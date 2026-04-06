@@ -1,4 +1,4 @@
-# Varavel Design System (VDS)
+# Varavel Design System
 
 Welcome to the official Varavel Design System. This document serves as the single source of truth for the visual, typographic, and architectural rules used to build user interfaces within the `@varavel/ui` ecosystem using Svelte and TailwindCSS.
 
@@ -39,21 +39,27 @@ _Note: The Geist font family is fully integrated and pre-configured within the `
 
 Our interface uses a high-contrast, monochromatic base relying on Tailwind's `slate` palette. This provides a clean, neutral background that allows data and semantic colors to stand out effectively.
 
-_Note: All semantic colors are pre-configured in the `@varavel/ui` core theme._
+_Note: All structural, base, and semantic colors are pre-configured in the `@varavel/ui` core theme._
 
-### Base Colors
+### 1. Text Colors
 
-- **Background (Dark Mode):** `#000000` (Pure Black)
-- **Background (Light Mode):** `#FFFFFF` (Pure White)
 - **Primary Text:** `slate-900` (Light Mode) / `slate-50` (Dark Mode)
-
-### Structural Colors
-
-- **Borders and Dividers:** `slate-200` (Light Mode) / `slate-800` (Dark Mode)
-- **Secondary Backgrounds (Cards/Panels):** `slate-50` (Light Mode) / `slate-900` (Dark Mode)
 - **Secondary Text (Muted):** `slate-500` (For metadata, helper text, and descriptions)
 
-### Semantic Colors
+### 2. Base Layers
+
+We utilize a three-level base system to define physical elevation and nesting logic. These are used primarily for backgrounds but are available for any utility (color, text, etc.).
+
+- **`base-100` (Canvas):** The primary background of the entire application.
+  - _Light Mode:_ `#FFFFFF` | _Dark Mode:_ `#000000`
+- **`base-200` (Surface):** Used for primary structural containers.
+  - _Usage:_ Sidebars, cards, panels, and modals.
+  - _Light Mode:_ `slate-50` | _Dark Mode:_ `slate-950`
+- **`base-300` (Muted/Interactive):** Used for smaller elements and interaction states.
+  - _Usage:_ Input fields, hover states, and nested UI components.
+  - _Light Mode:_ `slate-100` | _Dark Mode:_ `slate-900`
+
+### 3. Semantic Colors
 
 Semantic colors should be used sparingly to indicate specific states or actions.
 
@@ -76,29 +82,34 @@ We use specific border radii to maintain a cohesive structure across the applica
 - **Interactive Components (Buttons, Inputs, Badges):** `rounded-md` (**6px**) or `rounded-lg` (**8px**) — Keeps interactive elements contained and precise.
 - **Nested Elements:** `rounded-sm` (**4px**)
 
+### Borders and Separation
+
+To maintain a modern aesthetic, we prefer subtle borders over heavy shadows.
+
+- **`border-base`**: The default border color used to separate containers.
+  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-800`
+- Borders should be 1px wide by default to maintain a sharp, technical look.
+
 ### Shadows and Elevation
 
-To maintain a flat and modern aesthetic, avoid heavy or blurred shadows.
+Avoid heavy or blurred shadows.
 
-- Prefer subtle borders (`border border-slate-200` or `border-slate-800`) over shadows to separate containers.
-- For floating elements like modals and dropdowns, use Tailwind's default `shadow-md` or `shadow-lg`, ensuring the shadow color opacity is kept low for a clean look.
+- For floating elements like modals and dropdowns, use Tailwind's default `shadow-md` or `shadow-lg` with low opacity to maintain a clean appearance.
 
 ---
 
 ## Responsive Design & Breakpoints
 
-We employ a pragmatic "Single Breakpoint" architecture to streamline development while ensuring a flawless experience for complex developer tools. We bypass standard Tailwind breakpoints in favor of a single threshold.
+We employ a pragmatic "Single Breakpoint" architecture. We bypass standard Tailwind breakpoints in favor of a single threshold.
 
 _Note: This behavior is already baked into the `@varavel/ui` core theme._
 
-- **Constrained Base (< 1024px):** Everything below 1024px is treated as a mobile or portrait-tablet environment. Layouts stack vertically, sidebars collapse into accessible menus, and data density is optimized for touch interfaces.
-- **Desktop (`desk:` >= 1024px):** The threshold where true horizontal space is unlocked. Sidebars become fixed, data tables expand to full columns, and the interface assumes a traditional, high-density desktop layout suitable for engineering tasks.
+- **Constrained Base (< 1024px):** Everything below 1024px is treated as a mobile or portrait-tablet environment. Layouts stack vertically, and data density is optimized for touch interfaces.
+- **Desktop (`desk:` >= 1024px):** The threshold where horizontal space is unlocked. Sidebars become fixed and data tables expand to full columns.
 
 ---
 
 ## Theme Integration (Tailwind v4)
-
-Our design system is built to be strictly plug-and-play. All the configurations mentioned above (typography, semantic colors, border radius, and custom breakpoints) are bundled within our CSS theme file.
 
 To use `@varavel/ui` in your project, simply add the following to your main stylesheet:
 
@@ -106,7 +117,7 @@ To use `@varavel/ui` in your project, simply add the following to your main styl
 /* 1. Import the base Tailwind engine */
 @import "tailwindcss";
 
-/* 2. Import ALL Varavel configuration, plugins, fonts, and semantic colors */
+/* 2. Import ALL Varavel configuration, plugins, fonts, and base colors */
 @import "@varavel/ui/theme.css";
 
 /* 3. Instruct Tailwind to scan and compile classes used by the UI components */
@@ -117,12 +128,12 @@ To use `@varavel/ui` in your project, simply add the following to your main styl
 
 ## Component Guidelines (Svelte & Tailwind)
 
-When building or contributing components to `@varavel/ui`, please adhere to the following standards to ensure the best possible UX:
+When building or contributing components to `@varavel/ui`, please adhere to the following standards:
 
 1. **Clean Classes:** Keep Tailwind classes organized and avoid bloated component structures.
-2. **Focus States:** Every interactive element MUST have a clear and visible focus state for keyboard accessibility (e.g., `focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none`).
-3. **Native Dark Mode:** All components must be developed to support both light and dark themes simultaneously using Tailwind's `dark:` modifier.
-4. **Agile Responsiveness:** Build mobile-first by default, and use the `desk:` prefix strictly for horizontal expansions starting at 1024px.
+2. **Focus States:** Every interactive element MUST have a clear focus state (`focus-visible:ring-2 focus-visible:ring-blue-500`).
+3. **Native Dark Mode:** All components must support both light and dark themes using Tailwind's `dark:` modifier.
+4. **Agile Responsiveness:** Build mobile-first and use the `desk:` prefix strictly for horizontal expansions starting at 1024px.
 
 ---
 
