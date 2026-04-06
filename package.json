@@ -56,7 +56,8 @@
     "lint:biome": "biome check --config-path ./biome.json --log-level warn ."
   },
   "peerDependencies": {
-    "svelte": "5.55.1"
+    "svelte": "^5.0.0",
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.10",
@@ -65,12 +66,14 @@
     "@sveltejs/package": "2.5.7",
     "@sveltejs/vite-plugin-svelte": "6.2.4",
     "@tailwindcss/vite": "4.2.2",
-    "bits-ui": "2.17.2",
     "dprint": "0.53.2",
     "svelte": "5.55.1",
     "svelte-check": "4.4.6",
     "tailwindcss": "4.2.2",
     "typescript": "5.9.3",
     "vite": "7.3.1"
+  },
+  "dependencies": {
+    "bits-ui": "2.17.2"
   }
 }
