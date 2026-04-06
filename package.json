@@ -40,7 +40,8 @@
       "types": "./dist/blocks/index.d.ts",
       "svelte": "./dist/blocks/index.js",
       "default": "./dist/blocks/index.js"
-    }
+    },
+    "./theme.css": "./dist/theme.css"
   },
   "scripts": {
     "dev": "vite dev",
