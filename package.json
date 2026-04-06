@@ -16,6 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/varavelio/ui.git"
   },
+  "license": "MIT",
   "author": "Varavel",
   "files": [
     "README.md",
