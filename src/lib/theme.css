@@ -1,1 +1,5 @@
 /* Theme configuration */
+
+@plugin "@tailwindcss/forms" {
+  strategy: "base";
+}
