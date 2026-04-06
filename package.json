@@ -1,6 +1,6 @@
 {
   "name": "@varavel/ui",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run prepack",
@@ -31,10 +31,12 @@
     "svelte": "5.55.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.10",
     "@sveltejs/adapter-auto": "7.0.1",
     "@sveltejs/kit": "2.56.1",
     "@sveltejs/package": "2.5.7",
     "@sveltejs/vite-plugin-svelte": "6.2.4",
+    "dprint": "0.53.2",
     "svelte": "5.55.1",
     "svelte-check": "4.4.6",
     "typescript": "5.9.3",
