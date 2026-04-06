@@ -1,5 +1,9 @@
 node_modules
 
+# Temporary
+/temp
+/temp
+
 # Output
 .output
 .vercel
