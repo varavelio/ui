@@ -1,5 +1,120 @@
-/* Theme configuration */
+/* Enable dark mode with either .dark or [data-theme="dark"]. */
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
+/* Shared form reset shipped with the UI package. */
 @plugin "@tailwindcss/forms" {
   strategy: "base";
+}
+
+/* Bundled Geist fonts (self-hosted inside this package). */
+@font-face {
+  font-family: "Geist Sans";
+  src: url("./fonts/geist/Geist-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./fonts/geist/GeistMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@theme {
+  /* Single-breakpoint responsive model */
+  --breakpoint-*: initial;
+  --breakpoint-desk: 64rem;
+
+  /* Typography families. */
+  --font-sans:
+    "Geist Sans",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  --font-mono:
+    "Geist Mono",
+    ui-monospace,
+    "SFMono-Regular",
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  /* Restrict font utilities to approved weights only. */
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Strict radius scale from the design system. */
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Base layer architecture. */
+  --color-base-100: var(--color-white);
+  --color-base-200: var(--color-slate-50);
+  --color-base-300: var(--color-slate-100);
+  --color-base-400: var(--color-slate-200);
+
+  /* Content colors (text/icons). */
+  --color-content: var(--color-slate-900);
+  --color-content-muted: var(--color-slate-500);
+
+  /* Semantic colors from the spec. */
+  --color-primary: var(--color-blue-500);
+  --color-info: var(--color-blue-500);
+  --color-success: var(--color-emerald-500);
+  --color-warning: var(--color-amber-500);
+  --color-error: var(--color-red-500);
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Dark mode token overrides. */
+:where(.dark, [data-theme="dark"]) {
+  color-scheme: dark;
+
+  --color-base-100: var(--color-black);
+  --color-base-200: var(--color-slate-950);
+  --color-base-300: var(--color-slate-900);
+  --color-base-400: var(--color-slate-800);
+
+  --color-content: var(--color-slate-50);
+  --color-content-muted: var(--color-slate-500);
+}
+
+@layer base {
+  /* Use the structural border token by default. */
+  * {
+    @apply border-base-400;
+  }
+
+  /* Global typography and base canvas text/background. */
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    @apply bg-base-100 text-content antialiased;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
 }
