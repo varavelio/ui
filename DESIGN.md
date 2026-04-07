@@ -43,8 +43,8 @@ _Note: All structural, base, and semantic colors are pre-configured in the `@var
 
 ### 1. Text Colors
 
-- **Primary Text (`text-content`):** `slate-900` (Light Mode) / `slate-50` (Dark Mode)
-- **Secondary Text (`text-content-muted`):** `slate-500` (For metadata, helper text, and descriptions)
+- **Primary Text (`text-content`):** `slate-950` (Light Mode) / `slate-50` (Dark Mode)
+- **Secondary Text (`text-content-muted`):** `slate-500` (Light Mode) / `slate-400` (Dark Mode) for metadata, helper text, and descriptions.
 
 ### 2. Base Layers
 
@@ -59,8 +59,10 @@ We utilize a tiered base system to define physical elevation, nesting logic, and
   - _Usage:_ Input fields, hover states, and nested UI components.
   - _Light Mode:_ `slate-100` | _Dark Mode:_ `slate-900`
 - **`base-400` (Structural):** The absolute border color used to define component limits and separate containers.
-  - _Usage:_ Borders, dividers, and scrollbar thumbs.
-  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-800`
+  - _Usage:_ Borders and dividers.
+  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-700`
+- **Scrollbar Thumb Tokens:** Dedicated tokens tuned for visibility without increasing border weight.
+  - _Light Mode:_ `slate-300` (`hover: slate-500`) | _Dark Mode:_ `slate-600` (`hover: slate-400`)
 
 ### 3. Semantic Colors
 
@@ -118,7 +120,7 @@ Avoid heavy or blurred shadows.
 Our CSS core automatically handles essential UX details. You do **not** need to manually program these into your components:
 
 - **Accessible Focus Rings:** Every focusable element automatically receives a high-contrast focus ring (`ring-primary` with `ring-offset-base-100`). Do not hardcode focus states unless building a complex headless override.
-- **Minimalist Scrollbars:** All scrollable containers automatically inherit a 6px technical scrollbar (`base-400`).
+- **Minimalist Scrollbars:** All scrollable containers automatically inherit a 6px technical scrollbar with dedicated contrast-balanced thumb tokens.
 - **Text Selection:** Highlighted text automatically uses a high-contrast monochromatic inversion (Text becomes `base-100`, background becomes `content`).
 
 ---
