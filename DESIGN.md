@@ -61,8 +61,6 @@ We utilize a tiered base system to define physical elevation, nesting logic, and
 - **`base-400` (Structural):** The absolute border color used to define component limits and separate containers.
   - _Usage:_ Borders and dividers.
   - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-700`
-- **Scrollbar Thumb Tokens:** Dedicated tokens tuned for visibility without increasing border weight.
-  - _Light Mode:_ `slate-300` (`hover: slate-500`) | _Dark Mode:_ `slate-600` (`hover: slate-400`)
 
 ### 3. Semantic Colors
 
@@ -120,7 +118,6 @@ Avoid heavy or blurred shadows.
 Our CSS core automatically handles essential UX details. You do **not** need to manually program these into your components:
 
 - **Accessible Focus Rings:** Every focusable element automatically receives a high-contrast focus ring (`ring-primary` with `ring-offset-base-100`). Do not hardcode focus states unless building a complex headless override.
-- **Minimalist Scrollbars:** All scrollable containers automatically inherit a 6px technical scrollbar with dedicated contrast-balanced thumb tokens.
 - **Text Selection:** Highlighted text automatically uses a high-contrast monochromatic inversion (Text becomes `base-100`, background becomes `content`).
 
 ---
@@ -158,7 +155,7 @@ To use `@varavel/ui` in your project, simply add the following to your main styl
 When building or contributing components to `@varavel/ui`, please adhere to the following standards:
 
 1. **Clean Classes:** Keep Tailwind classes organized and avoid bloated component structures.
-2. **Trust the Global CSS:** Rely on the global `theme.css` for focus states, scrollbars, and selections. Do not duplicate these efforts locally.
+2. **Trust the Global CSS:** Rely on the global `theme.css` for focus states and selections. Do not duplicate these efforts locally.
 3. **Native Dark Mode:** All components must support both light and dark themes out-of-the-box via the semantic variables (e.g., `bg-base-200`, `text-content`). Avoid using Tailwind's explicit `dark:` modifier unless strictly necessary for a unique exception.
 4. **Agile Responsiveness:** Build mobile-first and use the `desk:` prefix strictly for horizontal expansions starting at 1024px.
 

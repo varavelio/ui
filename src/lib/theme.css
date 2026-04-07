@@ -70,10 +70,6 @@
   --color-content: var(--color-slate-950);
   --color-content-muted: var(--color-slate-500);
 
-  /* Scrollbar colors. */
-  --color-scrollbar-thumb: var(--color-slate-300);
-  --color-scrollbar-thumb-hover: var(--color-slate-500);
-
   /* Semantic colors from the spec. */
   --color-primary: var(--color-blue-500);
   --color-info: var(--color-blue-500);
@@ -97,40 +93,14 @@
 
   --color-content: var(--color-slate-50);
   --color-content-muted: var(--color-slate-400);
-
-  --color-scrollbar-thumb: var(--color-slate-600);
-  --color-scrollbar-thumb-hover: var(--color-slate-400);
 }
 
 @layer base {
-  /* Structural borders and Firefox scrollbars for all elements. */
+  /* Structural borders for all elements. */
   *,
   ::before,
   ::after {
     @apply border-base-400;
-    scrollbar-color: var(--color-scrollbar-thumb) transparent;
-  }
-
-  /* Global Webkit/Blink scrollbars for all scrollable containers. */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-scrollbar-thumb rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-scrollbar-thumb-hover;
-  }
-
-  ::-webkit-scrollbar-corner {
-    @apply bg-transparent;
   }
 
   /* Monochromatic text selection that inverts with theme tokens. */
