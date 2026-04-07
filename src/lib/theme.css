@@ -67,8 +67,12 @@
   --color-base-400: var(--color-slate-200);
 
   /* Content colors (text/icons). */
-  --color-content: var(--color-slate-900);
+  --color-content: var(--color-slate-950);
   --color-content-muted: var(--color-slate-500);
+
+  /* Scrollbar colors. */
+  --color-scrollbar-thumb: var(--color-slate-300);
+  --color-scrollbar-thumb-hover: var(--color-slate-500);
 
   /* Semantic colors from the spec. */
   --color-primary: var(--color-blue-500);
@@ -93,6 +97,9 @@
 
   --color-content: var(--color-slate-50);
   --color-content-muted: var(--color-slate-400);
+
+  --color-scrollbar-thumb: var(--color-slate-600);
+  --color-scrollbar-thumb-hover: var(--color-slate-400);
 }
 
 @layer base {
@@ -101,8 +108,7 @@
   ::before,
   ::after {
     @apply border-base-400;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-base-400) transparent;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
   }
 
   /* Global Webkit/Blink scrollbars for all scrollable containers. */
@@ -116,11 +122,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-base-400 rounded-full;
+    @apply bg-scrollbar-thumb rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-content-muted;
+    @apply bg-scrollbar-thumb-hover;
   }
 
   ::-webkit-scrollbar-corner {
