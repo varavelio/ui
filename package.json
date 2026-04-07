@@ -56,7 +56,9 @@
     "lint": "npm run lint:ts && npm run lint:dprint && npm run lint:biome",
     "lint:ts": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "lint:dprint": "dprint check --config ./dprint.json --log-level warn",
-    "lint:biome": "biome check --config-path ./biome.json --log-level warn ."
+    "lint:biome": "biome check --config-path ./biome.json --log-level warn .",
+    "test": "echo ''",
+    "ci": "npm run build && npm run lint && npm run check && npm run test"
   },
   "peerDependencies": {
     "svelte": "^5.0.0",
