@@ -37,14 +37,14 @@ _Note: The Geist font family is fully integrated and pre-configured within the `
 
 ## Color Palette (Tailwind Mapping)
 
-Our interface uses a high-contrast, monochromatic base relying on Tailwind's `slate` palette. This provides a clean, neutral background that allows data and semantic colors to stand out effectively.
+Our interface uses a high-contrast, monochromatic base relying on Tailwind's `neutral` palette. This keeps the system free of warm/cool tint shifts and lets content and semantic states stand out cleanly.
 
 _Note: All structural, base, and semantic colors are pre-configured in the `@varavel/ui` core theme._
 
 ### 1. Text Colors
 
-- **Primary Text (`text-content`):** `slate-950` (Light Mode) / `slate-50` (Dark Mode)
-- **Secondary Text (`text-content-muted`):** `slate-500` (Light Mode) / `slate-400` (Dark Mode) for metadata, helper text, and descriptions.
+- **Primary Text (`text-content`):** `neutral-950` (Light Mode) / `neutral-50` (Dark Mode)
+- **Secondary Text (`text-content-muted`):** `neutral-500` (Light Mode) / `neutral-400` (Dark Mode) for metadata, helper text, and descriptions.
 
 ### 2. Base Layers
 
@@ -54,19 +54,19 @@ We utilize a tiered base system to define physical elevation, nesting logic, and
   - _Light Mode:_ `#FFFFFF` | _Dark Mode:_ `#000000`
 - **`base-200` (Surface):** Used for primary structural containers.
   - _Usage:_ Sidebars, cards, panels, and modals.
-  - _Light Mode:_ `slate-50` | _Dark Mode:_ `slate-950`
+  - _Light Mode:_ `neutral-100` | _Dark Mode:_ `neutral-900`
 - **`base-300` (Muted/Interactive):** Used for smaller elements and interaction states.
   - _Usage:_ Input fields, hover states, and nested UI components.
-  - _Light Mode:_ `slate-100` | _Dark Mode:_ `slate-900`
+  - _Light Mode:_ `neutral-200` | _Dark Mode:_ `neutral-800`
 - **`base-400` (Structural):** The absolute border color used to define component limits and separate containers.
   - _Usage:_ Borders and dividers.
-  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-700`
+  - _Light Mode:_ `neutral-300` | _Dark Mode:_ `neutral-700`
 
 ### 3. Semantic Colors
 
 Semantic colors should be used sparingly to indicate specific states or actions.
 
-- **Information / Primary Accent:** `blue-500` (For links, active states, and focus rings).
+- **Information / Action Accent:** `blue-500` (For links, active states, and focus rings).
 - **Error / Destructive:** `red-500` (For delete actions, critical alerts, and server errors).
 - **Success:** `emerald-500` (For healthy statuses, online indicators, and success messages).
 - **Warning:** `amber-500` (For warnings and degradation alerts).
@@ -117,7 +117,7 @@ Avoid heavy or blurred shadows.
 
 Our CSS core automatically handles essential UX details. You do **not** need to manually program these into your components:
 
-- **Accessible Focus Rings:** Every focusable element automatically receives a high-contrast focus ring (`ring-primary` with `ring-offset-base-100`). Do not hardcode focus states unless building a complex headless override.
+- **Accessible Focus Rings:** Every focusable element automatically receives a high-contrast focus ring (`ring-info` with `ring-offset-base-100`). Do not hardcode focus states unless building a complex headless override.
 - **Text Selection:** Highlighted text automatically uses a high-contrast monochromatic inversion (Text becomes `base-100`, background becomes `content`).
 
 ---

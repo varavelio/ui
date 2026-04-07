@@ -62,16 +62,15 @@
 
   /* Base layer architecture. */
   --color-base-100: var(--color-white);
-  --color-base-200: var(--color-slate-50);
-  --color-base-300: var(--color-slate-100);
-  --color-base-400: var(--color-slate-200);
+  --color-base-200: var(--color-neutral-100);
+  --color-base-300: var(--color-neutral-200);
+  --color-base-400: var(--color-neutral-300);
 
   /* Content colors (text/icons). */
-  --color-content: var(--color-slate-950);
-  --color-content-muted: var(--color-slate-500);
+  --color-content: var(--color-neutral-950);
+  --color-content-muted: var(--color-neutral-500);
 
   /* Semantic colors from the spec. */
-  --color-primary: var(--color-blue-500);
   --color-info: var(--color-blue-500);
   --color-success: var(--color-emerald-500);
   --color-warning: var(--color-amber-500);
@@ -87,12 +86,12 @@
   color-scheme: dark;
 
   --color-base-100: var(--color-black);
-  --color-base-200: var(--color-slate-950);
-  --color-base-300: var(--color-slate-900);
-  --color-base-400: var(--color-slate-700);
+  --color-base-200: var(--color-neutral-900);
+  --color-base-300: var(--color-neutral-800);
+  --color-base-400: var(--color-neutral-700);
 
-  --color-content: var(--color-slate-50);
-  --color-content-muted: var(--color-slate-400);
+  --color-content: var(--color-neutral-50);
+  --color-content-muted: var(--color-neutral-400);
 }
 
 @layer base {
@@ -110,7 +109,7 @@
 
   /* Global accessible focus ring for keyboard navigation. */
   *:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-base-100;
+    @apply outline-none ring-2 ring-info ring-offset-2 ring-offset-base-100;
   }
 
   /* Document behavior: smooth scrolling only on html. */
