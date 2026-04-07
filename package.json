@@ -43,6 +43,11 @@
       "svelte": "./dist/blocks/index.js",
       "default": "./dist/blocks/index.js"
     },
+    "./layouts": {
+      "types": "./dist/layouts/index.d.ts",
+      "svelte": "./dist/layouts/index.js",
+      "default": "./dist/layouts/index.js"
+    },
     "./theme.css": "./dist/theme.css"
   },
   "scripts": {
