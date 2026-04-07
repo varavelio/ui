@@ -64,7 +64,7 @@ We utilize a three-level base system to define physical elevation and nesting lo
 Semantic colors should be used sparingly to indicate specific states or actions.
 
 - **Information / Primary Accent:** `blue-500` (For links, active states, and focus rings).
-- **Destructive / Error:** `red-500` (For delete actions, critical alerts, and server errors).
+- **Error / Destructive:** `red-500` (For delete actions, critical alerts, and server errors).
 - **Success:** `emerald-500` (For healthy statuses, online indicators, and success messages).
 - **Warning:** `amber-500` (For warnings and degradation alerts).
 
