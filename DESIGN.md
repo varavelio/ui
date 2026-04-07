@@ -43,12 +43,12 @@ _Note: All structural, base, and semantic colors are pre-configured in the `@var
 
 ### 1. Text Colors
 
-- **Primary Text:** `slate-900` (Light Mode) / `slate-50` (Dark Mode)
-- **Secondary Text (Muted):** `slate-500` (For metadata, helper text, and descriptions)
+- **Primary Text (`text-content`):** `slate-900` (Light Mode) / `slate-50` (Dark Mode)
+- **Secondary Text (`text-content-muted`):** `slate-500` (For metadata, helper text, and descriptions)
 
 ### 2. Base Layers
 
-We utilize a three-level base system to define physical elevation and nesting logic. These are used primarily for backgrounds but are available for any utility (color, text, etc.).
+We utilize a tiered base system to define physical elevation, nesting logic, and structural borders.
 
 - **`base-100` (Canvas):** The primary background of the entire application.
   - _Light Mode:_ `#FFFFFF` | _Dark Mode:_ `#000000`
@@ -58,6 +58,9 @@ We utilize a three-level base system to define physical elevation and nesting lo
 - **`base-300` (Muted/Interactive):** Used for smaller elements and interaction states.
   - _Usage:_ Input fields, hover states, and nested UI components.
   - _Light Mode:_ `slate-100` | _Dark Mode:_ `slate-900`
+- **`base-400` (Structural):** The absolute border color used to define component limits and separate containers.
+  - _Usage:_ Borders, dividers, and scrollbar thumbs.
+  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-800`
 
 ### 3. Semantic Colors
 
@@ -74,27 +77,49 @@ Semantic colors should be used sparingly to indicate specific states or actions.
 
 The `@varavel/ui` system is built on a standard **4px** grid (Tailwind's default spacing scale). Consistent spacing is crucial for a minimalist layout.
 
-### Border Radius
+### Strict Border Radius
 
-We use specific border radii to maintain a cohesive structure across the application.
+We enforce a strict 3-tier geometric scale to maintain a cohesive structure and limit nesting depth.
 
-- **Structural Elements (Cards, Modals, Panels):** `rounded-2xl` (**16px**) — Derived from the exact radius of the pillars in the official Varavel logo.
-- **Interactive Components (Buttons, Inputs, Badges):** `rounded-md` (**6px**) or `rounded-lg` (**8px**) — Keeps interactive elements contained and precise.
-- **Nested Elements:** `rounded-sm` (**4px**)
+- **`rounded-lg` (16px):** Structural Elements (Cards, Modals, Panels). Derived from the exact radius of the pillars in the official Varavel logo.
+- **`rounded-md` (8px):** Interactive Components (Buttons, Inputs, Dropdowns).
+- **`rounded-sm` (4px):** Nested Elements (Badges, Tags, small internal components).
+- **`rounded-none` / `rounded-full`:** Reserved for full-bleed elements, pills, or avatars.
+
+### The Mathematics of Nesting (Concentricity)
+
+To achieve perfect visual concentricity when placing a rounded element inside another rounded container, the spacing must obey the exact mathematical formula:
+
+`Inner Radius = Outer Radius - Padding`
+
+Do not guess the padding. Use the following strictly approved combinations to guarantee optical perfection:
+
+- **Standard Card Nesting:** Outer `rounded-lg` (16px) - Padding `p-2` (8px) = Inner `rounded-md` (8px).
+- **High-Density Card Nesting:** Outer `rounded-lg` (16px) - Padding `p-3` (12px) = Inner `rounded-sm` (4px).
+- **Component Level Nesting:** Outer `rounded-md` (8px) - Padding `p-1` (4px) = Inner `rounded-sm` (4px).
 
 ### Borders and Separation
 
 To maintain a modern aesthetic, we prefer subtle borders over heavy shadows.
 
-- **`border-base`**: The default border color used to separate containers.
-  - _Light Mode:_ `slate-200` | _Dark Mode:_ `slate-800`
-- Borders should be 1px wide by default to maintain a sharp, technical look.
+- **`border-base-400`**: The default border color used to separate containers globally.
+- Borders should be 1px wide (`border`) by default to maintain a sharp, technical look.
 
 ### Shadows and Elevation
 
 Avoid heavy or blurred shadows.
 
 - For floating elements like modals and dropdowns, use Tailwind's default `shadow-md` or `shadow-lg` with low opacity to maintain a clean appearance.
+
+---
+
+## Global UI Behaviors
+
+Our CSS core automatically handles essential UX details. You do **not** need to manually program these into your components:
+
+- **Accessible Focus Rings:** Every focusable element automatically receives a high-contrast focus ring (`ring-primary` with `ring-offset-base-100`). Do not hardcode focus states unless building a complex headless override.
+- **Minimalist Scrollbars:** All scrollable containers automatically inherit a 6px technical scrollbar (`base-400`).
+- **Text Selection:** Highlighted text automatically uses a high-contrast monochromatic inversion (Text becomes `base-100`, background becomes `content`).
 
 ---
 
@@ -131,8 +156,8 @@ To use `@varavel/ui` in your project, simply add the following to your main styl
 When building or contributing components to `@varavel/ui`, please adhere to the following standards:
 
 1. **Clean Classes:** Keep Tailwind classes organized and avoid bloated component structures.
-2. **Focus States:** Every interactive element MUST have a clear focus state (`focus-visible:ring-2 focus-visible:ring-blue-500`).
-3. **Native Dark Mode:** All components must support both light and dark themes using Tailwind's `dark:` modifier.
+2. **Trust the Global CSS:** Rely on the global `theme.css` for focus states, scrollbars, and selections. Do not duplicate these efforts locally.
+3. **Native Dark Mode:** All components must support both light and dark themes out-of-the-box via the semantic variables (e.g., `bg-base-200`, `text-content`). Avoid using Tailwind's explicit `dark:` modifier unless strictly necessary for a unique exception.
 4. **Agile Responsiveness:** Build mobile-first and use the `desk:` prefix strictly for horizontal expansions starting at 1024px.
 
 ---
