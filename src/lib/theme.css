@@ -99,6 +99,8 @@
   /* Use the structural border token by default. */
   * {
     @apply border-base-400;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
   }
 
   /* Global typography and base canvas text/background. */
