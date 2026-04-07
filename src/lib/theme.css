@@ -123,6 +123,10 @@
     @apply bg-content-muted;
   }
 
+  ::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
+
   /* Monochromatic text selection that inverts with theme tokens. */
   ::selection {
     @apply bg-content text-base-100;
