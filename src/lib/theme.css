@@ -52,14 +52,13 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
 
-  /* Strict radius scale from the design system. */
+  /* Strict Radius scale. */
   --radius-*: initial;
   --radius-none: 0;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-2xl: 1rem;
-  --radius-full: 9999px;
+  --radius-sm: 0.25rem; /* 4px: Nested elements / Badges */
+  --radius-md: 0.5rem; /* 8px: Buttons / Inputs / Dropdowns */
+  --radius-lg: 1rem; /* 16px: Main Cards / Modals / Surfaces */
+  --radius-full: 9999px; /* Pills / Avatars */
 
   /* Base layer architecture. */
   --color-base-100: var(--color-white);
