@@ -1,15 +1,17 @@
 /** Component Catalog */
 
+import type { Component as SvelteComponent } from "svelte";
+
 /**
  * Defines the available categories for components in the catalog.
  */
 export const componentCategories = [
-  "Foundations",
-  "Forms",
-  "Disclosure",
-  "Overlay",
-  "Feedback",
-  "Utilities",
+  "Core Building Blocks",
+  "Form Controls",
+  "Disclosure & Expansion",
+  "Overlays & Floating UI",
+  "Status & Feedback",
+  "Utilities & Preferences",
 ] as const;
 
 /**
@@ -29,23 +31,23 @@ export type ComponentProp = {
 };
 
 /**
- * Defines the structure of component metadata, which includes an optional
- * name, a required category, and an array of properties.
+ * Defines the structure of component metadata used by the explorer catalog.
  */
 export type ComponentMeta = {
-  name?: string;
+  name: string;
   category: ComponentCategory;
   props: ComponentProp[];
+  demo?: SvelteComponent;
 };
 
 /**
  * Helper function to define component metadata with proper typing.
  *
- * @param meta - The metadata object for a component, including its category and props.
- * @returns The defined component metadata.
+ * @param entries - One or more component metadata entries.
+ * @returns The same entries with catalog typing.
  */
-export function component(meta: Omit<ComponentMeta, "name">): ComponentMeta {
-  return meta;
+export function components(entries: ComponentMeta[]): ComponentMeta[] {
+  return entries;
 }
 
 /**
@@ -68,24 +70,16 @@ export function prop(
 
 function createComponentCatalog() {
   // Find all meta.ts modules in the components directory
-  type MetaModuleShape = { componentMeta: ComponentMeta };
+  type MetaModuleShape = { componentMeta: ComponentMeta[] };
+
   const metaModules = import.meta.glob<MetaModuleShape>(
     "./components/*/meta.ts",
     { eager: true },
   );
 
   // Create the catalog
-  const componentCatalog: ComponentMeta[] = Object
-    // Create an array of meta modules
-    .entries(metaModules)
-    // Extract component name from the file path
-    .map(([path, module]) => {
-      const nameMatch = path.match(/\.\/components\/([^/]+)\/meta\.ts$/);
-      if (!nameMatch) return null;
-      return { ...module.componentMeta, name: nameMatch[1] };
-    })
-    // Filter out any entries that couldn't be processed and sort by component name
-    .filter((entry) => entry !== null)
+  const componentCatalog: ComponentMeta[] = Object.entries(metaModules)
+    .flatMap(([, module]) => module.componentMeta)
     // Sort the components alphabetically by name
     .sort((a, b) => a.name.localeCompare(b.name));
 
