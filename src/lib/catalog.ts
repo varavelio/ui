@@ -44,7 +44,7 @@ export type ComponentMeta = {
  * @param meta - The metadata object for a component, including its category and props.
  * @returns The defined component metadata.
  */
-export function component(meta: ComponentMeta): ComponentMeta {
+export function component(meta: Omit<ComponentMeta, "name">): ComponentMeta {
   return meta;
 }
 
