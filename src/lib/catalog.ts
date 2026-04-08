@@ -1,15 +1,21 @@
 /** Component Catalog */
 
 /**
- * Defines the category of a component, which can be one of the following:
+ * Defines the available categories for components in the catalog.
  */
-export type ComponentCategory =
-  | "Foundations"
-  | "Forms"
-  | "Disclosure"
-  | "Overlay"
-  | "Feedback"
-  | "Utilities";
+export const componentCategories = [
+  "Foundations",
+  "Forms",
+  "Disclosure",
+  "Overlay",
+  "Feedback",
+  "Utilities",
+] as const;
+
+/**
+ * Defines the category of a component, which can be one of the following
+ */
+export type ComponentCategory = (typeof componentCategories)[number];
 
 /**
  * Defines the structure of a component property, including its name, type,
