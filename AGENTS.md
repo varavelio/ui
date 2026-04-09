@@ -30,6 +30,7 @@ When updating this document, do so with the context of the entire document in mi
 
 - **DESIGN.md First**: It is IMPERATIVE to read `DESIGN.md` at the start of every new task. This document standardizes the design system and implementation direction.
 - **bits-ui Docs First**: It is IMPERATIVE to always read `https://bits-ui.com/llms.txt` at the start of every new task to understand Bits UI behavior. Also read any linked docs from that file that are relevant to the specific feature being implemented.
+- **Verification**: Run `npm run format` and `npm run lint` before finishing tasks.
 - **Context**: Always run `tree` to understand the latest component structure.
 - **Svelte 5**: Use Svelte 5 runes (`$state`, `$derived`, `$props`, etc.). Avoid legacy Svelte syntax.
 - **Tailwind 4**: Use the new Tailwind 4 syntax. The theme is defined in `src/lib/theme.css` using the `@theme` block.
@@ -56,8 +57,11 @@ When updating this document, do so with the context of the entire document in mi
 
 - **Role**: Contains the reusable UI components and theme logic.
 - **Key Directories**:
-  - `components/`: Atomic UI components (e.g., `Avatar/`). Each component typically has its own folder with a `.svelte` file and an `index.ts` exporter.
+  - `components/`: Atomic UI components (e.g., `Avatar/`). Each component typically has its own folder with a `.svelte` file, a colocated `Demo.svelte` showcase file, and an `index.ts` exporter.
+  - `catalog.ts`: Typed catalog registry that auto-discovers each component's `meta.ts` via `import.meta.glob`, then builds the explorer dataset.
+  - `helpers/`: Shared cross-library utilities such as `cn()` that are not specific to any one component family.
   - `blocks/`: Larger, pre-composed UI sections or patterns.
+  - `layouts/`: Ready to use layout components to use in various scenarios.
   - `fonts/`: Self-hosted Geist font family.
   - `theme.css`: The central Tailwind 4 theme definition, including colors, typography, and base styles.
 
@@ -66,8 +70,8 @@ When updating this document, do so with the context of the entire document in mi
 - **Role**: A SvelteKit application used to showcase and test the components during development.
 - **Key Files**:
   - `+layout.ts`: Route-level options/configuration for the showcase app.
-  - `+layout.svelte`: Global layout for the showcase app.
-  - `+page.svelte`: Main landing page for component demonstration.
+  - `+layout.svelte`: Global layout for the showcase app. This wraps the app in a shared `Tooltip.Provider` and bootstraps the persisted explorer theme before hydration.
+  - `+page.svelte`: Main component explorer page. It consumes `src/lib/catalog.ts` directly, then renders the grouped explorer plus live demos from the catalog entries.
 
 ## Svelte
 
@@ -94,6 +98,13 @@ Generates a Svelte Playground link with the provided code. After completing the 
 ## Coding Conventions
 
 - **Component Exporting**: Export components via `index.ts` in their respective folders, and then again in the main `src/lib/components/index.ts`.
+- **Component Demos**: Keep showcase demos next to their components when possible, but wire explorer rendering through `meta.ts` via each entry's optional `demo` field.
 - **Library Exports**: Keep package export entry points aligned with `package.json` (`.`, `./blocks`, `./theme.css`) when adding new public modules.
 - **Props**: Use `$props()` for component properties. Prefer explicit types for props.
+- **Form Controls**: Wrapper inputs should preserve practical Svelte ergonomics such as `bind:value` where appropriate.
+- **Catalog Metadata**: Every public component folder should include a `meta.ts` file exporting a `componentMeta` array via the `components([...])` helper. Each entry should declare `name`, `category`, documented `props`, and can attach `demo` directly (typically from colocated `Demo.svelte`). Avoid hardcoding all metadata in one file.
+- **Helpers**: Put generic utilities like class merging under `src/lib/helpers/`, not under `components/internal/`.
 - **Styling**: Keep Tailwind classes organized. Use `theme.css` variables (e.g., `bg-base-100`, `text-content`) instead of hardcoding slate colors where possible.
+- **Semantic Tones**: The theme does not expose a `primary` token; use semantic tones (`info`, `success`, `warning`, `error/danger`) for colored UI states.
+- **Theme Components**: Any theme selector/toggle should consume `src/lib/utils/theme.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
+- **Theme Reactivity**: For UI sync with OS changes and cross-tab updates, prefer `theme.subscribe()` (backed by the global `varavel-theme-change` event from `static/theme-init.js`) rather than ad-hoc listeners inside components.
