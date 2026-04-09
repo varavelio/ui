@@ -1,11 +1,6 @@
 /* Enable dark mode with either .dark or [data-theme="dark"]. */
 @custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
-/* Shared form reset shipped with the UI package. */
-@plugin "@tailwindcss/forms" {
-  strategy: "base";
-}
-
 /* Bundled Geist fonts (self-hosted inside this package). */
 @font-face {
   font-family: "Geist Sans";
@@ -107,21 +102,12 @@
     @apply bg-content text-base-100;
   }
 
-  /* Global accessible focus ring for keyboard navigation. */
-  *:focus-visible {
-    @apply outline-none ring-2 ring-info ring-offset-2 ring-offset-base-100;
-  }
-
-  /* Document behavior: smooth scrolling only on html. */
-  html {
-    @apply font-sans;
-    scroll-behavior: smooth;
-  }
-
+  /* Document behavior. */
   body {
-    @apply bg-base-100 text-content antialiased;
+    @apply font-sans bg-base-100 text-content antialiased;
   }
 
+  /* Font for code elements. */
   code,
   kbd,
   pre,
