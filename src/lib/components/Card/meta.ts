@@ -34,7 +34,7 @@ export const componentMeta = components([
         "shadow",
         '"none" | "sm" | "md" | "lg"',
         "Elevation shadow preset.",
-        '"none"',
+        '"sm"',
       ),
       prop(
         "bordered",

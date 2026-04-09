@@ -96,7 +96,7 @@
     padding = "md",
     color = "default",
     radius = "lg",
-    shadow = "none",
+    shadow = "sm",
     bordered = true,
     ...restProps
   }: Props = $props();
