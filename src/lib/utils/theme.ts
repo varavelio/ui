@@ -13,9 +13,22 @@ declare global {
 }
 
 /**
+ * The custom event name used by the Varavel UI to notify listeners of theme changes.
+ */
+const THEME_CHANGE_EVENT = "varavel-theme-change";
+
+/**
  * Defines the valid theme options for Varavel UI.
  */
 export type Theme = "light" | "dark" | "system";
+
+/**
+ * This function checks if the value is one of the allowed theme strings
+ * "light", "dark", or "system".
+ */
+const isTheme = (value: unknown): value is Theme => {
+  return value === "light" || value === "dark" || value === "system";
+};
 
 /**
  * A utility object for managing the Varavel UI theme preference. It provides
@@ -47,5 +60,30 @@ export const theme = {
     if (typeof window !== "undefined" && window.__varavelUiTheme) {
       window.__varavelUiTheme.set(theme);
     }
+  },
+
+  /**
+   * Subscribes to global theme changes.
+   *
+   * @param {(theme: Theme) => void} callback - Called whenever theme changes.
+   * @returns {() => void} Cleanup function to remove listener.
+   */
+  subscribe: (callback: (theme: Theme) => void): (() => void) => {
+    if (typeof window === "undefined") {
+      return () => {};
+    }
+
+    const handler = (event: Event) => {
+      const nextTheme = (event as CustomEvent<unknown>).detail;
+      if (isTheme(nextTheme)) {
+        callback(nextTheme);
+      }
+    };
+
+    window.addEventListener(THEME_CHANGE_EVENT, handler);
+
+    return () => {
+      window.removeEventListener(THEME_CHANGE_EVENT, handler);
+    };
   },
 };

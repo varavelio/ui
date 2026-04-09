@@ -9,6 +9,7 @@
 
 (() => {
   const STORAGE_KEY = "varavel-theme";
+  const THEME_CHANGE_EVENT = "varavel-theme-change";
 
   // Safely initialize matchMedia for environments that support it
   const mql =
@@ -51,6 +52,12 @@
 
       document.documentElement.dataset.theme = resolved;
       document.documentElement.style.colorScheme = resolved;
+
+      window.dispatchEvent(
+        new CustomEvent(THEME_CHANGE_EVENT, {
+          detail: theme,
+        }),
+      );
     } catch (_) {
       // Fail silently in highly restrictive environments
     }
