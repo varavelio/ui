@@ -22,8 +22,7 @@
       neutral: "border-base-400 bg-base-300 text-content",
       info: "border-info/15 bg-info/10 text-info",
       success: "border-success/15 bg-success/10 text-success",
-      warning:
-        "border-warning/25 bg-warning/10 text-warning dark:text-warning",
+      warning: "border-warning/25 bg-warning/10 text-warning dark:text-warning",
       danger: "border-error/15 bg-error/10 text-error",
     },
     outline: {
