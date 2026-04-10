@@ -95,7 +95,7 @@
 
       // Variant: Solid
       ...(variant === "solid" && {
-        "focus-visible:outline-offset-2 focus-visible:outline-offset-base-100": true,
+        "focus-visible:outline-offset-2": true,
         "border-content bg-content text-base-100 hover:bg-content/90 active:bg-content outline-content": color === "neutral",
         "border-info bg-info text-white hover:bg-info/90 active:bg-info outline-info": color === "info",
         "border-success bg-success text-white hover:bg-success/90 active:bg-success outline-success": color === "success",
