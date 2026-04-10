@@ -78,7 +78,7 @@
      * Semantic color representation for the checked state.
      * @default "neutral"
      */
-    color?: "neutral" | "info" | "success" | "danger";
+    color?: "neutral" | "info" | "success" | "warning" | "danger";
   }
 
   let {
@@ -137,6 +137,7 @@
         "data-[state=checked]:border-content data-[state=checked]:bg-content data-[state=indeterminate]:border-content data-[state=indeterminate]:bg-content text-base-100 focus-visible:outline-content": color === "neutral",
         "data-[state=checked]:border-info data-[state=checked]:bg-info data-[state=indeterminate]:border-info data-[state=indeterminate]:bg-info text-white focus-visible:outline-info": color === "info",
         "data-[state=checked]:border-success data-[state=checked]:bg-success data-[state=indeterminate]:border-success data-[state=indeterminate]:bg-success text-white focus-visible:outline-success": color === "success",
+        "data-[state=checked]:border-warning data-[state=checked]:bg-warning data-[state=indeterminate]:border-warning data-[state=indeterminate]:bg-warning text-white focus-visible:outline-warning": color === "warning",
         "data-[state=checked]:border-error data-[state=checked]:bg-error data-[state=indeterminate]:border-error data-[state=indeterminate]:bg-error text-white focus-visible:outline-error": color === "danger",
       },
     )}
