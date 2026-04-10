@@ -20,7 +20,7 @@
     Card,
     Input,
     ScrollArea,
-    ThemeToggle,
+    ThemePicker,
   } from "$lib/components/index.js";
 
   type ExplorerEntry = (typeof catalog.components)[number] & {
@@ -106,7 +106,7 @@
         >
         <h1 class="font-semibold text-2xl">Varavel UI</h1>
       </div>
-      <ThemeToggle class="shrink-0" />
+      <ThemePicker class="shrink-0" />
     </header>
   </Container>
 </div>
