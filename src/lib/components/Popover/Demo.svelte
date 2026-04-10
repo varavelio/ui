@@ -83,7 +83,10 @@
     </h3>
     <Popover size="lg">
       {#snippet trigger()}
-        <Button variant="outline">View Details</Button>
+        <Avatar
+          src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/avatar-dark.svg"
+          class="cursor-help"
+        />
       {/snippet}
       <div class="space-y-4">
         <div class="flex items-center gap-4">
@@ -103,6 +106,41 @@
           <Button size="sm" class="w-full">Follow</Button>
           <Button size="sm" variant="outline" class="w-full">Message</Button>
         </div>
+      </div>
+    </Popover>
+  </section>
+
+  <!-- Interactive Content -->
+  <section class="space-y-4">
+    <h3 class="text-sm font-medium text-content-muted uppercase tracking-wider">
+      Interactive Form
+    </h3>
+    <Popover title="Update settings">
+      {#snippet trigger()}
+        <Button variant="outline">Settings</Button>
+      {/snippet}
+      <div class="space-y-4">
+        <div class="grid gap-2">
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label for="width" class="text-xs font-medium">Width</label>
+            <Input id="width" value="100%" class="col-span-2 h-8" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label for="maxWidth" class="text-xs font-medium">Max. width</label>
+            <Input id="maxWidth" value="300px" class="col-span-2 h-8" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label for="height" class="text-xs font-medium">Height</label>
+            <Input id="height" value="25px" class="col-span-2 h-8" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label for="maxHeight" class="text-xs font-medium"
+              >Max. height</label
+            >
+            <Input id="maxHeight" value="none" class="col-span-2 h-8" />
+          </div>
+        </div>
+        <Button size="sm" class="w-full">Save Changes</Button>
       </div>
     </Popover>
   </section>

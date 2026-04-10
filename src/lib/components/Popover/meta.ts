@@ -22,6 +22,7 @@ export const componentMeta = components([
         "Preferred placement.",
         '"bottom"',
       ),
+      prop("padded", "boolean", "If true, adds standard padding.", "true"),
       prop("class", "ClassValue", "Additional CSS classes for content."),
     ],
   },

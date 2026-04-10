@@ -5,14 +5,6 @@
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
-  const popoverSizes = {
-    sm: "max-w-xs",
-    md: "max-w-sm",
-    lg: "max-w-md",
-  } as const;
-
-  type PopoverSize = keyof typeof popoverSizes;
-
   interface Props {
     /**
      * Additional CSS classes to apply to the popover content.
@@ -38,7 +30,12 @@
      * The maximum width of the popover.
      * @default "md"
      */
-    size?: PopoverSize;
+    size?: "sm" | "md" | "lg";
+    /**
+     * If true, adds standard padding (p-4) to the content area.
+     * @default true
+     */
+    padded?: boolean;
     /**
      * The preferred side to render the popover.
      * @default "bottom"
@@ -53,6 +50,7 @@
     trigger,
     children,
     size = "md",
+    padded = true,
     side = "bottom",
   }: Props = $props();
 </script>
@@ -64,9 +62,13 @@
     <BitsPopover.Content
       {side}
       class={cn(
-        "bg-base-100 z-50 w-[calc(100vw-2rem)] rounded-lg border border-base-400 shadow-sm overflow-hidden",
-        popoverSizes[size],
-        className ?? ""
+        "bg-base-100 z-50 w-[calc(100vw-2rem)] max-h-[70dvh] max-w-[70dvw] overflow-auto rounded-lg border border-base-400 shadow-sm",
+        {
+          "max-w-xs": size === "sm",
+          "max-w-sm": size === "md",
+          "max-w-md": size === "lg",
+        },
+        className,
       )}
       sideOffset={8}
     >
@@ -76,7 +78,7 @@
         </div>
       {/if}
 
-      <div class="p-4">{@render children?.()}</div>
+      <div class={cn(padded && "p-4")}>{@render children?.()}</div>
     </BitsPopover.Content>
   </BitsPopover.Portal>
 </BitsPopover.Root>
