@@ -1,16 +1,26 @@
 <script lang="ts">
   import { Alert } from "$lib/components/index.js";
+
+  function handleClose() {
+    alert("This alert has been closed via the onClose callback!");
+  }
 </script>
 
 <div class="space-y-4">
   <Alert
-    title="Neutral Notice"
-    description="Every component demo is discoverable from the explorer and documented with import, props and accessibility notes."
+    title="Dismissible Notice"
+    description="This alert can be closed by clicking the X icon. Try it out!"
+    color="info"
+    onClose={handleClose}
   />
   <Alert
-    title="Info State"
-    description="A new software update is available for your device. Please install it soon."
-    color="info"
+    title="Non-Closable Notice"
+    description="This alert cannot be closed because closable is set to false."
+    closable={false}
+  />
+  <Alert
+    title="Neutral Notice"
+    description="Every component demo is discoverable from the explorer and documented with import, props and accessibility notes."
   />
   <Alert
     title="Success State"

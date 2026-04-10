@@ -15,6 +15,8 @@ export const componentMeta = components([
         "Semantic visual color.",
         '"neutral"',
       ),
+      prop("closable", "boolean", "Whether the alert can be closed.", "true"),
+      prop("onClose", "() => void", "Callback fired when the alert is closed."),
       prop("children", "Snippet", "Custom content to render inside the alert."),
       prop("class", "string", "Additional CSS classes to apply."),
     ],

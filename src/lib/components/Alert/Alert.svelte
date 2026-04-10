@@ -1,7 +1,13 @@
 <script lang="ts">
+  import {
+    AlertCircle,
+    CheckCircle2,
+    Info,
+    TriangleAlert,
+    X,
+  } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-
   import { cn } from "../../helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -19,6 +25,15 @@
      */
     color?: "neutral" | "info" | "success" | "warning" | "danger";
     /**
+     * Whether the alert can be closed.
+     * @default true
+     */
+    closable?: boolean;
+    /**
+     * Callback fired when the alert is closed.
+     */
+    onClose?: () => void;
+    /**
      * Custom content to render inside the alert.
      */
     children?: Snippet;
@@ -29,6 +44,8 @@
     title,
     description,
     color = "neutral",
+    closable = true,
+    onClose,
     children,
     ...restProps
   }: Props = $props();
@@ -36,32 +53,68 @@
   let role = $derived(
     color === "danger" || color === "warning" ? "alert" : "status",
   );
+
+  let visible = $state(true);
+
+  function handleClose() {
+    visible = false;
+    onClose?.();
+  }
 </script>
 
-<div
-  {...restProps}
-  class={cn(
-    "rounded-lg border p-4",
-    {
-      "border-base-400 bg-base-200 text-content": color === "neutral",
-      "border-info/20 bg-info/10 text-info": color === "info",
-      "border-success/20 bg-success/10 text-success": color === "success",
-      "border-warning/20 bg-warning/10 text-warning": color === "warning",
-      "border-error/20 bg-error/10 text-error": color === "danger",
-    },
-    className,
-  )}
-  {role}
->
-  <div class="space-y-2">
-    {#if title}
-      <h3 class="font-medium">{title}</h3>
-    {/if}
-    {#if description}
-      <p class="text-sm leading-relaxed opacity-90">{description}</p>
-    {/if}
-    {#if children}
-      <div class="text-sm">{@render children()}</div>
+{#if visible}
+  <div
+    {...restProps}
+    class={cn(
+      "relative rounded-lg border p-4",
+      {
+        "border-base-400 bg-base-200 text-content": color === "neutral",
+        "border-info/20 bg-info/10 text-info": color === "info",
+        "border-success/20 bg-success/10 text-success": color === "success",
+        "border-warning/20 bg-warning/10 text-warning": color === "warning",
+        "border-error/20 bg-error/10 text-error": color === "danger",
+      },
+      className,
+    )}
+    {role}
+  >
+    <div class="flex gap-3">
+      {#if title}
+        <div class="mt-0.5 shrink-0">
+          {#if color === "neutral"}
+            <Info class="size-5" />
+          {:else if color === "info"}
+            <Info class="size-5" />
+          {:else if color === "success"}
+            <CheckCircle2 class="size-5" />
+          {:else if color === "warning"}
+            <TriangleAlert class="size-5" />
+          {:else if color === "danger"}
+            <AlertCircle class="size-5" />
+          {/if}
+        </div>
+      {/if}
+      <div class="flex-1 space-y-2">
+        {#if title}
+          <h3 class="font-medium pr-6">{title}</h3>
+        {/if}
+        {#if description}
+          <p class="text-sm leading-relaxed opacity-90 pr-6">{description}</p>
+        {/if}
+        {#if children}
+          <div class="text-sm pr-6">{@render children()}</div>
+        {/if}
+      </div>
+    </div>
+    {#if closable}
+      <button
+        type="button"
+        class="absolute top-4 right-4 cursor-pointer rounded-md opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:outline-none focus-visible:ring-content"
+        onclick={handleClose}
+        aria-label="Close alert"
+      >
+        <X class="size-4.5" />
+      </button>
     {/if}
   </div>
-</div>
+{/if}
