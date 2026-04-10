@@ -7,50 +7,6 @@
   import { cn } from "../../helpers/cn.js";
   import Label from "../Label/Label.svelte";
 
-  const checkboxSizes = {
-    sm: {
-      box: "size-4",
-      icon: "size-3",
-      gap: "gap-2",
-      title: "text-sm",
-      description: "text-xs",
-    },
-    md: {
-      box: "size-5",
-      icon: "size-3.5",
-      gap: "gap-3",
-      title: "text-sm",
-      description: "text-sm",
-    },
-    lg: {
-      box: "size-6",
-      icon: "size-4",
-      gap: "gap-3",
-      title: "text-base",
-      description: "text-sm",
-    },
-  } as const;
-
-  const checkboxColors = {
-    neutral:
-      "data-[state=checked]:border-content data-[state=checked]:bg-content data-[state=indeterminate]:border-content data-[state=indeterminate]:bg-content text-base-100",
-    info: "data-[state=checked]:border-info data-[state=checked]:bg-info data-[state=indeterminate]:border-info data-[state=indeterminate]:bg-info text-white",
-    success:
-      "data-[state=checked]:border-success data-[state=checked]:bg-success data-[state=indeterminate]:border-success data-[state=indeterminate]:bg-success text-black",
-    danger:
-      "data-[state=checked]:border-error data-[state=checked]:bg-error data-[state=indeterminate]:border-error data-[state=indeterminate]:bg-error text-white",
-  } as const;
-
-  /**
-   * Compactness preset for the checkbox.
-   */
-  type CheckboxSize = keyof typeof checkboxSizes;
-
-  /**
-   * Semantic color preset for the checked state.
-   */
-  type CheckboxColor = keyof typeof checkboxColors;
-
   interface Props {
     /**
      * Additional CSS classes to apply to the root wrapper.
@@ -116,13 +72,13 @@
      * Visual size preset of the checkbox.
      * @default "md"
      */
-    size?: CheckboxSize;
+    size?: "sm" | "md" | "lg";
 
     /**
      * Semantic color representation for the checked state.
      * @default "neutral"
      */
-    color?: CheckboxColor;
+    color?: "neutral" | "info" | "success" | "danger";
   }
 
   let {
@@ -145,7 +101,16 @@
   let resolvedId = $derived(id ?? `${uid}-checkbox`);
 </script>
 
-<div class={cn("flex items-start", checkboxSizes[size].gap, className)}>
+<div
+  class={cn(
+    "flex items-center",
+    {
+      "gap-2": size === "sm",
+      "gap-3": size === "md" || size === "lg",
+    },
+    className,
+  )}
+>
   <BitsCheckbox.Root
     {disabled}
     {readonly}
@@ -159,19 +124,42 @@
       // Base layout & typography
       "border-base-400 bg-base-100 inline-flex shrink-0 items-center justify-center rounded-sm border transition-colors duration-200",
       // Focus states
-      "focus:outline-hidden focus-visible:ring-2 focus-visible:ring-base-400 focus-visible:ring-offset-2",
+      "focus-visible:outline-2 focus-visible:outline-offset-2",
       // Disabled state
       "disabled:cursor-not-allowed disabled:opacity-50",
-      // Presets
-      checkboxSizes[size].box,
-      checkboxColors[color],
+      {
+        // Size presets
+        "size-4": size === "sm",
+        "size-5": size === "md",
+        "size-6": size === "lg",
+
+        // Color presets
+        "data-[state=checked]:border-content data-[state=checked]:bg-content data-[state=indeterminate]:border-content data-[state=indeterminate]:bg-content text-base-100 focus-visible:outline-content": color === "neutral",
+        "data-[state=checked]:border-info data-[state=checked]:bg-info data-[state=indeterminate]:border-info data-[state=indeterminate]:bg-info text-white focus-visible:outline-info": color === "info",
+        "data-[state=checked]:border-success data-[state=checked]:bg-success data-[state=indeterminate]:border-success data-[state=indeterminate]:bg-success text-white focus-visible:outline-success": color === "success",
+        "data-[state=checked]:border-error data-[state=checked]:bg-error data-[state=indeterminate]:border-error data-[state=indeterminate]:bg-error text-white focus-visible:outline-error": color === "danger",
+      },
     )}
   >
     {#snippet children({ checked: isChecked, indeterminate: isIndeterminate })}
       {#if isIndeterminate}
-        <Minus aria-hidden="true" class={checkboxSizes[size].icon} />
+        <Minus
+          aria-hidden="true"
+          class={cn({
+            "size-3": size === "sm",
+            "size-3.5": size === "md",
+            "size-4": size === "lg",
+          })}
+        />
       {:else if isChecked}
-        <Check aria-hidden="true" class={checkboxSizes[size].icon} />
+        <Check
+          aria-hidden="true"
+          class={cn({
+            "size-3": size === "sm",
+            "size-3.5": size === "md",
+            "size-4": size === "lg",
+          })}
+        />
       {/if}
     {/snippet}
   </BitsCheckbox.Root>
@@ -180,14 +168,21 @@
     <div class="space-y-1">
       {#if label}
         <Label
-          class={cn("cursor-pointer", checkboxSizes[size].title)}
+          class={cn("cursor-pointer", {
+            "text-sm": size === "sm" || size === "md",
+            "text-base": size === "lg",
+          })}
           for={resolvedId}
-          >{label}</Label
         >
+          {label}
+        </Label>
       {/if}
       {#if description}
         <p
-          class={cn("text-content-muted leading-relaxed", checkboxSizes[size].description)}
+          class={cn("text-content-muted leading-relaxed", {
+            "text-xs": size === "sm",
+            "text-sm": size === "md" || size === "lg",
+          })}
         >
           {description}
         </p>
