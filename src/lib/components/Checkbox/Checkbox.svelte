@@ -166,7 +166,7 @@
   </BitsCheckbox.Root>
 
   {#if label || description}
-    <div class="space-y-1">
+    <div class="space-y-0.5">
       {#if label}
         <Label
           class={cn("cursor-pointer", {
