@@ -68,7 +68,7 @@
   /* Semantic colors from the spec. */
   --color-info: var(--color-blue-500);
   --color-success: var(--color-emerald-500);
-  --color-warning: var(--color-amber-500);
+  --color-warning: var(--color-orange-500);
   --color-error: var(--color-red-500);
 }
 
