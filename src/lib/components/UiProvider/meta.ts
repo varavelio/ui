@@ -5,7 +5,6 @@ export const componentMeta = components([
   {
     name: "UiProvider",
     demo: Demo,
-
     category: "Utilities & Preferences",
     props: [
       prop(
