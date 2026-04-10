@@ -35,6 +35,8 @@ export type ComponentProp = {
  */
 export type ComponentMeta = {
   name: string;
+  slug: string;
+  type: "components" | "blocks" | "layouts";
   category: ComponentCategory;
   props: ComponentProp[];
   demo?: SvelteComponent;
@@ -46,7 +48,9 @@ export type ComponentMeta = {
  * @param entries - One or more component metadata entries.
  * @returns The same entries with catalog typing.
  */
-export function components(entries: ComponentMeta[]): ComponentMeta[] {
+export function components(
+  entries: Omit<ComponentMeta, "slug" | "type">[],
+): Omit<ComponentMeta, "slug" | "type">[] {
   return entries;
 }
 
@@ -70,7 +74,9 @@ export function prop(
 
 function createComponentCatalog() {
   // Find all meta.ts modules in the components directory
-  type MetaModuleShape = { componentMeta: ComponentMeta[] };
+  type MetaModuleShape = {
+    componentMeta: Omit<ComponentMeta, "slug" | "type">[];
+  };
 
   const metaModules = import.meta.glob<MetaModuleShape>(
     "./components/*/meta.ts",
@@ -81,7 +87,13 @@ function createComponentCatalog() {
   const componentCatalog: ComponentMeta[] = Object.entries(metaModules)
     .flatMap(([, module]) => module.componentMeta)
     // Sort the components alphabetically by name
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => a.name.localeCompare(b.name))
+    // Add slug and type
+    .map((meta) => ({
+      ...meta,
+      type: "components" as const,
+      slug: meta.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
+    }));
 
   return componentCatalog;
 }
