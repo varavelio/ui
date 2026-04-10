@@ -25,6 +25,7 @@ export const componentMeta = components([
         "If true, prevents the tooltip from opening.",
         "false",
       ),
+      prop("padded", "boolean", "If true, adds standard padding.", "true"),
       prop(
         "triggerClass",
         "ClassValue",

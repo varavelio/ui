@@ -37,6 +37,11 @@
      * @default "top"
      */
     side?: "top" | "bottom" | "left" | "right";
+    /**
+     * If true, adds standard padding (px-3 py-2) to the content area.
+     * @default true
+     */
+    padded?: boolean;
   }
 
   let {
@@ -47,6 +52,7 @@
     delay = 0,
     disabled = false,
     side = "top",
+    padded = true,
   }: Props = $props();
 </script>
 
@@ -64,8 +70,9 @@
     <BitsTooltip.Content {side} class="z-50" sideOffset={8}>
       <div
         class={cn(
-          "bg-base-100 max-h-[70dvh] max-w-[70dvw] overflow-auto rounded-md border border-base-400 px-3 py-2 text-sm text-content shadow-sm",
-          contentClass ?? ""
+          "bg-base-100 max-h-[70dvh] max-w-[70dvw] overflow-auto rounded-md border border-base-400 text-sm text-content shadow-sm",
+          padded && "px-4 py-2",
+          contentClass,
         )}
       >
         {#if typeof content === "string"}
