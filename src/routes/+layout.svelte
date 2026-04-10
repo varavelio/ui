@@ -1,6 +1,9 @@
 <script>
-  let { children } = $props();
   import "../app.css";
+
+  import { UiProvider } from "$lib/components/index.js";
+
+  let { children } = $props();
 </script>
 
-{@render children()}
+<UiProvider>{@render children()}</UiProvider>
