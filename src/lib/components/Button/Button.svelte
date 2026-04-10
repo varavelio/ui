@@ -99,7 +99,7 @@
         "border-content bg-content text-base-100 hover:bg-content/90 active:bg-content outline-content": color === "neutral",
         "border-info bg-info text-white hover:bg-info/90 active:bg-info outline-info": color === "info",
         "border-success bg-success text-white hover:bg-success/90 active:bg-success outline-success": color === "success",
-        "border-warning bg-warning text-black hover:bg-warning/90 active:bg-warning outline-warning": color === "warning",
+        "border-warning bg-warning text-white hover:bg-warning/90 active:bg-warning outline-warning": color === "warning",
         "border-error bg-error text-white hover:bg-error/90 active:bg-error outline-error": color === "danger",
       }),
       
