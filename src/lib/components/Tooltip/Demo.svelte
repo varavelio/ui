@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Button, Tooltip } from "$lib/components/index.js";
+  import { Button, Input, Tooltip } from "$lib/components/index.js";
+  import Avatar from "../Avatar/Avatar.svelte";
 </script>
 
 <div class="flex flex-col gap-12">
@@ -58,6 +59,37 @@
         {/snippet}
         <Button variant="outline" color="info">Analytics</Button>
       </Tooltip>
+
+      <!-- Rich Content from Popover Demo -->
+      <Tooltip side="bottom">
+        {#snippet content()}
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <Avatar
+                src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/avatar-dark.svg"
+              />
+              <div>
+                <p class="text-sm font-medium">Varavel UI</p>
+                <p class="text-xs text-content-muted">@varavel/ui</p>
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed max-w-64">
+              The official Svelte 5 & Tailwind CSS 4 UI library for the Varavel
+              ecosystem. Designed with a high-contrast, monochromatic aesthetic.
+            </p>
+            <div class="flex gap-2">
+              <Button size="sm" class="w-full">Follow</Button>
+              <Button size="sm" variant="outline" class="w-full">
+                Message
+              </Button>
+            </div>
+          </div>
+        {/snippet}
+        <Avatar
+          src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/avatar-dark.svg"
+          class="cursor-help"
+        />
+      </Tooltip>
     </div>
   </section>
 
@@ -70,7 +102,7 @@
       <Tooltip content="Instant tooltip (default 0ms delay)">
         <Button variant="outline">Default (Instant)</Button>
       </Tooltip>
-      <Tooltip content="Delayed tooltip (500ms delay)" delayDuration={500}>
+      <Tooltip content="Delayed tooltip (500ms delay)" delay={500}>
         <Button variant="outline">Delayed (500ms)</Button>
       </Tooltip>
       <Tooltip content="This should not be visible" disabled>

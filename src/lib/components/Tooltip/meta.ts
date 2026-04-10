@@ -18,7 +18,7 @@ export const componentMeta = components([
         "Preferred placement.",
         '"top"',
       ),
-      prop("delayDuration", "number", "Hover delay before opening.", "0"),
+      prop("delay", "number", "Hover delay before opening.", "0"),
       prop(
         "disabled",
         "boolean",

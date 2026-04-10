@@ -26,7 +26,7 @@
      * Time in milliseconds before the tooltip opens.
      * @default 0
      */
-    delayDuration?: number;
+    delay?: number;
     /**
      * If true, prevents the tooltip from opening.
      * @default false
@@ -44,13 +44,13 @@
     contentClass,
     content,
     children,
-    delayDuration = 0,
+    delay = 0,
     disabled = false,
     side = "top",
   }: Props = $props();
 </script>
 
-<BitsTooltip.Root {delayDuration} {disabled}>
+<BitsTooltip.Root delayDuration={delay} {disabled}>
   <BitsTooltip.Trigger
     class={cn(
       "focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content inline-flex outline-hidden",
@@ -64,7 +64,7 @@
     <BitsTooltip.Content {side} class="z-50" sideOffset={8}>
       <div
         class={cn(
-          "bg-base-100 rounded-md border border-base-400 px-3 py-2 text-sm text-content shadow-sm",
+          "bg-base-100 max-h-[70dvh] max-w-[70dvw] overflow-auto rounded-md border border-base-400 px-3 py-2 text-sm text-content shadow-sm",
           contentClass ?? ""
         )}
       >
