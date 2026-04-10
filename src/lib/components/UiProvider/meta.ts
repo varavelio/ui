@@ -8,22 +8,9 @@ export const componentMeta = components([
     category: "Utilities & Preferences",
     props: [
       prop(
-        "tooltipDisabled",
-        "boolean",
-        "Disables tooltip provider behavior globally.",
-        "false",
-      ),
-      prop(
-        "tooltipDelayDuration",
-        "number",
-        "Delay before tooltips open, in milliseconds.",
-        "250",
-      ),
-      prop(
-        "tooltipSkipDelayDuration",
-        "number",
-        "Re-open delay window after a tooltip was recently shown, in milliseconds.",
-        "150",
+        "children",
+        "Snippet",
+        "The application content wrapped by the provider.",
       ),
     ],
   },
