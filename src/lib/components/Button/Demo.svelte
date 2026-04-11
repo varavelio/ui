@@ -1,10 +1,18 @@
 <script lang="ts">
-  import { Button, Card, Label } from "$lib/components/index.js";
+  import { Button, Card, Label, Switch } from "$lib/components/index.js";
+
+  let active = $state(false);
 </script>
 
 <div class="space-y-8">
   <div class="space-y-3">
-    <Label>Variants & Colors</Label>
+    <div class="flex items-center justify-between">
+      <Label>Variants & Colors</Label>
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-content-muted">Force Active</span>
+        <Switch bind:checked={active} size="sm" />
+      </div>
+    </div>
     <Card class="space-y-6 p-6">
       <div class="space-y-3">
         <span
@@ -13,11 +21,11 @@
           Solid
         </span>
         <div class="flex flex-wrap items-center gap-3">
-          <Button variant="solid" color="neutral">Neutral</Button>
-          <Button variant="solid" color="info">Info</Button>
-          <Button variant="solid" color="success">Success</Button>
-          <Button variant="solid" color="warning">Warning</Button>
-          <Button variant="solid" color="danger">Danger</Button>
+          <Button {active} variant="solid" color="neutral">Neutral</Button>
+          <Button {active} variant="solid" color="info">Info</Button>
+          <Button {active} variant="solid" color="success">Success</Button>
+          <Button {active} variant="solid" color="warning">Warning</Button>
+          <Button {active} variant="solid" color="danger">Danger</Button>
         </div>
       </div>
       <div class="space-y-3">
@@ -26,11 +34,11 @@
           >Outline</span
         >
         <div class="flex flex-wrap items-center gap-3">
-          <Button variant="outline" color="neutral">Neutral</Button>
-          <Button variant="outline" color="info">Info</Button>
-          <Button variant="outline" color="success">Success</Button>
-          <Button variant="outline" color="warning">Warning</Button>
-          <Button variant="outline" color="danger">Danger</Button>
+          <Button {active} variant="outline" color="neutral">Neutral</Button>
+          <Button {active} variant="outline" color="info">Info</Button>
+          <Button {active} variant="outline" color="success">Success</Button>
+          <Button {active} variant="outline" color="warning">Warning</Button>
+          <Button {active} variant="outline" color="danger">Danger</Button>
         </div>
       </div>
       <div class="space-y-3">
@@ -40,11 +48,11 @@
           Ghost
         </span>
         <div class="flex flex-wrap items-center gap-3">
-          <Button variant="ghost" color="neutral">Neutral</Button>
-          <Button variant="ghost" color="info">Info</Button>
-          <Button variant="ghost" color="success">Success</Button>
-          <Button variant="ghost" color="warning">Warning</Button>
-          <Button variant="ghost" color="danger">Danger</Button>
+          <Button {active} variant="ghost" color="neutral">Neutral</Button>
+          <Button {active} variant="ghost" color="info">Info</Button>
+          <Button {active} variant="ghost" color="success">Success</Button>
+          <Button {active} variant="ghost" color="warning">Warning</Button>
+          <Button {active} variant="ghost" color="danger">Danger</Button>
         </div>
       </div>
     </Card>

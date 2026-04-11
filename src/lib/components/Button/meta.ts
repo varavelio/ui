@@ -37,6 +37,12 @@ export const componentMeta = components([
         "Shows a spinner and disables interaction.",
         "false",
       ),
+      prop(
+        "active",
+        "boolean",
+        "Forces the hover style to represent an active state.",
+        "false",
+      ),
       prop("block", "boolean", "Expands button to full width.", "false"),
     ],
   },
