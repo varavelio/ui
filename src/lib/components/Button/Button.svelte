@@ -53,6 +53,12 @@
      * @default false
      */
     active?: boolean;
+
+    /**
+     * Internal content alignment.
+     * @default "center"
+     */
+    alignContent?: "left" | "center" | "right";
   }
 
   let {
@@ -67,6 +73,7 @@
     loading = false,
     active = false,
     disabled = false,
+    alignContent = "center",
     ...restProps
   }: Props = $props();
 </script>
@@ -77,7 +84,7 @@
   disabled={disabled || loading}
   class={cn(
     // Base layout & typography
-    "relative inline-flex items-center justify-center gap-2 border font-medium transition-all duration-75",
+    "relative inline-flex items-center gap-2 border font-medium transition-all duration-75",
     // Interactive states
     "active:translate-y-px active:transition-none",
     // Disabled state
@@ -86,6 +93,11 @@
     "focus-visible:outline-2",
 
     {
+      // Alignment
+      "justify-center": alignContent === "center",
+      "justify-start": alignContent === "left",
+      "justify-end": alignContent === "right",
+
       // Size presets
       "h-8 px-3 text-xs": size === "sm",
       "h-10 px-4 text-sm": size === "md",

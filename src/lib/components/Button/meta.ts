@@ -44,6 +44,12 @@ export const componentMeta = components([
         "false",
       ),
       prop("wide", "boolean", "Expands button to full width.", "false"),
+      prop(
+        "alignContent",
+        '"left" | "center" | "right"',
+        "Inner content alignment.",
+        '"center"',
+      ),
     ],
   },
 ]);

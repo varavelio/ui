@@ -87,7 +87,11 @@
   </div>
 
   <div class="space-y-3">
-    <Label>Wide Width</Label>
-    <Card class="p-6"> <Button wide>Full Width Button</Button> </Card>
+    <Label>Wide Width & Alignment</Label>
+    <Card class="p-6 space-y-4">
+      <Button wide alignContent="left">Left Aligned</Button>
+      <Button wide alignContent="center">Center Aligned (Default)</Button>
+      <Button wide alignContent="right">Right Aligned</Button>
+    </Card>
   </div>
 </div>
