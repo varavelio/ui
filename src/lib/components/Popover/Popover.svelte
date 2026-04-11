@@ -73,8 +73,8 @@
       sideOffset={8}
     >
       {#if title}
-        <div class="border-b border-base-400 px-4 py-2">
-          <h3 class="text-sm font-medium text-content">{title}</h3>
+        <div class="px-4 pt-4">
+          <h3 class="text-base font-medium text-content">{title}</h3>
         </div>
       {/if}
 
