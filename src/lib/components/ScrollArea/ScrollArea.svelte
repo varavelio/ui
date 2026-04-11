@@ -46,11 +46,13 @@
 </script>
 
 <BitsScrollArea.Root
-  class={cn("relative overflow-hidden", className ?? "")}
+  class={cn("relative flex min-h-0 flex-col overflow-hidden", className ?? "")}
   {scrollHideDelay}
   {type}
 >
-  <BitsScrollArea.Viewport class={cn("size-full", viewportClass ?? "")}>
+  <BitsScrollArea.Viewport
+    class={cn("min-h-0 w-full flex-1", viewportClass ?? "")}
+  >
     {@render children?.()}
   </BitsScrollArea.Viewport>
 

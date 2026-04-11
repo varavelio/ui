@@ -105,6 +105,7 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Catalog Metadata**: Every public component folder should include a `meta.ts` file exporting a `componentMeta` array via the `components([...])` helper. Each entry should declare `name`, `category`, documented `props`, and can attach `demo` directly (typically from colocated `Demo.svelte`). Avoid hardcoding all metadata in one file.
 - **Helpers**: Put generic utilities like class merging under `src/lib/helpers/`, not under `components/internal/`.
 - **Styling**: Keep Tailwind classes organized. Use `theme.css` variables (e.g., `bg-base-100`, `text-content`) instead of hardcoding slate colors where possible.
+- **Scroll Areas**: When wrapping `bits-ui` ScrollArea, prefer a flex-column root with a `min-h-0 flex-1` viewport instead of relying on `h-full`/`size-full`; this keeps vertical overflow working inside flex parents constrained by `max-height` such as modal bodies.
 - **Semantic Tones**: The theme does not expose a `primary` token; use semantic tones (`info`, `success`, `warning`, `error/danger`) for colored UI states.
 - **Theme Components**: Any theme selector/toggle should consume `src/lib/utils/theme.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
 - **Theme Reactivity**: For UI sync with OS changes and cross-tab updates, prefer `theme.subscribe()` (backed by the global `varavel-theme-change` event from `static/theme-init.js`) rather than ad-hoc listeners inside components.
