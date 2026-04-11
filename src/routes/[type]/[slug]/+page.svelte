@@ -13,6 +13,7 @@
     catalog,
     componentCategories,
   } from "$lib/catalog.js";
+  import Button from "$lib/components/Button/Button.svelte";
   import Container from "$lib/components/Container/Container.svelte";
   import {
     Alert,
@@ -167,24 +168,16 @@
 
                 <div class="space-y-1">
                   {#each categoryEntries as entry (entry.id)}
-                    <a
-                      href="/{entry.type}/{entry.slug}"
-                      class={[
-                            "w-full rounded-lg border px-3 py-3 text-left transition-colors block",
-                            activeId === entry.id
-                              ? "border-info/30 bg-info/10"
-                              : "border-transparent hover hover:bg-base-200",
-                          ]}
-                    >
-                      <div class="flex items-center justify-between gap-3">
-                        <span
-                          class={activeId === entry.id
-                                ? "font-semibold text-info"
-                                : "font-medium text-content"}
-                        >
-                          {entry.name}
-                        </span>
-                      </div>
+                    <a href="/{entry.type}/{entry.slug}" class="w-full block">
+                      <Button
+                        wide
+                        class="justify-start"
+                        active={activeId === entry.id}
+                        variant={activeId === entry.id ? "outline" : "ghost"}
+                        color={activeId === entry.id ? "info" : "neutral"}
+                      >
+                        {entry.name}
+                      </Button>
                     </a>
                   {/each}
                 </div>

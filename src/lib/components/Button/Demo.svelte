@@ -87,7 +87,7 @@
   </div>
 
   <div class="space-y-3">
-    <Label>Block Width</Label>
-    <Card class="p-6"> <Button block>Full Width Button</Button> </Card>
+    <Label>Wide Width</Label>
+    <Card class="p-6"> <Button wide>Full Width Button</Button> </Card>
   </div>
 </div>

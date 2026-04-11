@@ -38,7 +38,7 @@
      * Whether the button should span the full width of its container.
      * @default false
      */
-    block?: boolean;
+    wide?: boolean;
 
     /**
      * Whether the button is in a loading state.
@@ -63,7 +63,7 @@
     radius = "md",
     variant = "solid",
     color = "neutral",
-    block = false,
+    wide = false,
     loading = false,
     active = false,
     disabled = false,
@@ -98,8 +98,8 @@
       "rounded-full": radius === "full",
 
       // Width modifiers
-      "w-full": block,
-      "w-auto": !block,
+      "w-full": wide,
+      "w-auto": !wide,
 
       // Variant: Solid
       ...(variant === "solid" && {

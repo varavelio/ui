@@ -43,7 +43,7 @@ export const componentMeta = components([
         "Forces the hover style to represent an active state.",
         "false",
       ),
-      prop("block", "boolean", "Expands button to full width.", "false"),
+      prop("wide", "boolean", "Expands button to full width.", "false"),
     ],
   },
 ]);
