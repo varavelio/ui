@@ -46,7 +46,7 @@ export const componentMeta = components([
       prop("wide", "boolean", "Expands button to full width.", "false"),
       prop(
         "alignContent",
-        '"left" | "center" | "right"',
+        '"left" | "center" | "right" | "between"',
         "Inner content alignment.",
         '"center"',
       ),

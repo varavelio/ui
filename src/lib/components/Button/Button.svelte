@@ -58,7 +58,7 @@
      * Internal content alignment.
      * @default "center"
      */
-    alignContent?: "left" | "center" | "right";
+    alignContent?: "left" | "center" | "right" | "between";
   }
 
   let {
@@ -93,11 +93,6 @@
     "focus-visible:outline-2",
 
     {
-      // Alignment
-      "justify-center": alignContent === "center",
-      "justify-start": alignContent === "left",
-      "justify-end": alignContent === "right",
-
       // Size presets
       "h-8 px-3 text-xs": size === "sm",
       "h-10 px-4 text-sm": size === "md",
@@ -187,10 +182,29 @@
     className,
   )}
 >
-  <div class="flex items-center justify-center gap-2 leading-none">
-    {#if loading}
-      <Loader class="size-4 animate-spin" />
-    {/if}
+  <div
+    class={cn(
+      "absolute inset-0 flex items-center justify-center transition-opacity duration-200", {
+      "opacity-100": loading,
+      "opacity-0": !loading,
+    })}
+  >
+    <Loader class="size-4 animate-spin" />
+  </div>
+
+  <div
+    class={cn(
+      "inline-flex items-center gap-2 leading-none w-full",  
+      {
+        "invisible": loading,
+        // Alignment
+        "justify-center": alignContent === "center",
+        "justify-start": alignContent === "left",
+        "justify-end": alignContent === "right",
+        "justify-between": alignContent === "between",
+      }
+    )}
+  >
     {@render children?.()}
   </div>
 </button>

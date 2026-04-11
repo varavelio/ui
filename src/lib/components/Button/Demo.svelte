@@ -2,6 +2,7 @@
   import { Button, Card, Label, Switch } from "$lib/components/index.js";
 
   let active = $state(false);
+  let loading = $state(false);
 </script>
 
 <div class="space-y-8">
@@ -87,11 +88,20 @@
   </div>
 
   <div class="space-y-3">
-    <Label>Wide Width & Alignment</Label>
+    <div class="flex items-center justify-between gap-4">
+      <Label>Wide Width & Alignment</Label>
+      <Switch bind:checked={loading} size="sm" label="Loading State" />
+    </div>
     <Card class="p-6 space-y-4">
-      <Button wide alignContent="left">Left Aligned</Button>
-      <Button wide alignContent="center">Center Aligned (Default)</Button>
-      <Button wide alignContent="right">Right Aligned</Button>
+      <Button {loading} wide alignContent="left">Left Aligned</Button>
+      <Button {loading} wide alignContent="center">
+        Center Aligned (Default)
+      </Button>
+      <Button {loading} wide alignContent="right">Right Aligned</Button>
+      <Button {loading} wide alignContent="between">
+        <span>Between Aligned</span>
+        <span class="text-xs opacity-50">⌘K</span>
+      </Button>
     </Card>
   </div>
 </div>
