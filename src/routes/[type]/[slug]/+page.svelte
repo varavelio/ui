@@ -171,7 +171,7 @@
                     <a href="/{entry.type}/{entry.slug}" class="w-full block">
                       <Button
                         wide
-                        class="justify-start"
+                        alignContent="left"
                         active={activeId === entry.id}
                         variant={activeId === entry.id ? "outline" : "ghost"}
                         color={activeId === entry.id ? "info" : "neutral"}
