@@ -251,8 +251,8 @@
             {active}
             {loading}
             {disabled}
+            square
             variant="outline"
-            class="size-10 p-0"
             aria-label="Settings"
           >
             <Settings class="size-4" />
@@ -261,8 +261,8 @@
             {active}
             {loading}
             {disabled}
+            square
             variant="ghost"
-            class="size-10 p-0"
             aria-label="Inbox"
           >
             <Mail class="size-4" />
@@ -271,8 +271,8 @@
             {active}
             {loading}
             {disabled}
+            square
             color="neutral"
-            class="size-10 p-0"
             radius="full"
             aria-label="Download"
           >
@@ -283,8 +283,8 @@
             {loading}
             {disabled}
             variant="outline"
+            square
             color="success"
-            class="size-10 p-0"
             radius="sm"
             aria-label="Complete"
           >
