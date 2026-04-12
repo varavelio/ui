@@ -20,7 +20,7 @@ export const componentMeta = components([
       ),
       prop(
         "color",
-        '"neutral" | "info" | "success" | "warning" | "danger"',
+        '"neutral" | "info" | "success" | "warning" | "error"',
         "Semantic color representing the button's intent.",
         '"neutral"',
       ),

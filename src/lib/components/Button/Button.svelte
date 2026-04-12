@@ -33,7 +33,7 @@
      * Semantic color representing the button's intent.
      * @default "neutral"
      */
-    color?: "neutral" | "info" | "success" | "warning" | "danger";
+    color?: "neutral" | "info" | "success" | "warning" | "error";
 
     /**
      * Whether the button should span the full width of its container.
@@ -150,9 +150,9 @@
         "bg-warning/80 border-warning/80": color === "warning" && active,
         "hover:bg-warning/80": color === "warning" && !disabledOrLoading,
 
-        "border-error bg-error text-white outline-error": color === "danger",
-        "bg-error/80 border-error/80": color === "danger" && active,
-        "hover:bg-error/80": color === "danger" && !disabledOrLoading,
+        "border-error bg-error text-white outline-error": color === "error",
+        "bg-error/80 border-error/80": color === "error" && active,
+        "hover:bg-error/80": color === "error" && !disabledOrLoading,
       }),
 
       // Variant: Outline
@@ -173,9 +173,9 @@
         "bg-warning/10": color === "warning" && active,
         "hover:bg-warning/10": color === "warning" && !disabledOrLoading,
 
-        "border-error/30 bg-transparent text-error outline-error": color === "danger",
-        "bg-error/10": color === "danger" && active,
-        "hover:bg-error/10": color === "danger" && !disabledOrLoading,
+        "border-error/30 bg-transparent text-error outline-error": color === "error",
+        "bg-error/10": color === "error" && active,
+        "hover:bg-error/10": color === "error" && !disabledOrLoading,
       }),
 
       // Variant: Ghost
@@ -196,9 +196,9 @@
         "bg-warning/10": color === "warning" && active,
         "hover:bg-warning/10": color === "warning" && !disabledOrLoading,
 
-        "border-transparent bg-transparent text-error outline-error": color === "danger",
-        "bg-error/10": color === "danger" && active,
-        "hover:bg-error/10": color === "danger" && !disabledOrLoading,
+        "border-transparent bg-transparent text-error outline-error": color === "error",
+        "bg-error/10": color === "error" && active,
+        "hover:bg-error/10": color === "error" && !disabledOrLoading,
       }),
     },
 

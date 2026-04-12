@@ -18,7 +18,7 @@
   let disabled = $state(false);
 
   const variants = ["solid", "outline", "ghost"] as const;
-  const colors = ["neutral", "info", "success", "warning", "danger"] as const;
+  const colors = ["neutral", "info", "success", "warning", "error"] as const;
   const sizes = ["sm", "md", "lg"] as const;
   const radii = ["sm", "md", "lg", "full"] as const;
 </script>
@@ -237,7 +237,7 @@
             {loading}
             {disabled}
             variant="ghost"
-            color="danger"
+            color="error"
             size="sm"
           >
             <Trash2 class="size-4" />
