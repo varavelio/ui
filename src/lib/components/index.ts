@@ -8,6 +8,7 @@ export { Checkbox } from "./Checkbox/index.js";
 export { Collapsible } from "./Collapsible/index.js";
 export { Confirm } from "./Confirm/index.js";
 export { Container } from "./Container/index.js";
+export { Heading } from "./Heading/index.js";
 export { Input } from "./Input/index.js";
 export { Kbd } from "./Kbd/index.js";
 export { Label } from "./Label/index.js";
