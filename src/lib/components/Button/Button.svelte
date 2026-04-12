@@ -246,15 +246,15 @@
   )}
 >
   {#if loading}
-    <div
+    <span
       class="absolute inset-0 flex items-center justify-center"
       in:fade={{ duration: 100 }}
     >
       <Loader class="size-4 animate-spin" />
-    </div>
+    </span>
   {/if}
 
-  <div
+  <span
     class={cn(
       "inline-flex items-center gap-2 leading-none w-full",
       {
@@ -267,5 +267,5 @@
     )}
   >
     {@render children?.()}
-  </div>
+  </span>
 </svelte:element>
