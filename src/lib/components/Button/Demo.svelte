@@ -4,7 +4,6 @@
     ArrowRight,
     Check,
     Download,
-    Loader,
     Mail,
     Plus,
     Send,
@@ -16,6 +15,9 @@
   let active = $state(false);
   let loading = $state(false);
   let disabled = $state(false);
+
+  let isLink = $state(false);
+  let href = $derived(isLink ? "#" : undefined);
 
   const variants = ["solid", "outline", "ghost"] as const;
   const colors = ["neutral", "info", "success", "warning", "error"] as const;
@@ -38,6 +40,8 @@
       <Switch bind:checked={active} size="sm" label="Active" />
       <Switch bind:checked={loading} size="sm" label="Loading" />
       <Switch bind:checked={disabled} size="sm" label="Disabled" />
+      <div class="h-6 w-px bg-base-300 mx-2"></div>
+      <Switch bind:checked={isLink} size="sm" label="As Link (href)" />
     </Card>
   </div>
 </div>
@@ -67,6 +71,7 @@
                   {disabled}
                   {variant}
                   {color}
+                  {href}
                   class="min-w-25"
                 >
                   {color.charAt(0).toUpperCase() + color.slice(1)}
@@ -86,7 +91,7 @@
       <Card class="flex items-center justify-center gap-8 p-10">
         {#each sizes as size}
           <div class="flex flex-col items-center gap-4">
-            <Button {active} {loading} {disabled} {size} color="neutral">
+            <Button {active} {loading} {disabled} {size} color="neutral" {href}>
               Button
             </Button>
             <span
@@ -105,7 +110,14 @@
       <Card class="flex flex-wrap items-center justify-center gap-6 p-10">
         {#each radii as radius}
           <div class="flex flex-col items-center gap-4">
-            <Button {active} {loading} {disabled} {radius} variant="outline">
+            <Button
+              {active}
+              {loading}
+              {disabled}
+              {radius}
+              variant="outline"
+              {href}
+            >
               Radius
             </Button>
             <span
@@ -131,6 +143,7 @@
           color="neutral"
           wide
           alignContent="left"
+          {href}
         >
           <Plus class="size-4" />
           <span>Left Aligned Action</span>
@@ -146,6 +159,7 @@
             color="info"
             wide
             alignContent="center"
+            {href}
           >
             Center Aligned (Default)
           </Button>
@@ -159,6 +173,7 @@
             color="neutral"
             wide
             alignContent="right"
+            {href}
           >
             <span>Right Aligned Action</span>
             <ArrowRight class="size-4" />
@@ -173,6 +188,7 @@
           color="neutral"
           wide
           alignContent="between"
+          {href}
         >
           <div class="flex items-center gap-2">
             <AlertCircle class="size-4 opacity-50" />
@@ -203,6 +219,7 @@
                   {size}
                   square
                   color="neutral"
+                  {href}
                 >
                   <Plus class="size-4" />
                 </Button>
@@ -224,11 +241,18 @@
       <Card class="grid grid-cols-1 divide-y divide-base-300">
         <!-- Standard Icon Compositions -->
         <div class="flex flex-wrap items-center justify-center gap-6 p-8">
-          <Button {active} {loading} {disabled} color="neutral">
+          <Button {active} {loading} {disabled} color="neutral" {href}>
             <Plus class="size-4" />
             <span>New Project</span>
           </Button>
-          <Button {active} {loading} {disabled} variant="outline" color="info">
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            variant="outline"
+            color="info"
+            {href}
+          >
             <span>Send Message</span>
             <Send class="size-4" />
           </Button>
@@ -239,11 +263,19 @@
             variant="ghost"
             color="error"
             size="sm"
+            {href}
           >
             <Trash2 class="size-4" />
             <span>Delete Account</span>
           </Button>
-          <Button {active} {loading} {disabled} color="success" radius="full">
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            color="success"
+            radius="full"
+            {href}
+          >
             <span>Get Started</span>
             <ArrowRight class="size-4" />
           </Button>
@@ -254,6 +286,7 @@
             square
             variant="outline"
             aria-label="Settings"
+            {href}
           >
             <Settings class="size-4" />
           </Button>
@@ -264,6 +297,7 @@
             square
             variant="ghost"
             aria-label="Inbox"
+            {href}
           >
             <Mail class="size-4" />
           </Button>
@@ -275,6 +309,7 @@
             color="neutral"
             radius="full"
             aria-label="Download"
+            {href}
           >
             <Download class="size-4" />
           </Button>
@@ -287,6 +322,7 @@
             color="success"
             radius="sm"
             aria-label="Complete"
+            {href}
           >
             <Check class="size-4" />
           </Button>

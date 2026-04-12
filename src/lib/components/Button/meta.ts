@@ -56,6 +56,17 @@ export const componentMeta = components([
         "Inner content alignment.",
         '"center"',
       ),
+      prop(
+        "href",
+        "string",
+        "Link destination. If provided, the component will render as an `<a>` element.",
+      ),
+      prop("target", "string", "Where to display the linked URL."),
+      prop(
+        "rel",
+        "string",
+        "The relationship of the linked URL as space-separated link types.",
+      ),
     ],
   },
 ]);

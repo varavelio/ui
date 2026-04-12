@@ -1,7 +1,10 @@
 <script lang="ts">
   import { Loader } from "@lucide/svelte";
   import type { Snippet } from "svelte";
-  import type { HTMLButtonAttributes } from "svelte/elements";
+  import type {
+    HTMLAnchorAttributes,
+    HTMLButtonAttributes,
+  } from "svelte/elements";
   import { fade } from "svelte/transition";
   import { cn } from "../../helpers/cn.js";
 
@@ -10,6 +13,21 @@
      * Inner content of the button.
      */
     children?: Snippet;
+
+    /**
+     * Link destination. If provided, the component will render as an `<a>` element.
+     */
+    href?: string;
+
+    /**
+     * Where to display the linked URL.
+     */
+    target?: HTMLAnchorAttributes["target"];
+
+    /**
+     * The relationship of the linked URL as space-separated link types.
+     */
+    rel?: HTMLAnchorAttributes["rel"];
 
     /**
      * Button size preset.
@@ -72,6 +90,9 @@
   let {
     class: className,
     children,
+    href,
+    target,
+    rel,
     type = "button",
     size = "md",
     radius = "md",
@@ -87,20 +108,39 @@
   }: Props = $props();
 
   let disabledOrLoading = $derived(disabled || loading);
+  const isLink = $derived(!!href);
+  const tagName = $derived(isLink ? "a" : "button");
+
+  const elementProps = $derived.by(() => {
+    if (isLink) {
+      return {
+        href: disabledOrLoading ? undefined : href,
+        target: disabledOrLoading ? undefined : target,
+        "aria-disabled": disabledOrLoading ? "true" : undefined,
+        rel: target === "_blank" && !rel ? "noopener noreferrer" : rel,
+        ...restProps,
+      } as HTMLAnchorAttributes;
+    }
+
+    return {
+      type,
+      disabled: disabledOrLoading,
+      ...restProps,
+    } as HTMLButtonAttributes;
+  });
 </script>
 
-<button
-  {...restProps}
-  {type}
-  disabled={disabledOrLoading}
+<svelte:element
+  this={tagName}
+  {...elementProps}
   class={cn(
     // Base layout & typography
     "relative inline-flex items-center gap-2 border font-medium transition-all duration-75",
-    "cursor-pointer select-none",
+    "cursor-pointer select-none no-underline",
 
     // Focus state
     "focus-visible:outline-2",
-    
+
     {
       // Interactive states
       "active:translate-y-px": !disabledOrLoading,
@@ -216,7 +256,7 @@
 
   <div
     class={cn(
-      "inline-flex items-center gap-2 leading-none w-full",  
+      "inline-flex items-center gap-2 leading-none w-full",
       {
         "invisible": loading,
         "justify-center": alignContent === "center",
@@ -228,4 +268,4 @@
   >
     {@render children?.()}
   </div>
-</button>
+</svelte:element>
