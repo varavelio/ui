@@ -166,17 +166,16 @@
 
                 <div class="space-y-1">
                   {#each categoryEntries as entry (entry.id)}
-                    <a href="/{entry.type}/{entry.slug}" class="w-full block">
-                      <Button
-                        wide
-                        alignContent="left"
-                        active={activeId === entry.id}
-                        variant={activeId === entry.id ? "outline" : "ghost"}
-                        color={activeId === entry.id ? "info" : "neutral"}
-                      >
-                        {entry.name}
-                      </Button>
-                    </a>
+                    <Button
+                      href="/{entry.type}/{entry.slug}"
+                      wide
+                      alignContent="left"
+                      active={activeId === entry.id}
+                      variant={activeId === entry.id ? "outline" : "ghost"}
+                      color={activeId === entry.id ? "info" : "neutral"}
+                    >
+                      {entry.name}
+                    </Button>
                   {/each}
                 </div>
               </section>
