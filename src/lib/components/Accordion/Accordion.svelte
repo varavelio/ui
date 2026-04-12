@@ -4,7 +4,6 @@
   import { Accordion as BitsAccordion } from "bits-ui";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-
   import { cn } from "../../helpers/cn.js";
 
   type AccordionItem = {

@@ -3,7 +3,6 @@
   import { Label as BitsLabel } from "bits-ui";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-
   import { cn } from "../../helpers/cn.js";
 
   const labelSizes = {
