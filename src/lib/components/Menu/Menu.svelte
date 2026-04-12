@@ -7,7 +7,7 @@
 
   type DropdownMenuItem = {
     type?: "item" | "label" | "separator" | string;
-    label?: string;
+    label?: string | Snippet;
     icon?: Snippet;
     disabled?: boolean;
     destructive?: boolean;
@@ -68,7 +68,11 @@
           <div
             class="px-3 py-2 text-xs font-medium uppercase tracking-wide text-content-muted"
           >
-            {item.label}
+            {#if typeof item.label === "string"}
+              {item.label}
+            {:else if item.label}
+              {@render item.label()}
+            {/if}
           </div>
         {:else}
           <BitsDropdownMenu.Item
@@ -78,14 +82,18 @@
             )}
             disabled={item.disabled}
             onclick={() => !item.disabled && item.onSelect?.()}
-            textValue={item.label ?? ""}
+            textValue={typeof item.label === "string" ? item.label : ""}
           >
             {#if item.icon}
               <div class="flex size-4 shrink-0 items-center justify-center">
                 {@render item.icon()}
               </div>
             {/if}
-            <span class="flex-1">{item.label}</span>
+            {#if typeof item.label === "string"}
+              <span class="flex-1">{item.label}</span>
+            {:else if item.label}
+              {@render item.label()}
+            {/if}
           </BitsDropdownMenu.Item>
         {/if}
       {/each}
