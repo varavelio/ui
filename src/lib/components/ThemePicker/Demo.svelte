@@ -71,14 +71,25 @@
           tooltip while keeping the existing accessible label on the button.
         </p>
         <div class="flex flex-wrap gap-3">
-          <ThemePicker showLabel={false} square label="Appearance" />
+          <ThemePicker
+            showLabel={false}
+            square
+            label="Appearance"
+            color="info"
+          />
           <ThemePicker
             showLabel={false}
             square
             label="Color mode"
             variant="ghost"
+            color="success"
           />
-          <ThemePicker square radius="full" label="Appearance" />
+          <ThemePicker
+            square
+            radius="full"
+            label="Appearance"
+            color="warning"
+          />
         </div>
       </div>
     </article>
