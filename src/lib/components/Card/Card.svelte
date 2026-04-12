@@ -4,55 +4,6 @@
 
   import { cn } from "../../helpers/cn.js";
 
-  const cardPaddings = {
-    none: "p-0",
-    sm: "p-3",
-    md: "p-5",
-    lg: "p-8",
-  } as const;
-
-  const cardColors = {
-    default: "bg-base-200 text-content",
-    muted: "bg-base-300 text-content",
-    contrast: "bg-content text-base-100",
-  } as const;
-
-  const cardRadii = {
-    none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-md",
-    lg: "rounded-lg",
-    xl: "rounded-xl",
-    "2xl": "rounded-2xl",
-  } as const;
-
-  const cardShadows = {
-    none: "shadow-none",
-    sm: "shadow-sm",
-    md: "shadow-md",
-    lg: "shadow-lg",
-  } as const;
-
-  /**
-   * Internal spacing preset for the card.
-   */
-  type CardPadding = keyof typeof cardPaddings;
-
-  /**
-   * Surface color for the card.
-   */
-  type CardColor = keyof typeof cardColors;
-
-  /**
-   * Corner radius preset for the card.
-   */
-  type CardRadius = keyof typeof cardRadii;
-
-  /**
-   * Elevation shadow preset for the card.
-   */
-  type CardShadow = keyof typeof cardShadows;
-
   interface Props extends HTMLAttributes<HTMLDivElement> {
     /**
      * Inner content of the card.
@@ -63,25 +14,25 @@
      * Internal spacing preset.
      * @default "md"
      */
-    padding?: CardPadding;
+    padding?: "none" | "sm" | "md" | "lg";
 
     /**
      * Surface color variant.
      * @default "default"
      */
-    color?: CardColor;
+    color?: "default" | "muted" | "contrast";
 
     /**
      * Corner radius preset.
      * @default "lg"
      */
-    radius?: CardRadius;
+    radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl";
 
     /**
      * Elevation shadow preset.
-     * @default "none"
+     * @default "sm"
      */
-    shadow?: CardShadow;
+    shadow?: "none" | "sm" | "md" | "lg";
 
     /**
      * Whether the card should have a visible border.
@@ -107,13 +58,36 @@
   class={cn(
     // Base layout
     "relative overflow-hidden transition-all duration-200",
-    // Presets
-    cardPaddings[padding],
-    cardColors[color],
-    cardRadii[radius],
-    cardShadows[shadow],
-    // Border logic
-    bordered ? "border border-base-400" : "border-transparent",
+    {
+      // Padding presets
+      "p-0": padding === "none",
+      "p-3": padding === "sm",
+      "p-5": padding === "md",
+      "p-8": padding === "lg",
+
+      // Color variants
+      "bg-base-200 text-content": color === "default",
+      "bg-base-300 text-content": color === "muted",
+      "bg-content text-base-100": color === "contrast",
+
+      // Radius presets
+      "rounded-none": radius === "none",
+      "rounded-sm": radius === "sm",
+      "rounded-md": radius === "md",
+      "rounded-lg": radius === "lg",
+      "rounded-xl": radius === "xl",
+      "rounded-2xl": radius === "2xl",
+
+      // Shadow presets
+      "shadow-none": shadow === "none",
+      "shadow-sm": shadow === "sm",
+      "shadow-md": shadow === "md",
+      "shadow-lg": shadow === "lg",
+
+      // Border logic
+      "border border-base-400": bordered,
+      "border-transparent": !bordered,
+    },
     className,
   )}
 >
