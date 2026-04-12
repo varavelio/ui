@@ -60,6 +60,13 @@
      * @default "center"
      */
     alignContent?: "left" | "center" | "right" | "between";
+
+    /**
+     * Whether the button should have a square aspect ratio.
+     * If true, width will match height and horizontal padding will be removed.
+     * @default false
+     */
+    square?: boolean;
   }
 
   let {
@@ -75,6 +82,7 @@
     active = false,
     disabled = false,
     alignContent = "center",
+    square = false,
     ...restProps
   }: Props = $props();
 
@@ -104,19 +112,24 @@
       "cursor-wait": loading,
 
       // Size presets
-      "h-8 px-3 text-xs": size === "sm",
-      "h-10 px-4 text-sm": size === "md",
-      "h-12 px-6 text-base": size === "lg",
+      "h-8 px-3 text-xs": size === "sm" && !square,
+      "h-10 px-4 text-sm": size === "md" && !square,
+      "h-12 px-6 text-base": size === "lg" && !square,
+
+      // Square presets
+      "size-8 p-0 text-xs": size === "sm" && square,
+      "size-10 p-0 text-sm": size === "md" && square,
+      "size-12 p-0 text-base": size === "lg" && square,
+
+      // Width modifiers
+      "w-full": wide,
+      "w-auto": !wide && !square,
 
       // Radius presets
       "rounded-sm": radius === "sm",
       "rounded-md": radius === "md",
       "rounded-lg": radius === "lg",
       "rounded-full": radius === "full",
-
-      // Width modifiers
-      "w-full": wide,
-      "w-auto": !wide,
 
       // Variant: Solid
       ...(variant === "solid" && {

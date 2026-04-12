@@ -79,124 +79,44 @@
     </Card>
   </div>
 
-  <!-- Composition & Icons -->
-  <div class="space-y-2">
-    <Label>Composition Patterns</Label>
-    <Card class="grid grid-cols-1 divide-y divide-base-300">
-      <!-- Standard Icon Compositions -->
-      <div class="flex flex-wrap items-center justify-center gap-6 p-8">
-        <Button {active} {loading} {disabled} color="neutral">
-          <Plus class="size-4" />
-          <span>New Project</span>
-        </Button>
-        <Button {active} {loading} {disabled} variant="outline" color="info">
-          <span>Send Message</span>
-          <Send class="size-4" />
-        </Button>
-        <Button
-          {active}
-          {loading}
-          {disabled}
-          variant="ghost"
-          color="danger"
-          size="sm"
-        >
-          <Trash2 class="size-4" />
-          <span>Delete Account</span>
-        </Button>
-        <Button {active} {loading} {disabled} color="success" radius="full">
-          <span>Get Started</span>
-          <ArrowRight class="size-4" />
-        </Button>
-      </div>
+  <div class="space-y-8">
+    <!-- Sizes -->
+    <div class="space-y-2">
+      <Label>Sizes</Label>
+      <Card class="flex items-center justify-center gap-8 p-10">
+        {#each sizes as size}
+          <div class="flex flex-col items-center gap-4">
+            <Button {active} {loading} {disabled} {size} color="neutral">
+              Button
+            </Button>
+            <span
+              class="font-mono text-[10px] font-medium text-content-muted uppercase"
+            >
+              {size}
+            </span>
+          </div>
+        {/each}
+      </Card>
+    </div>
 
-      <!-- Icon-Only & Utilities -->
-      <div
-        class="flex flex-wrap items-center justify-center gap-6 p-8 bg-base-100/50"
-      >
-        <Button
-          {active}
-          {loading}
-          {disabled}
-          variant="outline"
-          class="size-10 p-0"
-          aria-label="Settings"
-        >
-          <Settings class="size-4" />
-        </Button>
-        <Button
-          {active}
-          {loading}
-          {disabled}
-          variant="ghost"
-          class="size-10 p-0"
-          aria-label="Inbox"
-        >
-          <Mail class="size-4" />
-        </Button>
-        <Button
-          {active}
-          {loading}
-          {disabled}
-          color="neutral"
-          class="size-10 p-0"
-          radius="full"
-          aria-label="Download"
-        >
-          <Download class="size-4" />
-        </Button>
-        <Button
-          {active}
-          {loading}
-          {disabled}
-          variant="outline"
-          color="success"
-          class="size-10 p-0"
-          radius="sm"
-          aria-label="Complete"
-        >
-          <Check class="size-4" />
-        </Button>
-      </div>
-    </Card>
-  </div>
-
-  <!-- Sizes -->
-  <div class="space-y-2">
-    <Label>Sizes</Label>
-    <Card class="flex items-center justify-center gap-8 p-10">
-      {#each sizes as size}
-        <div class="flex flex-col items-center gap-4">
-          <Button {active} {loading} {disabled} {size} color="neutral">
-            Button
-          </Button>
-          <span
-            class="font-mono text-[10px] font-medium text-content-muted uppercase"
-          >
-            {size}
-          </span>
-        </div>
-      {/each}
-    </Card>
-  </div>
-
-  <!-- Radius -->
-  <div class="space-y-2">
-    <Label>Border Radius</Label>
-    <Card class="flex flex-wrap items-center justify-center gap-6 p-10">
-      {#each radii as radius}
-        <div class="flex flex-col items-center gap-4">
-          <Button {active} {loading} {disabled} {radius} variant="outline">
-            Radius
-          </Button>
-          <span
-            class="font-mono text-[10px] font-medium text-content-muted uppercase"
-          >
-            {radius}
-          </span>
-        </div>
-      {/each}
-    </Card>
+    <!-- Radius -->
+    <div class="space-y-2">
+      <Label>Border Radius</Label>
+      <Card class="flex flex-wrap items-center justify-center gap-6 p-10">
+        {#each radii as radius}
+          <div class="flex flex-col items-center gap-4">
+            <Button {active} {loading} {disabled} {radius} variant="outline">
+              Radius
+            </Button>
+            <span
+              class="font-mono text-[10px] font-medium text-content-muted uppercase"
+            >
+              {radius}
+            </span>
+          </div>
+        {/each}
+      </Card>
+    </div>
   </div>
 
   <!-- Full Width & Alignment -->
@@ -265,5 +185,113 @@
         </Button>
       </div>
     </Card>
+  </div>
+
+  <div class="space-y-8">
+    <!-- Square Aspect Ratio -->
+    <div class="space-y-2">
+      <Label>Square Aspect Ratio</Label>
+      <Card class="flex flex-col divide-y divide-base-300">
+        <div class="flex flex-wrap items-center justify-center gap-8 p-10">
+          {#each sizes as size}
+            <div class="flex flex-col items-center gap-4">
+              <div class="flex-none">
+                <Button
+                  {active}
+                  {loading}
+                  {disabled}
+                  {size}
+                  square
+                  color="neutral"
+                >
+                  <Plus class="size-4" />
+                </Button>
+              </div>
+              <span
+                class="font-mono text-[10px] font-medium text-content-muted uppercase"
+              >
+                {size}
+              </span>
+            </div>
+          {/each}
+        </div>
+      </Card>
+    </div>
+
+    <!-- Composition & Icons -->
+    <div class="space-y-2">
+      <Label>Composition Patterns</Label>
+      <Card class="grid grid-cols-1 divide-y divide-base-300">
+        <!-- Standard Icon Compositions -->
+        <div class="flex flex-wrap items-center justify-center gap-6 p-8">
+          <Button {active} {loading} {disabled} color="neutral">
+            <Plus class="size-4" />
+            <span>New Project</span>
+          </Button>
+          <Button {active} {loading} {disabled} variant="outline" color="info">
+            <span>Send Message</span>
+            <Send class="size-4" />
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            variant="ghost"
+            color="danger"
+            size="sm"
+          >
+            <Trash2 class="size-4" />
+            <span>Delete Account</span>
+          </Button>
+          <Button {active} {loading} {disabled} color="success" radius="full">
+            <span>Get Started</span>
+            <ArrowRight class="size-4" />
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            variant="outline"
+            class="size-10 p-0"
+            aria-label="Settings"
+          >
+            <Settings class="size-4" />
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            variant="ghost"
+            class="size-10 p-0"
+            aria-label="Inbox"
+          >
+            <Mail class="size-4" />
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            color="neutral"
+            class="size-10 p-0"
+            radius="full"
+            aria-label="Download"
+          >
+            <Download class="size-4" />
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            variant="outline"
+            color="success"
+            class="size-10 p-0"
+            radius="sm"
+            aria-label="Complete"
+          >
+            <Check class="size-4" />
+          </Button>
+        </div>
+      </Card>
+    </div>
   </div>
 </div>

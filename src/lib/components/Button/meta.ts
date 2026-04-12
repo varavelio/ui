@@ -45,6 +45,12 @@ export const componentMeta = components([
       ),
       prop("wide", "boolean", "Expands button to full width.", "false"),
       prop(
+        "square",
+        "boolean",
+        "Whether the button should have a square aspect ratio.",
+        "false",
+      ),
+      prop(
         "alignContent",
         '"left" | "center" | "right" | "between"',
         "Inner content alignment.",
