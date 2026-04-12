@@ -8,16 +8,15 @@
   } from "@lucide/svelte";
   import { type Component, onMount } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { cn } from "../../helpers/cn.ts";
   import { type Theme, theme } from "../../utils/index.ts";
   import { Button } from "../Button/index.js";
   import { Menu } from "../Menu/index.js";
   import { Tooltip } from "../Tooltip/index.js";
 
   const options = [
+    { value: "system", label: "System", icon: LaptopMinimal },
     { value: "light", label: "Light", icon: SunMedium },
     { value: "dark", label: "Dark", icon: MoonStar },
-    { value: "system", label: "System", icon: LaptopMinimal },
   ] as const satisfies readonly {
     value: Theme;
     label: string;
