@@ -44,16 +44,36 @@
      * @default true
      */
     showLabel?: boolean;
+
     /**
-     * Whether to use the ghost button style.
+     * Button size preset.
+     * @default "md"
+     */
+    size?: "sm" | "md" | "lg";
+
+    /**
+     * Button border radius preset.
+     * @default "md"
+     */
+    radius?: "sm" | "md" | "lg" | "full";
+
+    /**
+     * Button appearance variant.
+     * @default "outline"
+     */
+    variant?: "solid" | "outline" | "ghost";
+
+    /**
+     * Semantic color representing the button's intent.
+     * @default "neutral"
+     */
+    color?: "neutral" | "info" | "success" | "warning" | "error";
+
+    /**
+     * Whether the button should have a square aspect ratio.
      * @default false
      */
-    ghost?: boolean;
-    /**
-     * Whether to render a circular trigger.
-     * @default false
-     */
-    circular?: boolean;
+    square?: boolean;
   }
 
   let {
@@ -61,8 +81,11 @@
     value = $bindable<Theme>("system"),
     label = "Theme",
     showLabel = true,
-    ghost = false,
-    circular = false,
+    size = "md",
+    radius = "md",
+    variant = "outline",
+    color = "neutral",
+    square = false,
   }: Props = $props();
 
   let isLoading = $state(true);
@@ -85,17 +108,8 @@
     options.find((option) => option.value === selectedTheme) ?? options[2],
   );
   let TriggerIcon = $derived(selectedOption.icon);
-  let effectiveShowLabel = $derived(showLabel && !circular);
+  let effectiveShowLabel = $derived(showLabel && !square);
   let iconOnly = $derived(!effectiveShowLabel);
-  let triggerVariant = $derived.by<"ghost" | "outline">(() =>
-    ghost ? "ghost" : "outline",
-  );
-  let triggerRadius = $derived.by<"full" | "md">(() =>
-    circular ? "full" : "md",
-  );
-  let triggerClass = $derived(
-    cn(effectiveShowLabel ? "w-fit" : "size-10 shrink-0 px-0", className),
-  );
 
   let iconSnippets = $derived({
     light: sunIcon,
@@ -129,10 +143,12 @@
 {#snippet triggerButton()}
   <Button
     disabled={isLoading}
-    variant={triggerVariant}
-    radius={triggerRadius}
-    size="md"
-    class={triggerClass}
+    {variant}
+    {radius}
+    {size}
+    {color}
+    {square}
+    class={className}
   >
     {@render triggerContent()}
   </Button>

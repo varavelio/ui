@@ -5,21 +5,23 @@
   type Combination = {
     id: string;
     showLabel: boolean;
-    ghost: boolean;
-    circular: boolean;
+    variant: "solid" | "outline" | "ghost";
+    radius: "sm" | "md" | "lg" | "full";
   };
 
-  const flags = [false, true] as const;
+  const showLabels = [true, false] as const;
+  const variants = ["outline", "ghost", "solid"] as const;
+  const radius = ["md", "full"] as const;
 
-  const combinations = flags.flatMap((showLabel) =>
-    flags.flatMap((ghost) =>
-      flags.map(
-        (circular) =>
+  const combinations = showLabels.flatMap((showLabel) =>
+    variants.flatMap((variant) =>
+      radius.map(
+        (radius) =>
           ({
-            id: `${showLabel}-${ghost}-${circular}`,
+            id: `${showLabel}-${variant}-${radius}`,
             showLabel,
-            ghost,
-            circular,
+            variant,
+            radius,
           }) satisfies Combination,
       ),
     ),
@@ -52,7 +54,7 @@
         </p>
         <div class="flex flex-wrap gap-3">
           <ThemePicker label="Appearance" />
-          <ThemePicker label="Color mode" ghost={true} />
+          <ThemePicker label="Color mode" variant="ghost" />
         </div>
       </div>
     </article>
@@ -69,9 +71,14 @@
           tooltip while keeping the existing accessible label on the button.
         </p>
         <div class="flex flex-wrap gap-3">
-          <ThemePicker showLabel={false} label="Appearance" />
-          <ThemePicker showLabel={false} label="Color mode" ghost={true} />
-          <ThemePicker circular={true} label="Appearance" />
+          <ThemePicker showLabel={false} square label="Appearance" />
+          <ThemePicker
+            showLabel={false}
+            square
+            label="Color mode"
+            variant="ghost"
+          />
+          <ThemePicker square radius="full" label="Appearance" />
         </div>
       </div>
     </article>
@@ -92,12 +99,12 @@
                 <dd>{boolLabel(combo.showLabel)}</dd>
               </div>
               <div>
-                <dt class="font-medium text-content">ghost</dt>
-                <dd>{boolLabel(combo.ghost)}</dd>
+                <dt class="font-medium text-content">variant</dt>
+                <dd>{combo.variant}</dd>
               </div>
               <div>
-                <dt class="font-medium text-content">circular</dt>
-                <dd>{boolLabel(combo.circular)}</dd>
+                <dt class="font-medium text-content">radius</dt>
+                <dd>{combo.radius}</dd>
               </div>
             </dl>
           </div>
@@ -107,8 +114,9 @@
           >
             <ThemePicker
               showLabel={combo.showLabel}
-              ghost={combo.ghost}
-              circular={combo.circular}
+              variant={combo.variant}
+              radius={combo.radius}
+              square={!combo.showLabel}
               bind:value={values[combo.id]}
             />
           </div>
