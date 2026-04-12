@@ -122,7 +122,7 @@
   {/if}
 
   {#if effectiveShowLabel}
-    <span class="hidden desk:inline">{label}</span>
+    <span>{label}</span>
   {/if}
 {/snippet}
 
