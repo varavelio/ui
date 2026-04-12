@@ -9,28 +9,28 @@
 
   interface Props {
     /**
-     * Additional CSS classes to apply to the modal content.
+     * Additional CSS classes to apply to the dialog content.
      */
     class?: ClassValue;
     /**
-     * Controls the open state of the modal.
+     * Controls the open state of the dialog.
      */
     open?: boolean;
     /**
-     * The title of the modal.
+     * The title of the dialog.
      */
     title?: string;
     /**
-     * The description text of the modal.
+     * The description text of the dialog.
      */
     description?: string;
     /**
-     * The maximum width of the modal.
+     * The maximum width of the dialog.
      * @default "md"
      */
     size?: "sm" | "md" | "lg";
     /**
-     * Whether the modal can be closed by clicking outside or pressing escape.
+     * Whether the dialog can be closed by clicking outside or pressing escape.
      * @default true
      */
     dismissible?: boolean;
@@ -44,11 +44,11 @@
      */
     trigger?: Snippet;
     /**
-     * The snippet for the modal footer.
+     * The snippet for the dialog footer.
      */
     footer?: Snippet;
     /**
-     * The main content of the modal.
+     * The main content of the dialog.
      */
     children?: Snippet;
   }
@@ -100,7 +100,7 @@
           ]}
         >
           <X aria-hidden="true" class="size-4" />
-          <span class="sr-only">Close modal</span>
+          <span class="sr-only">Close dialog</span>
         </BitsDialog.Close>
       {/if}
 

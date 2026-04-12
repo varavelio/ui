@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Input, Label, Modal } from "$lib/components/index.js";
+  import { Button, Dialog, Input, Label } from "$lib/components/index.js";
 
   let nonDismissable = $state(false);
   let controlledOpen = $state(false);
@@ -9,11 +9,11 @@
   <div class="space-y-4">
     <h2 class="text-lg font-semibold tracking-tight">Full Example</h2>
     <p class="text-sm text-content-muted">
-      A complete modal with title, description, body content, and a custom
+      A complete dialog with title, description, body content, and a custom
       footer. The trigger is an unstyled snippet — wrap it in any element.
     </p>
 
-    <Modal
+    <Dialog
       description="Create and manage scoped credentials for your services."
       title="New API Key"
     >
@@ -38,7 +38,7 @@
           <Button color="info">Save</Button>
         </div>
       {/snippet}
-    </Modal>
+    </Dialog>
   </div>
 
   <div class="space-y-4">
@@ -54,30 +54,30 @@
     </p>
 
     <div class="flex flex-wrap items-center gap-3">
-      <Modal size="sm" title="Small Modal">
+      <Dialog size="sm" title="Small Dialog">
         {#snippet trigger()}
           <Button variant="outline" size="sm">sm</Button>
         {/snippet}
         <p class="text-sm text-content-muted">
           Compact — good for simple prompts.
         </p>
-      </Modal>
+      </Dialog>
 
-      <Modal size="md" title="Medium Modal">
+      <Dialog size="md" title="Medium Dialog">
         {#snippet trigger()}
           <Button variant="outline" size="sm">md</Button>
         {/snippet}
         <p class="text-sm text-content-muted">Default — fits most content.</p>
-      </Modal>
+      </Dialog>
 
-      <Modal size="lg" title="Large Modal">
+      <Dialog size="lg" title="Large Dialog">
         {#snippet trigger()}
           <Button variant="outline" size="sm">lg</Button>
         {/snippet}
         <p class="text-sm text-content-muted">
           Spacious — for tables or long forms.
         </p>
-      </Modal>
+      </Dialog>
     </div>
   </div>
 
@@ -93,13 +93,13 @@
     </p>
 
     <div class="flex flex-wrap items-center gap-3">
-      <Modal description="Standard padding applied." title="Padded (default)">
+      <Dialog description="Standard padding applied." title="Padded (default)">
         {#snippet trigger()}
           <Button variant="outline" size="sm">Padded</Button>
         {/snippet}
-      </Modal>
+      </Dialog>
 
-      <Modal
+      <Dialog
         description="No padding — you control all spacing."
         padded={false}
         title="Unpadded"
@@ -110,7 +110,7 @@
         <p class="text-sm text-content-muted">
           Content sits flush against the edges. Add your own padding inside.
         </p>
-      </Modal>
+      </Dialog>
     </div>
   </div>
 
@@ -126,16 +126,16 @@
     </p>
 
     <div class="flex flex-wrap items-center gap-3">
-      <Modal
+      <Dialog
         description="Close with X, Escape, or outside click."
         title="Dismissible"
       >
         {#snippet trigger()}
           <Button variant="outline" size="sm">Dismissible</Button>
         {/snippet}
-      </Modal>
+      </Dialog>
 
-      <Modal
+      <Dialog
         description="No close button. Escape and outside click are disabled."
         dismissible={false}
         bind:open={nonDismissable}
@@ -151,7 +151,7 @@
             </Button>
           </div>
         {/snippet}
-      </Modal>
+      </Dialog>
     </div>
   </div>
 
@@ -162,20 +162,20 @@
     </p>
 
     <div class="flex flex-wrap items-center gap-3">
-      <Modal title="Just a title">
+      <Dialog title="Just a title">
         {#snippet trigger()}
           <Button variant="outline" size="sm">Title only</Button>
         {/snippet}
-      </Modal>
+      </Dialog>
 
-      <Modal>
+      <Dialog>
         {#snippet trigger()}
           <Button variant="outline" size="sm">Bare</Button>
         {/snippet}
         <p class="text-sm text-content-muted">
           No header at all — only children content.
         </p>
-      </Modal>
+      </Dialog>
     </div>
   </div>
 
@@ -184,7 +184,7 @@
     <p class="text-sm text-content-muted">
       Bind
       <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">open</code>
-      to control the modal programmatically, with or without a trigger.
+      to control the dialog programmatically, with or without a trigger.
     </p>
 
     <div class="flex items-center gap-4">
@@ -196,10 +196,10 @@
       </span>
     </div>
 
-    <Modal
+    <Dialog
       bind:open={controlledOpen}
-      description="This modal is driven by an external state variable."
-      title="Controlled Modal"
+      description="This dialog is driven by an external state variable."
+      title="Controlled Dialog"
     >
       <div class="flex justify-end gap-3 pt-1">
         <Button variant="ghost" onclick={() => (controlledOpen = false)}>
@@ -209,16 +209,16 @@
           Confirm
         </Button>
       </div>
-    </Modal>
+    </Dialog>
   </div>
 
   <div class="space-y-4">
     <h2 class="text-lg font-semibold tracking-tight">Overflow</h2>
     <p class="text-sm text-content-muted">
-      Testing modal behavior when content exceeds the viewport or modal size.
+      Testing dialog behavior when content exceeds the viewport or dialog size.
     </p>
 
-    <Modal
+    <Dialog
       title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       size="sm"
@@ -239,6 +239,6 @@
           <Button color="info">Save</Button>
         </div>
       {/snippet}
-    </Modal>
+    </Dialog>
   </div>
 </div>

@@ -3,7 +3,7 @@
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
   import Button from "../Button/Button.svelte";
-  import Modal from "../Modal/Modal.svelte";
+  import Dialog from "../Dialog/Dialog.svelte";
 
   interface Props {
     /**
@@ -80,7 +80,7 @@
   }
 </script>
 
-<Modal
+<Dialog
   {title}
   {description}
   {trigger}
@@ -97,4 +97,4 @@
       <Button color={actionColor} onclick={handleAction}>{actionText}</Button>
     </div>
   {/snippet}
-</Modal>
+</Dialog>
