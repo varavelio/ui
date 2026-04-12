@@ -195,7 +195,7 @@
   {#if loading}
     <div
       class="absolute inset-0 flex items-center justify-center"
-      transition:fade={{ duration: 100 }}
+      in:fade={{ duration: 100 }}
     >
       <Loader class="size-4 animate-spin" />
     </div>
