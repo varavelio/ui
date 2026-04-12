@@ -68,11 +68,11 @@
     class={cn(
       "relative rounded-lg border p-4",
       {
-        "border-base-400 bg-base-200 text-content": color === "neutral",
-        "border-info/20 bg-info/10 text-info": color === "info",
-        "border-success/20 bg-success/10 text-success": color === "success",
-        "border-warning/20 bg-warning/10 text-warning": color === "warning",
-        "border-error/20 bg-error/10 text-error": color === "danger",
+        "border-base-400 bg-base-200/2 text-content": color === "neutral",
+        "border-info/40 bg-info/2 text-info": color === "info",
+        "border-success/40 bg-success/2 text-success": color === "success",
+        "border-warning/40 bg-warning/2 text-warning": color === "warning",
+        "border-error/40 bg-error/2 text-error": color === "danger",
       },
       className,
     )}
@@ -94,7 +94,7 @@
           {/if}
         </div>
       {/if}
-      <div class="flex-1 space-y-2">
+      <div class="flex-1">
         {#if title}
           <h3 class="font-medium pr-6">{title}</h3>
         {/if}

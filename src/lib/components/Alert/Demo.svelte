@@ -38,9 +38,9 @@
     color="danger"
   />
   <Alert title="Custom Content" color="neutral">
-    <div class="mt-2 text-sm opacity-90">
+    <div class="text-sm opacity-90">
       <p>This alert demonstrates passing custom child elements via snippet.</p>
-      <ul class="list-inside list-disc mt-2">
+      <ul class="list-inside list-disc mt-1">
         <li>Bullet point 1</li>
         <li>Bullet point 2</li>
       </ul>
