@@ -45,10 +45,12 @@
     <h2 class="text-lg font-semibold tracking-tight">Sizes</h2>
     <p class="text-sm text-content-muted">
       Three width presets:
-      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">sm</code>,
+      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">sm</code>
+      ,
       <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">md</code>
       (default), and
-      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">lg</code>.
+      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">lg</code>
+      .
     </p>
 
     <div class="flex flex-wrap items-center gap-3">

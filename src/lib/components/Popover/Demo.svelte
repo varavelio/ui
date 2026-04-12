@@ -134,9 +134,9 @@
             <Input id="height" value="25px" class="col-span-2 h-8" />
           </div>
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="maxHeight" class="text-xs font-medium"
-              >Max. height</label
-            >
+            <label for="maxHeight" class="text-xs font-medium">
+              Max. height
+            </label>
             <Input id="maxHeight" value="none" class="col-span-2 h-8" />
           </div>
         </div>

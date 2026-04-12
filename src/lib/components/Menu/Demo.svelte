@@ -137,30 +137,30 @@
 <Card class="flex flex-col gap-8">
   <div class="flex flex-wrap gap-4">
     <div class="flex flex-col gap-2">
-      <span class="text-xs font-medium text-content-muted text-center"
-        >Simple</span
-      >
+      <span class="text-xs font-medium text-content-muted text-center">
+        Simple
+      </span>
       <Menu items={simpleItems} trigger={simpleTrigger} />
     </div>
 
     <div class="flex flex-col gap-2">
-      <span class="text-xs font-medium text-content-muted text-center"
-        >With Icons</span
-      >
+      <span class="text-xs font-medium text-content-muted text-center">
+        With Icons
+      </span>
       <Menu items={itemsWithIcons} trigger={iconTrigger} />
     </div>
 
     <div class="flex flex-col gap-2">
-      <span class="text-xs font-medium text-content-muted text-center"
-        >Complex</span
-      >
+      <span class="text-xs font-medium text-content-muted text-center">
+        Complex
+      </span>
       <Menu items={complexItems} trigger={complexTrigger} />
     </div>
 
     <div class="flex flex-col gap-2">
-      <span class="text-xs font-medium text-content-muted text-center"
-        >Custom Trigger</span
-      >
+      <span class="text-xs font-medium text-content-muted text-center">
+        Custom Trigger
+      </span>
       <Menu items={simpleItems} trigger={customTrigger} />
     </div>
   </div>

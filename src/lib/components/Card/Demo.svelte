@@ -9,8 +9,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Default</span
         >
+          Default
+        </span>
         <Card color="default" class="h-full">
           <p class="text-sm">
             Standard container for most UI elements and sections.
@@ -20,8 +21,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Muted</span
         >
+          Muted
+        </span>
         <Card color="muted" class="h-full">
           <p class="text-sm">
             Subtle background for nested content or less emphasis.
@@ -31,8 +33,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Contrast</span
         >
+          Contrast
+        </span>
         <Card color="contrast" class="h-full">
           <p class="text-sm">
             High-impact surface for hero sections or priority data.

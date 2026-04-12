@@ -102,9 +102,10 @@
       <Label>xl</Label>
       <p class="text-sm text-content-muted">
         <span class="font-medium text-content">Use:</span>
-        Only in root layout (<code class="font-mono text-xs"
-          >+layout.svelte</code
-        >) wrapping nav/sidebar/main canvas.
+        Only in root layout (<code class="font-mono text-xs">
+          +layout.svelte
+        </code>
+        ) wrapping nav/sidebar/main canvas.
         <br>
         <span class="font-medium text-content">Why:</span>
         Absolute ultrawide cap and meta-container for the full app shell.

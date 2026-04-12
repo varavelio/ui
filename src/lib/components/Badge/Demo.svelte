@@ -9,8 +9,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Solid</span
         >
+          Solid
+        </span>
         <div class="flex flex-wrap items-center gap-3">
           <Badge variant="solid" color="neutral">Neutral</Badge>
           <Badge variant="solid" color="info">Info</Badge>
@@ -22,8 +23,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Soft (Default)</span
         >
+          Soft (Default)
+        </span>
         <div class="flex flex-wrap items-center gap-3">
           <Badge variant="soft" color="neutral">Neutral</Badge>
           <Badge variant="soft" color="info">Info</Badge>
@@ -35,8 +37,9 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Outline</span
         >
+          Outline
+        </span>
         <div class="flex flex-wrap items-center gap-3">
           <Badge variant="outline" color="neutral">Neutral</Badge>
           <Badge variant="outline" color="info">Info</Badge>

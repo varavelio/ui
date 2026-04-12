@@ -65,14 +65,14 @@
   {#if label || showValue}
     <div class="flex items-center justify-between gap-3 text-sm">
       {#if label}
-        <span class="font-medium text-content" id={`${labelId}-label`}
-          >{label}</span
-        >
+        <span class="font-medium text-content" id={`${labelId}-label`}>
+          {label}
+        </span>
       {/if}
       {#if showValue}
-        <span class="text-content-muted"
-          >{clampedValue === null ? "..." : `${percentage}%`}</span
-        >
+        <span class="text-content-muted">
+          {clampedValue === null ? "..." : `${percentage}%`}
+        </span>
       {/if}
     </div>
   {/if}

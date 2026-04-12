@@ -125,9 +125,7 @@
           Component Library
         </h1>
 
-        <label class="sr-only" for="component-search">
-          Search components
-        </label>
+        <label class="sr-only" for="component-search">Search components</label>
 
         <div class="relative">
           <Search

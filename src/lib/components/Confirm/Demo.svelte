@@ -91,13 +91,13 @@
     <h2 class="text-lg font-semibold tracking-tight">Custom Button Labels</h2>
     <p class="text-sm text-content-muted">
       Override
-      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs"
-        >cancelText</code
-      >
+      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">
+        cancelText
+      </code>
       and
-      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs"
-        >actionText</code
-      >
+      <code class="rounded border bg-base-200 px-1.5 py-0.5 text-xs">
+        actionText
+      </code>
       to match your context.
     </p>
 

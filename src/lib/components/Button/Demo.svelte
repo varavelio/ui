@@ -201,7 +201,7 @@
 
   <!-- Full Width & Alignment -->
   <div class="space-y-2">
-    <Label> Full Width & Content Alignment </Label>
+    <Label>Full Width & Content Alignment</Label>
     <Card class="divide-y divide-base-300">
       <div class="p-6">
         <Button

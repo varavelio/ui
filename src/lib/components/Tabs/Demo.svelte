@@ -62,36 +62,41 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Neutral (Default)</span
         >
+          Neutral (Default)
+        </span>
         <Tabs {items} color="neutral" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Info</span
         >
+          Info
+        </span>
         <Tabs {items} color="info" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Success</span
         >
+          Success
+        </span>
         <Tabs {items} color="success" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Warning</span
         >
+          Warning
+        </span>
         <Tabs {items} color="warning" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Error</span
         >
+          Error
+        </span>
         <Tabs {items} color="error" />
       </div>
     </div>
@@ -110,22 +115,25 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >BG 100</span
         >
+          BG 100
+        </span>
         <Tabs {items} bg="100" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >BG 200</span
         >
+          BG 200
+        </span>
         <Tabs {items} bg="200" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >BG 300 (Default)</span
         >
+          BG 300 (Default)
+        </span>
         <Tabs {items} bg="300" />
       </div>
     </div>
@@ -143,22 +151,25 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Small (sm)</span
         >
+          Small (sm)
+        </span>
         <Tabs {items} size="sm" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Medium (md)</span
         >
+          Medium (md)
+        </span>
         <Tabs {items} size="md" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Large (lg)</span
         >
+          Large (lg)
+        </span>
         <Tabs {items} size="lg" />
       </div>
     </div>
@@ -176,15 +187,17 @@
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Horizontal (Default)</span
         >
+          Horizontal (Default)
+        </span>
         <Tabs {items} orientation="horizontal" />
       </div>
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
-          >Vertical</span
         >
+          Vertical
+        </span>
         <Tabs {items} orientation="vertical" />
       </div>
     </div>
