@@ -23,7 +23,7 @@ export const componentMeta = components([
       ),
       prop(
         "color",
-        '"neutral" | "info" | "success" | "warning" | "danger"',
+        '"neutral" | "info" | "success" | "warning" | "error"',
         "The semantic color of the progress bar.",
         '"info"',
       ),

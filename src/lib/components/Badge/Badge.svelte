@@ -28,7 +28,7 @@
      *
      * @default "neutral"
      */
-    color?: "neutral" | "info" | "success" | "warning" | "danger";
+    color?: "neutral" | "info" | "success" | "warning" | "error";
   }
 
   let {
@@ -56,21 +56,9 @@
       "border-info bg-info text-white": variant === "solid" && color === "info",
       "border-success bg-success text-white": variant === "solid" && color === "success",
       "border-warning bg-warning text-white": variant === "solid" && color === "warning",
-      "border-error bg-error text-white": variant === "solid" && color === "danger",
-
-      // Variant: Soft
-      "border-base-400 bg-base-300 text-content": variant === "soft" && color === "neutral",
-      "border-info/15 bg-info/10 text-info": variant === "soft" && color === "info",
-      "border-success/15 bg-success/10 text-success": variant === "soft" && color === "success",
-      "border-warning/25 bg-warning/10 text-warning dark:text-warning": variant === "soft" && color === "warning",
-      "border-error/15 bg-error/10 text-error": variant === "soft" && color === "danger",
-
-      // Variant: Outline
-      "border-base-400 bg-transparent text-content": variant === "outline" && color === "neutral",
-      "border-info/30 bg-transparent text-info": variant === "outline" && color === "info",
-      "border-success/30 bg-transparent text-success": variant === "outline" && color === "success",
-      "border-warning/40 bg-transparent text-warning dark:text-warning": variant === "outline" && color === "warning",
-      "border-error/30 bg-transparent text-error": variant === "outline" && color === "danger",
+      "border-error bg-error text-white": variant === "solid" && color === "error",
+      "border-error/15 bg-error/10 text-error": variant === "soft" && color === "error",
+      "border-error/30 bg-transparent text-error": variant === "outline" && color === "error",
     },
     className,
   )}

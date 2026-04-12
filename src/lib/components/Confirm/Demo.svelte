@@ -18,7 +18,7 @@
       onConfirm={() => console.log("Confirmed")}
     >
       {#snippet trigger()}
-        <Button color="danger">Delete project</Button>
+        <Button color="error">Delete project</Button>
       {/snippet}
     </Confirm>
   </div>
@@ -75,13 +75,13 @@
       </Confirm>
 
       <Confirm
-        actionColor="danger"
+        actionColor="error"
         actionText="Delete"
         description="This action cannot be undone."
         title="Delete account?"
       >
         {#snippet trigger()}
-          <Button color="danger" variant="outline" size="sm">Danger</Button>
+          <Button color="error" variant="outline" size="sm">Error</Button>
         {/snippet}
       </Confirm>
     </div>
@@ -103,7 +103,7 @@
 
     <div class="flex flex-wrap items-center gap-3">
       <Confirm
-        actionColor="danger"
+        actionColor="error"
         actionText="Yes, remove"
         cancelText="Go back"
         description="All team members will lose access immediately."
@@ -136,16 +136,14 @@
     </p>
 
     <Confirm
-      actionColor="danger"
+      actionColor="error"
       actionText="Discard"
       cancelText="Keep editing"
       description="Your unsaved changes will be lost."
       title="Discard draft?"
     >
       {#snippet trigger()}
-        <Button color="danger" variant="outline" size="sm">
-          Discard draft
-        </Button>
+        <Button color="error" variant="outline" size="sm">Discard draft</Button>
       {/snippet}
 
       <Alert

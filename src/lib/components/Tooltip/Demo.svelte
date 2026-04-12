@@ -106,7 +106,7 @@
         <Button variant="outline">Delayed (500ms)</Button>
       </Tooltip>
       <Tooltip content="This should not be visible" disabled>
-        <Button variant="outline" color="danger">Disabled Tooltip</Button>
+        <Button variant="outline" color="error">Disabled Tooltip</Button>
       </Tooltip>
     </div>
   </section>

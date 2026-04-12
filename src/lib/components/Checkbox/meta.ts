@@ -45,7 +45,7 @@ export const componentMeta = components([
       prop("size", '"sm" | "md" | "lg"', "Visual size preset.", '"md"'),
       prop(
         "color",
-        '"neutral" | "info" | "success" | "danger"',
+        '"neutral" | "info" | "success" | "error"',
         "Semantic color representation for the checked state.",
         '"neutral"',
       ),

@@ -27,7 +27,7 @@
       <Checkbox bind:checked={checked3} color="info" label="Info" />
       <Checkbox bind:checked={checked3} color="success" label="Success" />
       <Checkbox bind:checked={checked3} color="warning" label="Warning" />
-      <Checkbox bind:checked={checked3} color="danger" label="Danger" />
+      <Checkbox bind:checked={checked3} color="error" label="Error" />
     </Card>
   </div>
 

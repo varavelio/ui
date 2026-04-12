@@ -33,9 +33,9 @@
     color="warning"
   />
   <Alert
-    title="Danger State"
+    title="Error State"
     description="This action permanently removes the project and all environment variables."
-    color="danger"
+    color="error"
   />
   <Alert title="Custom Content" color="neutral">
     <div class="text-sm opacity-90">

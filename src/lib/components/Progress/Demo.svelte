@@ -14,7 +14,7 @@
       <Progress label="Info (Default)" color="info" value={60} />
       <Progress label="Success" color="success" value={85} />
       <Progress label="Warning" color="warning" value={30} />
-      <Progress label="Danger" color="danger" value={15} />
+      <Progress label="Error" color="error" value={15} />
     </div>
 
     <div class="space-y-4">

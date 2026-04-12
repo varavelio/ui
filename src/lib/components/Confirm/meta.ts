@@ -24,9 +24,9 @@ export const componentMeta = components([
       ),
       prop(
         "actionColor",
-        '"neutral" | "info" | "success" | "warning" | "danger"',
+        '"neutral" | "info" | "success" | "warning" | "error"',
         "Semantic color of the action button.",
-        '"danger"',
+        '"error"',
       ),
       prop(
         "onCancel",

@@ -17,7 +17,7 @@
           <Badge variant="solid" color="info">Info</Badge>
           <Badge variant="solid" color="success">Success</Badge>
           <Badge variant="solid" color="warning">Warning</Badge>
-          <Badge variant="solid" color="danger">Danger</Badge>
+          <Badge variant="solid" color="error">Error</Badge>
         </div>
       </div>
       <div class="space-y-3">
@@ -31,7 +31,7 @@
           <Badge variant="soft" color="info">Info</Badge>
           <Badge variant="soft" color="success">Success</Badge>
           <Badge variant="soft" color="warning">Warning</Badge>
-          <Badge variant="soft" color="danger">Danger</Badge>
+          <Badge variant="soft" color="error">Error</Badge>
         </div>
       </div>
       <div class="space-y-3">
@@ -45,7 +45,7 @@
           <Badge variant="outline" color="info">Info</Badge>
           <Badge variant="outline" color="success">Success</Badge>
           <Badge variant="outline" color="warning">Warning</Badge>
-          <Badge variant="outline" color="danger">Danger</Badge>
+          <Badge variant="outline" color="error">Error</Badge>
         </div>
       </div>
     </Card>

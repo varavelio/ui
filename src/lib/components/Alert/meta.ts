@@ -11,7 +11,7 @@ export const componentMeta = components([
       prop("description", "string", "Supporting message below the title."),
       prop(
         "color",
-        '"neutral" | "info" | "success" | "warning" | "danger"',
+        '"neutral" | "info" | "success" | "warning" | "error"',
         "Semantic visual color.",
         '"neutral"',
       ),

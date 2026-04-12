@@ -23,7 +23,7 @@
      * The semantic color of the alert.
      * @default "neutral"
      */
-    color?: "neutral" | "info" | "success" | "warning" | "danger";
+    color?: "neutral" | "info" | "success" | "warning" | "error";
     /**
      * Whether the alert can be closed.
      * @default true
@@ -51,7 +51,7 @@
   }: Props = $props();
 
   let role = $derived(
-    color === "danger" || color === "warning" ? "alert" : "status",
+    color === "error" || color === "warning" ? "alert" : "status",
   );
 
   let visible = $state(true);
@@ -72,7 +72,7 @@
         "border-info/40 bg-info/2 text-info": color === "info",
         "border-success/40 bg-success/2 text-success": color === "success",
         "border-warning/40 bg-warning/2 text-warning": color === "warning",
-        "border-error/40 bg-error/2 text-error": color === "danger",
+        "border-error/40 bg-error/2 text-error": color === "error",
       },
       className,
     )}
@@ -89,7 +89,7 @@
             <CheckCircle2 class="size-5" />
           {:else if color === "warning"}
             <TriangleAlert class="size-5" />
-          {:else if color === "danger"}
+          {:else if color === "error"}
             <AlertCircle class="size-5" />
           {/if}
         </div>

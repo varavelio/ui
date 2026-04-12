@@ -42,9 +42,9 @@
     actionText?: string;
     /**
      * The semantic color of the action button.
-     * @default "danger"
+     * @default "error"
      */
-    actionColor?: "neutral" | "info" | "success" | "warning" | "danger";
+    actionColor?: "neutral" | "info" | "success" | "warning" | "error";
     /**
      * Called before the dialog closes on cancel.
      */
@@ -64,7 +64,7 @@
     children,
     cancelText = "Cancel",
     actionText = "Continue",
-    actionColor = "danger",
+    actionColor = "error",
     onCancel,
     onConfirm,
   }: Props = $props();

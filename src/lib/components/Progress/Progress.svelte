@@ -30,7 +30,7 @@
      * The semantic color of the progress bar.
      * @default "info"
      */
-    color?: "neutral" | "info" | "success" | "warning" | "danger";
+    color?: "neutral" | "info" | "success" | "warning" | "error";
     /**
      * Whether to display the percentage text next to the label.
      * @default false
@@ -95,7 +95,7 @@
         "bg-info": color === "info",
         "bg-success": color === "success",
         "bg-warning": color === "warning",
-        "bg-error": color === "danger",
+        "bg-error": color === "error",
       })}
       style={clampedValue === null ? undefined : `transform: translateX(-${100 - percentage}%); width: 100%;`}
     ></div>
