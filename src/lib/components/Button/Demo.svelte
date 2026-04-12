@@ -258,7 +258,10 @@
             <AlertCircle class="size-4 opacity-50" />
             <span>Complex Alignment Pattern</span>
           </div>
-          <Kbd>CTRL K</Kbd>
+          <div class="flex items-center gap-2">
+            <Kbd>CTRL</Kbd>
+            <Kbd>K</Kbd>
+          </div>
         </Button>
       </div>
     </Card>
