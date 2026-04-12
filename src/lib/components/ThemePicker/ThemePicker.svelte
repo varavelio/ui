@@ -12,56 +12,89 @@
   import { type Theme, theme } from "../../utils/index.ts";
   import { Button } from "../Button/index.js";
   import { Menu } from "../Menu/index.js";
+  import { Tooltip } from "../Tooltip/index.js";
 
   const options = [
     { value: "light", label: "Light", icon: SunMedium },
     { value: "dark", label: "Dark", icon: MoonStar },
     { value: "system", label: "System", icon: LaptopMinimal },
-  ] as const;
+  ] as const satisfies readonly {
+    value: Theme;
+    label: string;
+    icon: Component;
+  }[];
 
   interface Props {
     /**
-     * Additional CSS classes to apply to the theme toggle button.
+     * Additional CSS classes to apply to the trigger.
      */
     class?: ClassValue;
     /**
-     * The bound theme value ("light", "dark", or "system").
+     * The bound theme value.
      * @default "system"
      */
     value?: Theme;
+    /**
+     * Visible trigger label text.
+     * @default "Theme"
+     */
+    label?: string;
+    /**
+     * Whether to show the visible Theme label.
+     * @default true
+     */
+    showLabel?: boolean;
+    /**
+     * Whether to use the ghost button style.
+     * @default false
+     */
+    ghost?: boolean;
+    /**
+     * Whether to render a circular trigger.
+     * @default false
+     */
+    circular?: boolean;
   }
 
-  let { class: className, value = $bindable<Theme>("system") }: Props =
-    $props();
+  let {
+    class: className,
+    value = $bindable<Theme>("system"),
+    label = "Theme",
+    showLabel = true,
+    ghost = false,
+    circular = false,
+  }: Props = $props();
 
   let isLoading = $state(true);
-  let currentTheme = $state<Theme>("system");
 
-  function handleValueChange(next: string) {
-    if (next !== "light" && next !== "dark" && next !== "system") return;
+  function setThemeValue(next: Theme) {
     theme.set(next);
   }
 
   onMount(() => {
-    const initialTheme = theme.get();
-
-    value = initialTheme;
-    currentTheme = initialTheme;
+    value = theme.get();
     isLoading = false;
 
     return theme.subscribe((nextTheme) => {
-      currentTheme = nextTheme;
       value = nextTheme;
     });
   });
 
-  let selectedTheme = $derived(isLoading ? "system" : currentTheme);
-  let TriggerIcon = $derived(
-    selectedTheme === "system"
-      ? LaptopMinimal
-      : selectedTheme === "dark"
-        ? MoonStar
-        : SunMedium,
+  let selectedTheme = $derived(isLoading ? "system" : value);
+  let selectedOption = $derived(
+    options.find((option) => option.value === selectedTheme) ?? options[2],
+  );
+  let TriggerIcon = $derived(selectedOption.icon);
+  let effectiveShowLabel = $derived(showLabel && !circular);
+  let iconOnly = $derived(!effectiveShowLabel);
+  let triggerVariant = $derived.by<"ghost" | "outline">(() =>
+    ghost ? "ghost" : "outline",
+  );
+  let triggerRadius = $derived.by<"full" | "md">(() =>
+    circular ? "full" : "md",
+  );
+  let triggerClass = $derived(
+    cn(effectiveShowLabel ? "w-fit" : "size-10 shrink-0 px-0", className),
   );
 
   let iconSnippets = $derived({
@@ -81,8 +114,40 @@
   <Icon class="size-4" />
 {/snippet}
 
+{#snippet triggerContent()}
+  {#if isLoading}
+    <Loader class="size-4 animate-spin" />
+  {:else}
+    <TriggerIcon class="size-4" />
+  {/if}
+
+  {#if effectiveShowLabel}
+    <span class="hidden desk:inline">{label}</span>
+  {/if}
+{/snippet}
+
+{#snippet triggerButton()}
+  <Button
+    disabled={isLoading}
+    variant={triggerVariant}
+    radius={triggerRadius}
+    size="md"
+    class={triggerClass}
+  >
+    {@render triggerContent()}
+  </Button>
+{/snippet}
+
+{#snippet maybeTooltip()}
+  {#if iconOnly}
+    <Tooltip content={label} delay={0}>{@render triggerButton()}</Tooltip>
+  {:else}
+    {@render triggerButton()}
+  {/if}
+{/snippet}
+
 {#snippet labelContent(optionLabel: string, isSelected: boolean)}
-  <div class="flex flex-1 items-center justify-between">
+  <div class="flex flex-1 items-center justify-between gap-3">
     <span>{optionLabel}</span>
     {#if isSelected}
       <Check class="size-4 text-content-muted" />
@@ -93,9 +158,11 @@
 {#snippet sunIcon()}
   {@render icon(SunMedium)}
 {/snippet}
+
 {#snippet moonIcon()}
   {@render icon(MoonStar)}
 {/snippet}
+
 {#snippet laptopIcon()}
   {@render icon(LaptopMinimal)}
 {/snippet}
@@ -103,9 +170,11 @@
 {#snippet lightLabel()}
   {@render labelContent("Light", selectedTheme === "light")}
 {/snippet}
+
 {#snippet darkLabel()}
   {@render labelContent("Dark", selectedTheme === "dark")}
 {/snippet}
+
 {#snippet systemLabel()}
   {@render labelContent("System", selectedTheme === "system")}
 {/snippet}
@@ -113,19 +182,12 @@
 <Menu
   items={options.map((option) => ({
     label: labelSnippets[option.value],
-    onSelect: () => handleValueChange(option.value),
+    onSelect: () => setThemeValue(option.value),
     icon: iconSnippets[option.value],
     type: "item",
   }))}
 >
   {#snippet trigger()}
-    <Button variant="outline" size="md" class={cn("w-fit", className)}>
-      {#if isLoading}
-        <Loader class="size-4 animate-spin" />
-      {:else}
-        <TriggerIcon class="size-4" />
-      {/if}
-      <span class="hidden desk:inline">Theme</span>
-    </Button>
+    {@render maybeTooltip()}
   {/snippet}
 </Menu>
