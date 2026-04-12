@@ -8,7 +8,7 @@
   } from "@lucide/svelte";
   import { type Component, onMount } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { type Theme, theme } from "../../utils/index.ts";
+  import { type Theme, theme } from "../../runtime/index.js";
   import { Button } from "../Button/index.js";
   import { Menu } from "../Menu/index.js";
   import { Tooltip } from "../Tooltip/index.js";

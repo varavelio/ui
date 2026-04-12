@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ThemePicker } from "$lib/components/index.js";
-  import type { Theme } from "$lib/utils/index.js";
+  import type { Theme } from "$lib/runtime/index.js";
 
   type Combination = {
     id: string;

@@ -48,9 +48,9 @@
       "svelte": "./dist/layouts/index.js",
       "default": "./dist/layouts/index.js"
     },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "default": "./dist/utils/index.js"
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
     },
     "./theme.css": "./dist/theme.css"
   },
