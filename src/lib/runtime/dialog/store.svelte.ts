@@ -1,5 +1,5 @@
-import type { ConfirmProps } from "./Confirm.svelte";
 import type { AlertProps } from "./Alert.svelte";
+import type { ConfirmProps } from "./Confirm.svelte";
 
 /**
  * Options for the `dialog.confirm` function.
