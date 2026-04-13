@@ -28,18 +28,18 @@
 <svelte:element
   this={`h${level}`}
   class={cn(
-    "font-sans font-semibold",
+    "font-sans font-semibold text-balance",
     {
       "text-content-muted": muted,
       "text-content": !muted,
 
       // Hero / Display
-      "text-4xl desk:text-5xl tracking-tighter text-balance": size === "3xl",
-      "text-3xl desk:text-4xl tracking-tighter text-balance": size === "2xl",
+      "text-4xl desk:text-5xl tracking-tighter": size === "3xl",
+      "text-3xl desk:text-4xl tracking-tighter": size === "2xl",
 
       // Page / Section Titles
-      "text-2xl desk:text-3xl tracking-tight text-balance": size === "xl",
-      "text-xl desk:text-2xl tracking-tight text-balance": size === "lg",
+      "text-2xl desk:text-3xl tracking-tight": size === "xl",
+      "text-xl desk:text-2xl tracking-tight": size === "lg",
       "text-lg desk:text-xl tracking-tight": size === "md",
 
       // Subtitles / Labels
