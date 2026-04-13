@@ -91,6 +91,7 @@
     "@lucide/svelte": "1.7.0",
     "bits-ui": "2.17.2",
     "clsx": "2.1.1",
+    "svelte-sonner": "1.1.0",
     "tailwind-merge": "3.5.0"
   }
 }
