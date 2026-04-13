@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Tooltip } from "bits-ui";
   import type { Snippet } from "svelte";
+  import DialogProvider from "$lib/runtime/dialog/DialogProvider.svelte";
 
   interface Props {
     /**
@@ -13,3 +14,5 @@
 </script>
 
 <Tooltip.Provider>{@render children()}</Tooltip.Provider>
+
+<DialogProvider />
