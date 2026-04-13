@@ -2,6 +2,7 @@
   import { Tooltip } from "bits-ui";
   import type { Snippet } from "svelte";
   import DialogProvider from "$lib/runtime/dialog/DialogProvider.svelte";
+  import ToastProvider from "$lib/runtime/toast/ToastProvider.svelte";
 
   interface Props {
     /**
@@ -13,6 +14,8 @@
   let { children }: Props = $props();
 </script>
 
-<Tooltip.Provider>{@render children()}</Tooltip.Provider>
-
-<DialogProvider />
+<Tooltip.Provider>
+  {@render children()}
+  <DialogProvider />
+  <ToastProvider />
+</Tooltip.Provider>
