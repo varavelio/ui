@@ -70,8 +70,9 @@ When updating this document, do so with the context of the entire document in mi
 - **Role**: A SvelteKit application used to showcase and test the components during development.
 - **Key Files**:
   - `+layout.ts`: Route-level options/configuration for the showcase app.
-  - `+layout.svelte`: Global layout for the showcase app. This wraps the app in a shared `Tooltip.Provider` and bootstraps the persisted explorer theme before hydration.
-  - `+page.svelte`: Main component explorer page. It consumes `src/lib/catalog.ts` directly, then renders the grouped explorer plus live demos from the catalog entries.
+  - `+layout.svelte`: Global layout for the showcase app. It mounts `UiProvider` so runtime primitives (e.g., global dialogs) remain available throughout the explorer.
+  - `[type]/+layout.svelte`: Shared explorer shell with the top section navbar (`components`, `blocks`, `layouts`, `runtime`) and a type-aware sidebar.
+  - `[type]/[slug]/+page.svelte`: Detail renderer for explorer entries. It handles component docs from `src/lib/catalog.ts` and runtime API docs from `[type]/explorer.ts`.
 
 ## Svelte
 
@@ -109,5 +110,5 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Class Order Priority**: Follow this strict order inside `cn()` to ensure correct CSS overrides: `1. Base Styles` -> `2. Logic/Conditional Objects` -> `3. User-defined classes` (e.g., `className`). Components MUST expose a `class` (`className` internally) prop to allow consumer overrides whenever possible.
 - **Scroll Areas**: When wrapping `bits-ui` ScrollArea, prefer a flex-column root with a `min-h-0 flex-1` viewport instead of relying on `h-full`/`size-full`; this keeps vertical overflow working inside flex parents constrained by `max-height` such as modal bodies.
 - **Semantic Tones**: The theme does not expose a `primary` token; use semantic tones (`info`, `success`, `warning`, `error/danger`) for colored UI states.
-- **Theme Components**: Any theme selector/toggle should consume `src/lib/utils/theme.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
+- **Theme Components**: Any theme selector/toggle should consume `src/lib/runtime/theme/index.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
 - **Theme Reactivity**: For UI sync with OS changes and cross-tab updates, prefer `theme.subscribe()` (backed by the global `varavel-theme-change` event from `static/theme-init.js`) rather than ad-hoc listeners inside components.
