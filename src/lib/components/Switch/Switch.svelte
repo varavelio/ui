@@ -97,7 +97,7 @@
       // Base layout & surface
       "inline-flex shrink-0 items-center rounded-full border cursor-pointer",
       // Transition
-      "transition-[background-color] duration-200",
+      "transition-[background-color,border-color] duration-200",
       // Focus state
       "focus-visible:outline-2 focus-visible:outline-offset-2",
       // Disabled state
