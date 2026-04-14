@@ -89,6 +89,15 @@
 
   // Expose the runtime API in a highly specific, non-colliding namespace
   window.__varavelUiTheme = {
+    /**
+     * Sets the user's theme preference and applies it immediately.
+     *
+     * If the provided theme is invalid, it defaults to "system".
+     *
+     * The new theme is also stored in localStorage for persistence across sessions and tabs.
+     *
+     * @param {"light"|"dark"|"system"} newTheme - The new theme preference to set.
+     */
     set: (newTheme) => {
       const safeTheme = isValidTheme(newTheme) ? newTheme : "system";
       try {
@@ -98,6 +107,12 @@
       }
       applyDOM(safeTheme);
     },
+
+    /**
+     * Retrieves the current theme state, including the user's preference and the resolved theme.
+     *
+     * @returns {{ theme: "light"|"dark"|"system", resolved: "light"|"dark" }} The current theme state.
+     */
     get: getThemeState,
   };
 
