@@ -1,33 +1,55 @@
 /**
- * @fileoverview Varavel UI Theme Bootstrapper.
+ * @fileoverview Varavel UI theme bootstrapper.
  *
- * Synchronously resolves and applies the theme before the first paint to prevent
- * FOUC (Flash of Unstyled Content).
+ * Resolves and applies the user's saved theme preference before the first paint
+ * to prevent a flash of incorrect theme styles.
  *
- * Safely exposes a runtime API via window.__varavelUiTheme.
+ * The bootstrapper also exposes a small runtime bridge on
+ * `window.__varavelUiTheme` so the Svelte runtime can read and update the same
+ * source of truth without duplicating browser logic.
  */
 
 (() => {
   const STORAGE_KEY = "varavel-theme";
   const THEME_CHANGE_EVENT = "varavel-theme-change";
 
-  // Safely initialize matchMedia for environments that support it
+  /** @typedef {"light" | "dark" | "system"} ThemePreference */
+  /** @typedef {"light" | "dark"} ResolvedTheme */
+
+  /**
+   * @typedef {object} ThemeState
+   * @property {ThemePreference} theme The saved user preference.
+   * @property {ResolvedTheme} resolved The concrete theme applied to the document.
+   */
+
+  /**
+   * @typedef {object} ThemeRuntimeApi
+   * @property {(theme: ThemePreference) => void} set Persists and applies a preference.
+   * @property {() => ThemeState} get Returns the current preference and resolved theme.
+   */
+
+  // `matchMedia` is optional in restrictive or non-browser environments.
   const mql =
     typeof window !== "undefined" && window.matchMedia
       ? window.matchMedia("(prefers-color-scheme: dark)")
       : null;
 
   /**
-   * Validates if the provided theme string is supported.
-   * @param {string} t - The theme to validate.
-   * @returns {boolean} True if the theme is valid.
+   * Returns whether a value is a supported theme preference.
+   *
+   * @param {unknown} value - Value to validate.
+   * @returns {value is ThemePreference} Whether the value is supported.
    */
-  const isValidTheme = (t) => t === "light" || t === "dark" || t === "system";
+  const isThemePreference = (value) =>
+    value === "light" || value === "dark" || value === "system";
 
   /**
-   * Resolves the theme to a concrete "light" or "dark" value.
-   * @param {string} theme - The theme to resolve.
-   * @returns {"light"|"dark"} The resolved theme.
+   * Resolves a preference to the concrete theme applied to the document.
+   *
+   * `"system"` follows the current `prefers-color-scheme` media query.
+   *
+   * @param {ThemePreference} theme - Preference to resolve.
+   * @returns {ResolvedTheme} The resolved document theme.
    */
   const resolveTheme = (theme) => {
     if (theme === "light") return "light";
@@ -36,14 +58,20 @@
   };
 
   /**
-   * Safely retrieves the stored theme and its resolved value.
-   * @returns {{ theme: "light"|"dark"|"system", resolved: "light"|"dark" }}
+   * Reads the saved theme preference and derives the resolved document theme.
+   *
+   * If storage is unavailable or contains an invalid value, the preference falls
+   * back to `"system"`.
+   *
+   * @returns {ThemeState} The current preference and resolved theme.
    */
   const getThemeState = () => {
+    /** @type {ThemePreference} */
     let theme = "system";
+
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (isValidTheme(stored)) {
+      if (isThemePreference(stored)) {
         theme = stored;
       } else {
         localStorage.setItem(STORAGE_KEY, "system");
@@ -59,18 +87,20 @@
   };
 
   /**
-   * Applies the resolved theme to the DOM.
+   * Applies a theme preference to the document and emits a runtime update event.
    *
-   * It also dispatches a custom event "varavel-theme-change" with details about the
-   * current theme and the resolved theme.
+   * The document keeps both `data-theme` and the `dark` class in sync so the
+   * runtime works with the package theme tokens and any consumer CSS that relies
+   * on Tailwind's dark selector.
    *
-   * @param {"light"|"dark"|"system"} theme - The user's theme preference.
+   * @param {ThemePreference} theme - Theme preference to apply.
    */
   const applyDOM = (theme) => {
     try {
       const resolved = resolveTheme(theme);
 
       document.documentElement.dataset.theme = resolved;
+      document.documentElement.classList.toggle("dark", resolved === "dark");
       document.documentElement.style.colorScheme = resolved;
 
       window.dispatchEvent(
@@ -87,19 +117,17 @@
   const initialState = getThemeState();
   applyDOM(initialState.theme);
 
-  // Expose the runtime API in a highly specific, non-colliding namespace
+  /** @type {ThemeRuntimeApi} */
   window.__varavelUiTheme = {
     /**
-     * Sets the user's theme preference and applies it immediately.
+     * Persists and applies a theme preference immediately.
      *
-     * If the provided theme is invalid, it defaults to "system".
+     * Invalid input is normalized to `"system"` to keep the runtime predictable.
      *
-     * The new theme is also stored in localStorage for persistence across sessions and tabs.
-     *
-     * @param {"light"|"dark"|"system"} newTheme - The new theme preference to set.
+     * @param {ThemePreference} newTheme - Preference to save and apply.
      */
     set: (newTheme) => {
-      const safeTheme = isValidTheme(newTheme) ? newTheme : "system";
+      const safeTheme = isThemePreference(newTheme) ? newTheme : "system";
       try {
         localStorage.setItem(STORAGE_KEY, safeTheme);
       } catch (_) {
@@ -109,30 +137,37 @@
     },
 
     /**
-     * Retrieves the current theme state, including the user's preference and the resolved theme.
+     * Returns the current theme state.
      *
-     * @returns {{ theme: "light"|"dark"|"system", resolved: "light"|"dark" }} The current theme state.
+     * @returns {ThemeState} The saved preference and resolved document theme.
      */
     get: getThemeState,
   };
 
-  // React to OS-level theme changes (e.g., sunset/sunrise schedules)
+  // React to OS-level theme changes when the active preference is `system`.
   if (mql) {
-    mql.addEventListener("change", () => {
+    const handleSystemThemeChange = () => {
       const state = getThemeState();
       if (state.theme === "system") {
         applyDOM("system");
       }
-    });
+    };
+
+    if (typeof mql.addEventListener === "function") {
+      mql.addEventListener("change", handleSystemThemeChange);
+    } else if (typeof mql.addListener === "function") {
+      mql.addListener(handleSystemThemeChange);
+    }
   }
 
-  // Cross-tab synchronization (updates UI if theme changes in another tab)
+  // Keep other tabs in sync, including `localStorage.clear()` resets.
   window.addEventListener("storage", (event) => {
-    if (event.key === STORAGE_KEY) {
-      const state = getThemeState();
-      if (isValidTheme(state.theme)) {
-        applyDOM(state.theme);
-      }
+    if (event.storageArea !== localStorage) {
+      return;
+    }
+
+    if (event.key === STORAGE_KEY || event.key === null) {
+      applyDOM(getThemeState().theme);
     }
   });
 })();

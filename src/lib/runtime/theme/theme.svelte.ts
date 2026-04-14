@@ -1,173 +1,164 @@
 /**
- * @fileoverview Type-safe interface for the Varavel UI theme bootstrapper.
- * Provides safe methods to interact with the underlying global theme engine.
+ * @fileoverview Reactive theme runtime for Varavel UI.
+ *
+ * This module is the typed Svelte-facing wrapper around the theme
+ * bootstrapper in `static/theme-init.js`.
  */
 
-/**
- * Extends the global Window interface to include the __varavelUiTheme property,
- * which is the bridge to the Varavel UI theme engine. This allows us to safely
- * access and manipulate the theme preference from anywhere in the application.
- */
-declare global {
-  interface Window {
-    __varavelUiTheme?: {
-      set: (theme: ThemePreference) => void;
-      get: () => ThemeState;
-    };
-  }
-}
-
-/**
- * The custom event name used by the Varavel UI to notify listeners of theme changes.
- */
+/** The event name for theme change notifications. */
 const THEME_CHANGE_EVENT = "varavel-theme-change";
 
+/** The default theme state. */
+const DEFAULT_THEME_STATE: ThemeState = {
+  theme: "system",
+  resolved: "light",
+};
+
 /**
- * Defines the valid theme preference options for Varavel UI.
- *
- * This represents what the user has selected.
+ * A saved user preference.
  */
 export type ThemePreference = "light" | "dark" | "system";
 
 /**
- * Defines the resolved theme value after evaluating the preference.
- *
- * This represents the actual theme applied to the DOM.
+ * The concrete theme currently applied to the document.
  */
 export type ThemeResolved = "light" | "dark";
 
 /**
- * Represents the complete state of the theme engine.
+ * The full runtime theme state.
  */
 export interface ThemeState {
-  /** The user's theme preference. */
+  /** The saved user preference. */
   theme: ThemePreference;
-  /** The actual theme applied to the application. */
+  /** The concrete theme currently applied to the document. */
   resolved: ThemeResolved;
 }
 
 /**
- * This function checks if the value is one of the allowed theme preference strings.
+ * Low-level browser bridge provided by `static/theme-init.js`.
+ *
+ * `get()` returns the full state so consumers can read both the saved
+ * preference and the resolved document theme from one source of truth.
  */
-const isThemePreference = (value: unknown): value is ThemePreference => {
-  return value === "light" || value === "dark" || value === "system";
-};
+interface ThemeRuntimeBridge {
+  set: (theme: ThemePreference) => void;
+  get: () => ThemeState;
+}
 
 /**
- * This function checks if the value is one of the allowed resolved theme strings.
+ * Extends the global `Window` interface with the theme runtime bridge.
  */
-const isThemeResolved = (value: unknown): value is ThemeResolved => {
-  return value === "light" || value === "dark";
-};
+declare global {
+  interface Window {
+    __varavelUiTheme?: ThemeRuntimeBridge;
+  }
+}
 
 /**
- * This function checks if the value is a valid theme state object.
+ * Returns whether a value is a supported theme preference.
+ */
+const isThemePreference = (value: unknown): value is ThemePreference =>
+  value === "light" || value === "dark" || value === "system";
+
+/**
+ * Returns whether a value is a supported resolved theme.
+ */
+const isThemeResolved = (value: unknown): value is ThemeResolved =>
+  value === "light" || value === "dark";
+
+/**
+ * Returns whether a value matches the expected runtime theme state shape.
  */
 const isThemeState = (value: unknown): value is ThemeState => {
-  if (typeof value !== "object") return false;
-  if (value === null) return false;
-  if ("theme" in value === false) return false;
-  if ("resolved" in value === false) return false;
-  if (!isThemePreference(value.theme)) return false;
-  if (!isThemeResolved(value.resolved)) return false;
-  return true;
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+
+  return (
+    isThemePreference(candidate.theme) && isThemeResolved(candidate.resolved)
+  );
 };
 
 /**
- * Reactive theme engine for the Varavel UI.
+ * Reactive theme runtime for Varavel UI.
  *
- * This store synchronizes the Svelte state with the global theme engine
- * and provides a reactive interface for components.
+ * The store keeps Svelte state in sync with the global browser bootstrapper and
+ * exposes a small ergonomic API for reading the saved preference, the resolved
+ * document theme, or the full combined state.
  */
 class ThemeStore {
   /**
    * Internal reactive state powered by Svelte 5 runes.
    *
-   * Initializes to "system"/"light" to prevent hydration mismatches during SSR.
+   * The default value is only a safe server fallback until the client bridge is
+   * available.
    *
    * @private
    */
-  private _state = $state<ThemeState>({
-    theme: "system",
-    resolved: "light",
-  });
+  private _state = $state<ThemeState>(DEFAULT_THEME_STATE);
 
   /**
-   * Creates a new instance of the theme store.
+   * Creates the theme runtime.
    *
-   * On the client side, it initializes the current theme and sets up a subscription
-   * to global theme changes to keep the state in sync.
+   * On the client, the initial state is pulled from the bootstrapper and a single
+   * event listener keeps the reactive state synchronized afterwards.
    */
   constructor() {
     if (typeof window === "undefined") {
       return;
     }
 
-    // Capture initial state on the client
     this._state = this.get();
 
-    // Subscribe to global DOM events.
-    // This ensures that if window.__varavelUiTheme.set() is called directly,
-    // the Svelte state stays in sync and updates the UI instantly.
     this.subscribe((newState) => {
       this._state = newState;
     });
   }
 
   /**
-   * Reactive getter for the entire theme state.
-   *
-   * This includes both the user's preference and the resolved theme, allowing
-   * components to react to any changes in the theme state as a whole.
-   *
-   * @returns {ThemeState} The current theme state object.
+   * Returns the current runtime state as a reactive getter.
    */
   public get state(): ThemeState {
     return this._state;
   }
 
   /**
-   * Reactive getter for the current theme preference.
-   *
-   * Use this inside Svelte components to reactively track theme changes.
-   *
-   * @returns {ThemePreference} The currently active theme preference.
+   * Returns the current saved theme preference as a reactive getter.
    */
   public get current(): ThemePreference {
     return this._state.theme;
   }
 
   /**
-   * Reactive getter for the resolved theme.
-   *
-   * This is useful for logic that needs to know if the UI is currently
-   * effectively in 'dark' or 'light' mode, regardless of the 'system' setting.
-   *
-   * @returns {ThemeResolved} The resolved theme ("light" or "dark").
+   * Returns the resolved document theme as a reactive getter.
    */
   public get resolved(): ThemeResolved {
     return this._state.resolved;
   }
 
   /**
-   * Safely retrieves the currently active theme state from the global engine.
+   * Reads the full runtime state from the browser bridge.
    *
-   * Falls back to a default state if executed in SSR or if the bootstrapper is unavailable.
-   *
-   * @returns {ThemeState} The current theme state including preference and resolved value.
+   * If the bridge is unavailable or returns invalid data, a safe default state is
+   * returned instead.
    */
   public get(): ThemeState {
-    if (typeof window !== "undefined" && window.__varavelUiTheme) {
-      return window.__varavelUiTheme.get();
+    if (typeof window !== "undefined") {
+      const nextState = window.__varavelUiTheme?.get();
+      if (isThemeState(nextState)) {
+        return nextState;
+      }
     }
-    return { theme: "system", resolved: "light" };
+
+    return { ...DEFAULT_THEME_STATE };
   }
 
   /**
-   * Updates the global theme preference, persists it to local storage,
-   * and immediately triggers a DOM update across the application.
+   * Persists and applies a theme preference through the browser bridge.
    *
-   * @param {ThemePreference} targetTheme - The target theme to apply ("light", "dark", or "system").
+   * Invalid values are ignored.
    */
   public set(targetTheme: ThemePreference): void {
     if (
@@ -180,10 +171,10 @@ class ThemeStore {
   }
 
   /**
-   * Subscribes to global theme change events dispatched by the theme engine.
+   * Subscribes to the full runtime state.
    *
-   * @param {(state: ThemeState) => void} callback - A function called whenever the theme changes.
-   * @returns {() => void} A cleanup function to remove the event listener.
+   * Use this when both the saved preference and the resolved document theme are
+   * needed.
    */
   public subscribe(callback: (state: ThemeState) => void): () => void {
     if (typeof window === "undefined") {
@@ -206,6 +197,6 @@ class ThemeStore {
 }
 
 /**
- * A reactive utility object for managing the Varavel UI theme preference.
+ * Reactive theme runtime singleton.
  */
 export const theme = new ThemeStore();
