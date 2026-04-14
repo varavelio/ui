@@ -17,7 +17,6 @@
     Badge,
     Button,
     Input,
-    ScrollArea,
     ThemePicker,
   } from "$lib/components/index.js";
   import {
@@ -227,7 +226,7 @@
         {/if}
       </div>
 
-      <ScrollArea class="min-h-0 flex-1" viewportClass="pr-4 py-4">
+      <div class="min-h-0 flex-1 pr-4 py-4 overflow-y-auto">
         {#if currentType === "components"}
           <nav aria-label="Component catalog" class="space-y-6">
             {#each componentCategories as category (category)}
@@ -345,7 +344,7 @@
         {:else}
           <Alert title="Coming soon" color="info" closable={false} />
         {/if}
-      </ScrollArea>
+      </div>
     </div>
   </aside>
 

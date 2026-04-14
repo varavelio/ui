@@ -18,7 +18,6 @@ export { Popover } from "./Popover/index.js";
 export { Progress } from "./Progress/index.js";
 export { Prose } from "./Prose/index.js";
 export { RadioGroup } from "./RadioGroup/index.js";
-export { ScrollArea } from "./ScrollArea/index.js";
 export { Select } from "./Select/index.js";
 export { Separator } from "./Separator/index.js";
 export { Switch } from "./Switch/index.js";

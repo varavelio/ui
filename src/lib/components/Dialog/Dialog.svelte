@@ -5,7 +5,6 @@
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
-  import ScrollArea from "../ScrollArea/ScrollArea.svelte";
 
   interface Props {
     /**
@@ -125,16 +124,14 @@
       {/if}
 
       {#if children}
-        <ScrollArea
+        <div
           class={[
-            "min-h-0 h-0 flex-1",
+            "min-h-0 h-0 flex-1 overflow-auto",
             { "m-4": padded },
           ]}
-          viewportClass="min-h-0"
-          orientation="both"
         >
           {@render children()}
-        </ScrollArea>
+        </div>
       {/if}
 
       {#if footer}
