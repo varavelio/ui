@@ -86,7 +86,7 @@
       <BitsAccordion.Header>
         <BitsAccordion.Trigger
           class={cn(
-            "flex w-full items-center gap-4 text-left font-medium focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content",
+            "flex w-full cursor-pointer items-center gap-4 text-left font-medium focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content",
             {
               "py-3 text-sm": size === "sm",
               "py-4 text-sm": size === "md",

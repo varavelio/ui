@@ -144,7 +144,7 @@
       aria-invalid={error || undefined}
       class={cn(
         // Base layout & typography
-        "text-content inline-flex w-full items-center gap-3 border transition-colors duration-200",
+        "text-content inline-flex w-full cursor-pointer items-center gap-3 border transition-colors duration-200",
         // Hover state
         "hover:bg-base-100 hover:border-content",
         // Focus & open states

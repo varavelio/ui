@@ -139,7 +139,7 @@
           value={item.value}
           class={cn(
             // Base layout
-            "border-base-400 bg-base-100 inline-flex shrink-0 items-center justify-center rounded-full border transition-colors duration-200",
+            "border-base-400 bg-base-100 inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full border transition-colors duration-200",
             // Focus state
             "focus-visible:outline-2 focus-visible:outline-offset-2",
             // Disabled state

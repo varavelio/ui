@@ -121,7 +121,7 @@
     id={resolvedId}
     class={cn(
       // Base layout & typography
-      "border-base-400 bg-base-100 inline-flex shrink-0 items-center justify-center rounded-sm border transition-colors duration-200",
+      "border-base-400 bg-base-100 inline-flex shrink-0 cursor-pointer items-center justify-center rounded-sm border transition-colors duration-200",
       // Focus states
       "focus-visible:outline-2 focus-visible:outline-offset-2",
       // Disabled state

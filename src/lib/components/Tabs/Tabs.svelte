@@ -95,7 +95,7 @@
         disabled={item.disabled}
         value={item.value}
         class={cn(
-          "text-content-muted focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content rounded-md font-medium outline-hidden transition-all duration-75 active:scale-[0.99] active:transition-none disabled:opacity-50",
+          "text-content-muted focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content cursor-pointer rounded-md font-medium outline-hidden transition-all duration-75 active:scale-[0.99] active:transition-none disabled:opacity-50",
           {
             "h-7 px-2.5 text-xs": size === "sm",
             "h-9 px-4 text-sm": size === "md",

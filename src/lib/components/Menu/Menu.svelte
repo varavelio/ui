@@ -77,7 +77,7 @@
         {:else}
           <BitsDropdownMenu.Item
             class={cn(
-              "flex select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none data-highlighted:bg-base-300 data-disabled:opacity-50",
+              "flex cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none data-highlighted:bg-base-300 data-disabled:opacity-50",
               item.destructive ? "text-error" : "text-content"
             )}
             disabled={item.disabled}

@@ -76,7 +76,7 @@
 >
   <BitsCollapsible.Trigger
     class={cn(
-      "group flex w-full items-start gap-4 text-left font-medium focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content",
+      "group flex w-full cursor-pointer items-start gap-4 text-left font-medium focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content",
       {
         "py-3 text-sm": size === "sm",
         "py-4 text-sm": size === "md",

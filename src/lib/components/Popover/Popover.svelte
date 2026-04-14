@@ -56,7 +56,9 @@
 </script>
 
 <BitsPopover.Root bind:open>
-  <BitsPopover.Trigger class="w-fit">{@render trigger?.()}</BitsPopover.Trigger>
+  <BitsPopover.Trigger class="w-fit cursor-pointer">
+    {@render trigger?.()}
+  </BitsPopover.Trigger>
 
   <BitsPopover.Portal>
     <BitsPopover.Content

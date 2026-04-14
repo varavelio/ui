@@ -122,19 +122,25 @@
       <div class="space-y-4">
         <div class="grid gap-2">
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="width" class="text-xs font-medium">Width</label>
+            <label for="width" class="cursor-pointer text-xs font-medium">
+              Width
+            </label>
             <Input id="width" value="100%" class="col-span-2 h-8" />
           </div>
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="maxWidth" class="text-xs font-medium">Max. width</label>
+            <label for="maxWidth" class="cursor-pointer text-xs font-medium">
+              Max. width
+            </label>
             <Input id="maxWidth" value="300px" class="col-span-2 h-8" />
           </div>
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="height" class="text-xs font-medium">Height</label>
+            <label for="height" class="cursor-pointer text-xs font-medium">
+              Height
+            </label>
             <Input id="height" value="25px" class="col-span-2 h-8" />
           </div>
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="maxHeight" class="text-xs font-medium">
+            <label for="maxHeight" class="cursor-pointer text-xs font-medium">
               Max. height
             </label>
             <Input id="maxHeight" value="none" class="col-span-2 h-8" />
