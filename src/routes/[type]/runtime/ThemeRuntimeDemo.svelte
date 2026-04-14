@@ -1,26 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Alert, Badge, Button, Card } from "$lib/components/index.js";
-  import { type Theme, theme } from "$lib/runtime/index.js";
+  import { theme } from "$lib/runtime/index.js";
 
-  const themes: Theme[] = ["system", "light", "dark"];
+  const themes = ["system", "light", "dark"] as const;
 
-  let activeTheme = $state<Theme>("system");
-  let history = $state<Theme[]>([]);
-
-  function applyTheme(next: Theme) {
-    theme.set(next);
-  }
+  let activeTheme = $derived(theme.current);
+  let history = $state<string[]>([]);
 
   onMount(() => {
-    activeTheme = theme.get();
-    history = [activeTheme];
+    history = [theme.get().theme];
 
-    return theme.subscribe((nextTheme) => {
-      activeTheme = nextTheme;
-      history = [nextTheme, ...history].slice(0, 6);
+    return theme.subscribe((nextState) => {
+      history = [nextState.theme, ...history].slice(0, 6);
     });
   });
+
+  function applyTheme(next: (typeof themes)[number]) {
+    theme.set(next);
+  }
 
   let statusDescription = $derived.by(() => {
     if (activeTheme === "system") {

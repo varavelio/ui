@@ -1,14 +1,8 @@
 <script lang="ts">
-  import {
-    Check,
-    LaptopMinimal,
-    Loader,
-    MoonStar,
-    SunMedium,
-  } from "@lucide/svelte";
-  import { type Component, onMount } from "svelte";
+  import { Check, LaptopMinimal, MoonStar, SunMedium } from "@lucide/svelte";
+  import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { type Theme, theme } from "../../runtime/index.js";
+  import { theme } from "../../runtime/index.js";
   import { Button } from "../Button/index.js";
   import { Menu } from "../Menu/index.js";
   import { Tooltip } from "../Tooltip/index.js";
@@ -17,22 +11,13 @@
     { value: "system", label: "System", icon: LaptopMinimal },
     { value: "light", label: "Light", icon: SunMedium },
     { value: "dark", label: "Dark", icon: MoonStar },
-  ] as const satisfies readonly {
-    value: Theme;
-    label: string;
-    icon: Component;
-  }[];
+  ] as const;
 
   interface Props {
     /**
      * Additional CSS classes to apply to the trigger.
      */
     class?: ClassValue;
-    /**
-     * The bound theme value.
-     * @default "system"
-     */
-    value?: Theme;
     /**
      * Visible trigger label text.
      * @default "Theme"
@@ -77,7 +62,6 @@
 
   let {
     class: className,
-    value = $bindable<Theme>("system"),
     label = "Theme",
     showLabel = true,
     size = "md",
@@ -87,24 +71,9 @@
     square = false,
   }: Props = $props();
 
-  let isLoading = $state(true);
-
-  function setThemeValue(next: Theme) {
-    theme.set(next);
-  }
-
-  onMount(() => {
-    value = theme.get();
-    isLoading = false;
-
-    return theme.subscribe((nextTheme) => {
-      value = nextTheme;
-    });
-  });
-
-  let selectedTheme = $derived(isLoading ? "system" : value);
+  let selectedTheme = $derived(theme.current);
   let selectedOption = $derived(
-    options.find((option) => option.value === selectedTheme) ?? options[2],
+    options.find((option) => option.value === selectedTheme) ?? options[0],
   );
   let TriggerIcon = $derived(selectedOption.icon);
   let effectiveShowLabel = $derived(showLabel && !square);
@@ -128,11 +97,7 @@
 {/snippet}
 
 {#snippet triggerContent()}
-  {#if isLoading}
-    <Loader class="size-4 animate-spin" />
-  {:else}
-    <TriggerIcon class="size-4" />
-  {/if}
+  <TriggerIcon class="size-4" />
 
   {#if effectiveShowLabel}
     <span>{label}</span>
@@ -140,15 +105,7 @@
 {/snippet}
 
 {#snippet triggerButton()}
-  <Button
-    disabled={isLoading}
-    {variant}
-    {radius}
-    {size}
-    {color}
-    {square}
-    class={className}
-  >
+  <Button {variant} {radius} {size} {color} {square} class={className}>
     {@render triggerContent()}
   </Button>
 {/snippet}
@@ -197,7 +154,7 @@
 <Menu
   items={options.map((option) => ({
     label: labelSnippets[option.value],
-    onSelect: () => setThemeValue(option.value),
+    onSelect: () => theme.set(option.value),
     icon: iconSnippets[option.value],
     type: "item",
   }))}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ThemePicker } from "$lib/components/index.js";
-  import type { Theme } from "$lib/runtime/index.js";
+  import { theme } from "$lib/runtime/index.js";
 
   type Combination = {
     id: string;
@@ -26,12 +26,6 @@
       ),
     ),
   );
-
-  const initialValues = Object.fromEntries(
-    combinations.map(({ id }) => [id, "system"]),
-  ) as Record<string, Theme>;
-
-  let values = $state(initialValues);
 
   function boolLabel(value: boolean) {
     return value ? "true" : "false";
@@ -128,13 +122,12 @@
               variant={combo.variant}
               radius={combo.radius}
               square={!combo.showLabel}
-              bind:value={values[combo.id]}
             />
           </div>
 
           <p class="text-xs text-content-muted">
-            Current value:
-            <span class="font-mono text-content">{values[combo.id]}</span>
+            Current preference:
+            <span class="font-mono text-content">{theme.current}</span>
           </p>
         </div>
       </article>
