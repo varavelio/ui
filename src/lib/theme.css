@@ -1,3 +1,6 @@
+/* Tailwind Typography plugin used by rich text surfaces (`prose`). */
+@plugin "@tailwindcss/typography";
+
 /* Enable dark mode with either .dark or [data-theme="dark"]. */
 @custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
