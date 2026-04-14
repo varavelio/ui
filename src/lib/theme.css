@@ -100,6 +100,32 @@
     @apply border-base-400;
   }
 
+  /* Scrollbar styling. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-base-400) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-base-400);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-content-muted);
+  }
+
   /* Monochromatic text selection that inverts with theme tokens. */
   ::selection {
     @apply bg-content text-base-100;
