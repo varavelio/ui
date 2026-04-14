@@ -76,7 +76,7 @@
   });
 </script>
 
-<Dialog {size} dismissible={false} open={true}>
+<Dialog {size} dismissible={true} open={true}>
   <div class="flex flex-col items-center gap-4 text-center">
     {#if !hideIcon}
       <Icon
