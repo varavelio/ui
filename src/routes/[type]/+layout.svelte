@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    Bell,
     CircleAlert,
     Component,
     Info,
@@ -45,6 +46,7 @@
   const runtimeCategoryIcons = {
     "Theme Management": Info,
     "Dialog Management": CircleAlert,
+    "Toast Management": Bell,
   } as const satisfies Record<RuntimeCategory, SvelteComponent>;
 
   let query = $state("");
