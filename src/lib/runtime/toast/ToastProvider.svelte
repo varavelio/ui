@@ -71,17 +71,17 @@
       @apply transition-colors! opacity-0! size-4! top-4! left-auto! right-0!;
       @apply group-hover:opacity-100!;
       @apply active:translate-y-px!;
-      background-color: var(--sonner-button-bg) !important;
-      border-color: var(--sonner-button-bg) !important;
-      color: var(--sonner-button-fg) !important;
+      background-color: var(--sonner-button-bg);
+      border-color: var(--sonner-button-bg);
+      color: var(--sonner-button-fg);
     }
 
     .sonner-action-button {
       @apply rounded-md! p-2! text-xs! font-medium!;
       @apply active:translate-y-px!;
-      background-color: var(--sonner-button-bg) !important;
-      border-color: var(--sonner-button-bg) !important;
-      color: var(--sonner-button-fg) !important;
+      background-color: var(--sonner-button-bg);
+      border-color: var(--sonner-button-bg);
+      color: var(--sonner-button-fg);
     }
 
     .sonner-icon {
