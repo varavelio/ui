@@ -1,37 +1,9 @@
 <script lang="ts">
   import { Alert, Badge, Button, Card } from "$lib/components/index.js";
-  import { toast } from "$lib/runtime/index.js";
+  import { dialog, toast } from "$lib/runtime/index.js";
 
   const variants = ["success", "info", "warning", "error"] as const;
   type ToastId = string | number;
-  type RuntimeToastOptions = {
-    id?: ToastId;
-    title?: string;
-    text?: string;
-    closeButton?: boolean;
-  };
-  type RuntimeToastMethod = (
-    input?: RuntimeToastOptions | string,
-    options?: RuntimeToastOptions,
-  ) => ToastId | undefined;
-  type RuntimeToastApi = {
-    success: RuntimeToastMethod;
-    info: RuntimeToastMethod;
-    warning: RuntimeToastMethod;
-    error: RuntimeToastMethod;
-    loading: RuntimeToastMethod;
-    promise: <T>(
-      promise: Promise<T> | (() => Promise<T>),
-      options?: RuntimeToastOptions & {
-        loadingText?: string | (() => string);
-        successText?: string | ((data: T) => string);
-        errorText?: string | ((error: unknown) => string);
-        finally?: () => void | Promise<void>;
-      },
-    ) => ToastId | undefined;
-    dismiss: (id?: ToastId) => ToastId | undefined;
-  };
-  const runtimeToast = toast as unknown as RuntimeToastApi & RuntimeToastMethod;
 
   let latestAction = $state("No toast triggered yet.");
   let lastToastId = $state<ToastId | null>(null);
@@ -42,12 +14,41 @@
   }
 
   function showDefaultToast() {
-    const id = runtimeToast("Saved with string shorthand.");
+    const id = toast("Saved with string shorthand.");
     rememberAction("Opened default toast.", id);
   }
 
+  function showDismissableToast() {
+    const id = toast({
+      title: "Dismissable toast",
+      text: "This toast has a close button and won't auto-close.",
+      closeButton: true,
+      duration: Number.POSITIVE_INFINITY,
+    });
+    rememberAction("Opened dismissable toast.", id);
+  }
+
+  function showActionToast() {
+    const id = toast({
+      title: "Action required",
+      text: "An important update is available.",
+      action: {
+        label: "Update",
+        onClick: async () => {
+          await dialog.alert({
+            title: "Update triggered",
+            text: "The system is now applying the changes.",
+            color: "info",
+          });
+          rememberAction("Action button clicked!");
+        },
+      },
+    });
+    rememberAction("Opened toast with action.", id);
+  }
+
   function showVariantToast(variant: (typeof variants)[number]) {
-    const id = runtimeToast[variant]({
+    const id = toast[variant]({
       title: `${variant[0]?.toUpperCase()}${variant.slice(1)} toast`,
       text: "Runtime feedback stays intentionally small and clear.",
       closeButton: true,
@@ -57,7 +58,7 @@
   }
 
   function showLoadingToast() {
-    const id = runtimeToast.loading({
+    const id = toast.loading({
       title: "Sync in progress",
       text: "Updating the same toast after a short delay.",
       closeButton: true,
@@ -70,7 +71,7 @@
     }
 
     setTimeout(() => {
-      runtimeToast.success({
+      toast.success({
         id,
         title: "Sync complete",
         text: "The loading toast was updated using the returned id.",
@@ -90,7 +91,7 @@
   }
 
   function showPromiseToast() {
-    const id = runtimeToast.promise(fakeRequest, {
+    const id = toast.promise(fakeRequest, {
       title: "Promise toast",
       text: "Tracking a fake async request.",
       loadingText: "Saving changes...",
@@ -109,13 +110,13 @@
       return;
     }
 
-    runtimeToast.dismiss(lastToastId);
+    toast.dismiss(lastToastId);
     latestAction = `Dismissed toast ${lastToastId}.`;
     lastToastId = null;
   }
 
   function dismissAllToasts() {
-    runtimeToast.dismiss();
+    toast.dismiss();
     latestAction = "Dismissed all toasts.";
     lastToastId = null;
   }
@@ -140,6 +141,10 @@
       <Button variant="outline" onclick={showDefaultToast}>
         Default toast
       </Button>
+      <Button variant="outline" onclick={showDismissableToast}>
+        Dismissable (Sticky)
+      </Button>
+      <Button variant="outline" onclick={showActionToast}>With Action</Button>
       <Button variant="outline" color="warning" onclick={showLoadingToast}>
         Loading toast update
       </Button>
