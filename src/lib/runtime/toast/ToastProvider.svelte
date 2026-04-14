@@ -4,4 +4,9 @@
 </script>
 
 <!-- https://github.com/wobsoriano/svelte-sonner (MIT license) -->
-<Toaster position="bottom-right" expand={true} theme={theme.resolved} richColors />
+<Toaster
+  position="bottom-right"
+  expand={true}
+  theme={theme.resolved}
+  richColors
+/>

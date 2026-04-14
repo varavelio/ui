@@ -126,7 +126,7 @@ class ThemeStore {
 
   /**
    * Returns the current saved theme preference as a reactive getter.
-   * 
+   *
    * It can be "light", "dark", or "system".
    */
   public get current(): ThemePreference {
@@ -135,7 +135,7 @@ class ThemeStore {
 
   /**
    * Returns the resolved document theme as a reactive getter.
-   * 
+   *
    * It can be "light" or "dark".
    */
   public get resolved(): ThemeResolved {
