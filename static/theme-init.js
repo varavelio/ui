@@ -32,7 +32,14 @@
   const getStoredTheme = () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return isValidTheme(stored) ? stored : "system";
+
+      // Store and return "system" if no valid the theme is found
+      if (!isValidTheme(stored)) {
+        localStorage.setItem(STORAGE_KEY, "system");
+        return "system";
+      }
+
+      return stored;
     } catch (_) {
       return "system"; // Safe fallback
     }
@@ -40,22 +47,23 @@
 
   /**
    * Applies the resolved theme to the DOM.
+   *
+   * It also dispatches a custom event "varavel-theme-change" with details about the
+   * current theme and the resolved theme (after considering "system" preferences).
+   *
    * @param {"light"|"dark"|"system"} theme - The user's theme preference.
    */
   const applyDOM = (theme) => {
     try {
       let resolved = theme;
-
-      if (theme === "system") {
-        resolved = mql?.matches ? "dark" : "light";
-      }
+      if (theme === "system") resolved = mql?.matches ? "dark" : "light";
 
       document.documentElement.dataset.theme = resolved;
       document.documentElement.style.colorScheme = resolved;
 
       window.dispatchEvent(
         new CustomEvent(THEME_CHANGE_EVENT, {
-          detail: theme,
+          detail: { theme, resolved },
         }),
       );
     } catch (_) {
