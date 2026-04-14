@@ -2,6 +2,7 @@ export { Accordion } from "./Accordion/index.js";
 export { Alert } from "./Alert/index.js";
 export { Avatar } from "./Avatar/index.js";
 export { Badge } from "./Badge/index.js";
+export { Breadcrumb } from "./Breadcrumb/index.js";
 export { Button } from "./Button/index.js";
 export { Card } from "./Card/index.js";
 export { Checkbox } from "./Checkbox/index.js";
