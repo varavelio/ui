@@ -90,8 +90,7 @@
   const resolvedTabIndex = $derived(disabledLink ? -1 : tabindex);
 </script>
 
-<svelte:element
-  this={"a"}
+<a
   {...restProps}
   href={resolvedHref}
   target={resolvedTarget}
@@ -108,4 +107,4 @@
   )}
 >
   {@render children?.()}
-</svelte:element>
+</a>
