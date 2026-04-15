@@ -108,7 +108,7 @@
 
     <div class="flex items-center gap-2">
       <Input value={deploymentId} readonly />
-      <Copy text={deploymentId} successMessage="Deployment id copied." />
+      <Copy text={deploymentId} />
     </div>
   </Card>
 

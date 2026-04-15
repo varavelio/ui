@@ -8,6 +8,7 @@ export { Card } from "./Card/index.js";
 export { Checkbox } from "./Checkbox/index.js";
 export { Collapsible } from "./Collapsible/index.js";
 export { Container } from "./Container/index.js";
+export { Copy } from "./Copy/index.ts";
 export { Dialog } from "./Dialog/index.js";
 export { Heading } from "./Heading/index.js";
 export { Input } from "./Input/index.js";
