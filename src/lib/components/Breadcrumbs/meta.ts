@@ -20,7 +20,7 @@ export const componentMeta = components([
       ),
       prop(
         "items",
-        "{ label; icon; href?; onClick?; disabled? }[]",
+        "{ label; icon?; href?; onClick?; disabled? }[]",
         "Ordered breadcrumb steps. Last step is always active; each item can render as link, button, or text.",
       ),
       prop(

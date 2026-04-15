@@ -13,7 +13,7 @@
     /**
      * Icon component rendered before the label.
      */
-    icon: Component;
+    icon?: Component;
 
     /**
      * Optional link destination. When provided, the step renders as an anchor.
@@ -99,7 +99,9 @@
               )}
               {...{ href: item.href }}
             >
-              <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {#if Icon}
+                <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {/if}
               <span>{item.label}</span>
             </a>
           {:else if asButton}
@@ -116,7 +118,9 @@
               onclick={item.onClick}
               type="button"
             >
-              <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {#if Icon}
+                <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {/if}
               <span>{item.label}</span>
             </button>
           {:else}
@@ -131,7 +135,9 @@
                 "cursor-default": !item.disabled,
               })}
             >
-              <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {#if Icon}
+                <Icon aria-hidden="true" class="size-4 shrink-0" />
+              {/if}
               <span>{item.label}</span>
             </span>
           {/if}

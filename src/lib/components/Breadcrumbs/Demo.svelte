@@ -13,7 +13,7 @@
 
   type BreadcrumbDemoItem = {
     label: string;
-    icon: Component;
+    icon?: Component;
     href?: string;
     onClick?: () => void;
     disabled?: boolean;
@@ -27,7 +27,7 @@
       href: "#workspace",
     },
     { label: "Modules", icon: Package, href: "#modules" },
-    { label: "Security", icon: ShieldCheck },
+    { label: "Security", href: "#security" },
   ];
 
   const buttonOnlyItems: BreadcrumbDemoItem[] = [
@@ -38,14 +38,13 @@
       icon: Settings2,
       onClick: () => {},
     },
-    { label: "Access Tokens", icon: ShieldCheck },
+    { label: "Access Tokens", onClick: () => {} },
   ];
 
   const mixedItems: BreadcrumbDemoItem[] = [
     { label: "Docs", icon: BookOpen, href: "#docs" },
     {
       label: "Settings",
-      icon: Settings2,
       onClick: () => {},
     },
     {
@@ -54,7 +53,7 @@
       onClick: () => {},
       disabled: true,
     },
-    { label: "Usage limits", icon: Package },
+    { label: "Usage limits" },
   ];
 
   const textOnlyItems: BreadcrumbDemoItem[] = [
