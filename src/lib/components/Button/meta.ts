@@ -12,6 +12,15 @@ export const componentMeta = components([
         "ClassValue",
         "Additional CSS classes to apply to the button element.",
       ),
+      prop("children", "Snippet", "Inner content of the button."),
+      prop("Icon", "Component", "Icon component rendered before the label."),
+      prop("icon", "Component", "Icon component rendered before the label."),
+      prop(
+        "iconRight",
+        "Component",
+        "Icon component rendered after the label.",
+      ),
+
       prop(
         "variant",
         '"solid" | "outline" | "ghost"',

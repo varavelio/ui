@@ -220,9 +220,8 @@
                   square
                   color="neutral"
                   {href}
-                >
-                  <Plus class="size-4" />
-                </Button>
+                  icon={Plus}
+                />
               </div>
               <span
                 class="font-mono text-[10px] font-medium text-content-muted uppercase"
@@ -241,9 +240,15 @@
       <Card class="grid grid-cols-1 divide-y divide-base-300">
         <!-- Standard Icon Compositions -->
         <div class="flex flex-wrap items-center justify-center gap-6 p-8">
-          <Button {active} {loading} {disabled} color="neutral" {href}>
-            <Plus class="size-4" />
-            <span>New Project</span>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            color="neutral"
+            {href}
+            icon={Plus}
+          >
+            New Project
           </Button>
           <Button
             {active}
@@ -252,9 +257,9 @@
             variant="outline"
             color="info"
             {href}
+            iconRight={Send}
           >
-            <span>Send Message</span>
-            <Send class="size-4" />
+            Send Message
           </Button>
           <Button
             {active}
@@ -264,9 +269,9 @@
             color="error"
             size="sm"
             {href}
+            icon={Trash2}
           >
-            <Trash2 class="size-4" />
-            <span>Delete Account</span>
+            Delete Account
           </Button>
           <Button
             {active}
@@ -275,9 +280,21 @@
             color="success"
             radius="full"
             {href}
+            iconRight={ArrowRight}
           >
-            <span>Get Started</span>
-            <ArrowRight class="size-4" />
+            Get Started
+          </Button>
+          <Button
+            {active}
+            {loading}
+            {disabled}
+            color="neutral"
+            variant="outline"
+            {href}
+            icon={Download}
+            iconRight={Check}
+          >
+            Dual Icons
           </Button>
           <Button
             {active}
@@ -287,9 +304,8 @@
             variant="outline"
             aria-label="Settings"
             {href}
-          >
-            <Settings class="size-4" />
-          </Button>
+            icon={Settings}
+          />
           <Button
             {active}
             {loading}
@@ -298,9 +314,8 @@
             variant="ghost"
             aria-label="Inbox"
             {href}
-          >
-            <Mail class="size-4" />
-          </Button>
+            icon={Mail}
+          />
           <Button
             {active}
             {loading}
@@ -310,22 +325,8 @@
             radius="full"
             aria-label="Download"
             {href}
-          >
-            <Download class="size-4" />
-          </Button>
-          <Button
-            {active}
-            {loading}
-            {disabled}
-            variant="outline"
-            square
-            color="success"
-            radius="sm"
-            aria-label="Complete"
-            {href}
-          >
-            <Check class="size-4" />
-          </Button>
+            icon={Download}
+          />
         </div>
       </Card>
     </div>

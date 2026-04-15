@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Loader } from "@lucide/svelte";
-  import type { Snippet } from "svelte";
+  import type { Component, Snippet } from "svelte";
   import type {
     HTMLAnchorAttributes,
     HTMLButtonAttributes,
@@ -13,6 +13,16 @@
      * Inner content of the button.
      */
     children?: Snippet;
+
+    /**
+     * Icon component rendered before the label.
+     */
+    icon?: Component;
+
+    /**
+     * Icon component rendered after the label.
+     */
+    iconRight?: Component;
 
     /**
      * Link destination. If provided, the component will render as an `<a>` element.
@@ -90,6 +100,8 @@
   let {
     class: className,
     children,
+    icon: Icon,
+    iconRight: IconRight,
     href,
     target,
     rel,
@@ -266,6 +278,14 @@
       }
     )}
   >
+    {#if Icon}
+      <Icon class="size-4 shrink-0" />
+    {/if}
+
     {@render children?.()}
+
+    {#if IconRight}
+      <IconRight class="size-4 shrink-0" />
+    {/if}
   </span>
 </svelte:element>
