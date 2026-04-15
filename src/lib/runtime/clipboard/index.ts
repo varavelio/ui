@@ -4,18 +4,6 @@ const DEFAULT_SUCCESS_MESSAGE = "Copied to clipboard.";
 const DEFAULT_ERROR_MESSAGE = "Could not copy to clipboard.";
 
 /**
- * Extended Window interface to support legacy IE clipboard access.
- */
-interface LegacyClipboardWindow extends Window {
-  clipboardData?: {
-    /**
-     * Sets data to the clipboard in a specific format.
-     */
-    setData: (format: string, text: string) => boolean;
-  };
-}
-
-/**
  * Options for clipboard copy operations.
  */
 export interface ClipboardCopyOptions {
@@ -47,17 +35,6 @@ function canUseClipboardApi(): boolean {
 }
 
 /**
- * Checks if legacy IE-specific clipboardData API is available.
- */
-function canUseLegacyClipboardData(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    typeof (window as LegacyClipboardWindow).clipboardData?.setData ===
-      "function"
-  );
-}
-
-/**
  * Checks if the document.execCommand fallback is available.
  */
 function canUseExecCommand(): boolean {
@@ -81,24 +58,6 @@ async function copyWithClipboardApi(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Attempts to copy text using the legacy IE clipboardData API.
- */
-function copyWithLegacyClipboardData(text: string): boolean {
-  if (!canUseLegacyClipboardData()) {
-    return false;
-  }
-
-  try {
-    return !!(window as LegacyClipboardWindow).clipboardData?.setData(
-      "Text",
-      text,
-    );
   } catch {
     return false;
   }
@@ -165,9 +124,7 @@ export const clipboard = {
     if (typeof window === "undefined" || typeof document === "undefined") {
       return false;
     }
-    return (
-      canUseClipboardApi() || canUseLegacyClipboardData() || canUseExecCommand()
-    );
+    return canUseClipboardApi() || canUseExecCommand();
   },
 
   /**
@@ -190,9 +147,7 @@ export const clipboard = {
     } = options;
 
     const didCopy =
-      (await copyWithClipboardApi(text)) ||
-      copyWithLegacyClipboardData(text) ||
-      copyWithExecCommand(text);
+      (await copyWithClipboardApi(text)) || copyWithExecCommand(text);
 
     if (!quiet) {
       if (didCopy) {
