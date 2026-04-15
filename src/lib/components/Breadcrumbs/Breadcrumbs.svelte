@@ -2,7 +2,7 @@
   import { ChevronRight } from "@lucide/svelte";
   import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { cn } from "../../helpers/cn.js";
+  import { cn } from "../../helpers/cn.ts";
 
   type BreadcrumbItem = {
     /**

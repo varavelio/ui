@@ -9,7 +9,7 @@
     UserRound,
   } from "@lucide/svelte";
   import type { Component } from "svelte";
-  import { Breadcrumb, Card, Label } from "$lib/components/index.js";
+  import { Breadcrumbs, Card, Label } from "$lib/components/index.js";
 
   type BreadcrumbDemoItem = {
     label: string;
@@ -106,7 +106,7 @@
 <div class="grid grid-cols-1 gap-4 desk:grid-cols-2">
   <Card class="space-y-2">
     <Label>Links Only</Label>
-    <Breadcrumb items={linkOnlyItems} />
+    <Breadcrumbs items={linkOnlyItems} />
     <p class="text-sm text-content-muted">
       All previous steps are links and the last step is static active text.
     </p>
@@ -114,7 +114,7 @@
 
   <Card class="space-y-2">
     <Label>Buttons Only</Label>
-    <Breadcrumb items={buttonOnlyItems} />
+    <Breadcrumbs items={buttonOnlyItems} />
     <p class="text-sm text-content-muted">
       Steps with
       <code class="rounded-sm bg-base-200 px-1.5 py-0.5 text-xs">onClick</code>
@@ -124,7 +124,7 @@
 
   <Card class="space-y-2">
     <Label>Mixed Types and Disabled Step</Label>
-    <Breadcrumb items={mixedItems} />
+    <Breadcrumbs items={mixedItems} />
     <p class="text-sm text-content-muted">
       A step can be a link, button, or text. Disabled steps become
       non-interactive.
@@ -134,7 +134,7 @@
   <Card class="space-y-2">
     <Label>Text-Only Steps</Label>
 
-    <Breadcrumb items={textOnlyItems} />
+    <Breadcrumbs items={textOnlyItems} />
     <p class="text-sm text-content-muted">
       Items without
       <code class="rounded-sm bg-base-200 px-1.5 py-0.5 text-xs">href</code>
@@ -146,7 +146,7 @@
 
   <Card class="space-y-2">
     <Label>Disabled Variants</Label>
-    <Breadcrumb items={disabledVariantsItems} />
+    <Breadcrumbs items={disabledVariantsItems} />
     <p class="text-sm text-content-muted">
       Disabled behavior is consistent for link, button, and text steps.
     </p>
@@ -154,7 +154,7 @@
 
   <Card class="space-y-2">
     <Label>Horizontal Overflow</Label>
-    <Breadcrumb items={overflowItems} />
+    <Breadcrumbs items={overflowItems} />
     <p class="text-sm text-content-muted">
       Overflow uses native horizontal scroll and starts from the right edge.
     </p>

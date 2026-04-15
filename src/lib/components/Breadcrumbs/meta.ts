@@ -3,7 +3,7 @@ import Demo from "./Demo.svelte";
 
 export const componentMeta = components([
   {
-    name: "Breadcrumb",
+    name: "Breadcrumbs",
     demo: Demo,
     category: "Core Building Blocks",
     props: [
