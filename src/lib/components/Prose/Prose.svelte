@@ -28,7 +28,7 @@
     "prose text-content dark:prose-invert",
     "prose-headings:font-sans prose-headings:font-semibold prose-headings:text-balance prose-headings:text-content",
     "prose-p:text-content prose-li:text-content prose-strong:text-content prose-code:text-content",
-    "prose-a:text-info prose-a:hover:text-info/80",
+    "prose-a:font-medium prose-a:text-current prose-a:underline prose-a:underline-offset-4 prose-a:decoration-base-400 prose-a:transition-colors prose-a:duration-150 prose-a:hover:decoration-content",
     "prose-pre:border prose-pre:border-base-400 prose-pre:bg-base-200 prose-pre:text-content",
     "prose-th:text-content prose-td:text-content",
     "prose-blockquote:text-content-muted prose-blockquote:border-base-400 prose-hr:border-base-400",
