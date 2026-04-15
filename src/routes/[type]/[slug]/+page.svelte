@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import Copy from "$lib/components/Copy/Copy.svelte";
   import { Alert, Badge, Card } from "$lib/components/index.js";
   import {
     componentEntries,
@@ -56,11 +57,14 @@
           </div>
         </div>
 
-        <code
-          class="mt-2 block overflow-x-auto rounded-md border bg-base-100 px-3 py-3 text-sm text-content"
-        >
-          {currentComponent.importCode}
-        </code>
+        <div class="mt-2 flex justify-end items-center space-x-2">
+          <code
+            class="block overflow-x-auto rounded-md border bg-base-100 px-4 py-2 text-sm text-content"
+          >
+            {currentComponent.importCode}
+          </code>
+          <Copy text={currentComponent.importCode} />
+        </div>
       </div>
     </div>
 
@@ -160,11 +164,14 @@
           </div>
         </div>
 
-        <code
-          class="mt-2 block overflow-x-auto rounded-md border bg-base-100 px-3 py-3 text-sm text-content"
-        >
-          {currentRuntime.importCode}
-        </code>
+        <div class="mt-2 flex justify-end items-center space-x-2">
+          <code
+            class="block overflow-x-auto rounded-md border bg-base-100 px-4 py-2 text-sm text-content"
+          >
+            {currentRuntime.importCode}
+          </code>
+          <Copy text={currentRuntime.importCode} />
+        </div>
       </div>
     </div>
 
