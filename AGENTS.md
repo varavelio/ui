@@ -63,6 +63,7 @@ When updating this document, do so with the context of the entire document in mi
   - `blocks/`: Larger, pre-composed UI sections or patterns.
   - `layouts/`: Ready to use layout components to use in various scenarios.
   - `fonts/`: Self-hosted Geist font family.
+  - `runtime/`: App-level browser helpers such as `theme`, `dialog`, `toast`, and `clipboard`. Prefer these runtime singletons over ad-hoc browser API access inside components.
   - `theme.css`: The central Tailwind 4 theme definition, including colors, typography, and base styles.
 
 ### `src/routes/` (Documentation / Showcase)
@@ -114,3 +115,4 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Semantic Tones**: The theme does not expose a `primary` token; use semantic tones (`info`, `success`, `warning`, `error/danger`) for colored UI states.
 - **Theme Components**: Any theme selector/toggle should consume `src/lib/runtime/theme/index.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
 - **Theme Reactivity**: For UI sync with OS changes and cross-tab updates, prefer `theme.subscribe()` (backed by the global `varavel-theme-change` event from `static/theme-init.js`) rather than ad-hoc listeners inside components.
+- **Clipboard Interactions**: Prefer `src/lib/runtime/clipboard/index.ts` for copy behavior so browser support handling and toast feedback stay standardized. The `Copy` component should remain an opinionated icon-only wrapper around that runtime.
