@@ -2,6 +2,7 @@
   import {
     Bell,
     CircleAlert,
+    Clipboard,
     Component,
     Info,
     Layers3,
@@ -43,6 +44,7 @@
   } as const satisfies Record<ComponentCategory, SvelteComponent>;
 
   const runtimeCategoryIcons = {
+    "Clipboard Management": Clipboard,
     "Theme Management": Info,
     "Dialog Management": CircleAlert,
     "Toast Management": Bell,

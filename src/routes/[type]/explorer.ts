@@ -4,6 +4,7 @@ import {
   catalog,
   componentCategories,
 } from "$lib/catalog.js";
+import ClipboardRuntimeDemo from "./runtime/ClipboardRuntimeDemo.svelte";
 import DialogRuntimeDemo from "./runtime/DialogRuntimeDemo.svelte";
 import ThemeRuntimeDemo from "./runtime/ThemeRuntimeDemo.svelte";
 import ToastRuntimeDemo from "./runtime/ToastRuntimeDemo.svelte";
@@ -42,6 +43,7 @@ export type { ComponentCategory };
 export { componentCategories };
 
 export const runtimeCategories = [
+  "Clipboard Management",
   "Theme Management",
   "Dialog Management",
   "Toast Management",
@@ -85,6 +87,112 @@ export type RuntimeEntry = {
 };
 
 export const runtimeEntries: RuntimeEntry[] = [
+  {
+    name: "clipboard",
+    slug: "clipboard",
+    category: "Clipboard Management",
+    summary:
+      "Copy plain text through one runtime API that handles browser support, success/error outcomes, and optional toast feedback.",
+    importCode: 'import { clipboard } from "@varavel/ui/runtime";',
+    methods: [
+      {
+        name: "clipboard.isSupported",
+        signature: "clipboard.isSupported(): boolean",
+        returns: "boolean",
+        description:
+          "Returns whether the current browser exposes `navigator.clipboard.writeText(...)`.",
+      },
+      {
+        name: "clipboard.copy",
+        signature:
+          "clipboard.copy(text: string, options?: ClipboardCopyOptions): Promise<boolean>",
+        returns: "Promise<boolean>",
+        description:
+          "Copies plain text to the browser clipboard. Resolves to `true` on success and `false` when the browser rejects the request or the Clipboard API is unavailable.",
+        options: [
+          {
+            name: "text",
+            type: "string",
+            required: true,
+            description: "Plain text written to the clipboard.",
+          },
+          {
+            name: "quiet",
+            type: "boolean",
+            defaultValue: "false",
+            description:
+              "Suppresses toast feedback and keeps the call silent beyond the returned boolean.",
+          },
+          {
+            name: "successMessage",
+            type: "string",
+            description:
+              "Custom success toast message used when the copy succeeds.",
+          },
+          {
+            name: "errorMessage",
+            type: "string",
+            description:
+              "Custom error toast message used when the browser rejects the copy.",
+          },
+        ],
+      },
+    ],
+    snippets: [
+      {
+        title: "1. Copy plain text",
+        description:
+          "The smallest direct call for IDs, tokens, or any other machine value.",
+        language: "ts",
+        code: [
+          'import { clipboard } from "@varavel/ui/runtime";',
+          "",
+          'const ok = await clipboard.copy("dep_01JSQ53JVH2G6B87QR4P4X2F1N");',
+          "",
+          "if (!ok) {",
+          '  console.error("Copy failed");',
+          "}",
+        ].join("\n"),
+      },
+      {
+        title: "2. Quiet copy",
+        description:
+          "Use this when local UI feedback is enough and a global toast would be redundant.",
+        language: "ts",
+        code: [
+          'import { clipboard } from "@varavel/ui/runtime";',
+          "",
+          'await clipboard.copy("whsec_5X2E9N1Q4M7R8T3A6C2Z1B0L", {',
+          "  quiet: true,",
+          "});",
+        ].join("\n"),
+      },
+      {
+        title: "3. Compose with Copy",
+        description:
+          "The `Copy` component builds on the same runtime and adds opinionated local feedback.",
+        language: "svelte",
+        code: [
+          '<script lang="ts">',
+          '  import { Copy, Input } from "@varavel/ui";',
+          "",
+          '  const apiKey = "vrvl_live_8N9S2Q1Z7X4K5M3P";',
+          "</script>",
+          "",
+          '<div class="flex items-center gap-2">',
+          "  <Input value={apiKey} readonly />",
+          '  <Copy text={apiKey} successMessage="API key copied." />',
+          "</div>",
+        ].join("\n"),
+      },
+    ],
+    notes: [
+      "The clipboard runtime is intentionally narrow: it standardizes browser copy behavior and feedback without turning clipboard access into a large abstraction.",
+      "`clipboard.copy(...)` returns a boolean instead of throwing so UI components can handle success and failure without noisy try/catch blocks.",
+      "By default, copy operations reuse the global toast runtime. Pass `quiet: true` when local UI feedback is already enough.",
+    ],
+    demo: ClipboardRuntimeDemo,
+  },
   {
     name: "theme",
     slug: "theme",
