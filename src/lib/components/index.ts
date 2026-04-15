@@ -21,6 +21,7 @@ export { Prose } from "./Prose/index.js";
 export { RadioGroup } from "./RadioGroup/index.js";
 export { Select } from "./Select/index.js";
 export { Separator } from "./Separator/index.js";
+export { Skeleton } from "./Skeleton/index.ts";
 export { Switch } from "./Switch/index.js";
 export { Tabs } from "./Tabs/index.js";
 export { Textarea } from "./Textarea/index.js";
