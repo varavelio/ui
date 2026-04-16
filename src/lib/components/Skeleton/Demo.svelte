@@ -6,7 +6,7 @@
 
 <div class="space-y-12">
   <section class="space-y-4">
-    <Heading level={3}>Shapes</Heading>
+    <Heading level="3">Shapes</Heading>
     <p>
       By default, skeletons does not have size or shape defined. You can
       customize them using Tailwind CSS classes.
@@ -36,7 +36,7 @@
   </section>
 
   <section class="space-y-4">
-    <Heading level={3}>Composition</Heading>
+    <Heading level="3">Composition</Heading>
     <p>Mix and match skeletons to create complex loading states.</p>
     <Card class="max-w-sm p-4">
       <div class="flex items-center gap-4">

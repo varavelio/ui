@@ -4,7 +4,7 @@
 
   interface Props extends HTMLAttributes<HTMLHeadingElement> {
     /** The HTML heading level (h1-h6) */
-    level?: 1 | 2 | 3 | 4 | 5 | 6;
+    level?: "1" | "2" | "3" | "4" | "5" | "6";
     /** The visual size preset */
     size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
     /** Whether to apply a muted text color */
@@ -16,7 +16,7 @@
   }
 
   let {
-    level = 1,
+    level = "1",
     size = "xl",
     muted = false,
     class: className,

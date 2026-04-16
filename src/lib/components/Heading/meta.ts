@@ -10,9 +10,9 @@ export const componentMeta = components([
       prop("class", "string", "Additional CSS classes to apply."),
       prop(
         "level",
-        "1 | 2 | 3 | 4 | 5 | 6",
+        '"1" | "2" | "3" | "4" | "5" | "6"',
         "The HTML heading level (h1-h6).",
-        "1",
+        '"1"',
       ),
       prop(
         "size",

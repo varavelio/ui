@@ -92,7 +92,7 @@
 
     <div class="flex flex-col items-center gap-2 text-center">
       {#if title}
-        <Heading level={2} size="lg" class="leading-tight">{title}</Heading>
+        <Heading level="2" size="lg" class="leading-tight">{title}</Heading>
       {/if}
       {#if text}
         <p

@@ -18,7 +18,7 @@
 
 <div class="flex flex-col gap-12">
   <section class="flex flex-col gap-4">
-    <Heading level={3} size="md">
+    <Heading level="3" size="md">
       Default (3 Columns Desktop, 1 Column Mobile, Gap 4)
     </Heading>
     <Masonry>
@@ -33,7 +33,7 @@
   </section>
 
   <section class="flex flex-col gap-4">
-    <Heading level={3} size="md">High Density (6 Columns, Gap 2)</Heading>
+    <Heading level="3" size="md">High Density (6 Columns, Gap 2)</Heading>
     <Masonry cols="2" deskCols="6" gap="2">
       {#each images as item}
         <Card class={item.color}>
@@ -46,7 +46,7 @@
   </section>
 
   <section class="flex flex-col gap-4">
-    <Heading level={3} size="md">Wide Spacing (2 Columns, Gap 8)</Heading>
+    <Heading level="3" size="md">Wide Spacing (2 Columns, Gap 8)</Heading>
     <Masonry cols="1" deskCols="2" gap="8">
       {#each images as item}
         <Card class={item.color}>
