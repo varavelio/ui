@@ -9,13 +9,13 @@ export const componentMeta = components([
     props: [
       prop(
         "cols",
-        '"1" | "2" | "3" | "4" | "5" | "6"',
+        '"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12"',
         "Columns on mobile viewport.",
         '"1"',
       ),
       prop(
         "deskCols",
-        '"1" | "2" | "3" | "4" | "5" | "6"',
+        '"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12"',
         "Columns on desktop viewport (1024px+).",
         '"3"',
       ),
