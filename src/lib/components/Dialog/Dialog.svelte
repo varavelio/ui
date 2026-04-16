@@ -92,7 +92,7 @@
         <BitsDialog.Close
           class={[
             "focus-visible:outline-2 focus-visible:outline-content",
-            "absolute right-4 top-4 z-10 rounded-md p-1 text-content-muted",
+            "absolute right-4 top-4 z-10 rounded-md p-2 text-content-muted",
             "transition-colors duration-75",
             "hover:bg-base-300 hover:text-content",
             "active:scale-[0.99] active:transition-none"
@@ -106,7 +106,7 @@
       {#if title || description}
         <div
           class={{
-            "px-4 pt-4 space-y-2 shrink-0": true,
+            "px-4 pt-4 shrink-0": true,
             "pb-4": !children
           }}
         >
