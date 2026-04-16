@@ -32,6 +32,7 @@
         "[typescript]": {
           "editor.defaultFormatter": "biomejs.biome"
         },
+        "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
         "css.validate": false,
         "svelte.enable-ts-plugin": true,
         "[svelte]": {
