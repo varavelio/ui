@@ -100,6 +100,7 @@ Generates a Svelte Playground link with the provided code. After completing the 
 ## Coding Conventions
 
 - **Component Exporting**: Export components via `index.ts` in their respective folders, and then again in the main `src/lib/components/index.ts`.
+- **Compound Components**: When a component family exposes namespaced parts (for example `Bento.Grid` and `Bento.Item`), keep the namespace export in the folder `index.ts` and make the parent layout own shared structure such as column count and gap while children own span and surface props.
 - **Component Demos**: Keep showcase demos next to their components when possible, but wire explorer rendering through `meta.ts` via each entry's optional `demo` field.
 - **Library Exports**: Keep package export entry points aligned with `package.json` (`.`, `./blocks`, `./theme.css`) when adding new public modules.
 - **Props**: Use `$props()` for component properties. Prefer explicit types for props.
@@ -110,6 +111,7 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Text Links**: Prefer the `Link` component for inline/navigation anchors so external-link safety defaults (`target`/`rel`) and disabled behavior stay consistent across the library. Avoid global `a { ... }` base styles that can leak into button-like anchors.
 - **Rich Text Surfaces**: When introducing prose/markdown wrappers, rely on the Typography plugin via `prose` utilities and keep heading scale/weight/tracking aligned with the `Heading` component for visual consistency.
 - **Conditional Classes**: ALWAYS use the `cn()` helper with an object for conditional variants or sizes (e.g., `cn("base", { "variant-a": cond }, className)`). Logic MUST stay local to the `class={cn(...)}` call; AVOID external constants for styles.
+- **Inline Prop Types**: Prefer declaring simple literal unions directly inside the `Props` interface (for example `size?: "sm" | "md" | "lg"`) instead of introducing separate top-level aliases. Extract a named type only when it is genuinely reused, materially improves readability, or is otherwise necessary.
 - **Class Order Priority**: Follow this strict order inside `cn()` to ensure correct CSS overrides: `1. Base Styles` -> `2. Logic/Conditional Objects` -> `3. User-defined classes` (e.g., `className`). Components MUST expose a `class` (`className` internally) prop to allow consumer overrides whenever possible.
 - **Scroll Areas**: Always prefer the default browser scrollbars instead of the `bits-ui` ScrollArea component to maximize compatibility and reduce unwanted behavior.
 - **Semantic Tones**: The theme does not expose a `primary` token; use semantic tones (`info`, `success`, `warning`, `error/danger`) for colored UI states.
