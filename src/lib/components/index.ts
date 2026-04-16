@@ -15,6 +15,7 @@ export { Input } from "./Input/index.js";
 export { Kbd } from "./Kbd/index.js";
 export { Label } from "./Label/index.js";
 export { Link } from "./Link/index.js";
+export { Masonry } from "./Masonry/index.js";
 export { Menu } from "./Menu/index.ts";
 export { Popover } from "./Popover/index.js";
 export { Progress } from "./Progress/index.js";
