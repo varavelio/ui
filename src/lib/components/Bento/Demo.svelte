@@ -132,7 +132,7 @@
 
     <Bento.Grid cols="2" gap="4">
       <Bento.Item deskCols="3">
-        <Card class="h-full" color="default">
+        <Card class="h-full" bg="200">
           <div class="space-y-2">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Mobile pair
@@ -144,7 +144,7 @@
       </Bento.Item>
 
       <Bento.Item deskCols="3">
-        <Card class="h-full" color="default">
+        <Card class="h-full" bg="200">
           <div class="space-y-2">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Mobile pair
@@ -156,7 +156,7 @@
       </Bento.Item>
 
       <Bento.Item cols="2" deskCols="6" deskRows="2">
-        <Card class="flex h-full flex-col justify-between gap-4" color="muted">
+        <Card class="flex h-full flex-col justify-between gap-4" bg="300">
           <div class="space-y-2">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Full-width mobile panel
@@ -175,7 +175,7 @@
       </Bento.Item>
 
       <Bento.Item deskCols="6">
-        <Card class="h-full" color="default">
+        <Card class="h-full" bg="200">
           <div class="space-y-3">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Notes
@@ -202,7 +202,7 @@
 
     <Bento.Grid gap="6">
       <Bento.Item deskCols="8" deskRows="2">
-        <Card class="flex h-full flex-col gap-6" color="muted">
+        <Card class="flex h-full flex-col gap-6" bg="300">
           <div class="space-y-2">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Feature story
@@ -239,7 +239,7 @@
       </Bento.Item>
 
       <Bento.Item deskCols="4" deskRows="1">
-        <Card class="h-full" color="default">
+        <Card class="h-full" bg="200">
           <div class="space-y-3">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Side note
@@ -252,7 +252,7 @@
       </Bento.Item>
 
       <Bento.Item deskCols="4" deskRows="1">
-        <Card class="h-full" color="default">
+        <Card class="h-full" bg="200">
           <div class="space-y-3">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Compact block
@@ -263,7 +263,7 @@
       </Bento.Item>
 
       <Bento.Item deskCols="8" deskRows="1">
-        <Card class="h-full" color="muted">
+        <Card class="h-full" bg="300">
           <div class="space-y-3">
             <p class="text-xs uppercase tracking-[0.2em] text-content-muted">
               Supporting band

@@ -19,10 +19,10 @@ export const componentMeta = components([
         '"md"',
       ),
       prop(
-        "color",
-        '"default" | "muted" | "contrast"',
-        "Surface color variant.",
-        '"default"',
+        "bg",
+        '"100" | "200" | "300" | "contrast"',
+        "Surface background preset.",
+        '"200"',
       ),
       prop(
         "radius",

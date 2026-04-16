@@ -16,10 +16,10 @@
     padding?: "none" | "sm" | "md" | "lg";
 
     /**
-     * Surface color variant.
-     * @default "default"
+     * Surface background preset.
+     * @default "200"
      */
-    color?: "default" | "muted" | "contrast";
+    bg?: "100" | "200" | "300" | "contrast";
 
     /**
      * Corner radius preset.
@@ -44,7 +44,7 @@
     class: className,
     children,
     padding = "md",
-    color = "default",
+    bg = "200",
     radius = "lg",
     shadow = "sm",
     bordered = true,
@@ -64,10 +64,11 @@
       "p-5": padding === "md",
       "p-8": padding === "lg",
 
-      // Color variants
-      "bg-base-200 text-content": color === "default",
-      "bg-base-300 text-content": color === "muted",
-      "bg-content text-base-100": color === "contrast",
+      // Background variants
+      "bg-base-100 text-content": bg === "100",
+      "bg-base-200 text-content": bg === "200",
+      "bg-base-300 text-content": bg === "300",
+      "bg-content text-base-100": bg === "contrast",
 
       // Radius presets
       "rounded-none": radius === "none",

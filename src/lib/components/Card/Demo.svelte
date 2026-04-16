@@ -4,17 +4,17 @@
 
 <div class="space-y-8">
   <div class="space-y-3">
-    <Label>Colors & Surfaces</Label>
-    <div class="grid gap-6 desk:grid-cols-3">
+    <Label>Background Presets</Label>
+    <div class="grid gap-6 desk:grid-cols-4">
       <div class="space-y-3">
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
         >
-          Default
+          100
         </span>
-        <Card color="default" class="h-full">
+        <Card bg="100" class="h-full">
           <p class="text-sm">
-            Standard container for most UI elements and sections.
+            Clean canvas surface for low-emphasis containers.
           </p>
         </Card>
       </div>
@@ -22,11 +22,21 @@
         <span
           class="text-xs font-medium uppercase tracking-wider text-content-muted"
         >
-          Muted
+          200
         </span>
-        <Card color="muted" class="h-full">
+        <Card bg="200" class="h-full">
+          <p class="text-sm">Standard card surface for most UI sections.</p>
+        </Card>
+      </div>
+      <div class="space-y-3">
+        <span
+          class="text-xs font-medium uppercase tracking-wider text-content-muted"
+        >
+          300
+        </span>
+        <Card bg="300" class="h-full">
           <p class="text-sm">
-            Subtle background for nested content or less emphasis.
+            Muted surface for nested content and grouped blocks.
           </p>
         </Card>
       </div>
@@ -36,7 +46,7 @@
         >
           Contrast
         </span>
-        <Card color="contrast" class="h-full">
+        <Card bg="contrast" class="h-full">
           <p class="text-sm">
             High-impact surface for hero sections or priority data.
           </p>

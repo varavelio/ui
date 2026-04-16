@@ -64,7 +64,7 @@
     <p class="text-sm text-content-muted">{statusDescription}</p>
   </Card>
 
-  <Card color="muted" class="space-y-6">
+  <Card bg="300" class="space-y-6">
     <div class="space-y-1">
       <h4
         class="text-sm font-semibold uppercase tracking-[0.14em] text-content-muted"

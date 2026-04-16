@@ -93,7 +93,7 @@
     </div>
   </Card>
 
-  <Card color="muted" class="space-y-4">
+  <Card bg="300" class="space-y-4">
     <div>
       <h4
         class="text-sm font-semibold uppercase tracking-[0.14em] text-content-muted"
@@ -112,7 +112,7 @@
     </div>
   </Card>
 
-  <Card color="muted" class="space-y-3">
+  <Card bg="300" class="space-y-3">
     <div>
       <h4
         class="text-sm font-semibold uppercase tracking-[0.14em] text-content-muted"

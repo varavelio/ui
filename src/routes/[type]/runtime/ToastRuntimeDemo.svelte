@@ -173,7 +173,7 @@
     </div>
   </Card>
 
-  <Card color="muted" class="space-y-4">
+  <Card bg="300" class="space-y-4">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div>
         <h4
