@@ -131,7 +131,7 @@
 {/snippet}
 
 {#snippet customTrigger()}
-  <Avatar fallback="JD" />
+  <Avatar fallback="JD" interactive />
 {/snippet}
 
 <Card class="flex flex-col gap-8">

@@ -87,7 +87,7 @@
         {/snippet}
         <Avatar
           src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/avatar-dark.svg"
-          class="cursor-help"
+          interactive
         />
       </Tooltip>
     </div>
