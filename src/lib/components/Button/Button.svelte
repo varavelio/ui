@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Loader } from "@lucide/svelte";
+  import { LoaderCircle } from "@lucide/svelte";
   import type { Component, Snippet } from "svelte";
   import type {
     HTMLAnchorAttributes,
@@ -262,7 +262,7 @@
       class="absolute inset-0 flex items-center justify-center"
       in:fade={{ duration: 100 }}
     >
-      <Loader class="size-4 animate-spin" />
+      <LoaderCircle class="size-4 animate-spin" />
     </span>
   {/if}
 

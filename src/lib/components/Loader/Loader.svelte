@@ -1,6 +1,5 @@
 <script lang="ts">
-  // biome-ignore lint/correctness/noUnusedImports: Used as the wrapped icon component in Svelte markup.
-  import { Loader as LoaderIcon } from "@lucide/svelte";
+  import { LoaderCircle } from "@lucide/svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
@@ -20,7 +19,7 @@
   let { class: className, size = "md" }: Props = $props();
 </script>
 
-<LoaderIcon
+<LoaderCircle
   aria-hidden="true"
   class={cn(
     "animate-spin shrink-0",
