@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Copy from "$lib/components/Copy/Copy.svelte";
-  import { Alert, Badge, Card } from "$lib/components/index.js";
+  import { Alert, Badge, Card, Table } from "$lib/components/index.js";
   import {
     componentEntries,
     isExplorerType,
@@ -92,40 +92,40 @@
         <h3 class="text-2xl font-semibold tracking-tight">Props</h3>
       </div>
 
-      <Card padding="none">
+      <Card padding="none" class="overflow-hidden">
         {#if currentComponent.props.length}
-          <table class="w-full text-left text-sm">
-            <thead class="bg-base-200 text-content-muted">
-              <tr>
-                <th class="px-5 py-3 font-medium">Name</th>
-                <th class="px-5 py-3 font-medium">Type</th>
-                <th class="px-5 py-3 font-medium">Default</th>
-                <th class="px-5 py-3 font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table.Root>
+            <Table.Header>
+              <Table.Row>
+                <Table.Head>Name</Table.Head>
+                <Table.Head>Type</Table.Head>
+                <Table.Head>Default</Table.Head>
+                <Table.Head>Description</Table.Head>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
               {#each currentComponent.props as prop (prop.name)}
-                <tr class="border-t align-top">
-                  <td class="px-5 py-3 font-medium text-content">
+                <Table.Row class="align-top">
+                  <Table.Cell class="font-medium text-content">
                     {prop.name}
-                  </td>
-                  <td class="px-5 py-3">
+                  </Table.Cell>
+                  <Table.Cell>
                     <code
                       class="rounded border bg-base-200 px-1.5 py-0.5 text-xs text-content"
                     >
                       {prop.type}
                     </code>
-                  </td>
-                  <td class="px-5 py-3 text-content-muted">
+                  </Table.Cell>
+                  <Table.Cell class="text-content-muted">
                     {prop.defaultValue ?? "-"}
-                  </td>
-                  <td class="px-5 py-3 text-content-muted">
+                  </Table.Cell>
+                  <Table.Cell class="text-content-muted">
                     {prop.description}
-                  </td>
-                </tr>
+                  </Table.Cell>
+                </Table.Row>
               {/each}
-            </tbody>
-          </table>
+            </Table.Body>
+          </Table.Root>
         {:else}
           <div class="p-5">
             <Alert
@@ -190,37 +190,39 @@
         <h3 class="text-2xl font-semibold tracking-tight">Methods</h3>
       </div>
 
-      <Card padding="none">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-base-200 text-content-muted">
-            <tr>
-              <th class="px-5 py-3 font-medium">Method</th>
-              <th class="px-5 py-3 font-medium">Signature</th>
-              <th class="px-5 py-3 font-medium">Returns</th>
-              <th class="px-5 py-3 font-medium">Description</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Card padding="none" class="overflow-hidden">
+        <Table.Root>
+          <Table.Header>
+            <Table.Row>
+              <Table.Head>Method</Table.Head>
+              <Table.Head>Signature</Table.Head>
+              <Table.Head>Returns</Table.Head>
+              <Table.Head>Description</Table.Head>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {#each currentRuntime.methods as method (method.name)}
-              <tr class="border-t align-top">
-                <td class="px-5 py-3 font-medium text-content">
+              <Table.Row class="align-top">
+                <Table.Cell class="font-medium text-content">
                   {method.name}
-                </td>
-                <td class="px-5 py-3">
+                </Table.Cell>
+                <Table.Cell>
                   <code
                     class="rounded border bg-base-200 px-1.5 py-0.5 text-xs text-content"
                   >
                     {method.signature}
                   </code>
-                </td>
-                <td class="px-5 py-3 text-content-muted">{method.returns}</td>
-                <td class="px-5 py-3 text-content-muted">
+                </Table.Cell>
+                <Table.Cell class="text-content-muted">
+                  {method.returns}
+                </Table.Cell>
+                <Table.Cell class="text-content-muted">
                   {method.description}
-                </td>
-              </tr>
+                </Table.Cell>
+              </Table.Row>
             {/each}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table.Root>
       </Card>
     </section>
 
@@ -233,43 +235,43 @@
             </h3>
           </div>
 
-          <Card padding="none">
-            <table class="w-full text-left text-sm">
-              <thead class="bg-base-200 text-content-muted">
-                <tr>
-                  <th class="px-5 py-3 font-medium">Option</th>
-                  <th class="px-5 py-3 font-medium">Type</th>
-                  <th class="px-5 py-3 font-medium">Required</th>
-                  <th class="px-5 py-3 font-medium">Default</th>
-                  <th class="px-5 py-3 font-medium">Description</th>
-                </tr>
-              </thead>
-              <tbody>
+          <Card padding="none" class="overflow-hidden">
+            <Table.Root>
+              <Table.Header>
+                <Table.Row>
+                  <Table.Head>Option</Table.Head>
+                  <Table.Head>Type</Table.Head>
+                  <Table.Head>Required</Table.Head>
+                  <Table.Head>Default</Table.Head>
+                  <Table.Head>Description</Table.Head>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
                 {#each method.options as option (`${method.name}-${option.name}`)}
-                  <tr class="border-t align-top">
-                    <td class="px-5 py-3 font-medium text-content">
+                  <Table.Row class="align-top">
+                    <Table.Cell class="font-medium text-content">
                       {option.name}
-                    </td>
-                    <td class="px-5 py-3">
+                    </Table.Cell>
+                    <Table.Cell>
                       <code
                         class="rounded border bg-base-200 px-1.5 py-0.5 text-xs text-content"
                       >
                         {option.type}
                       </code>
-                    </td>
-                    <td class="px-5 py-3 text-content-muted">
+                    </Table.Cell>
+                    <Table.Cell class="text-content-muted">
                       {option.required ? "Yes" : "No"}
-                    </td>
-                    <td class="px-5 py-3 text-content-muted">
+                    </Table.Cell>
+                    <Table.Cell class="text-content-muted">
                       {option.defaultValue ?? "-"}
-                    </td>
-                    <td class="px-5 py-3 text-content-muted">
+                    </Table.Cell>
+                    <Table.Cell class="text-content-muted">
                       {option.description}
-                    </td>
-                  </tr>
+                    </Table.Cell>
+                  </Table.Row>
                 {/each}
-              </tbody>
-            </table>
+              </Table.Body>
+            </Table.Root>
           </Card>
         </section>
       {/if}
