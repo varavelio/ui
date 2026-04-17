@@ -85,7 +85,7 @@
   let resolvedId = $derived(id ?? `${uid}-switch`);
 </script>
 
-<div class={cn("flex items-center gap-3", className)}>
+<div class={cn("flex items-start gap-3", className)}>
   <BitsSwitch.Root
     {disabled}
     {required}
@@ -95,7 +95,7 @@
     id={resolvedId}
     class={cn(
       // Base layout & surface
-      "inline-flex shrink-0 items-center rounded-full border cursor-pointer",
+      "inline-flex shrink-0 items-center rounded-full border cursor-pointer mt-0.5",
       // Transition
       "transition-[background-color,border-color] duration-200",
       // Focus state
