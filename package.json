@@ -48,8 +48,14 @@
       "svelte": "./dist/layouts/index.js",
       "default": "./dist/layouts/index.js"
     },
+    "./brand": {
+      "types": "./dist/brand/index.d.ts",
+      "svelte": "./dist/brand/index.js",
+      "default": "./dist/brand/index.js"
+    },
     "./runtime": {
       "types": "./dist/runtime/index.d.ts",
+      "svelte": "./dist/runtime/index.js",
       "default": "./dist/runtime/index.js"
     },
     "./theme.css": "./dist/theme.css"
