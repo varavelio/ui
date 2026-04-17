@@ -56,6 +56,26 @@
   </div>
 
   <div class="space-y-3">
+    <Label>Interactivity</Label>
+    <Card class="flex flex-wrap items-center gap-6 p-6">
+      <div class="flex flex-col items-center gap-2">
+        <Avatar
+          alt="Interactive Avatar"
+          fallback="IA"
+          interactive
+          size="lg"
+          tone="contrast"
+        />
+        <span class="text-xs text-content-muted">Interactive</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <Avatar alt="Non-interactive" fallback="NI" size="lg" />
+        <span class="text-xs text-content-muted">Static (Default)</span>
+      </div>
+    </Card>
+  </div>
+
+  <div class="space-y-3">
     <Label>Images & Fallbacks</Label>
     <Card class="flex flex-wrap items-center gap-6 p-6">
       <div class="flex flex-col items-center gap-2">

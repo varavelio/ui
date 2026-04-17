@@ -35,6 +35,12 @@ export const componentMeta = components([
         "Whether to show a border around the avatar.",
         "true",
       ),
+      prop(
+        "interactive",
+        "boolean",
+        "Whether the avatar is interactive with a click animation.",
+        "false",
+      ),
     ],
   },
 ]);

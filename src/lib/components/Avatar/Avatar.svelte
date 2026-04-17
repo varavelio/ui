@@ -4,28 +4,6 @@
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
-  const avatarSizes = {
-    sm: "size-8 text-xs",
-    md: "size-10 text-sm",
-    lg: "size-12 text-base",
-    xl: "size-16 text-lg",
-  } as const;
-
-  const avatarTones = {
-    neutral: "border-base-400 bg-base-300 text-content-muted",
-    contrast: "border-content bg-content text-base-100",
-  } as const;
-
-  /**
-   * Visual size presets for the avatar.
-   */
-  type AvatarSize = keyof typeof avatarSizes;
-
-  /**
-   * Surface and text tone presets.
-   */
-  type AvatarTone = keyof typeof avatarTones;
-
   interface Props {
     /**
      * Additional CSS classes to apply to the avatar root element.
@@ -67,14 +45,14 @@
      *
      * @default "md"
      */
-    size?: AvatarSize;
+    size?: "sm" | "md" | "lg" | "xl";
 
     /**
      * Surface and text tone of the avatar.
      *
      * @default "neutral"
      */
-    tone?: AvatarTone;
+    tone?: "neutral" | "contrast";
 
     /**
      * Whether to show a border around the avatar.
@@ -82,6 +60,14 @@
      * @default true
      */
     bordered?: boolean;
+
+    /**
+     * Whether the avatar is interactive.
+     * If true, it adds a pointer cursor and a click animation (1px down).
+     *
+     * @default false
+     */
+    interactive?: boolean;
   }
 
   let {
@@ -94,6 +80,7 @@
     size = "md",
     tone = "neutral",
     bordered = true,
+    interactive = false,
   }: Props = $props();
 
   /**
@@ -120,9 +107,24 @@
   aria-label={alt || fallback || initials}
   class={cn(
     "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border font-medium uppercase",
-    avatarSizes[size],
-    avatarTones[tone],
-    bordered ? "" : "border-transparent",
+    "transition-all duration-75",
+    {
+      // Size presets
+      "size-8 text-xs": size === "sm",
+      "size-10 text-sm": size === "md",
+      "size-12 text-base": size === "lg",
+      "size-16 text-lg": size === "xl",
+
+      // Tone presets
+      "border-base-400 bg-base-300 text-content-muted": tone === "neutral",
+      "border-content bg-content text-base-100": tone === "contrast",
+
+      // Border override
+      "border-transparent": !bordered,
+
+      // Interactive states
+      "cursor-pointer select-none active:translate-y-px": interactive,
+    },
     className,
   )}
   {delayMs}
