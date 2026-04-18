@@ -1,11 +1,5 @@
 <script lang="ts">
-  import {
-    AlertCircle,
-    CheckCircle2,
-    Info,
-    TriangleAlert,
-    X,
-  } from "@lucide/svelte";
+  import { CircleAlert, CircleCheck, CircleX, Info, X } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
@@ -86,11 +80,11 @@
           {:else if color === "info"}
             <Info class="size-5" />
           {:else if color === "success"}
-            <CheckCircle2 class="size-5" />
+            <CircleCheck class="size-5" />
           {:else if color === "warning"}
-            <TriangleAlert class="size-5" />
+            <CircleAlert class="size-5" />
           {:else if color === "error"}
-            <AlertCircle class="size-5" />
+            <CircleX class="size-5" />
           {/if}
         </div>
       {/if}

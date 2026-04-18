@@ -5,7 +5,7 @@
     Clipboard,
     Component,
     Info,
-    Layers3,
+    Layers,
     RectangleEllipsis,
     Search,
     Waypoints,
@@ -35,12 +35,12 @@
   let { children } = $props();
 
   const componentCategoryIcons = {
-    "Core Building Blocks": Layers3,
+    "Core Building Blocks": Layers,
     "Form Controls": RectangleEllipsis,
     "Disclosure & Expansion": Waypoints,
     "Overlays & Floating UI": Component,
     "Status & Feedback": Component,
-    "Utilities & Preferences": Layers3,
+    "Utilities & Preferences": Layers,
   } as const satisfies Record<ComponentCategory, SvelteComponent>;
 
   const runtimeCategoryIcons = {

@@ -1,8 +1,8 @@
 <script lang="ts">
   import {
-    AlertCircle,
     ArrowRight,
     Check,
+    CircleAlert,
     Download,
     Mail,
     Plus,
@@ -191,7 +191,7 @@
           {href}
         >
           <div class="flex items-center gap-2">
-            <AlertCircle class="size-4 opacity-50" />
+            <CircleAlert class="size-4 opacity-50" />
             <span>Complex Alignment Pattern</span>
           </div>
           <div class="flex items-center gap-2">
