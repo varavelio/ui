@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build-and-upload:
+    name: Build and upload release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create mount directories
+        run: |
+          mkdir -p ~/.claude ~/.config/opencode ~/.local/share/opencode
+
+      - name: Publish to npm
+        uses: devcontainers/ci@v0.3
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+        with:
+          push: never
+          inheritEnv: true
+          runCmd: |
+            /bin/bash -lc '
+              set -euo pipefail
+
+              npm ci
+
+              echo "Publishing version: $VERSION"
+
+              npm version "$VERSION" --no-git-tag-version --allow-same-version
+
+              if [[ "$VERSION" == *"-"* ]]; then
+                NPM_TAG="next"
+              else
+                NPM_TAG="latest"
+              fi
+              echo "Using npm tag: $NPM_TAG"
+
+              npm publish --provenance --access public --tag "$NPM_TAG"
+            '
