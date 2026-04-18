@@ -1,6 +1,12 @@
 import { error } from "@sveltejs/kit";
 
-const validTypes = new Set(["components", "blocks", "layouts", "runtime"]);
+const validTypes = new Set([
+  "components",
+  "brand",
+  "blocks",
+  "layouts",
+  "runtime",
+]);
 
 export function load({ params }: { params: { type: string } }) {
   if (!validTypes.has(params.type)) {

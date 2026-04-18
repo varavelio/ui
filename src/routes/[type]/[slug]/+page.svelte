@@ -3,6 +3,7 @@
   import Copy from "$lib/components/Copy/Copy.svelte";
   import { Alert, Badge, Card, Table } from "$lib/components/index.js";
   import {
+    brandEntries,
     componentEntries,
     isExplorerType,
     runtimeEntries,
@@ -19,6 +20,20 @@
       : null,
   );
 
+  let currentBrand = $derived(
+    currentType === "brand"
+      ? (brandEntries.find((entry) => entry.slug === page.params.slug) ?? null)
+      : null,
+  );
+
+  let currentCatalogEntry = $derived(
+    currentType === "components"
+      ? currentComponent
+      : currentType === "brand"
+        ? currentBrand
+        : null,
+  );
+
   let currentRuntime = $derived(
     currentType === "runtime"
       ? (runtimeEntries.find((entry) => entry.slug === page.params.slug) ??
@@ -27,8 +42,8 @@
   );
 
   let documentTitle = $derived.by(() => {
-    if (currentType === "components" && currentComponent) {
-      return `${currentComponent.name} | Varavel UI Explorer`;
+    if (currentCatalogEntry) {
+      return `${currentCatalogEntry.name} | Varavel UI Explorer`;
     }
 
     if (currentType === "runtime" && currentRuntime) {
@@ -43,17 +58,17 @@
   <title>{documentTitle}</title>
 </svelte:head>
 
-{#if currentType === "components"}
-  {#if currentComponent}
+{#if currentType === "components" || currentType === "brand"}
+  {#if currentCatalogEntry}
     <div class="space-y-5 overflow-hidden">
       <div class="flex flex-wrap items-start justify-between gap-5">
         <div class="max-w-3xl space-y-2">
           <h2 class="text-3xl font-semibold tracking-tight">
-            {currentComponent.name}
+            {currentCatalogEntry.name}
           </h2>
 
           <div class="flex flex-wrap items-center gap-2">
-            <Badge color="info">{currentComponent.category}</Badge>
+            <Badge color="info">{currentCatalogEntry.category}</Badge>
           </div>
         </div>
 
@@ -61,9 +76,9 @@
           <code
             class="block overflow-x-auto rounded-md border bg-base-100 px-4 py-2 text-sm text-content"
           >
-            {currentComponent.importCode}
+            {currentCatalogEntry.importCode}
           </code>
-          <Copy text={currentComponent.importCode} />
+          <Copy text={currentCatalogEntry.importCode} />
         </div>
       </div>
     </div>
@@ -74,8 +89,8 @@
       </div>
 
       <div class="bg-base-100 py-4">
-        {#if currentComponent.demo}
-          <currentComponent.demo />
+        {#if currentCatalogEntry.demo}
+          <currentCatalogEntry.demo />
         {:else}
           <Alert
             title="Missing live example"
@@ -93,7 +108,7 @@
       </div>
 
       <Card padding="none" class="overflow-hidden">
-        {#if currentComponent.props.length}
+        {#if currentCatalogEntry.props.length}
           <Table.Root variant="ghost">
             <Table.Header>
               <Table.Row>
@@ -104,7 +119,7 @@
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {#each currentComponent.props as prop (prop.name)}
+              {#each currentCatalogEntry.props as prop (prop.name)}
                 <Table.Row class="align-top">
                   <Table.Cell class="font-medium text-content">
                     {prop.name}
@@ -140,8 +155,10 @@
     </section>
   {:else}
     <Alert
-      title="Component not found"
-      description="Pick another component from the sidebar."
+      title={currentType === "brand" ? "Brand component not found" : "Component not found"}
+      description={currentType === "brand"
+          ? "Pick another brand component from the sidebar."
+          : "Pick another component from the sidebar."}
       color="warning"
       closable={false}
     />

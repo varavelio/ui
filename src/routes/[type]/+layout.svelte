@@ -12,6 +12,7 @@
   } from "@lucide/svelte";
   import type { Component as SvelteComponent } from "svelte";
   import { page } from "$app/state";
+  import { Logo } from "$lib/brand/index.js";
   import Container from "$lib/components/Container/Container.svelte";
   import {
     Alert,
@@ -21,6 +22,7 @@
     ThemePicker,
   } from "$lib/components/index.js";
   import {
+    brandEntries,
     type ComponentCategory,
     componentCategories,
     componentEntries,
@@ -78,17 +80,38 @@
     }),
   );
 
-  let componentCategoryCounts = $derived.by(() => {
+  let filteredBrandEntries = $derived.by(() =>
+    brandEntries.filter((entry) => {
+      if (!normalizedQuery) {
+        return true;
+      }
+
+      const haystack = `${entry.name} ${entry.category}`.toLowerCase();
+      return haystack.includes(normalizedQuery);
+    }),
+  );
+
+  function countEntriesByCategory(
+    entries: { category: ComponentCategory }[],
+  ): Record<ComponentCategory, number> {
     const counts = Object.fromEntries(
       componentCategories.map((category) => [category, 0]),
     ) as Record<ComponentCategory, number>;
 
-    for (const entry of filteredComponentEntries) {
+    for (const entry of entries) {
       counts[entry.category] += 1;
     }
 
     return counts;
-  });
+  }
+
+  let componentCategoryCounts = $derived.by(() =>
+    countEntriesByCategory(filteredComponentEntries),
+  );
+
+  let brandCategoryCounts = $derived.by(() =>
+    countEntriesByCategory(filteredBrandEntries),
+  );
 
   let filteredRuntimeEntries = $derived.by(() =>
     runtimeEntries.filter((entry) => {
@@ -118,6 +141,8 @@
     switch (currentType) {
       case "components":
         return "Component Library";
+      case "brand":
+        return "Brand Library";
       case "runtime":
         return "Runtime APIs";
       case "blocks":
@@ -131,6 +156,8 @@
     switch (currentType) {
       case "components":
         return "Search and browse reusable UI primitives.";
+      case "brand":
+        return "Explore Varavel-specific marks, loaders, and identity primitives.";
       case "runtime":
         return "Explore app-level APIs for interacting with Varavel UI.";
       case "blocks":
@@ -145,11 +172,17 @@
       return "Search runtime API";
     }
 
+    if (currentType === "brand") {
+      return "Search brand component or category";
+    }
+
     return "Search component or category";
   });
 
   let supportsSearch = $derived(
-    currentType === "components" || currentType === "runtime",
+    currentType === "components" ||
+      currentType === "brand" ||
+      currentType === "runtime",
   );
 </script>
 
@@ -158,16 +191,7 @@
     <div class="space-y-3">
       <header class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <img
-            src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/logo-white.svg"
-            alt="Varavel UI"
-            class="hidden size-6 dark:block"
-          >
-          <img
-            src="https://cdn.jsdelivr.net/gh/varavelio/brand@1.0.0/dist/logo-black.svg"
-            alt="Varavel UI"
-            class="size-6 dark:hidden"
-          >
+          <Logo class="size-6" href="/" />
           <h1 class="text-2xl font-semibold">Varavel UI</h1>
 
           <div class="pl-4">
@@ -229,10 +253,20 @@
       </div>
 
       <div class="min-h-0 flex-1 py-4 overflow-y-auto">
-        {#if currentType === "components"}
-          <nav aria-label="Component catalog" class="space-y-6">
+        {#if currentType === "components" || currentType === "brand"}
+          {@const catalogEntries = currentType === "brand"
+            ? filteredBrandEntries
+            : filteredComponentEntries}
+          {@const categoryCounts = currentType === "brand"
+            ? brandCategoryCounts
+            : componentCategoryCounts}
+
+          <nav
+            aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
+            class="space-y-6"
+          >
             {#each componentCategories as category (category)}
-              {@const categoryEntries = filteredComponentEntries.filter(
+              {@const categoryEntries = catalogEntries.filter(
                 (entry) => entry.category === category,
               )}
               {@const Icon = componentCategoryIcons[category]}
@@ -250,7 +284,7 @@
                         </h3>
                       </div>
                       <span class="text-xs text-content-muted">
-                        {componentCategoryCounts[category]}
+                        {categoryCounts[category]}
                       </span>
                     </div>
                   </div>
@@ -258,14 +292,14 @@
                   <div class="space-y-1">
                     {#each categoryEntries as entry (entry.id)}
                       <Button
-                        href="/components/{entry.slug}"
+                        href="/{currentType}/{entry.slug}"
                         wide
                         alignContent="left"
-                        active={activeSlug === entry.slug && currentType === "components"}
-                        variant={activeSlug === entry.slug && currentType === "components"
+                        active={activeSlug === entry.slug}
+                        variant={activeSlug === entry.slug
                             ? "outline"
                             : "ghost"}
-                        color={activeSlug === entry.slug && currentType === "components"
+                        color={activeSlug === entry.slug
                             ? "info"
                             : "neutral"}
                       >
@@ -277,10 +311,14 @@
               {/if}
             {/each}
 
-            {#if !filteredComponentEntries.length}
+            {#if !catalogEntries.length}
               <Alert
-                title="No components match this filter"
-                description="Try broader terms like form, dialog, or feedback."
+                title={currentType === "brand"
+                    ? "No brand components match this filter"
+                    : "No components match this filter"}
+                description={currentType === "brand"
+                    ? "Try broader terms like logo or loader."
+                    : "Try broader terms like form, dialog, or feedback."}
                 color="warning"
                 closable={false}
               />

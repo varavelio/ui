@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import { Alert, Button, Card } from "$lib/components/index.js";
   import {
+    defaultBrandSlug,
     defaultComponentSlug,
     defaultRuntimeSlug,
     isExplorerType,
@@ -14,6 +15,10 @@
   let defaultHref = $derived.by(() => {
     if (currentType === "components" && defaultComponentSlug) {
       return `/components/${defaultComponentSlug}`;
+    }
+
+    if (currentType === "brand" && defaultBrandSlug) {
+      return `/brand/${defaultBrandSlug}`;
     }
 
     if (currentType === "runtime" && defaultRuntimeSlug) {
@@ -38,7 +43,7 @@
     />
 
     <Button href={defaultHref} color="info" variant="outline">
-      Open first {currentType === "components" ? "component" : "runtime API"}
+      Open first {currentType === "runtime" ? "runtime API" : currentType === "brand" ? "brand component" : "component"}
     </Button>
   {:else}
     <Alert title="Coming soon" color="info" closable={false} />

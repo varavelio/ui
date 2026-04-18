@@ -11,6 +11,7 @@ import ToastRuntimeDemo from "./runtime/ToastRuntimeDemo.svelte";
 
 export const explorerTypes = [
   "components",
+  "brand",
   "blocks",
   "layouts",
   "runtime",
@@ -34,9 +35,27 @@ export const componentEntries: ComponentExplorerEntry[] =
     importCode: `import { ${entry.name} } from "@varavel/ui";`,
   }));
 
+export type BrandExplorerEntry = (typeof catalog.brand)[number] & {
+  id: string;
+  importCode: string;
+};
+
+export const brandEntries: BrandExplorerEntry[] = catalog.brand.map(
+  (entry) => ({
+    ...entry,
+    id: entry.name,
+    importCode: `import { ${entry.name} } from "@varavel/ui/brand";`,
+  }),
+);
+
 export const defaultComponentSlug =
   componentEntries.find((entry) => entry.slug === "avatar")?.slug ??
   componentEntries[0]?.slug ??
+  "";
+
+export const defaultBrandSlug =
+  brandEntries.find((entry) => entry.slug === "logo")?.slug ??
+  brandEntries[0]?.slug ??
   "";
 
 export type { ComponentCategory };
@@ -682,6 +701,7 @@ export const runtimeSlugSet = new Set(
 export const componentSlugSet = new Set(
   componentEntries.map((entry) => entry.slug),
 );
+export const brandSlugSet = new Set(brandEntries.map((entry) => entry.slug));
 
 export const explorerSections: {
   type: ExplorerType;
@@ -693,6 +713,12 @@ export const explorerSections: {
     type: "components",
     label: "Components",
     description: "Atomic UI primitives with typed props and live demos.",
+  },
+  {
+    type: "brand",
+    label: "Brand",
+    description:
+      "Varavel-specific building blocks, marks, and feedback states.",
   },
   {
     type: "blocks",
@@ -719,6 +745,8 @@ export function getSectionHref(type: ExplorerType): string {
       return defaultComponentSlug
         ? `/components/${defaultComponentSlug}`
         : "/components";
+    case "brand":
+      return defaultBrandSlug ? `/brand/${defaultBrandSlug}` : "/brand";
     case "runtime":
       return defaultRuntimeSlug ? `/runtime/${defaultRuntimeSlug}` : "/runtime";
     case "blocks":
