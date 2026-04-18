@@ -94,7 +94,7 @@
 
       <Card padding="none" class="overflow-hidden">
         {#if currentComponent.props.length}
-          <Table.Root>
+          <Table.Root variant="ghost">
             <Table.Header>
               <Table.Row>
                 <Table.Head>Name</Table.Head>
