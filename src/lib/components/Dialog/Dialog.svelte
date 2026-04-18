@@ -72,12 +72,15 @@
   {/if}
 
   <BitsDialog.Portal>
-    <BitsDialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
+    <BitsDialog.Overlay
+      class="fixed inset-0 z-40 bg-black/60 transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+    />
     <BitsDialog.Content
       class={cn(
         "fixed left-1/2 top-1/2 z-50 flex flex-col overflow-hidden isolate",
         "rounded-lg border bg-base-100 border-base-400 shadow-sm",
         "max-h-[calc(100dvh-4rem)] w-[calc(100dvw-2rem)] -translate-x-1/2 -translate-y-1/2",
+        "transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
         {
           "max-w-md": size === "sm",
           "max-w-xl": size === "md",
