@@ -17,6 +17,7 @@ When updating this document, do so with the context of the entire document in mi
 - **Language**: TypeScript
 - **Tooling**: Vite, Biome (Linting/Formatting), dprint (Formatting)
 - **Component Primitives**: `bits-ui`
+- **Date/Time Values**: `@internationalized/date` for all public date and time component state
 
 ## Operational Commands
 
@@ -108,6 +109,7 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Catalog Metadata**: Every public component folder should include a `meta.ts` file exporting a `componentMeta` array via the `components([...])` helper. Each entry should declare `name`, `category`, documented `props`, and can attach `demo` directly (typically from colocated `Demo.svelte`). Avoid hardcoding all metadata in one file.
 - **Helpers**: Put generic utilities like class merging under `src/lib/helpers/`, not under `components/internal/`.
 - **Styling**: Keep Tailwind classes organized. Use `theme.css` variables (e.g., `bg-base-100`, `text-content`) instead of hardcoding slate colors where possible.
+- **Date/Time Wrappers**: Public date/time components should expose `@internationalized/date` values directly (`CalendarDate`, `Time`, `CalendarDateTime`, `ZonedDateTime`) rather than native `Date` or ISO strings. When a wrapper needs an initial date/time seed, prefer a `placeholderValue` prop so `placeholder` remains available for text-based fields elsewhere in the library.
 - **Text Links**: Prefer the `Link` component for inline/navigation anchors so external-link safety defaults (`target`/`rel`) and disabled behavior stay consistent across the library. Avoid global `a { ... }` base styles that can leak into button-like anchors.
 - **Rich Text Surfaces**: When introducing prose/markdown wrappers, rely on the Typography plugin via `prose` utilities and keep heading scale/weight/tracking aligned with the `Heading` component for visual consistency.
 - **Conditional Classes**: ALWAYS use the `cn()` helper with an object for conditional variants or sizes (e.g., `cn("base", { "variant-a": cond }, className)`). Logic MUST stay local to the `class={cn(...)}` call; AVOID external constants for styles.
