@@ -18,6 +18,9 @@
   },
   "license": "MIT",
   "author": "Varavel",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "README.md",
     "LICENSE",
