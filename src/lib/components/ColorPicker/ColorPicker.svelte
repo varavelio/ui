@@ -109,7 +109,7 @@
       aria-label={label ? undefined : `Pick color ${displayValue}`}
       aria-labelledby={labelId}
       class={cn(
-        "relative flex w-full items-center gap-3 border text-content transition-colors duration-200",
+        "relative flex w-full items-center gap-2 border text-content transition-colors duration-200",
         "hover:bg-base-100 hover:border-content",
         "focus-visible:bg-base-100 focus-visible:border-content",
         "focus:outline-none focus-visible:outline-none",
@@ -127,6 +127,7 @@
           "bg-transparent border-transparent": variant === "ghost",
           "border-error hover:border-error": error,
           "focus-visible:border-error focus-visible:ring-error": error,
+          "cursor-pointer": !disabled,
           "cursor-not-allowed opacity-50 hover:border-base-400": disabled,
         },
       )}
@@ -144,9 +145,7 @@
         ></span>
       </span>
 
-      <span
-        class="pointer-events-none min-w-0 flex-1 truncate font-mono text-content-muted"
-      >
+      <span class="pointer-events-none font-mono text-content-muted">
         {displayValue}
       </span>
     </button>
