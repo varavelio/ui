@@ -22,7 +22,7 @@
 <LoaderCircle
   aria-hidden="true"
   class={cn(
-    "animate-spin shrink-0",
+    "animate-spin shrink-0 cursor-wait",
     {
       "size-4": size === "sm",
       "size-6": size === "md",
