@@ -3,7 +3,7 @@
   import type { HTMLAttributes } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
-  interface Props extends HTMLAttributes<HTMLDivElement> {
+  export interface BentoItemProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Inner content of the bento item.
      */
@@ -90,7 +90,7 @@
     deskRows = "1",
     class: className,
     ...restProps
-  }: Props = $props();
+  }: BentoItemProps = $props();
 </script>
 
 <div
