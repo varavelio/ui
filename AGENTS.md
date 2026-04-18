@@ -59,7 +59,8 @@ When updating this document, do so with the context of the entire document in mi
 - **Role**: Contains the reusable UI components and theme logic.
 - **Key Directories**:
   - `components/`: Atomic UI components (e.g., `Avatar/`). Each component typically has its own folder with a `.svelte` file, a colocated `Demo.svelte` showcase file, and an `index.ts` exporter.
-  - `catalog.ts`: Typed catalog registry that auto-discovers each component's `meta.ts` via `import.meta.glob`, then builds the explorer dataset.
+  - `brand/`: Brand-specific public components (for example `Logo/` or brand-only loaders) following the same folder pattern as `components/` with colocated demos and metadata.
+  - `catalog.ts`: Typed catalog registry that auto-discovers public `meta.ts` files for both the main component library and the brand module via `import.meta.glob`, then builds the explorer dataset.
   - `helpers/`: Shared cross-library utilities such as `cn()` that are not specific to any one component family.
   - `blocks/`: Larger, pre-composed UI sections or patterns.
   - `layouts/`: Ready to use layout components to use in various scenarios.
@@ -73,7 +74,7 @@ When updating this document, do so with the context of the entire document in mi
 - **Key Files**:
   - `+layout.ts`: Route-level options/configuration for the showcase app.
   - `+layout.svelte`: Global layout for the showcase app. It mounts `UiProvider` so runtime primitives (e.g., global dialogs) remain available throughout the explorer.
-  - `[type]/+layout.svelte`: Shared explorer shell with the top section navbar (`components`, `blocks`, `layouts`, `runtime`) and a type-aware sidebar.
+  - `[type]/+layout.svelte`: Shared explorer shell with the top section navbar (`components`, `brand`, `blocks`, `layouts`, `runtime`) and a type-aware sidebar.
   - `[type]/[slug]/+page.svelte`: Detail renderer for explorer entries. It handles component docs from `src/lib/catalog.ts` and runtime API docs from `[type]/explorer.ts`.
 
 ## Svelte
@@ -103,7 +104,7 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Component Exporting**: Export components via `index.ts` in their respective folders, and then again in the main `src/lib/components/index.ts`.
 - **Compound Components**: When a component family exposes namespaced parts (for example `Bento.Grid` and `Bento.Item`), keep the namespace export in the folder `index.ts` and make the parent layout own shared structure such as column count and gap while children own span and surface props.
 - **Component Demos**: Keep showcase demos next to their components when possible, but wire explorer rendering through `meta.ts` via each entry's optional `demo` field.
-- **Library Exports**: Keep package export entry points aligned with `package.json` (`.`, `./blocks`, `./theme.css`) when adding new public modules.
+- **Library Exports**: Keep package export entry points aligned with `package.json` (`.`, `./brand`, `./blocks`, `./theme.css`) when adding new public modules.
 - **Props**: Use `$props()` for component properties. Prefer explicit types for props.
 - **Form Controls**: Wrapper inputs should preserve practical Svelte ergonomics such as `bind:value` where appropriate.
 - **Catalog Metadata**: Every public component folder should include a `meta.ts` file exporting a `componentMeta` array via the `components([...])` helper. Each entry should declare `name`, `category`, documented `props`, and can attach `demo` directly (typically from colocated `Demo.svelte`). Avoid hardcoding all metadata in one file.
@@ -120,3 +121,4 @@ Generates a Svelte Playground link with the provided code. After completing the 
 - **Theme Components**: Any theme selector/toggle should consume `src/lib/runtime/theme/index.ts` (`theme.get()` / `theme.set()`) instead of duplicating localStorage, matchMedia, or DOM theme-application logic inside components.
 - **Theme Reactivity**: For UI sync with OS changes and cross-tab updates, prefer `theme.subscribe()` (backed by the global `varavel-theme-change` event from `static/theme-init.js`) rather than ad-hoc listeners inside components.
 - **Clipboard Interactions**: Prefer `src/lib/runtime/clipboard/index.ts` for copy behavior so browser support handling and toast feedback stay standardized. The `Copy` component should remain an opinionated icon-only wrapper around that runtime.
+- **Menu Modes**: Reuse `src/lib/components/Menu/Menu.svelte` for both standard dropdown menus and right-click context menus via its `mode` prop instead of introducing ad-hoc floating menu wrappers.
