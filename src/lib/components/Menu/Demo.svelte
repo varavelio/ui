@@ -134,6 +134,14 @@
   <Avatar fallback="JD" interactive />
 {/snippet}
 
+{#snippet contextTrigger()}
+  <div
+    class="grid h-24 w-48 place-items-center rounded-lg border border-dashed border-base-400 px-4 text-center text-sm text-content-muted"
+  >
+    Right-click here
+  </div>
+{/snippet}
+
 <Card class="flex flex-col gap-8">
   <div class="flex flex-wrap gap-4">
     <div class="flex flex-col gap-2">
@@ -162,6 +170,13 @@
         Custom Trigger
       </span>
       <Menu items={simpleItems} trigger={customTrigger} />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="text-xs font-medium text-content-muted text-center">
+        Context Menu
+      </span>
+      <Menu items={itemsWithIcons} mode="context" trigger={contextTrigger} />
     </div>
   </div>
 

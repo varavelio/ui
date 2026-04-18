@@ -11,6 +11,12 @@ export const componentMeta = components([
       prop("items", "Array", "Menu items, labels and separators."),
       prop("open", "boolean", "Controlled open state."),
       prop("side", "string", "The preferred side to render the menu."),
+      prop(
+        "mode",
+        '"dropdown" | "context"',
+        "Whether the menu opens as a standard dropdown or a context menu (right click).",
+        '"dropdown"',
+      ),
       prop("class", "string", "Additional CSS classes for the content."),
     ],
   },
