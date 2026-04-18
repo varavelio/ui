@@ -36,7 +36,7 @@ export type ComponentProp = {
 export type ComponentMeta = {
   name: string;
   slug: string;
-  type: "components" | "blocks" | "layouts";
+  type: "components" | "brand" | "blocks" | "layouts";
   category: ComponentCategory;
   props: ComponentProp[];
   demo?: SvelteComponent;
@@ -72,34 +72,39 @@ export function prop(
   return { name, type, description, defaultValue };
 }
 
-function createComponentCatalog() {
-  // Find all meta.ts modules in the components directory
-  type MetaModuleShape = {
-    componentMeta: Omit<ComponentMeta, "slug" | "type">[];
-  };
+type MetaModuleShape = {
+  componentMeta: Omit<ComponentMeta, "slug" | "type">[];
+};
 
-  const metaModules = import.meta.glob<MetaModuleShape>(
-    "./components/*/meta.ts",
-    { eager: true },
-  );
-
-  // Create the catalog
-  const componentCatalog: ComponentMeta[] = Object.entries(metaModules)
+function createCatalogEntries(
+  type: ComponentMeta["type"],
+  metaModules: Record<string, MetaModuleShape>,
+) {
+  return Object.entries(metaModules)
     .flatMap(([, module]) => module.componentMeta)
-    // Sort the components alphabetically by name
     .sort((a, b) => a.name.localeCompare(b.name))
-    // Add slug and type
     .map((meta) => ({
       ...meta,
-      type: "components" as const,
+      type,
       slug: meta.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
     }));
-
-  return componentCatalog;
 }
+
+const componentMetaModules = import.meta.glob<MetaModuleShape>(
+  "./components/*/meta.ts",
+  { eager: true },
+);
+
+const brandMetaModules = import.meta.glob<MetaModuleShape>(
+  "./brand/*/meta.ts",
+  {
+    eager: true,
+  },
+);
 
 /** Catalog */
 
 export const catalog = {
-  components: createComponentCatalog(),
+  components: createCatalogEntries("components", componentMetaModules),
+  brand: createCatalogEntries("brand", brandMetaModules),
 };
