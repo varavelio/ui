@@ -9,7 +9,7 @@ export const componentMeta = components([
     props: [
       prop(
         "size",
-        '"xs" | "sm" | "md" | "lg" | "xl"',
+        '"xs" | "sm" | "md" | "lg" | "xl" | "full"',
         "The maximum width of the container.",
         '"md"',
       ),

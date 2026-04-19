@@ -5,7 +5,7 @@
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
     /** The maximum width of the container. */
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    size?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
     /** Adds responsive horizontal padding (px-4 on mobile, px-8 on desktop). */
     padded?: boolean;
     /** The horizontal alignment of the container within its parent. */
@@ -39,6 +39,7 @@
       "max-w-6xl": size === "md", /* 72rem = 1152px */
       "max-w-360": size === "lg", /* 90rem = 1440px */
       "max-w-480": size === "xl", /* 120rem = 1920px */
+      "max-w-full": size === "full", /* 100% of the parent container */
     },
     className
   )}
