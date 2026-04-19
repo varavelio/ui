@@ -16,6 +16,14 @@
   let { class: className, children }: Props = $props();
 
   const state = getAppLayoutState();
+
+  // Register the sidebar presence in the layout state
+  $effect(() => {
+    state.hasSidebar = true;
+    return () => {
+      state.hasSidebar = false;
+    };
+  });
 </script>
 
 <aside
