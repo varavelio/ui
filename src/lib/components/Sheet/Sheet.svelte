@@ -116,12 +116,7 @@
       {/if}
 
       {#if title || description}
-        <div
-          class={{
-            "px-4 pt-4 shrink-0": true,
-            "pb-4": !children
-          }}
-        >
+        <div class="p-4 shrink-0">
           {#if title}
             <BitsDialog.Title class="text-lg font-semibold text-content">
               {title}
@@ -136,18 +131,21 @@
       {/if}
 
       {#if children}
-        <div
-          class={[
-            "min-h-0 h-0 flex-1 overflow-auto",
-            { "m-4": padded },
-          ]}
-        >
-          {@render children()}
+        <div class="min-h-0 h-0 flex-1 overflow-auto">
+          <div
+            class={{ 
+              "p-4": padded,
+              "pt-0": title || description,
+              "pb-0": footer,
+            }}
+          >
+            {@render children()}
+          </div>
         </div>
       {/if}
 
       {#if footer}
-        <div class="px-4 pb-4 shrink-0">{@render footer()}</div>
+        <div class="p-4 shrink-0">{@render footer()}</div>
       {/if}
     </BitsDialog.Content>
   </BitsDialog.Portal>
