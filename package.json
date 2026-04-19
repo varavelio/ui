@@ -24,6 +24,7 @@
   "files": [
     "README.md",
     "LICENSE",
+    "static",
     "dist",
     "!dist/**/Demo.svelte",
     "!dist/**/*.test.*",
