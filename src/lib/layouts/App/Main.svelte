@@ -14,6 +14,6 @@
   let { class: className, children }: Props = $props();
 </script>
 
-<main class={cn("p-4 overflow-auto grow", className)}>
+<main class={cn("p-4 overflow-auto flex-1 min-w-0 min-h-0", className)}>
   {@render children()}
 </main>
