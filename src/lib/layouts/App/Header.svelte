@@ -40,7 +40,7 @@
         square
         variant="ghost"
         size="sm"
-        class="desk:hidden -ml-2 mr-2"
+        class="desk:hidden -ml-2 mr-2 flex-none"
         onclick={() => state.toggleSidebarOpen()}
         aria-label="Toggle Navigation"
       >
