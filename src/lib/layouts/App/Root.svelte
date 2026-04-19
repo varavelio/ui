@@ -18,8 +18,12 @@
     maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
     /** Header surface background preset. (default 100) */
     headerBg?: "100" | "200" | "300";
+    /** Whether the header should render its border. */
+    headerBordered?: boolean;
     /** Sidebar surface background preset. (default 100) */
     sidebarBg?: "100" | "200" | "300";
+    /** Whether the sidebar should render its border. */
+    sidebarBordered?: boolean;
     /** Main surface background preset. (default 100) */
     mainBg?: "100" | "200" | "300";
     /** The header content to be rendered within the layout. */
@@ -35,7 +39,9 @@
     primaryRegion = "header",
     maxWidth = "xl",
     headerBg = "100",
+    headerBordered = true,
     sidebarBg = "100",
+    sidebarBordered = true,
     mainBg = "100",
     header,
     sidebar,
@@ -53,7 +59,9 @@
     )}
   >
     {#if header}
-      <Header bg={headerBg} {maxWidth}>{@render header()}</Header>
+      <Header bg={headerBg} bordered={headerBordered} {maxWidth}>
+        {@render header()}
+      </Header>
     {/if}
 
     {#if sidebar}
@@ -95,7 +103,11 @@
       class="relative z-10 flex flex-1 min-w-0 min-h-0 overflow-hidden"
     >
       {#if sidebar}
-        <Sidebar bg={sidebarBg} class="desk:h-[calc(100dvh-3.5rem)]">
+        <Sidebar
+          bg={sidebarBg}
+          bordered={sidebarBordered}
+          class="desk:h-[calc(100dvh-3.5rem)]"
+        >
           {@render sidebar()}
         </Sidebar>
       {/if}
@@ -115,13 +127,14 @@
     {#if header && sidebar}
       <div
         class={cn(
-          "pointer-events-none absolute top-0 right-0 hidden h-14 border-b border-base-400 desk:block",
+          "pointer-events-none absolute top-0 right-0 hidden h-14 desk:block",
           {
             "left-1/2": !!sidebar,
             "left-0": !sidebar,
             "bg-base-100": headerBg === "100",
             "bg-base-200": headerBg === "200",
             "bg-base-300": headerBg === "300",
+            "border-b border-base-400": headerBordered,
           },
         )}
       ></div>
@@ -164,12 +177,16 @@
       class="relative z-10 flex size-full min-h-0 min-w-0 justify-start overflow-hidden"
     >
       {#if sidebar}
-        <Sidebar bg={sidebarBg} class="desk:h-dvh">{@render sidebar()}</Sidebar>
+        <Sidebar bg={sidebarBg} bordered={sidebarBordered} class="desk:h-dvh">
+          {@render sidebar()}
+        </Sidebar>
       {/if}
 
       <div class="flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden">
         {#if header}
-          <Header bg={headerBg} {maxWidth}>{@render header()}</Header>
+          <Header bg={headerBg} bordered={headerBordered} {maxWidth}>
+            {@render header()}
+          </Header>
         {/if}
 
         <Main bg={mainBg}>{@render main?.()}</Main>
