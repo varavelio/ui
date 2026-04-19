@@ -28,7 +28,7 @@
 
 <aside
   class={cn(
-    "hidden w-64 flex-col border-r border-base-400 p-4 desk:flex",
+    "hidden w-64 flex-col overflow-x-hidden overflow-y-auto border-r border-base-400 p-4 desk:flex",
     className,
   )}
 >
