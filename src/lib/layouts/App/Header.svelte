@@ -10,13 +10,15 @@
   interface Props {
     /** Additional CSS classes for the header container. */
     class?: ClassValue;
+    /** Surface background preset. */
+    bg?: "100" | "200" | "300";
     /** The layout width max width. */
     maxWidth: "xs" | "sm" | "md" | "lg" | "xl" | "full";
     /** Header content. */
     children: Snippet;
   }
 
-  let { class: className, maxWidth, children }: Props = $props();
+  let { class: className, bg, maxWidth, children }: Props = $props();
 
   const state = getAppLayoutState();
 </script>
@@ -24,6 +26,11 @@
 <header
   class={cn(
     "h-14 shrink-0 min-w-0 overflow-hidden border-b border-base-400",
+    {
+      "bg-base-100 text-content": bg === "100",
+      "bg-base-200 text-content": bg === "200",
+      "bg-base-300 text-content": bg === "300",
+    },
     className,
   )}
 >
