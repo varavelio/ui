@@ -28,11 +28,11 @@
 
 <aside
   class={cn(
-    "hidden w-64 flex-col overflow-x-hidden overflow-y-auto border-r border-base-400 p-4 desk:flex",
+    "hidden w-64 shrink-0 min-h-0 overflow-x-hidden overflow-y-auto border-r border-base-400 p-4 desk:block",
     className,
   )}
 >
-  {@render children()}
+  <div class="flex min-h-full min-w-0 flex-col">{@render children()}</div>
 </aside>
 
 <div class="desk:hidden">
