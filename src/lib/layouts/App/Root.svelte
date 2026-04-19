@@ -17,6 +17,6 @@
   setAppLayoutState(new AppLayoutState());
 </script>
 
-<div class={cn("w-dvw h-dvh overflow-hidden", className)}>
+<div class={cn("size-full overflow-hidden", className)}>
   {@render children()}
 </div>
