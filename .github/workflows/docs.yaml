@@ -11,7 +11,7 @@ jobs:
     name: Deploy to Cloudflare Pages
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       deployments: write
 
     steps:
@@ -37,7 +37,6 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           OUTPUT=$(npx wrangler pages deploy ./build \
             --project-name=varavel-ui \
@@ -45,14 +44,13 @@ jobs:
             --commit-hash="${{ github.sha }}" \
             --commit-message="${{ github.event.head_commit.message }}")
 
-          # Print output for debugging purposes
-          echo "$OUTPUT"
-
-          # Extract the deployment URL from the output
           URL=$(echo "$OUTPUT" | grep -o 'https://[^ ]*\.pages\.dev' | head -n 1)
+
           if [ -n "$URL" ]; then
-            gh api repos/${{ github.repository }}/commits/${{ github.sha }}/comments \
-              -f body="🚀 Deployed to Cloudflare Pages! **Preview URL:** $URL"
+            echo "### 🚀 Deployed to Cloudflare Pages" >> $GITHUB_STEP_SUMMARY
+            echo "Preview: [$URL]($URL)" >> $GITHUB_STEP_SUMMARY
+            echo "::notice title=Deployment URL::$URL"
           else
-            echo "Cannot find deployment URL in Wrangler output."
+            echo "Deployment URL not found."
+            exit 1
           fi
