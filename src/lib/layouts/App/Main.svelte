@@ -18,7 +18,7 @@
 
 <main
   class={cn(
-    "flex-1 min-w-0 min-h-0 overflow-x-hidden overflow-y-auto",
+    "flex-1 min-w-0 min-h-0 overflow-x-hidden overflow-y-auto isolate",
     {
       "bg-base-100 text-content": bg === "100",
       "bg-base-200 text-content": bg === "200",

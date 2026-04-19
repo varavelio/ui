@@ -42,20 +42,23 @@
     className,
   )}
 >
-  <div class="flex min-h-full min-w-0 flex-col">{@render children()}</div>
+  <div class="flex min-h-full min-w-0 flex-col isolate">{@render children()}</div>
 </aside>
 
 <div class="desk:hidden">
   <Sheet
     bind:open={state.isSidebarOpen}
     size="sm"
-    class={cn({
-      "bg-base-100 text-content": bg === "100",
-      "bg-base-200 text-content": bg === "200",
-      "bg-base-300 text-content": bg === "300",
-      "border border-base-400": bordered,
-      "border-transparent": !bordered,
-    })}
+    class={cn(
+      "isolate",
+      {
+        "bg-base-100 text-content": bg === "100",
+        "bg-base-200 text-content": bg === "200",
+        "bg-base-300 text-content": bg === "300",
+        "border border-base-400": bordered,
+        "border-transparent": !bordered,
+      }
+    )}
   >
     {@render children()}
   </Sheet>
