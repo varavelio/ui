@@ -9,7 +9,7 @@
   {#snippet header()}
     <div class="w-full flex justify-between items-center">
       <Heading size="md" level="2">Header</Heading>
-      <ThemePicker class="-mr-2" /> 
+      <ThemePicker class="-mr-2" />
     </div>
   {/snippet}
 
