@@ -42,7 +42,9 @@
     className,
   )}
 >
-  <div class="flex min-h-full min-w-0 flex-col isolate">{@render children()}</div>
+  <div class="flex min-h-full min-w-0 flex-col isolate">
+    {@render children()}
+  </div>
 </aside>
 
 <div class="desk:hidden">
