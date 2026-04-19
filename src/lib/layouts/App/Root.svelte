@@ -17,6 +17,6 @@
   setAppLayoutState(new AppLayoutState());
 </script>
 
-<div class={cn("size-full overflow-hidden", className)}>
+<div class={cn("size-full overflow-hidden flex-1 min-w-0 min-h-0", className)}>
   {@render children()}
 </div>
