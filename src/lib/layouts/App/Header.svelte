@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { Menu } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { Button } from "$lib/components/index.js";
   import { cn } from "$lib/helpers/cn.js";
-  import { getAppLayoutState } from "./state.svelte.ts";
 
   /** Props for the Header component. */
   interface Props {
@@ -15,8 +12,6 @@
   }
 
   let { class: className, children }: Props = $props();
-
-  const state = getAppLayoutState();
 </script>
 
 <header
@@ -25,18 +20,5 @@
     className,
   )}
 >
-  {#if state.hasSidebar}
-    <Button
-      square
-      variant="ghost"
-      size="sm"
-      class="-ml-2 desk:hidden"
-      onclick={() => state.toggleSidebarOpen()}
-      aria-label="Toggle Navigation"
-    >
-      <Menu class="size-6" />
-    </Button>
-  {/if}
-
   {@render children()}
 </header>
