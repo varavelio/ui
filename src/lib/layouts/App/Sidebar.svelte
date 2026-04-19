@@ -33,5 +33,5 @@
 </aside>
 
 <div class="desk:hidden">
-  <Sheet bind:open={state.isSidebarOpen}>{@render children()}</Sheet>
+  <Sheet bind:open={state.isSidebarOpen} size="sm">{@render children()}</Sheet>
 </div>
