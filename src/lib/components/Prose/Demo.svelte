@@ -112,7 +112,7 @@
       <Prose
         size={combo.size}
         fluid={combo.fluid}
-        class="rounded-lg border border-base-400 p-6 desk:p-8"
+        class="rounded-lg border border-base-400 p-6"
       >
         {@render proseContent(combo.label)}
       </Prose>
