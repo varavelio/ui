@@ -3,8 +3,11 @@
   import type { ClassValue } from "svelte/elements";
   import { cn } from "$lib/helpers/cn.js";
 
+  /** Props for the Main component. */
   interface Props {
+    /** Additional CSS classes for the main content area. */
     class?: ClassValue;
+    /** The main content to display. */
     children: Snippet;
   }
 

@@ -5,22 +5,17 @@
   import { cn } from "$lib/helpers/cn.js";
   import { getAppLayoutState } from "./state.svelte.ts";
 
+  /** Props for the Sidebar component. */
   interface Props {
+    /** Additional CSS classes for the desktop sidebar and mobile sheet. */
     class?: ClassValue;
+    /** Sidebar navigation or content. */
     children: Snippet;
   }
 
   let { class: className, children }: Props = $props();
 
   const state = getAppLayoutState();
-
-  // Register the presence of the sidebar
-  $effect(() => {
-    state.hasSidebar = true;
-    return () => {
-      state.hasSidebar = false;
-    };
-  });
 </script>
 
 <aside

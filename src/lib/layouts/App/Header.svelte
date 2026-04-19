@@ -6,8 +6,11 @@
   import { cn } from "$lib/helpers/cn.js";
   import { getAppLayoutState } from "./state.svelte.ts";
 
+  /** Props for the Header component. */
   interface Props {
+    /** Additional CSS classes for the header container. */
     class?: ClassValue;
+    /** Header content. */
     children: Snippet;
   }
 

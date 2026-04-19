@@ -4,8 +4,11 @@
   import { cn } from "$lib/helpers/cn.js";
   import { AppLayoutState, setAppLayoutState } from "./state.svelte.js";
 
+  /** Props for the Root component. */
   interface Props {
+    /** Additional CSS classes to apply to the root layout container. */
     class?: ClassValue;
+    /** The content to be rendered within the layout root. */
     children: Snippet;
   }
 
