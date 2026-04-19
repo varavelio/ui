@@ -30,7 +30,7 @@
   class={cn(
     "w-full",
     {
-      "px-4 desk:px-8": padded,
+      "px-4": padded,
       "mr-auto": align === "left",
       "mx-auto": align === "center",
       "ml-auto": align === "right",
