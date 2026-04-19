@@ -8,7 +8,7 @@ export const componentMeta = components([
     category: "Core Building Blocks",
     props: [
       prop(
-        "size",
+        "maxWidth",
         '"xs" | "sm" | "md" | "lg" | "xl" | "full"',
         "The maximum width of the container.",
         '"md"',

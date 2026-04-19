@@ -99,7 +99,7 @@
     {/if}
 
     <Container
-      size={maxWidth}
+      {maxWidth}
       class="relative z-10 flex flex-1 min-w-0 min-h-0 overflow-hidden"
     >
       {#if sidebar}
@@ -173,7 +173,7 @@
     {/if}
 
     <Container
-      size={maxWidth}
+      {maxWidth}
       class="relative z-10 flex size-full min-h-0 min-w-0 justify-start overflow-hidden"
     >
       {#if sidebar}

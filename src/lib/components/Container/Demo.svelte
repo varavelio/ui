@@ -26,7 +26,7 @@
         class="rounded-md border border-dashed border-base-400 bg-base-100 p-2"
       >
         <Container
-          size="xs"
+          maxWidth="xs"
           class="rounded-sm border border-base-400 bg-base-200 py-2 text-center text-xs text-content-muted"
         >
           <code class="font-mono">~448px</code>
@@ -47,7 +47,7 @@
         class="rounded-md border border-dashed border-base-400 bg-base-100 p-2"
       >
         <Container
-          size="sm"
+          maxWidth="sm"
           class="rounded-sm border border-base-400 bg-base-200 py-2 text-center text-xs text-content-muted"
         >
           <code class="font-mono">~768px</code>
@@ -68,7 +68,7 @@
         class="rounded-md border border-dashed border-base-400 bg-base-100 p-2"
       >
         <Container
-          size="md"
+          maxWidth="md"
           class="rounded-sm border border-base-400 bg-base-200 py-2 text-center text-xs text-content-muted"
         >
           <code class="font-mono">~1152px</code>
@@ -90,7 +90,7 @@
         class="rounded-md border border-dashed border-base-400 bg-base-100 p-2"
       >
         <Container
-          size="lg"
+          maxWidth="lg"
           class="rounded-sm border border-base-400 bg-base-200 py-2 text-center text-xs text-content-muted"
         >
           <code class="font-mono">~1440px</code>
@@ -114,7 +114,7 @@
         class="rounded-md border border-dashed border-base-400 bg-base-100 p-2"
       >
         <Container
-          size="xl"
+          maxWidth="xl"
           class="rounded-sm border border-base-400 bg-base-200 py-2 text-center text-xs text-content-muted"
         >
           <code class="font-mono">1920px</code>

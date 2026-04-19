@@ -188,7 +188,7 @@
 </script>
 
 <div class="sticky top-0 z-10 border-b bg-base-100">
-  <Container padded class="py-2" size="xl" align="center">
+  <Container padded class="py-2" maxWidth="xl" align="center">
     <div class="space-y-3">
       <header class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
@@ -227,7 +227,7 @@
 <Container
   padded
   class="isolate z-0 flex min-h-screen justify-center gap-4 py-4"
-  size="xl"
+  maxWidth="xl"
   align="center"
 >
   <aside class="sticky top-22 h-[calc(100dvh-120px)] w-83 flex-none">

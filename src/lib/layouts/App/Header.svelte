@@ -43,7 +43,7 @@
     className,
   )}
 >
-  <Container size={maxWidth} padded class="flex items-center size-full isolate">
+  <Container {maxWidth} padded class="flex items-center size-full isolate">
     {#if state.hasSidebar}
       <Button
         square
