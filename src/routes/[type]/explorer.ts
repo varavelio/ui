@@ -49,6 +49,27 @@ export const brandEntries: BrandExplorerEntry[] = catalog.brand.map(
   }),
 );
 
+export type LayoutExplorerEntry = {
+  id: string;
+  name: string;
+  slug: string;
+  summary: string;
+  importCode: string;
+  previewHref: string;
+};
+
+export const layoutEntries: LayoutExplorerEntry[] = [
+  {
+    id: "app-layout",
+    name: "AppLayout",
+    slug: "app-layout",
+    summary:
+      "Responsive shell with sticky header, optional sidebar, and a primary main region.",
+    importCode: 'import { AppLayout } from "@varavel/ui/layouts";',
+    previewHref: "/preview/layouts/app",
+  },
+];
+
 export const defaultComponentSlug =
   componentEntries.find((entry) => entry.slug === "avatar")?.slug ??
   componentEntries[0]?.slug ??
@@ -58,6 +79,8 @@ export const defaultBrandSlug =
   brandEntries.find((entry) => entry.slug === "logo")?.slug ??
   brandEntries[0]?.slug ??
   "";
+
+export const defaultLayoutSlug = layoutEntries[0]?.slug ?? "";
 
 export type { ComponentCategory };
 export { componentCategories };
@@ -855,7 +878,6 @@ export const explorerSections: {
     type: "layouts",
     label: "Layouts",
     description: "Complete scaffolds to accelerate page architecture.",
-    soon: true,
   },
   {
     type: "runtime",
@@ -877,6 +899,6 @@ export function getSectionHref(type: ExplorerType): string {
     case "blocks":
       return "/blocks";
     case "layouts":
-      return "/layouts";
+      return defaultLayoutSlug ? `/layouts#${defaultLayoutSlug}` : "/layouts";
   }
 }

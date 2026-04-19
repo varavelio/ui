@@ -29,6 +29,7 @@
     explorerSections,
     getSectionHref,
     isExplorerType,
+    layoutEntries,
     type RuntimeCategory,
     runtimeCategories,
     runtimeEntries,
@@ -377,6 +378,29 @@
               <Alert
                 title="No runtime APIs match this filter"
                 description="Try searching for theme or dialog."
+                color="warning"
+                closable={false}
+              />
+            {/if}
+          </nav>
+        {:else if currentType === "layouts"}
+          <nav aria-label="Layout catalog" class="space-y-2">
+            {#each layoutEntries as entry (entry.id)}
+              <Button
+                href={`/layouts#${entry.slug}`}
+                wide
+                alignContent="left"
+                variant="ghost"
+                color="neutral"
+              >
+                {entry.name}
+              </Button>
+            {/each}
+
+            {#if !layoutEntries.length}
+              <Alert
+                title="No layouts available"
+                description="Add a layout entry to the explorer registry."
                 color="warning"
                 closable={false}
               />
