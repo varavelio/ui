@@ -15,6 +15,7 @@
 
   const state = getAppLayoutState();
 </script>
+
 {#if state.hasSidebar}
   <Button
     square
