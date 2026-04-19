@@ -47,6 +47,7 @@
 
   const runtimeCategoryIcons = {
     "Clipboard Management": Clipboard,
+    "DOM Instrumentation": Waypoints,
     "Theme Management": Info,
     "Dialog Management": CircleAlert,
     "Toast Management": Bell,

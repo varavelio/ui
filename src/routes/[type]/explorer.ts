@@ -6,6 +6,7 @@ import {
 } from "$lib/catalog.js";
 import ClipboardRuntimeDemo from "./runtime/ClipboardRuntimeDemo.svelte";
 import DialogRuntimeDemo from "./runtime/DialogRuntimeDemo.svelte";
+import MeasureRuntimeDemo from "./runtime/MeasureRuntimeDemo.svelte";
 import ThemeRuntimeDemo from "./runtime/ThemeRuntimeDemo.svelte";
 import ToastRuntimeDemo from "./runtime/ToastRuntimeDemo.svelte";
 
@@ -66,6 +67,7 @@ export const runtimeCategories = [
   "Theme Management",
   "Dialog Management",
   "Toast Management",
+  "DOM Instrumentation",
 ] as const;
 
 export type RuntimeCategory = (typeof runtimeCategories)[number];
@@ -690,6 +692,129 @@ export const runtimeEntries: RuntimeEntry[] = [
       "`toast.promise(...)` is the cleanest option for async flows because it keeps loading, success, and error feedback in one place.",
     ],
     demo: ToastRuntimeDemo,
+  },
+  {
+    name: "measure",
+    slug: "measure",
+    category: "DOM Instrumentation",
+    summary:
+      "Attach typed DOM measurement to any element and opt into scroll, offset, and computed-style reads only when a surface truly needs them.",
+    importCode: 'import { measure } from "@varavel/ui/runtime";',
+    methods: [
+      {
+        name: "measure",
+        signature: "measure(options: MeasureOptions): Attachment<HTMLElement>",
+        returns: "Attachment<HTMLElement>",
+        description:
+          "Creates a Svelte attachment that reports live element measurements through `options.onMeasure(...)`. Fast size and scroll metrics are always included, while offsets and computed styles remain opt-in.",
+        options: [
+          {
+            name: "onMeasure",
+            type: "(detail: MeasureDetail) => void",
+            required: true,
+            description:
+              "Typed callback invoked after each coalesced measurement cycle.",
+          },
+          {
+            name: "trackScroll",
+            type: "boolean",
+            defaultValue: "false",
+            description:
+              "Re-measures when the element itself scrolls so scroll position becomes part of the payload.",
+          },
+          {
+            name: "trackOffsets",
+            type: "boolean",
+            defaultValue: "false",
+            description:
+              "Adds `parentOffset` and `viewportOffset` to the payload and listens to ancestor and viewport scroll changes.",
+          },
+          {
+            name: "trackStyles",
+            type: "boolean",
+            defaultValue: "false",
+            description:
+              "Adds parsed numeric computed-style metrics such as width, height, margin, padding, and borders.",
+          },
+        ],
+      },
+    ],
+    snippets: [
+      {
+        title: "1. Basic attachment",
+        description:
+          "Start with the required callback only when width or height is enough.",
+        language: "svelte",
+        code: [
+          '<script lang="ts">',
+          '  import { measure, type MeasureDetail } from "@varavel/ui/runtime";',
+          "",
+          "  let width = $state(0);",
+          "",
+          "  function handleMeasure(detail: MeasureDetail) {",
+          "    width = detail.size.clientWidth;",
+          "  }",
+          "</script>",
+          "",
+          "<div {@attach measure({ onMeasure: handleMeasure })}>",
+          "  Width: {width}px",
+          "</div>",
+        ].join("\n"),
+      },
+      {
+        title: "2. Opt into offsets",
+        description:
+          "Enable offset tracking only when placement logic depends on parent or viewport geometry.",
+        language: "svelte",
+        code: [
+          '<script lang="ts">',
+          '  import { measure, type MeasureDetail } from "@varavel/ui/runtime";',
+          "",
+          "  let parentTop = $state(0);",
+          "",
+          "  function handleMeasure(detail: MeasureDetail) {",
+          "    parentTop = detail.parentOffset?.top ?? 0;",
+          "  }",
+          "</script>",
+          "",
+          "<aside {@attach measure({ onMeasure: handleMeasure, trackOffsets: true })}>",
+          "  Parent top offset: {parentTop}px",
+          "</aside>",
+        ].join("\n"),
+      },
+      {
+        title: "3. Read computed styles",
+        description:
+          "Turn on style parsing only for advanced layout math or DOM instrumentation panels.",
+        language: "svelte",
+        code: [
+          '<script lang="ts">',
+          '  import { measure, type MeasureDetail } from "@varavel/ui/runtime";',
+          "",
+          "  let paddingTop = $state(0);",
+          "",
+          "  function handleMeasure(detail: MeasureDetail) {",
+          "    paddingTop = detail.style?.paddingTop ?? 0;",
+          "  }",
+          "</script>",
+          "",
+          "<section {@attach measure({",
+          "  onMeasure: handleMeasure,",
+          "  trackStyles: true,",
+          "  trackScroll: true",
+          "})}>",
+          "  Padding top: {paddingTop}px",
+          "</section>",
+        ].join("\n"),
+      },
+    ],
+    notes: [
+      "`measure(...)` is a Svelte attachment factory, so it is applied with `{@attach ...}` rather than called imperatively.",
+      "The required `onMeasure` callback receives a typed payload on every coalesced frame, which makes local state updates straightforward and type-safe.",
+      "Keep `trackOffsets` and `trackStyles` disabled unless the UI genuinely needs those values. They trigger more expensive DOM reads than the default size and scroll metrics.",
+      "When `trackOffsets` is enabled, the attachment also listens to scrollable ancestors and the viewport so offset math stays fresh while the page moves.",
+    ],
+    demo: MeasureRuntimeDemo,
   },
 ];
 
