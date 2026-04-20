@@ -183,9 +183,9 @@
 <Button
   aria-label={resolvedLabel}
   alignContent="between"
-  {color}
   href={resolvedHref}
-  {loading}
+  skeleton={loading}
+  {color}
   {radius}
   {rel}
   {size}
@@ -209,13 +209,7 @@
           size="sm"
         >
           <Star aria-hidden="true" class="size-3" />
-          {#if resolvedStars}
-            <span class="font-mono tabular-nums">{resolvedStars}</span>
-          {:else}
-            <span aria-hidden="true" class="invisible font-mono tabular-nums">
-              000
-            </span>
-          {/if}
+          <span class="font-mono tabular-nums">{resolvedStars}</span>
         </Badge>
       {/if}
 
@@ -225,13 +219,7 @@
           size="sm"
         >
           <GitFork aria-hidden="true" class="size-3" />
-          {#if resolvedForks}
-            <span class="font-mono tabular-nums">{resolvedForks}</span>
-          {:else}
-            <span aria-hidden="true" class="invisible font-mono tabular-nums">
-              000
-            </span>
-          {/if}
+          <span class="font-mono tabular-nums">{resolvedForks}</span>
         </Badge>
       {/if}
 
@@ -241,11 +229,7 @@
           size="sm"
         >
           <Tag aria-hidden="true" class="size-3" />
-          {#if resolvedTag}
-            {resolvedTag}
-          {:else}
-            <span aria-hidden="true" class="invisible">v0.0.0</span>
-          {/if}
+          {resolvedTag}
         </Badge>
       {/if}
     </span>
