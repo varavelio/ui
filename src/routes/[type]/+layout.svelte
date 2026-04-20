@@ -13,14 +13,15 @@
   import type { Component as SvelteComponent } from "svelte";
   import { page } from "$app/state";
   import { Logo } from "$lib/brand/index.js";
-  import Container from "$lib/components/Container/Container.svelte";
   import {
     Alert,
     Badge,
     Button,
     Input,
+    Nav,
     ThemePicker,
   } from "$lib/components/index.js";
+  import { AppLayout } from "$lib/layouts/index.js";
   import {
     brandEntries,
     type ComponentCategory,
@@ -34,6 +35,13 @@
     runtimeCategories,
     runtimeEntries,
   } from "./explorer.ts";
+
+  interface GroupedEntries<TEntry, TCategory extends string> {
+    category: TCategory;
+    count: number;
+    entries: TEntry[];
+    icon: SvelteComponent;
+  }
 
   let { children } = $props();
 
@@ -56,17 +64,49 @@
 
   let query = $state("");
 
+  function groupEntriesByCategory<
+    TEntry extends { category: TCategory },
+    TCategory extends string,
+  >(
+    categories: readonly TCategory[],
+    entries: TEntry[],
+    icons: Record<TCategory, SvelteComponent>,
+  ): GroupedEntries<TEntry, TCategory>[] {
+    return categories
+      .map((category) => {
+        const categoryEntries = entries.filter(
+          (entry) => entry.category === category,
+        );
+
+        return {
+          category,
+          count: categoryEntries.length,
+          entries: categoryEntries,
+          icon: icons[category],
+        };
+      })
+      .filter((group) => group.entries.length > 0);
+  }
+
   let currentType = $derived(
     isExplorerType(page.params.type ?? "") ? page.params.type : "components",
   );
 
   let activeSlug = $derived(page.params.slug ?? "");
+  let activeHash = $derived(page.url.hash.replace(/^#/, ""));
 
-  let navItems = $derived.by(() =>
+  let sectionNavItems = $derived.by(() =>
     explorerSections.map((section) => ({
       ...section,
+      active: currentType === section.type,
       href: getSectionHref(section.type),
     })),
+  );
+
+  let currentSection = $derived.by(
+    () =>
+      sectionNavItems.find((item) => item.type === currentType) ??
+      sectionNavItems[0],
   );
 
   let normalizedQuery = $derived(query.trim().toLowerCase());
@@ -93,28 +133,6 @@
     }),
   );
 
-  function countEntriesByCategory(
-    entries: { category: ComponentCategory }[],
-  ): Record<ComponentCategory, number> {
-    const counts = Object.fromEntries(
-      componentCategories.map((category) => [category, 0]),
-    ) as Record<ComponentCategory, number>;
-
-    for (const entry of entries) {
-      counts[entry.category] += 1;
-    }
-
-    return counts;
-  }
-
-  let componentCategoryCounts = $derived.by(() =>
-    countEntriesByCategory(filteredComponentEntries),
-  );
-
-  let brandCategoryCounts = $derived.by(() =>
-    countEntriesByCategory(filteredBrandEntries),
-  );
-
   let filteredRuntimeEntries = $derived.by(() =>
     runtimeEntries.filter((entry) => {
       if (!normalizedQuery) {
@@ -127,17 +145,38 @@
     }),
   );
 
-  let runtimeCategoryCounts = $derived.by(() => {
-    const counts = Object.fromEntries(
-      runtimeCategories.map((category) => [category, 0]),
-    ) as Record<RuntimeCategory, number>;
+  let componentNavGroups = $derived.by(() =>
+    groupEntriesByCategory(
+      componentCategories,
+      filteredComponentEntries,
+      componentCategoryIcons,
+    ),
+  );
 
-    for (const entry of filteredRuntimeEntries) {
-      counts[entry.category] += 1;
-    }
+  let brandNavGroups = $derived.by(() =>
+    groupEntriesByCategory(
+      componentCategories,
+      filteredBrandEntries,
+      componentCategoryIcons,
+    ),
+  );
 
-    return counts;
-  });
+  let runtimeNavGroups = $derived.by(() =>
+    groupEntriesByCategory(
+      runtimeCategories,
+      filteredRuntimeEntries,
+      runtimeCategoryIcons,
+    ),
+  );
+
+  let layoutNavItems = $derived.by(() =>
+    layoutEntries.map((entry, index) => ({
+      ...entry,
+      active:
+        currentType === "layouts" &&
+        (activeHash ? activeHash === entry.slug : index === 0),
+    })),
+  );
 
   let sidebarTitle = $derived.by(() => {
     switch (currentType) {
@@ -188,53 +227,47 @@
   );
 </script>
 
-<div class="sticky top-0 z-10 border-b bg-base-100">
-  <Container padded class="py-2" maxWidth="xl" align="center">
-    <div class="space-y-3">
-      <header class="flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <Logo class="size-6" href="/" />
-          <h1 class="text-2xl font-semibold">Varavel UI</h1>
+<AppLayout primaryRegion="header" maxWidth="lg">
+  {#snippet header()}
+    <div class="flex min-w-0 flex-1 items-center gap-4">
+      <div class="min-w-0 shrink-0 flex items-center gap-2">
+        <Logo class="size-6 shrink-0" href="/" />
+        <h1 class="truncate text-base font-semibold desk:text-2xl">
+          Varavel UI
+        </h1>
+      </div>
 
-          <div class="pl-4">
-            <nav aria-label="Explorer sections" class="overflow-x-auto">
-              <div class="flex min-w-max items-center gap-2 pb-1">
-                {#each navItems as item (item.type)}
-                  <Button
-                    href={item.href}
-                    variant="ghost"
-                    color={currentType === item.type ? "info" : "neutral"}
-                    active={currentType === item.type}
-                  >
-                    <span>{item.label}</span>
-                    {#if item.soon}
-                      <Badge size="sm" variant="solid" color="neutral">
-                        Soon
-                      </Badge>
-                    {/if}
-                  </Button>
-                {/each}
-              </div>
-            </nav>
-          </div>
+      <nav
+        aria-label="Explorer sections"
+        class="hidden min-w-0 flex-1 overflow-x-auto desk:block"
+      >
+        <div class="flex min-w-max items-center gap-1">
+          {#each sectionNavItems as item (item.type)}
+            <Button
+              href={item.href}
+              variant="ghost"
+              color={item.active ? "info" : "neutral"}
+              active={item.active}
+            >
+              <span>{item.label}</span>
+              {#if item.soon}
+                <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
+              {/if}
+            </Button>
+          {/each}
         </div>
-
-        <ThemePicker class="shrink-0" />
-      </header>
+      </nav>
     </div>
-  </Container>
-</div>
 
-<Container
-  padded
-  class="isolate z-0 flex min-h-screen justify-center gap-4 py-4"
-  maxWidth="xl"
-  align="center"
->
-  <aside class="sticky top-22 h-[calc(100dvh-120px)] w-83 flex-none">
-    <div class="flex h-full flex-col">
+    <ThemePicker class="hidden shrink-0 desk:inline-flex" />
+  {/snippet}
+
+  {#snippet sidebar()}
+    <div class="flex min-h-full flex-col gap-4">
       <div class="space-y-2 border-b pb-4">
-        <h2 class="text-2xl font-semibold tracking-tight">{sidebarTitle}</h2>
+        <h2 class="text-xl font-semibold tracking-tight desk:text-2xl">
+          {sidebarTitle}
+        </h2>
         <p class="text-sm text-content-muted">{sidebarDescription}</p>
 
         {#if supportsSearch}
@@ -254,66 +287,54 @@
         {/if}
       </div>
 
-      <div class="min-h-0 flex-1 py-4 overflow-y-auto">
-        {#if currentType === "components" || currentType === "brand"}
-          {@const catalogEntries = currentType === "brand"
-            ? filteredBrandEntries
-            : filteredComponentEntries}
-          {@const categoryCounts = currentType === "brand"
-            ? brandCategoryCounts
-            : componentCategoryCounts}
-
-          <nav
-            aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
-            class="space-y-6"
+      <div class="flex-1 space-y-4">
+        <div class="space-y-3 border-b pb-4 desk:hidden">
+          <p
+            class="text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
           >
-            {#each componentCategories as category (category)}
-              {@const categoryEntries = catalogEntries.filter(
-                (entry) => entry.category === category,
-              )}
-              {@const Icon = componentCategoryIcons[category]}
+            Sections
+          </p>
 
-              {#if categoryEntries.length}
-                <section class="space-y-3">
-                  <div class="px-2">
-                    <div class="flex items-center justify-between gap-3">
-                      <div class="flex items-center gap-2">
-                        <Icon class="size-4 text-content-muted" />
-                        <h3
-                          class="text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
-                        >
-                          {category}
-                        </h3>
-                      </div>
-                      <span class="text-xs text-content-muted">
-                        {categoryCounts[category]}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="space-y-1">
-                    {#each categoryEntries as entry (entry.id)}
-                      <Button
-                        href="/{currentType}/{entry.slug}"
-                        wide
-                        alignContent="left"
-                        active={activeSlug === entry.slug}
-                        variant={activeSlug === entry.slug
-                            ? "outline"
-                            : "ghost"}
-                        color={activeSlug === entry.slug
-                            ? "info"
-                            : "neutral"}
-                      >
-                        {entry.name}
-                      </Button>
-                    {/each}
-                  </div>
-                </section>
-              {/if}
+          <Nav.Root aria-label="Explorer sections">
+            {#each sectionNavItems as item (item.type)}
+              <Nav.Item
+                href={item.href}
+                label={item.label}
+                active={item.active}
+              >
+                {#if item.soon}
+                  <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
+                {/if}
+              </Nav.Item>
             {/each}
+          </Nav.Root>
+        </div>
 
-            {#if !catalogEntries.length}
+        {#if currentType === "components" || currentType === "brand"}
+          {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
+
+          <div class="space-y-3">
+            <Nav.Root
+              aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
+            >
+              {#each navGroups as group (group.category)}
+                <Nav.Group
+                  label={`${group.category} (${group.count})`}
+                  icon={group.icon}
+                  open={true}
+                >
+                  {#each group.entries as entry (entry.id)}
+                    <Nav.Item
+                      href={`/${currentType}/${entry.slug}/`}
+                      label={entry.name}
+                      active={activeSlug === entry.slug}
+                    />
+                  {/each}
+                </Nav.Group>
+              {/each}
+            </Nav.Root>
+
+            {#if !navGroups.length}
               <Alert
                 title={currentType === "brand"
                     ? "No brand components match this filter"
@@ -325,56 +346,28 @@
                 closable={false}
               />
             {/if}
-          </nav>
+          </div>
         {:else if currentType === "runtime"}
-          <nav aria-label="Runtime catalog" class="space-y-6">
-            {#each runtimeCategories as category (category)}
-              {@const categoryEntries = filteredRuntimeEntries.filter(
-                (entry) => entry.category === category,
-              )}
-              {@const Icon = runtimeCategoryIcons[category]}
+          <div class="space-y-3">
+            <Nav.Root aria-label="Runtime catalog">
+              {#each runtimeNavGroups as group (group.category)}
+                <Nav.Group
+                  label={`${group.category} (${group.count})`}
+                  icon={group.icon}
+                  open={true}
+                >
+                  {#each group.entries as entry (entry.slug)}
+                    <Nav.Item
+                      href={`/runtime/${entry.slug}`}
+                      label={entry.name}
+                      active={activeSlug === entry.slug}
+                    />
+                  {/each}
+                </Nav.Group>
+              {/each}
+            </Nav.Root>
 
-              {#if categoryEntries.length}
-                <section class="space-y-3">
-                  <div class="px-2">
-                    <div class="flex items-center justify-between gap-3">
-                      <div class="flex items-center gap-2">
-                        <Icon class="size-4 text-content-muted" />
-                        <h3
-                          class="text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
-                        >
-                          {category}
-                        </h3>
-                      </div>
-                      <span class="text-xs text-content-muted">
-                        {runtimeCategoryCounts[category]}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="space-y-1">
-                    {#each categoryEntries as entry (entry.slug)}
-                      <Button
-                        href="/runtime/{entry.slug}"
-                        wide
-                        alignContent="left"
-                        active={activeSlug === entry.slug && currentType === "runtime"}
-                        variant={activeSlug === entry.slug && currentType === "runtime"
-                            ? "outline"
-                            : "ghost"}
-                        color={activeSlug === entry.slug && currentType === "runtime"
-                            ? "info"
-                            : "neutral"}
-                      >
-                        {entry.name}
-                      </Button>
-                    {/each}
-                  </div>
-                </section>
-              {/if}
-            {/each}
-
-            {#if !filteredRuntimeEntries.length}
+            {#if !runtimeNavGroups.length}
               <Alert
                 title="No runtime APIs match this filter"
                 description="Try searching for theme or dialog."
@@ -382,20 +375,18 @@
                 closable={false}
               />
             {/if}
-          </nav>
+          </div>
         {:else if currentType === "layouts"}
-          <nav aria-label="Layout catalog" class="space-y-2">
-            {#each layoutEntries as entry (entry.id)}
-              <Button
-                href={`/layouts#${entry.slug}`}
-                wide
-                alignContent="left"
-                variant="ghost"
-                color="neutral"
-              >
-                {entry.name}
-              </Button>
-            {/each}
+          <div class="space-y-3">
+            <Nav.Root aria-label="Layout catalog">
+              {#each layoutNavItems as entry (entry.id)}
+                <Nav.Item
+                  href={`/layouts#${entry.slug}`}
+                  label={entry.name}
+                  active={entry.active}
+                />
+              {/each}
+            </Nav.Root>
 
             {#if !layoutEntries.length}
               <Alert
@@ -405,13 +396,29 @@
                 closable={false}
               />
             {/if}
-          </nav>
+          </div>
         {:else}
           <Alert title="Coming soon" color="info" closable={false} />
         {/if}
       </div>
-    </div>
-  </aside>
 
-  <main class="min-w-0 grow space-y-6">{@render children()}</main>
-</Container>
+      <div class="border-t pt-4 desk:hidden">
+        <p
+          class="mb-3 text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
+        >
+          Theme
+        </p>
+
+        <ThemePicker />
+      </div>
+    </div>
+  {/snippet}
+
+  {#snippet main()}
+    <div
+      class="mx-auto flex min-h-full w-full max-w-7xl flex-col gap-6 p-4 desk:p-6"
+    >
+      {@render children()}
+    </div>
+  {/snippet}
+</AppLayout>

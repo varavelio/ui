@@ -13,6 +13,18 @@
     isExplorerType(page.params.type ?? "") ? page.params.type : "components",
   );
 
+  let defaultEntryLabel = $derived.by(() => {
+    if (currentType === "runtime") {
+      return "runtime API";
+    }
+
+    if (currentType === "brand") {
+      return "brand component";
+    }
+
+    return "component";
+  });
+
   let defaultHref = $derived.by(() => {
     if (currentType === "components" && defaultComponentSlug) {
       return `/components/${defaultComponentSlug}`;
@@ -35,8 +47,8 @@
     <Card class="space-y-2">
       <h2 class="text-3xl font-semibold tracking-tight">Layouts</h2>
       <p class="text-sm text-content-muted">
-        Live previews are embedded below. Each card can open its preview in a
-        new tab.
+        Live previews are embedded below. Each preview uses `AppLayout` with a
+        Nav-driven sidebar and can also open in a new tab.
       </p>
     </Card>
 
@@ -53,6 +65,7 @@
             target="_blank"
             variant="outline"
             color="info"
+            class="w-full desk:w-auto"
           >
             Open in new tab
           </Button>
@@ -63,7 +76,7 @@
             title={`${entry.name} preview`}
             src={entry.previewHref}
             loading="lazy"
-            class="h-[70dvh] min-h-[540px] w-full"
+            class="h-[60dvh] min-h-[22rem] w-full desk:h-[70dvh] desk:min-h-[34rem]"
           ></iframe>
         </div>
       </Card>
@@ -95,7 +108,7 @@
       />
 
       <Button href={defaultHref} color="info" variant="outline">
-        Open first {currentType === "runtime" ? "runtime API" : currentType === "brand" ? "brand component" : "component"}
+        Open first {defaultEntryLabel}
       </Button>
     {:else}
       <Alert title="Coming soon" color="info" closable={false} />
