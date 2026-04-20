@@ -18,8 +18,9 @@
       <GithubButton
         user="varavelio"
         repo="vdl-plugin-sdk"
-        showForks={false}
-        showStars={false}
+        showForks={true}
+        showStars={true}
+        showTag={true}
       />
     </Card>
   </div>

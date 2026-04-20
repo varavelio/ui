@@ -75,7 +75,7 @@
 
     /**
      * If true, shows the forks badge.
-     * @default true
+     * @default false
      */
     showForks?: boolean;
 
@@ -109,7 +109,7 @@
     color = "neutral",
     format = "compact",
     showStars = true,
-    showForks = true,
+    showForks = false,
     showTag = true,
     target = "_blank",
     rel,
