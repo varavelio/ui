@@ -17,6 +17,7 @@
     Alert,
     Badge,
     Button,
+    GithubButton,
     Input,
     Nav,
     ThemePicker,
@@ -285,7 +286,15 @@
       </nav>
     </div>
 
-    <ThemePicker class="hidden shrink-0 desk:inline-flex" />
+    <div class="flex items-center gap-2 shrink-0">
+      <GithubButton
+        user="varavelio"
+        repo="ui"
+        variant="ghost"
+        class="hidden desk:inline-flex"
+      />
+      <ThemePicker class="hidden shrink-0 desk:inline-flex" />
+    </div>
   {/snippet}
 
   {#snippet sidebar()}
@@ -435,7 +444,10 @@
           Theme
         </p>
 
-        <ThemePicker />
+        <div class="flex flex-col gap-4">
+          <ThemePicker />
+          <GithubButton user="varavelio" repo="ui" variant="ghost" />
+        </div>
       </div>
     </div>
   {/snippet}
