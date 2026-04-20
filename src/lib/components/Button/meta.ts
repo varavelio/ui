@@ -47,6 +47,12 @@ export const componentMeta = components([
         "false",
       ),
       prop(
+        "skeleton",
+        "boolean",
+        "Shows a skeleton placeholder instead of the button.",
+        "false",
+      ),
+      prop(
         "active",
         "boolean",
         "Forces the hover style to represent an active state.",

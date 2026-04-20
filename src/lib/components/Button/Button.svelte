@@ -7,6 +7,7 @@
   } from "svelte/elements";
   import { fade } from "svelte/transition";
   import { cn } from "../../helpers/cn.js";
+  import Skeleton from "../Skeleton/Skeleton.svelte";
 
   interface Props extends HTMLButtonAttributes {
     /**
@@ -95,6 +96,13 @@
      * @default false
      */
     square?: boolean;
+
+    /**
+     * Whether the button is in a skeleton state.
+     * Shows a skeleton placeholder instead of the button.
+     * @default false
+     */
+    skeleton?: boolean;
   }
 
   let {
@@ -116,10 +124,11 @@
     disabled = false,
     alignContent = "center",
     square = false,
+    skeleton = false,
     ...restProps
   }: Props = $props();
 
-  let disabledOrLoading = $derived(disabled || loading);
+  let disabledOrLoading = $derived(disabled || loading || skeleton);
   const isLink = $derived(!!href);
   const tagName = $derived(isLink ? "a" : "button");
 
@@ -161,7 +170,7 @@
       "cursor-not-allowed opacity-50": disabled,
 
       // Loading state
-      "cursor-wait": loading,
+      "cursor-wait": loading || skeleton,
 
       // Size presets
       "h-8 px-3 text-xs": size === "sm" && !square,
@@ -254,6 +263,8 @@
       }),
     },
 
+    skeleton && "border-transparent bg-transparent text-transparent outline-transparent",
+
     className,
   )}
 >
@@ -270,7 +281,7 @@
     class={cn(
       "inline-flex items-center gap-2 leading-none w-full",
       {
-        "invisible": loading,
+        "invisible": loading || skeleton,
         "justify-center": alignContent === "center",
         "justify-start": alignContent === "left",
         "justify-end": alignContent === "right",
@@ -288,4 +299,19 @@
       <IconRight class="size-4 shrink-0" />
     {/if}
   </span>
+
+  {#if skeleton}
+    <Skeleton
+      class={cn(
+        "absolute inset-[-1px] z-10",
+        {
+          "rounded-sm": radius === "sm",
+          "rounded-md": radius === "md",
+          "rounded-lg": radius === "lg",
+          "rounded-full": radius === "full",
+        },
+        className,
+      )}
+    />
+  {/if}
 </svelte:element>

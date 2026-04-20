@@ -14,6 +14,7 @@
 
   let active = $state(false);
   let loading = $state(false);
+  let skeleton = $state(false);
   let disabled = $state(false);
 
   let isLink = $state(false);
@@ -39,6 +40,7 @@
     <Card class="flex flex-wrap justify-start items-center space-x-4">
       <Switch bind:checked={active} size="sm" label="Active" />
       <Switch bind:checked={loading} size="sm" label="Loading" />
+      <Switch bind:checked={skeleton} size="sm" label="Skeleton" />
       <Switch bind:checked={disabled} size="sm" label="Disabled" />
       <div class="h-6 w-px bg-base-300 mx-2"></div>
       <Switch bind:checked={isLink} size="sm" label="As Link (href)" />
@@ -68,6 +70,7 @@
                 <Button
                   {active}
                   {loading}
+                  {skeleton}
                   {disabled}
                   {variant}
                   {color}
@@ -91,7 +94,15 @@
       <Card class="flex items-center justify-center gap-8 p-10">
         {#each sizes as size}
           <div class="flex flex-col items-center gap-4">
-            <Button {active} {loading} {disabled} {size} color="neutral" {href}>
+            <Button
+              {active}
+              {loading}
+              {skeleton}
+              {disabled}
+              {size}
+              color="neutral"
+              {href}
+            >
               Button
             </Button>
             <span
@@ -113,6 +124,7 @@
             <Button
               {active}
               {loading}
+              {skeleton}
               {disabled}
               {radius}
               variant="outline"
@@ -139,6 +151,7 @@
         <Button
           {active}
           {loading}
+          {skeleton}
           {disabled}
           color="neutral"
           wide
@@ -154,6 +167,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             variant="outline"
             color="info"
@@ -168,6 +182,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             variant="ghost"
             color="neutral"
@@ -184,6 +199,7 @@
         <Button
           {active}
           {loading}
+          {skeleton}
           {disabled}
           color="neutral"
           wide
@@ -215,6 +231,7 @@
                 <Button
                   {active}
                   {loading}
+                  {skeleton}
                   {disabled}
                   {size}
                   square
@@ -243,6 +260,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             color="neutral"
             {href}
@@ -253,6 +271,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             variant="outline"
             color="info"
@@ -264,6 +283,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             variant="ghost"
             color="error"
@@ -276,6 +296,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             color="success"
             radius="full"
@@ -287,6 +308,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             color="neutral"
             variant="outline"
@@ -299,6 +321,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             square
             variant="outline"
@@ -309,6 +332,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             square
             variant="ghost"
@@ -319,6 +343,7 @@
           <Button
             {active}
             {loading}
+            {skeleton}
             {disabled}
             square
             color="neutral"
