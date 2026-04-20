@@ -18,18 +18,18 @@
 <Container maxWidth="sm">
   <Card>
     <Nav.Root>
-      <Nav.Item href="#home" label="Home" icon={House} isActive={true} />
+      <Nav.Item href="#home" label="Home" icon={House} active={true} />
 
-      <Nav.Group label="Management" icon={Users} isOpen={true}>
+      <Nav.Group label="Management" icon={Users} open={true}>
         <Nav.Item href="#users" label="Users" />
 
-        <Nav.Group label="Permissions" icon={Shield} isOpen={true} line="solid">
-          <Nav.Item href="#roles" label="Roles" isActive />
+        <Nav.Group label="Permissions" icon={Shield} open={true} line="solid">
+          <Nav.Item href="#roles" label="Roles" active />
 
-          <Nav.Group label="Advanced" icon={Folder} isOpen={true}>
+          <Nav.Group label="Advanced" icon={Folder} open={true}>
             <Nav.Item href="#policies" label="Policies" />
 
-            <Nav.Group label="Overrides" icon={Box} isOpen={true} line="none">
+            <Nav.Group label="Overrides" icon={Box} open={true} line="none">
               <Nav.Item href="#custom-rules" label="Custom Rules" />
             </Nav.Group>
           </Nav.Group>

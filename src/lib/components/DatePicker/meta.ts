@@ -22,6 +22,16 @@ export const componentMeta = components([
         "CalendarDate",
         "Placeholder date used to seed the field and calendar when empty.",
       ),
+      prop(
+        "disabledDate",
+        "(date: CalendarDate) => boolean",
+        "A function that returns true if a date should be disabled.",
+      ),
+      prop(
+        "unavailableDate",
+        "(date: CalendarDate) => boolean",
+        "A function that returns true if a date is unavailable.",
+      ),
       prop("minValue", "CalendarDate", "Minimum selectable date."),
       prop("maxValue", "CalendarDate", "Maximum selectable date."),
       prop(

@@ -19,7 +19,7 @@
     /**
      * Whether the group is expanded. Can be two-way bound.
      */
-    isOpen?: boolean;
+    open?: boolean;
 
     /**
      * Style of the nested children indicator line.
@@ -43,7 +43,7 @@
     class: className,
     label,
     icon: IconComponent,
-    isOpen = $bindable(false),
+    open = $bindable(false),
     line = "dashed",
     borderWidth = "2",
     children,
@@ -51,7 +51,7 @@
   }: Props = $props();
 
   function toggle() {
-    isOpen = !isOpen;
+    open = !open;
   }
 </script>
 
@@ -64,19 +64,19 @@
     icon={IconComponent}
     onclick={toggle}
     class="font-medium text-content/70 hover:text-content"
-    aria-expanded={isOpen}
+    aria-expanded={open}
     {...restProps as any}
   >
     <span class="flex-1 truncate text-left">{label}</span>
 
     <ChevronRight
       class={cn("size-4 flex-none transition-transform duration-200", {
-        "rotate-90": isOpen,
+        "rotate-90": open,
       })}
     />
   </Button>
 
-  {#if isOpen}
+  {#if open}
     <div
       class={cn(
         "ml-4 mt-1 flex flex-col space-y-1 pl-3 relative",

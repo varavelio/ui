@@ -16,7 +16,7 @@ export const componentMeta = components([
       prop("Item.label", "string", "The text label of the link."),
       prop("Item.icon", "Component", "Optional Lucide-svelte icon component."),
       prop(
-        "Item.isActive",
+        "Item.active",
         "boolean",
         "Marks the link as currently active.",
         "false",
@@ -24,7 +24,7 @@ export const componentMeta = components([
       prop("Group.label", "string", "The text label of the collapsible group."),
       prop("Group.icon", "Component", "Optional Lucide-svelte icon component."),
       prop(
-        "Group.isOpen",
+        "Group.open",
         "boolean",
         "Controls the open/collapsed state. Bindable.",
         "false",

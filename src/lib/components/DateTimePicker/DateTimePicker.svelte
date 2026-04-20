@@ -226,12 +226,12 @@
     /**
      * Returns true for unavailable dates that should remain selectable but invalid.
      */
-    isDateUnavailable?: (value: CalendarDateTime | ZonedDateTime) => boolean;
+    unavailableDate?: (value: CalendarDateTime | ZonedDateTime) => boolean;
 
     /**
      * Returns true for disabled dates that should not be selectable.
      */
-    isDateDisabled?: (value: CalendarDateTime | ZonedDateTime) => boolean;
+    disabledDate?: (value: CalendarDateTime | ZonedDateTime) => boolean;
 
     /**
      * Returns a validation message or messages when the selected value is invalid.
@@ -283,8 +283,8 @@
     fixedWeeks = false,
     initialFocus = false,
     calendarLabel,
-    isDateUnavailable,
-    isDateDisabled,
+    unavailableDate,
+    disabledDate,
     validate,
     onInvalid,
   }: Props = $props();
@@ -338,7 +338,7 @@
       return false;
     }
 
-    if (isDateDisabled?.(nextValue) || isDateUnavailable?.(nextValue)) {
+    if (disabledDate?.(nextValue) || unavailableDate?.(nextValue)) {
       return false;
     }
 
@@ -375,8 +375,8 @@
     {hideTimeZone}
     {hourCycle}
     {initialFocus}
-    isDateDisabled={isDateDisabled as never}
-    isDateUnavailable={isDateUnavailable as never}
+    isDateDisabled={disabledDate as never}
+    isDateUnavailable={unavailableDate as never}
     {locale}
     {maxValue}
     {minValue}

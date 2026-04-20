@@ -22,7 +22,7 @@
     /**
      * Whether the link is currently active.
      */
-    isActive?: boolean;
+    active?: boolean;
 
     /**
      * Inner content. Typically not needed since `label` and `icon` are provided,
@@ -45,7 +45,7 @@
     class: className,
     label,
     icon: IconComponent,
-    isActive = false,
+    active = false,
     children,
     ...restProps
   }: Props = $props();
@@ -53,19 +53,19 @@
 
 <Button
   variant="ghost"
-  color={isActive ? "info" : "neutral"}
-  active={isActive}
+  color={active ? "info" : "neutral"}
+  {active}
   wide={true}
   alignContent="left"
   icon={IconComponent}
   class={cn(
     "font-medium",
     {
-      "text-content/70 hover:text-content": !isActive,
+      "text-content/70 hover:text-content": !active,
     },
     className,
   )}
-  aria-current={isActive ? "page" : undefined}
+  aria-current={active ? "page" : undefined}
   {...restProps as any}
 >
   <span class="flex-1 truncate text-left">{label}</span>
