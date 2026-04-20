@@ -9,7 +9,7 @@
     Trash,
     User,
   } from "@lucide/svelte";
-  import { Button, Card, Menu } from "$lib/components/index.js";
+  import { Card, Menu } from "$lib/components/index.js";
   import Avatar from "../Avatar/Avatar.svelte";
 
   let lastAction = $state("No action yet");
@@ -112,24 +112,6 @@
   <Archive size={16} />
 {/snippet}
 
-{#snippet simpleTrigger()}
-  <Button variant="outline">
-    Simple Menu <ChevronDown size={16} class="ml-2" />
-  </Button>
-{/snippet}
-
-{#snippet iconTrigger()}
-  <Button variant="outline">
-    Icon Menu <ChevronDown size={16} class="ml-2" />
-  </Button>
-{/snippet}
-
-{#snippet complexTrigger()}
-  <Button variant="outline">
-    Complex Menu <ChevronDown size={16} class="ml-2" />
-  </Button>
-{/snippet}
-
 {#snippet customTrigger()}
   <Avatar fallback="JD" interactive />
 {/snippet}
@@ -148,21 +130,38 @@
       <span class="text-xs font-medium text-content-muted text-center">
         Simple
       </span>
-      <Menu items={simpleItems} trigger={simpleTrigger} />
+      <Menu
+        items={simpleItems}
+        label="Simple Menu"
+        iconRight={ChevronDown}
+        variant="outline"
+      />
     </div>
 
     <div class="flex flex-col gap-2">
       <span class="text-xs font-medium text-content-muted text-center">
         With Icons
       </span>
-      <Menu items={itemsWithIcons} trigger={iconTrigger} />
+      <Menu
+        items={itemsWithIcons}
+        label="Icon Menu"
+        icon={Link}
+        iconRight={ChevronDown}
+        variant="outline"
+      />
     </div>
 
     <div class="flex flex-col gap-2">
       <span class="text-xs font-medium text-content-muted text-center">
         Complex
       </span>
-      <Menu items={complexItems} trigger={complexTrigger} />
+      <Menu
+        items={complexItems}
+        label="Complex Menu"
+        iconRight={ChevronDown}
+        variant="outline"
+        size="lg"
+      />
     </div>
 
     <div class="flex flex-col gap-2">
@@ -177,6 +176,19 @@
         Context Menu
       </span>
       <Menu items={itemsWithIcons} mode="context" trigger={contextTrigger} />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="text-xs font-medium text-content-muted text-center">
+        Context Button
+      </span>
+      <Menu
+        items={simpleItems}
+        mode="context"
+        label="Right-click Button"
+        iconRight={ChevronDown}
+        variant="outline"
+      />
     </div>
   </div>
 

@@ -4,9 +4,10 @@
     ContextMenu as BitsContextMenu,
     DropdownMenu as BitsDropdownMenu,
   } from "bits-ui";
-  import type { Snippet } from "svelte";
+  import type { ComponentProps, Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
+  import Button from "../Button/Button.svelte";
 
   type DropdownMenuItem = {
     type?: "item" | "label" | "separator" | string;
@@ -17,7 +18,12 @@
     onSelect?: () => void;
   };
 
-  interface Props {
+  type TriggerButtonProps = Omit<
+    ComponentProps<typeof Button>,
+    "children" | "class" | "href" | "target" | "rel"
+  >;
+
+  interface Props extends TriggerButtonProps {
     /**
      * Additional CSS classes to apply to the dropdown menu content.
      */
@@ -29,7 +35,11 @@
     /**
      * The snippet for the trigger element.
      */
-    trigger: Snippet;
+    trigger?: Snippet;
+    /**
+     * The label for the generated button trigger.
+     */
+    label?: string | Snippet;
     /**
      * The items to render in the dropdown menu.
      */
@@ -56,18 +66,79 @@
     class: className,
     open = $bindable(false),
     trigger,
+    label,
     items,
     side = "bottom",
     mode = "dropdown",
     triggerClass,
+    disabled = false,
+    icon,
+    iconRight,
+    ...buttonProps
   }: Props = $props();
+
+  const isFunction = (
+    value: unknown,
+  ): value is (...args: unknown[]) => unknown => typeof value === "function";
+
+  const hasButtonTrigger = $derived(Boolean(label || icon || iconRight));
+  const triggerDisabled = $derived(Boolean(disabled));
+
+  function _mergeTriggerProps(bitsProps: Record<string, unknown>) {
+    const userProps = buttonProps as Record<string, unknown>;
+    const mergedProps: Record<string, unknown> = { ...bitsProps, ...userProps };
+
+    for (const key of Object.keys(bitsProps)) {
+      const bitsValue = bitsProps[key];
+      const userValue = userProps[key];
+
+      if (key === "class") {
+        mergedProps[key] = cn(bitsValue as ClassValue, triggerClass);
+        continue;
+      }
+
+      if (key === "style") {
+        mergedProps[key] = [bitsValue, userValue].filter(Boolean).join("; ");
+        continue;
+      }
+
+      if (
+        key.startsWith("on") &&
+        isFunction(bitsValue) &&
+        isFunction(userValue)
+      ) {
+        mergedProps[key] = (...args: unknown[]) => {
+          bitsValue(...args);
+          userValue(...args);
+        };
+      }
+    }
+
+    mergedProps.class = cn(bitsProps.class as ClassValue, triggerClass);
+
+    return mergedProps as TriggerButtonProps & { class?: ClassValue };
+  }
 </script>
 
 {#if mode === "context"}
   <BitsContextMenu.Root bind:open>
-    <BitsContextMenu.Trigger class={triggerClass}>
-      {@render trigger()}
-    </BitsContextMenu.Trigger>
+    {#if hasButtonTrigger}
+      <BitsContextMenu.Trigger disabled={triggerDisabled}>
+        {#snippet child({ props })}
+          <Button {..._mergeTriggerProps(props)} {icon} {iconRight}>
+            {#if typeof label === "string"}
+              {label}
+            {:else if label}
+              {@render label()}
+            {/if}
+          </Button>
+        {/snippet}
+      </BitsContextMenu.Trigger>
+    {:else}
+      <BitsContextMenu.Trigger class={triggerClass} disabled={triggerDisabled}>
+        {@render trigger?.()}
+      </BitsContextMenu.Trigger>
+    {/if}
 
     <BitsContextMenu.Portal>
       <BitsContextMenu.Content
@@ -98,7 +169,7 @@
                 item.destructive ? "text-error" : "text-content",
               )}
               disabled={item.disabled}
-              onclick={() => !item.disabled && item.onSelect?.()}
+              onSelect={() => !item.disabled && item.onSelect?.()}
               textValue={typeof item.label === "string" ? item.label : ""}
             >
               {#if item.icon}
@@ -119,9 +190,23 @@
   </BitsContextMenu.Root>
 {:else}
   <BitsDropdownMenu.Root bind:open>
-    <BitsDropdownMenu.Trigger class={triggerClass}>
-      {@render trigger()}
-    </BitsDropdownMenu.Trigger>
+    {#if hasButtonTrigger}
+      <BitsDropdownMenu.Trigger disabled={triggerDisabled}>
+        {#snippet child({ props })}
+          <Button {..._mergeTriggerProps(props)} {icon} {iconRight}>
+            {#if typeof label === "string"}
+              {label}
+            {:else if label}
+              {@render label()}
+            {/if}
+          </Button>
+        {/snippet}
+      </BitsDropdownMenu.Trigger>
+    {:else}
+      <BitsDropdownMenu.Trigger class={triggerClass} disabled={triggerDisabled}>
+        {@render trigger?.()}
+      </BitsDropdownMenu.Trigger>
+    {/if}
 
     <BitsDropdownMenu.Portal>
       <BitsDropdownMenu.Content
@@ -152,7 +237,7 @@
                 item.destructive ? "text-error" : "text-content",
               )}
               disabled={item.disabled}
-              onclick={() => !item.disabled && item.onSelect?.()}
+              onSelect={() => !item.disabled && item.onSelect?.()}
               textValue={typeof item.label === "string" ? item.label : ""}
             >
               {#if item.icon}
