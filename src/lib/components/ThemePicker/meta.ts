@@ -50,6 +50,12 @@ export const componentMeta = components([
         "Whether the button should have a square aspect ratio.",
         "false",
       ),
+      prop(
+        "wide",
+        "boolean",
+        "Whether the button should span the full width of its container.",
+        "false",
+      ),
     ],
   },
 ]);

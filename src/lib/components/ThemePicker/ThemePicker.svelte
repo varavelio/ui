@@ -58,6 +58,12 @@
      * @default false
      */
     square?: boolean;
+
+    /**
+     * Whether the button should span the full width of its container.
+     * @default false
+     */
+    wide?: boolean;
   }
 
   let {
@@ -69,6 +75,7 @@
     variant = "outline",
     color = "neutral",
     square = false,
+    wide = false,
   }: Props = $props();
 
   let selectedTheme = $derived(theme.current);
@@ -105,14 +112,16 @@
 {/snippet}
 
 {#snippet triggerButton()}
-  <Button {variant} {radius} {size} {color} {square} class={className}>
+  <Button {variant} {radius} {size} {color} {square} {wide} class={className}>
     {@render triggerContent()}
   </Button>
 {/snippet}
 
 {#snippet maybeTooltip()}
   {#if iconOnly}
-    <Tooltip content={label} delay={0}>{@render triggerButton()}</Tooltip>
+    <Tooltip content={label} delay={0} triggerClass={wide ? "w-full" : ""}>
+      {@render triggerButton()}
+    </Tooltip>
   {:else}
     {@render triggerButton()}
   {/if}
@@ -152,6 +161,7 @@
 {/snippet}
 
 <Menu
+  triggerClass={wide ? "w-full" : ""}
   items={options.map((option) => ({
     label: labelSnippets[option.value],
     onSelect: () => theme.set(option.value),

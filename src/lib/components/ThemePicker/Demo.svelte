@@ -53,9 +53,26 @@
       </div>
     </article>
 
-    <article
-      class="rounded-lg border border-base-400 bg-base-100 p-4 desk:col-span-2"
-    >
+    <article class="rounded-lg border border-base-400 bg-base-100 p-4">
+      <div class="space-y-3">
+        <h4 class="text-sm font-medium text-content">Full width trigger</h4>
+        <p class="text-xs leading-5 text-content-muted">
+          Use the
+          <code
+            class="rounded-sm bg-base-200 px-1.5 py-0.5 font-mono text-[11px] text-content"
+          >
+            wide
+          </code>
+          prop to make the trigger span the full width of its container.
+        </p>
+        <div class="flex flex-col gap-3">
+          <ThemePicker wide label="Wide Theme Picker" />
+          <ThemePicker wide variant="ghost" label="Wide Ghost Theme Picker" />
+        </div>
+      </div>
+    </article>
+
+    <article class="rounded-lg border border-base-400 bg-base-100 p-4">
       <div class="space-y-3">
         <h4 class="text-sm font-medium text-content">
           Icon-only tooltip behavior
