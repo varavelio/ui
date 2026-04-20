@@ -1,11 +1,8 @@
 <script lang="ts">
   import { Check, LaptopMinimal, MoonStar, SunMedium } from "@lucide/svelte";
-  import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { theme } from "../../runtime/index.js";
-  import { Button } from "../Button/index.js";
   import { Menu } from "../Menu/index.js";
-  import { Tooltip } from "../Tooltip/index.js";
 
   const options = [
     { value: "system", label: "System", icon: LaptopMinimal },
@@ -85,6 +82,8 @@
   let TriggerIcon = $derived(selectedOption.icon);
   let effectiveShowLabel = $derived(showLabel && !square);
   let iconOnly = $derived(!effectiveShowLabel);
+  let triggerLabel = $derived(effectiveShowLabel ? label : undefined);
+  let triggerHint = $derived(iconOnly ? label : undefined);
 
   let iconSnippets = $derived({
     light: sunIcon,
@@ -99,34 +98,6 @@
   });
 </script>
 
-{#snippet icon(Icon: Component)}
-  <Icon class="size-4" />
-{/snippet}
-
-{#snippet triggerContent()}
-  <TriggerIcon class="size-4" />
-
-  {#if effectiveShowLabel}
-    <span>{label}</span>
-  {/if}
-{/snippet}
-
-{#snippet triggerButton()}
-  <Button {variant} {radius} {size} {color} {square} {wide} class={className}>
-    {@render triggerContent()}
-  </Button>
-{/snippet}
-
-{#snippet maybeTooltip()}
-  {#if iconOnly}
-    <Tooltip content={label} delay={0} triggerClass={wide ? "w-full" : ""}>
-      {@render triggerButton()}
-    </Tooltip>
-  {:else}
-    {@render triggerButton()}
-  {/if}
-{/snippet}
-
 {#snippet labelContent(optionLabel: string, isSelected: boolean)}
   <div class="flex flex-1 items-center justify-between gap-3">
     <span>{optionLabel}</span>
@@ -137,15 +108,15 @@
 {/snippet}
 
 {#snippet sunIcon()}
-  {@render icon(SunMedium)}
+  <SunMedium class="size-4" />
 {/snippet}
 
 {#snippet moonIcon()}
-  {@render icon(MoonStar)}
+  <MoonStar class="size-4" />
 {/snippet}
 
 {#snippet laptopIcon()}
-  {@render icon(LaptopMinimal)}
+  <LaptopMinimal class="size-4" />
 {/snippet}
 
 {#snippet lightLabel()}
@@ -161,15 +132,21 @@
 {/snippet}
 
 <Menu
-  triggerClass={wide ? "w-full" : ""}
+  triggerClass={className}
+  {size}
+  {radius}
+  {variant}
+  {color}
+  {square}
+  {wide}
+  icon={TriggerIcon}
+  label={triggerLabel}
+  aria-label={label}
+  title={triggerHint}
   items={options.map((option) => ({
     label: labelSnippets[option.value],
     onSelect: () => theme.set(option.value),
     icon: iconSnippets[option.value],
     type: "item",
   }))}
->
-  {#snippet trigger()}
-    {@render maybeTooltip()}
-  {/snippet}
-</Menu>
+/>
