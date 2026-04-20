@@ -290,7 +290,6 @@
       <GithubButton
         user="varavelio"
         repo="ui"
-        variant="ghost"
         class="hidden desk:inline-flex"
       />
       <ThemePicker class="hidden shrink-0 desk:inline-flex" />
@@ -438,15 +437,9 @@
       </div>
 
       <div class="border-t pt-4 desk:hidden">
-        <p
-          class="mb-3 text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
-        >
-          Theme
-        </p>
-
         <div class="flex flex-col gap-4">
-          <ThemePicker />
-          <GithubButton user="varavelio" repo="ui" variant="ghost" />
+          <ThemePicker wide />
+          <GithubButton user="varavelio" repo="ui" />
         </div>
       </div>
     </div>
