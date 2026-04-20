@@ -95,6 +95,12 @@
      * The relationship attribute of the generated link.
      */
     rel?: HTMLAnchorAttributes["rel"];
+
+    /**
+     * Whether the button should span the full width of its container.
+     * @default false
+     */
+    wide?: boolean;
   }
 
   let {
@@ -113,6 +119,7 @@
     showTag = true,
     target = "_blank",
     rel,
+    wide = false,
   }: Props = $props();
 
   let info = $state<GithubRepositoryInfo | null>(null);
@@ -191,8 +198,8 @@
   {size}
   {target}
   {variant}
-  class={cn("w-full max-w-full", className)}
-  wide
+  {wide}
+  class={className}
 >
   <span class="inline-flex min-w-0 flex-1 items-center gap-2">
     <SiGithub aria-hidden="true" class="size-4 shrink-0" />

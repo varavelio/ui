@@ -55,6 +55,12 @@ export const componentMeta = components([
         "HTMLAnchorAttributes['rel']",
         "The relationship attribute of the generated link.",
       ),
+      prop(
+        "wide",
+        "boolean",
+        "Whether the button should span the full width of its container.",
+        "false",
+      ),
     ],
   },
 ]);
