@@ -1,0 +1,73 @@
+<script lang="ts">
+  import type { Component, Snippet } from "svelte";
+  import type {
+    ClassValue,
+    HTMLAnchorAttributes,
+    HTMLButtonAttributes,
+  } from "svelte/elements";
+  import { cn } from "../../helpers/cn.js";
+  import { Button } from "../Button/index.js";
+
+  export interface BaseProps {
+    /**
+     * Optional icon component to display before the label.
+     */
+    icon?: Component;
+
+    /**
+     * The label text of the link.
+     */
+    label: string;
+
+    /**
+     * Whether the link is currently active.
+     */
+    isActive?: boolean;
+
+    /**
+     * Inner content. Typically not needed since `label` and `icon` are provided,
+     * but supported for advanced customization.
+     */
+    children?: Snippet;
+
+    /**
+     * Additional CSS classes.
+     */
+    class?: ClassValue;
+  }
+
+  export type AnchorProps = BaseProps & HTMLAnchorAttributes & { href: string };
+  export type ButtonProps = BaseProps & HTMLButtonAttributes & { href?: never };
+
+  export type Props = AnchorProps | ButtonProps;
+
+  let {
+    class: className,
+    label,
+    icon: IconComponent,
+    isActive = false,
+    children,
+    ...restProps
+  }: Props = $props();
+</script>
+
+<Button
+  variant="ghost"
+  color={isActive ? "info" : "neutral"}
+  active={isActive}
+  wide={true}
+  alignContent="left"
+  icon={IconComponent}
+  class={cn(
+    "font-medium",
+    {
+      "text-content/70 hover:text-content": !isActive,
+    },
+    className,
+  )}
+  aria-current={isActive ? "page" : undefined}
+  {...restProps as any}
+>
+  <span class="flex-1 truncate text-left">{label}</span>
+  {@render children?.()}
+</Button>

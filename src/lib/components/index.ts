@@ -24,6 +24,7 @@ export { Link } from "./Link/index.js";
 export { Loader } from "./Loader/index.js";
 export { Masonry } from "./Masonry/index.js";
 export { Menu } from "./Menu/index.js";
+export { Nav } from "./Nav/index.js";
 export { Pagination } from "./Pagination/index.js";
 export { Popover } from "./Popover/index.js";
 export { Progress } from "./Progress/index.js";
