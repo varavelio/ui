@@ -49,6 +49,19 @@ export const brandEntries: BrandExplorerEntry[] = catalog.brand.map(
   }),
 );
 
+export type BlockExplorerEntry = (typeof catalog.blocks)[number] & {
+  id: string;
+  importCode: string;
+};
+
+export const blockEntries: BlockExplorerEntry[] = catalog.blocks.map(
+  (entry) => ({
+    ...entry,
+    id: entry.name,
+    importCode: `import { ${entry.name} } from "@varavel/ui/blocks";`,
+  }),
+);
+
 export type LayoutExplorerEntry = {
   id: string;
   name: string;
@@ -81,6 +94,8 @@ export const defaultBrandSlug =
   "";
 
 export const defaultLayoutSlug = layoutEntries[0]?.slug ?? "";
+
+export const defaultBlockSlug = blockEntries[0]?.slug ?? "";
 
 export type { ComponentCategory };
 export { componentCategories };
@@ -850,6 +865,7 @@ export const componentSlugSet = new Set(
   componentEntries.map((entry) => entry.slug),
 );
 export const brandSlugSet = new Set(brandEntries.map((entry) => entry.slug));
+export const blockSlugSet = new Set(blockEntries.map((entry) => entry.slug));
 
 export const explorerSections: {
   type: ExplorerType;
@@ -872,7 +888,6 @@ export const explorerSections: {
     type: "blocks",
     label: "Blocks",
     description: "Prebuilt compositions for common interface sections.",
-    soon: true,
   },
   {
     type: "layouts",
@@ -897,7 +912,7 @@ export function getSectionHref(type: ExplorerType): string {
     case "runtime":
       return defaultRuntimeSlug ? `/runtime/${defaultRuntimeSlug}` : "/runtime";
     case "blocks":
-      return "/blocks";
+      return defaultBlockSlug ? `/blocks/${defaultBlockSlug}` : "/blocks";
     case "layouts":
       return defaultLayoutSlug ? `/layouts#${defaultLayoutSlug}` : "/layouts";
   }

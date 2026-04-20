@@ -20,6 +20,10 @@ export const entries: EntryGenerator = () => [
     type: "brand",
     slug: entry.slug,
   })),
+  ...catalog.blocks.map((entry) => ({
+    type: "blocks",
+    slug: entry.slug,
+  })),
   ...runtimeSlugs.map((slug) => ({
     type: "runtime",
     slug,

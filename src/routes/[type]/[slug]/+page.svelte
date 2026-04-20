@@ -3,6 +3,7 @@
   import Copy from "$lib/components/Copy/Copy.svelte";
   import { Alert, Badge, Card, Table } from "$lib/components/index.js";
   import {
+    blockEntries,
     brandEntries,
     componentEntries,
     isExplorerType,
@@ -26,12 +27,20 @@
       : null,
   );
 
+  let currentBlock = $derived(
+    currentType === "blocks"
+      ? (blockEntries.find((entry) => entry.slug === page.params.slug) ?? null)
+      : null,
+  );
+
   let currentCatalogEntry = $derived(
     currentType === "components"
       ? currentComponent
       : currentType === "brand"
         ? currentBrand
-        : null,
+        : currentType === "blocks"
+          ? currentBlock
+          : null,
   );
 
   let currentRuntime = $derived(
@@ -58,7 +67,7 @@
   <title>{documentTitle}</title>
 </svelte:head>
 
-{#if currentType === "components" || currentType === "brand"}
+{#if currentType === "components" || currentType === "brand" || currentType === "blocks"}
   {#if currentCatalogEntry}
     <div class="space-y-5 overflow-hidden">
       <div class="flex flex-wrap items-start justify-between gap-5">
@@ -155,10 +164,10 @@
     </section>
   {:else}
     <Alert
-      title={currentType === "brand" ? "Brand component not found" : "Component not found"}
+      title={currentType === "brand" ? "Brand component not found" : (currentType === "blocks" ? "Block not found" : "Component not found")}
       description={currentType === "brand"
           ? "Pick another brand component from the sidebar."
-          : "Pick another component from the sidebar."}
+          : (currentType === "blocks" ? "Pick another block from the sidebar." : "Pick another component from the sidebar.")}
       color="warning"
       closable={false}
     />

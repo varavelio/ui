@@ -23,6 +23,7 @@
   } from "$lib/components/index.js";
   import { AppLayout } from "$lib/layouts/index.js";
   import {
+    blockEntries,
     brandEntries,
     type ComponentCategory,
     componentCategories,
@@ -52,6 +53,7 @@
     "Overlays & Floating UI": Component,
     "Status & Feedback": Component,
     "Utilities & Preferences": Layers,
+    Blocks: Layers,
   } as const satisfies Record<ComponentCategory, SvelteComponent>;
 
   const runtimeCategoryIcons = {
@@ -133,6 +135,17 @@
     }),
   );
 
+  let filteredBlockEntries = $derived.by(() =>
+    blockEntries.filter((entry) => {
+      if (!normalizedQuery) {
+        return true;
+      }
+
+      const haystack = `${entry.name} ${entry.category}`.toLowerCase();
+      return haystack.includes(normalizedQuery);
+    }),
+  );
+
   let filteredRuntimeEntries = $derived.by(() =>
     runtimeEntries.filter((entry) => {
       if (!normalizedQuery) {
@@ -157,6 +170,14 @@
     groupEntriesByCategory(
       componentCategories,
       filteredBrandEntries,
+      componentCategoryIcons,
+    ),
+  );
+
+  let blockNavGroups = $derived.by(() =>
+    groupEntriesByCategory(
+      componentCategories,
+      filteredBlockEntries,
       componentCategoryIcons,
     ),
   );
@@ -217,12 +238,17 @@
       return "Search brand component or category";
     }
 
+    if (currentType === "blocks") {
+      return "Search block or category";
+    }
+
     return "Search component or category";
   });
 
   let supportsSearch = $derived(
     currentType === "components" ||
       currentType === "brand" ||
+      currentType === "blocks" ||
       currentType === "runtime",
   );
 </script>
@@ -310,12 +336,12 @@
           </Nav.Root>
         </div>
 
-        {#if currentType === "components" || currentType === "brand"}
-          {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
+        {#if currentType === "components" || currentType === "brand" || currentType === "blocks"}
+          {@const navGroups = currentType === "brand" ? brandNavGroups : (currentType === "blocks" ? blockNavGroups : componentNavGroups)}
 
           <div class="space-y-3">
             <Nav.Root
-              aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
+              aria-label={currentType === "brand" ? "Brand catalog" : (currentType === "blocks" ? "Block catalog" : "Component catalog")}
             >
               {#each navGroups as group (group.category)}
                 <Nav.Group
@@ -338,10 +364,10 @@
               <Alert
                 title={currentType === "brand"
                     ? "No brand components match this filter"
-                    : "No components match this filter"}
+                    : (currentType === "blocks" ? "No blocks match this filter" : "No components match this filter")}
                 description={currentType === "brand"
                     ? "Try broader terms like logo or loader."
-                    : "Try broader terms like form, dialog, or feedback."}
+                    : (currentType === "blocks" ? "Try broader terms like hero or footer." : "Try broader terms like form, dialog, or feedback.")}
                 color="warning"
                 closable={false}
               />

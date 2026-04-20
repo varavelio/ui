@@ -12,6 +12,7 @@ export const componentCategories = [
   "Overlays & Floating UI",
   "Status & Feedback",
   "Utilities & Preferences",
+  "Blocks",
 ] as const;
 
 /**
@@ -102,9 +103,17 @@ const brandMetaModules = import.meta.glob<MetaModuleShape>(
   },
 );
 
+const blocksMetaModules = import.meta.glob<MetaModuleShape>(
+  "./blocks/*/meta.ts",
+  {
+    eager: true,
+  },
+);
+
 /** Catalog */
 
 export const catalog = {
   components: createCatalogEntries("components", componentMetaModules),
   brand: createCatalogEntries("brand", brandMetaModules),
+  blocks: createCatalogEntries("blocks", blocksMetaModules),
 };
