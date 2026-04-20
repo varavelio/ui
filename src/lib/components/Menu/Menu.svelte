@@ -45,6 +45,11 @@
      * @default "dropdown"
      */
     mode?: "dropdown" | "context";
+
+    /**
+     * Additional CSS classes to apply to the trigger element.
+     */
+    triggerClass?: ClassValue;
   }
 
   let {
@@ -54,12 +59,13 @@
     items,
     side = "bottom",
     mode = "dropdown",
+    triggerClass,
   }: Props = $props();
 </script>
 
 {#if mode === "context"}
   <BitsContextMenu.Root bind:open>
-    <BitsContextMenu.Trigger class="w-fit">
+    <BitsContextMenu.Trigger class={triggerClass}>
       {@render trigger()}
     </BitsContextMenu.Trigger>
 
@@ -113,7 +119,7 @@
   </BitsContextMenu.Root>
 {:else}
   <BitsDropdownMenu.Root bind:open>
-    <BitsDropdownMenu.Trigger class="w-fit">
+    <BitsDropdownMenu.Trigger class={triggerClass}>
       {@render trigger()}
     </BitsDropdownMenu.Trigger>
 
