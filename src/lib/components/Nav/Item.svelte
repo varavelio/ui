@@ -59,7 +59,7 @@
   alignContent="left"
   icon={IconComponent}
   class={cn(
-    "font-medium",
+    "font-medium px-2",
     {
       "text-content/70 hover:text-content": !active,
     },

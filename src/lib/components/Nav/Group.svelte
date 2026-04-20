@@ -63,7 +63,7 @@
     alignContent="left"
     icon={IconComponent}
     onclick={toggle}
-    class="font-medium text-content/70 hover:text-content"
+    class="font-medium text-content/70 px-2 hover:text-content"
     aria-expanded={open}
     {...restProps as any}
   >
@@ -79,17 +79,18 @@
   {#if open}
     <div
       class={cn(
-        "ml-4 mt-1 flex flex-col space-y-1 pl-3 relative",
+        "ml-4 mt-1 flex flex-col space-y-1 pl-3.5 relative",
         // Direct children positioning and pseudo-elements for the horizontal line
         "[&>*]:relative [&>*::before]:absolute [&>*::before]:content-['']",
         // Position it right at the middle of the first line element (top-[18px] approx)
-        "[&>*::before]:-left-3 [&>*::before]:top-[18px] [&>*::before]:w-2",
+        "[&>*::before]:-left-3.5 [&>*::before]:top-[18px] [&>*::before]:w-2.5",
         {
-          "border-base-400 border-dashed [&>*::before]:border-dashed [&>*::before]:border-base-400": line === "dashed",
-          "border-base-400 border-solid [&>*::before]:border-solid [&>*::before]:border-base-400": line === "solid",
-          "border-transparent [&>*::before]:border-transparent": line === "none",
-          "border-l [&>*::before]:border-t": borderWidth === "1",
-          "border-l-2 [&>*::before]:border-t-2": borderWidth === "2",
+          "after:absolute after:top-0 after:left-0 after:h-[calc(100%-19px)]": line !== "none",
+          "after:border-l after:border-dashed after:border-base-400 [&>*::before]:border-dashed [&>*::before]:border-base-400": line === "dashed",
+          "after:border-l after:border-solid after:border-base-400 [&>*::before]:border-solid [&>*::before]:border-base-400": line === "solid",
+          "after:border-transparent [&>*::before]:border-transparent": line === "none",
+          "after:border-l [&>*::before]:border-t": borderWidth === "1",
+          "after:border-l-2 [&>*::before]:border-t-2": borderWidth === "2",
         }
       )}
     >

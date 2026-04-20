@@ -23,13 +23,13 @@
       <Nav.Group label="Management" icon={Users} open={true}>
         <Nav.Item href="#users" label="Users" />
 
-        <Nav.Group label="Permissions" icon={Shield} open={true} line="solid">
+        <Nav.Group label="Permissions" icon={Shield} open={true}>
           <Nav.Item href="#roles" label="Roles" active />
 
           <Nav.Group label="Advanced" icon={Folder} open={true}>
             <Nav.Item href="#policies" label="Policies" />
 
-            <Nav.Group label="Overrides" icon={Box} open={true} line="none">
+            <Nav.Group label="Overrides" icon={Box} open={true}>
               <Nav.Item href="#custom-rules" label="Custom Rules" />
             </Nav.Group>
           </Nav.Group>
