@@ -1,10 +1,10 @@
 import Group from "./Group.svelte";
-import Link from "./Link.svelte";
+import Item from "./Item.svelte";
 import Root from "./Root.svelte";
 
 export const Nav = {
   Root,
-  Link,
+  Item,
   Group,
 } as const;
 

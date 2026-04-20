@@ -9,14 +9,14 @@ export const componentMeta = components([
     props: [
       prop("Root.children", "Snippet", "The navigation items."),
       prop(
-        "Link.href",
+        "Item.href",
         "string",
         "Destination URL. Renders as an anchor tag if provided.",
       ),
-      prop("Link.label", "string", "The text label of the link."),
-      prop("Link.icon", "Component", "Optional Lucide-svelte icon component."),
+      prop("Item.label", "string", "The text label of the link."),
+      prop("Item.icon", "Component", "Optional Lucide-svelte icon component."),
       prop(
-        "Link.isActive",
+        "Item.isActive",
         "boolean",
         "Marks the link as currently active.",
         "false",
