@@ -74,7 +74,8 @@ When updating this document, do so with the context of the entire document in mi
 - **Key Files**:
   - `+layout.ts`: Route-level options/configuration for the showcase app.
   - `+layout.svelte`: Global layout for the showcase app. It mounts `UiProvider` so runtime primitives (e.g., global dialogs) remain available throughout the explorer.
-  - `[type]/+layout.svelte`: Shared explorer shell with the top section navbar (`components`, `brand`, `blocks`, `layouts`, `runtime`) and a type-aware sidebar.
+  - `[type]/+layout.svelte`: Shared explorer shell built with `AppLayout`; keep the section switcher in the header and render sidebar navigation with the `Nav` component so mobile and desktop stay aligned.
+  - `[type]/+page.ts` and `[type]/[slug]/+page.ts`: Keep static `entries()` lists in sync with the explorer registry so adapter-static prerenders every explorer section and detail route.
   - `[type]/[slug]/+page.svelte`: Detail renderer for explorer entries. It handles component docs from `src/lib/catalog.ts` and runtime API docs from `[type]/explorer.ts`.
 
 ## Svelte
