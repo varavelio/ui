@@ -438,7 +438,7 @@
 
       <div class="border-t pt-4 desk:hidden">
         <div class="flex flex-col gap-4">
-          <ThemePicker wide />
+          <ThemePicker wide alignContent="left" />
           <GithubButton user="varavelio" repo="ui" />
         </div>
       </div>
