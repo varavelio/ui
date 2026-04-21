@@ -95,13 +95,14 @@ import { Button, Input } from "@varavel/ui";
 </script>
 
 <AppLayout>
-  {#snippet header()}
-    <div class="flex items-center justify-between w-full">
-      <span>My Application</span>
-      <Button size="sm" onclick={() => toast.info("Refreshing...")}>
-        Refresh
-      </Button>
-    </div>
+  {#snippet headerLeft()}
+    <span>My Application</span>
+  {/snippet}
+
+  {#snippet headerRight()}
+    <Button size="sm" onclick={() => toast.info("Refreshing...")}>
+      Refresh
+    </Button>
   {/snippet}
 
   {#snippet main()}
