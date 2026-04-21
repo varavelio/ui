@@ -87,7 +87,10 @@ function createCatalogEntries(
     .map((meta) => ({
       ...meta,
       type,
-      slug: meta.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
+      slug: meta.name
+        .replace(/\./g, "-")
+        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+        .toLowerCase(),
     }));
 }
 
@@ -104,7 +107,7 @@ const brandMetaModules = import.meta.glob<MetaModuleShape>(
 );
 
 const blocksMetaModules = import.meta.glob<MetaModuleShape>(
-  "./blocks/*/meta.ts",
+  "./blocks/*/*/meta.ts",
   {
     eager: true,
   },
