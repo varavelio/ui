@@ -284,7 +284,7 @@
 </script>
 
 <AppLayout primaryRegion="header" maxWidth="xl" sidebarWidth="lg">
-  {#snippet header()}
+  {#snippet headerLeft()}
     <div class="flex min-w-0 flex-1 items-center gap-4">
       <div class="min-w-0 shrink-0 flex items-center gap-2">
         <Logo class="size-6 shrink-0" href="/" />
@@ -325,180 +325,178 @@
     </div>
   {/snippet}
 
-  {#snippet sidebar()}
-    <div class="flex min-h-full flex-col gap-4">
-      <div class="space-y-2 border-b pb-4">
-        <h2 class="text-xl font-semibold tracking-tight desk:text-2xl">
-          {sidebarTitle}
-        </h2>
-        <p class="text-sm text-content-muted">{sidebarDescription}</p>
+  {#snippet sidebarTop()}
+    <div class="space-y-2 border-b pb-4">
+      <h2 class="text-xl font-semibold tracking-tight desk:text-2xl">
+        {sidebarTitle}
+      </h2>
+      <p class="text-sm text-content-muted">{sidebarDescription}</p>
 
-        {#if supportsSearch}
-          <label class="sr-only" for="explorer-search">Explorer search</label>
+      {#if supportsSearch}
+        <label class="sr-only" for="explorer-search">Explorer search</label>
 
-          <div class="relative">
-            <Search
-              class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-content-muted"
-            />
-            <Input
-              id="explorer-search"
-              bind:value={query}
-              class="pl-9"
-              placeholder={searchPlaceholder}
-            />
-          </div>
-        {/if}
+        <div class="relative">
+          <Search
+            class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-content-muted"
+          />
+          <Input
+            id="explorer-search"
+            bind:value={query}
+            class="pl-9"
+            placeholder={searchPlaceholder}
+          />
+        </div>
+      {/if}
+    </div>
+  {/snippet}
+
+  {#snippet sidebarCenter()}
+    <div class="space-y-4">
+      <div class="space-y-3 border-b pb-4 desk:hidden">
+        <p
+          class="text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
+        >
+          Sections
+        </p>
+
+        <Nav.Root aria-label="Explorer sections">
+          {#each sectionNavItems as item (item.type)}
+            <Nav.Item href={item.href} label={item.label} active={item.active}>
+              {#if item.soon}
+                <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
+              {/if}
+            </Nav.Item>
+          {/each}
+        </Nav.Root>
       </div>
 
-      <div class="flex-1 space-y-4">
-        <div class="space-y-3 border-b pb-4 desk:hidden">
-          <p
-            class="text-xs font-medium tracking-[0.18em] text-content-muted uppercase"
-          >
-            Sections
-          </p>
+      {#if currentType === "components" || currentType === "brand"}
+        {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
 
-          <Nav.Root aria-label="Explorer sections">
-            {#each sectionNavItems as item (item.type)}
-              <Nav.Item
-                href={item.href}
-                label={item.label}
-                active={item.active}
+        <div class="space-y-3">
+          <Nav.Root
+            aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
+          >
+            {#each navGroups as group (group.category)}
+              <Nav.Group
+                label={`${group.category} (${group.count})`}
+                icon={group.icon}
+                open={true}
               >
-                {#if item.soon}
-                  <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
-                {/if}
-              </Nav.Item>
+                {#each group.entries as entry (entry.id)}
+                  <Nav.Item
+                    href={`/${currentType}/${entry.slug}/`}
+                    label={entry.name}
+                    active={activeSlug === entry.slug}
+                  />
+                {/each}
+              </Nav.Group>
             {/each}
           </Nav.Root>
+
+          {#if !navGroups.length}
+            <Alert
+              title={currentType === "brand"
+                  ? "No brand components match this filter"
+                  : "No components match this filter"}
+              description={currentType === "brand"
+                  ? "Try broader terms like logo or loader."
+                  : "Try broader terms like form, dialog, or feedback."}
+              color="warning"
+              closable={false}
+            />
+          {/if}
         </div>
+      {:else if currentType === "blocks"}
+        <div class="space-y-3">
+          <Nav.Root aria-label="Block catalog">
+            {#each blockNavGroups as group (group.family)}
+              <Nav.Group
+                label={`${group.family} (${group.count})`}
+                icon={group.icon}
+                open={true}
+              >
+                {#each group.entries as entry (entry.id)}
+                  <Nav.Item
+                    href={`/${currentType}/${entry.slug}/`}
+                    label={entry.variant}
+                    active={activeSlug === entry.slug}
+                  />
+                {/each}
+              </Nav.Group>
+            {/each}
+          </Nav.Root>
 
-        {#if currentType === "components" || currentType === "brand"}
-          {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
-
-          <div class="space-y-3">
-            <Nav.Root
-              aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
-            >
-              {#each navGroups as group (group.category)}
-                <Nav.Group
-                  label={`${group.category} (${group.count})`}
-                  icon={group.icon}
-                  open={true}
-                >
-                  {#each group.entries as entry (entry.id)}
-                    <Nav.Item
-                      href={`/${currentType}/${entry.slug}/`}
-                      label={entry.name}
-                      active={activeSlug === entry.slug}
-                    />
-                  {/each}
-                </Nav.Group>
-              {/each}
-            </Nav.Root>
-
-            {#if !navGroups.length}
-              <Alert
-                title={currentType === "brand"
-                    ? "No brand components match this filter"
-                    : "No components match this filter"}
-                description={currentType === "brand"
-                    ? "Try broader terms like logo or loader."
-                    : "Try broader terms like form, dialog, or feedback."}
-                color="warning"
-                closable={false}
-              />
-            {/if}
-          </div>
-        {:else if currentType === "blocks"}
-          <div class="space-y-3">
-            <Nav.Root aria-label="Block catalog">
-              {#each blockNavGroups as group (group.family)}
-                <Nav.Group
-                  label={`${group.family} (${group.count})`}
-                  icon={group.icon}
-                  open={true}
-                >
-                  {#each group.entries as entry (entry.id)}
-                    <Nav.Item
-                      href={`/${currentType}/${entry.slug}/`}
-                      label={entry.variant}
-                      active={activeSlug === entry.slug}
-                    />
-                  {/each}
-                </Nav.Group>
-              {/each}
-            </Nav.Root>
-
-            {#if !blockNavGroups.length}
-              <Alert
-                title="No blocks match this filter"
-                description="Try broader terms like hero, pricing, or footer."
-                color="warning"
-                closable={false}
-              />
-            {/if}
-          </div>
-        {:else if currentType === "runtime"}
-          <div class="space-y-3">
-            <Nav.Root aria-label="Runtime catalog">
-              {#each runtimeNavGroups as group (group.category)}
-                <Nav.Group
-                  label={`${group.category} (${group.count})`}
-                  icon={group.icon}
-                  open={true}
-                >
-                  {#each group.entries as entry (entry.slug)}
-                    <Nav.Item
-                      href={`/runtime/${entry.slug}`}
-                      label={entry.name}
-                      active={activeSlug === entry.slug}
-                    />
-                  {/each}
-                </Nav.Group>
-              {/each}
-            </Nav.Root>
-
-            {#if !runtimeNavGroups.length}
-              <Alert
-                title="No runtime APIs match this filter"
-                description="Try searching for theme or dialog."
-                color="warning"
-                closable={false}
-              />
-            {/if}
-          </div>
-        {:else if currentType === "layouts"}
-          <div class="space-y-3">
-            <Nav.Root aria-label="Layout catalog">
-              {#each layoutNavItems as entry (entry.id)}
-                <Nav.Item
-                  href={`/layouts#${entry.slug}`}
-                  label={entry.name}
-                  active={entry.active}
-                />
-              {/each}
-            </Nav.Root>
-
-            {#if !layoutEntries.length}
-              <Alert
-                title="No layouts available"
-                description="Add a layout entry to the explorer registry."
-                color="warning"
-                closable={false}
-              />
-            {/if}
-          </div>
-        {:else}
-          <Alert title="Coming soon" color="info" closable={false} />
-        {/if}
-      </div>
-
-      <div class="border-t pt-4 desk:hidden">
-        <div class="flex flex-col gap-4">
-          <ThemePicker wide alignContent="left" />
-          <GithubButton user="varavelio" repo="ui" />
+          {#if !blockNavGroups.length}
+            <Alert
+              title="No blocks match this filter"
+              description="Try broader terms like hero, pricing, or footer."
+              color="warning"
+              closable={false}
+            />
+          {/if}
         </div>
+      {:else if currentType === "runtime"}
+        <div class="space-y-3">
+          <Nav.Root aria-label="Runtime catalog">
+            {#each runtimeNavGroups as group (group.category)}
+              <Nav.Group
+                label={`${group.category} (${group.count})`}
+                icon={group.icon}
+                open={true}
+              >
+                {#each group.entries as entry (entry.slug)}
+                  <Nav.Item
+                    href={`/runtime/${entry.slug}`}
+                    label={entry.name}
+                    active={activeSlug === entry.slug}
+                  />
+                {/each}
+              </Nav.Group>
+            {/each}
+          </Nav.Root>
+
+          {#if !runtimeNavGroups.length}
+            <Alert
+              title="No runtime APIs match this filter"
+              description="Try searching for theme or dialog."
+              color="warning"
+              closable={false}
+            />
+          {/if}
+        </div>
+      {:else if currentType === "layouts"}
+        <div class="space-y-3">
+          <Nav.Root aria-label="Layout catalog">
+            {#each layoutNavItems as entry (entry.id)}
+              <Nav.Item
+                href={`/layouts#${entry.slug}`}
+                label={entry.name}
+                active={entry.active}
+              />
+            {/each}
+          </Nav.Root>
+
+          {#if !layoutEntries.length}
+            <Alert
+              title="No layouts available"
+              description="Add a layout entry to the explorer registry."
+              color="warning"
+              closable={false}
+            />
+          {/if}
+        </div>
+      {:else}
+        <Alert title="Coming soon" color="info" closable={false} />
+      {/if}
+    </div>
+  {/snippet}
+
+  {#snippet sidebarBottom()}
+    <div class="border-t pt-4 desk:hidden">
+      <div class="flex flex-col gap-4">
+        <ThemePicker wide alignContent="left" />
+        <GithubButton user="varavelio" repo="ui" />
       </div>
     </div>
   {/snippet}
