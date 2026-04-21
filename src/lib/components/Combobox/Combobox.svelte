@@ -2,6 +2,7 @@
   import { Check, ChevronDown } from "@lucide/svelte";
   // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Combobox as BitsCombobox } from "bits-ui";
+  import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
   import Label from "../Label/Label.svelte";
@@ -17,6 +18,16 @@
   };
 
   interface Props {
+    /**
+     * Icon component rendered before the input value.
+     */
+    icon?: Component;
+
+    /**
+     * Icon component rendered instead of the default chevron.
+     */
+    iconRight?: Component;
+
     /**
      * Additional CSS classes to apply to the root wrapper.
      */
@@ -116,6 +127,8 @@
 
   let {
     class: className,
+    icon: Icon,
+    iconRight: IconRight,
     id,
     label,
     description,
@@ -337,6 +350,25 @@
     type="single"
   >
     <div class="relative">
+      {#if Icon}
+        <div
+          class={cn(
+            "pointer-events-none absolute inset-y-0 left-0 flex items-center text-content-muted z-10",
+            {
+              "pl-3": size === "sm" || size === "md",
+              "pl-4": size === "lg",
+            }
+          )}
+        >
+          <Icon
+            class={cn({
+              "size-3.5": size === "sm",
+              "size-4": size === "md",
+              "size-5": size === "lg",
+            })}
+          />
+        </div>
+      {/if}
       <BitsCombobox.Input
         aria-describedby={describedBy}
         aria-invalid={hasError || undefined}
@@ -365,6 +397,9 @@
             "hover:border-error text-error": hasError,
             "focus-visible:border-error focus-visible:ring-error": hasError,
             "ring-1 ring-error bg-base-100": open && hasError,
+            "pl-8": Icon && size === "sm",
+            "pl-10": Icon && size === "md",
+            "pl-11": Icon && size === "lg",
           },
         )}
         defaultValue={selectedItem?.label}
@@ -388,10 +423,16 @@
         onmousedown={handleTriggerMouseDown}
         tabindex={-1}
       >
-        <ChevronDown
-          aria-hidden="true"
-          class="size-full shrink-0 transition-transform group-data-[state=open]:rotate-180"
-        />
+        {#if IconRight}
+          <IconRight
+            class="size-full shrink-0 transition-transform group-data-[state=open]:rotate-180"
+          />
+        {:else}
+          <ChevronDown
+            aria-hidden="true"
+            class="size-full shrink-0 transition-transform group-data-[state=open]:rotate-180"
+          />
+        {/if}
       </BitsCombobox.Trigger>
     </div>
 

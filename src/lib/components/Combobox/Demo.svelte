@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Globe, MapPin, Navigation } from "@lucide/svelte";
   import { Card, Combobox, Label } from "$lib/components/index.js";
 
   const items = [
@@ -34,6 +35,35 @@
 </script>
 
 <div class="space-y-8">
+  <div class="space-y-3">
+    <Label>Icons</Label>
+    <Card class="p-6">
+      <div class="grid desk:grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <Label>Left Icon</Label>
+          <Combobox {items} icon={MapPin} placeholder="Select region..." />
+        </div>
+        <div class="space-y-2">
+          <Label>Right Icon (Overrides Chevron)</Label>
+          <Combobox
+            {items}
+            iconRight={Navigation}
+            placeholder="Select region..."
+          />
+        </div>
+        <div class="space-y-2 desk:col-span-2">
+          <Label>Both Icons</Label>
+          <Combobox
+            {items}
+            icon={Globe}
+            iconRight={Navigation}
+            placeholder="Select region..."
+          />
+        </div>
+      </div>
+    </Card>
+  </div>
+
   <div class="space-y-3">
     <Label>Validation & Custom Values</Label>
     <div class="grid grid-cols-1 gap-4 desk:grid-cols-2">

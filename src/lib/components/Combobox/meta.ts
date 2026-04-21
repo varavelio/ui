@@ -12,6 +12,16 @@ export const componentMeta = components([
         "ClassValue",
         "Additional CSS classes to apply to the root wrapper.",
       ),
+      prop(
+        "icon",
+        "Component",
+        "Icon component rendered before the input value.",
+      ),
+      prop(
+        "iconRight",
+        "Component",
+        "Icon component rendered instead of the default chevron.",
+      ),
       prop("id", "string", "Optional ID for the combobox input element."),
       prop("label", "string", "Label text for the combobox field."),
       prop("description", "string", "Secondary helper text."),
