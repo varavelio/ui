@@ -8,6 +8,12 @@ export const componentMeta = components([
     category: "Overlays & Floating UI",
     props: [
       prop(
+        "as",
+        '"span" | "div" | "button"',
+        "HTML tag used for the trigger wrapper. Defaults to `span` for inline-safe usage.",
+        '"span"',
+      ),
+      prop(
         "content",
         "string | Snippet",
         "Tooltip content. Can be a string or a Svelte snippet for rich content.",

@@ -7,6 +7,12 @@
 
   interface Props {
     /**
+     * HTML tag used for the trigger wrapper.
+     * Use `span` for inline-safe wrapping or `div` for block-level surfaces.
+     * @default "span"
+     */
+    as?: "span" | "div" | "button";
+    /**
      * Additional CSS classes to apply to the trigger element.
      */
     triggerClass?: ClassValue;
@@ -45,6 +51,7 @@
   }
 
   let {
+    as = "span",
     triggerClass,
     contentClass,
     content,
@@ -57,13 +64,20 @@
 </script>
 
 <BitsTooltip.Root delayDuration={delay} {disabled}>
-  <BitsTooltip.Trigger
-    class={cn(
-      "focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content inline-flex outline-hidden",
-      triggerClass ?? "",
-    )}
-  >
-    {@render children?.()}
+  <BitsTooltip.Trigger>
+    {#snippet child({ props })}
+      <svelte:element
+        this={as}
+        {...props}
+        type={as === "button" ? "button" : undefined}
+        class={cn(
+          "inline-flex cursor-help focus:outline-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-content outline-hidden",
+          triggerClass ?? "",
+        )}
+      >
+        {@render children?.()}
+      </svelte:element>
+    {/snippet}
   </BitsTooltip.Trigger>
 
   <BitsTooltip.Portal>
