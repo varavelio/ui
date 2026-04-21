@@ -254,7 +254,7 @@
   );
 </script>
 
-<AppLayout primaryRegion="header" maxWidth="lg">
+<AppLayout primaryRegion="header" maxWidth="xl" sidebarWidth="lg">
   {#snippet header()}
     <div class="flex min-w-0 flex-1 items-center gap-4">
       <div class="min-w-0 shrink-0 flex items-center gap-2">
