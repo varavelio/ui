@@ -290,13 +290,17 @@
     )}
   >
     {#if Icon}
-      <Icon class="size-4 shrink-0" />
+      {#key Icon}
+        <Icon class="size-4 shrink-0" />
+      {/key}
     {/if}
 
     {@render children?.()}
 
     {#if IconRight}
-      <IconRight class="size-4 shrink-0" />
+      {#key IconRight}
+        <IconRight class="size-4 shrink-0" />
+      {/key}
     {/if}
   </span>
 
