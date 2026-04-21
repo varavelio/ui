@@ -31,7 +31,8 @@ When updating this document, do so with the context of the entire document in mi
 
 - **DESIGN.md First**: It is IMPERATIVE to read `DESIGN.md` at the start of every new task. This document standardizes the design system and implementation direction.
 - **bits-ui Docs First**: It is IMPERATIVE to always read `https://bits-ui.com/llms.txt` at the start of every new task to understand Bits UI behavior. Also read any linked docs from that file that are relevant to the specific feature being implemented.
-- **Verification**: Run `npm run format` and `npm run lint` before finishing tasks.
+- **Verification**: Run `npm run format` and `npm run ci` before finishing tasks. Ensure all requested functionality is 100% complete and verified as working.
+- **Task Completion**: Do not stop until the task is 100% complete and all requested functionality is verified as working. Always ensure `npm run ci` passes before finishing.
 - **Context**: Always run `tree` to understand the latest component structure.
 - **Svelte 5**: Use Svelte 5 runes (`$state`, `$derived`, `$props`, etc.). Avoid legacy Svelte syntax.
 - **Tailwind 4**: Use the new Tailwind 4 syntax. The theme is defined in `src/lib/theme.css` using the `@theme` block.
