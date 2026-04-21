@@ -77,13 +77,8 @@
   }: Props = $props();
 
   let selectedTheme = $derived(theme.current);
-  let selectedOption = $derived(
-    options.find((option) => option.value === selectedTheme) ?? options[0],
-  );
-  let TriggerIcon = $derived(selectedOption.icon);
   let effectiveShowLabel = $derived(showLabel && !square);
   let iconOnly = $derived(!effectiveShowLabel);
-  let triggerLabel = $derived(effectiveShowLabel ? label : undefined);
 
   let iconSnippets = $derived({
     light: sunIcon,
@@ -131,6 +126,19 @@
   {@render labelContent("System", selectedTheme === "system")}
 {/snippet}
 
+{#snippet triggerLabelSnippet()}
+  {#if selectedTheme === "light"}
+    <SunMedium class="size-4 shrink-0" />
+  {:else if selectedTheme === "dark"}
+    <MoonStar class="size-4 shrink-0" />
+  {:else}
+    <LaptopMinimal class="size-4 shrink-0" />
+  {/if}
+  {#if effectiveShowLabel}
+    <span>{label}</span>
+  {/if}
+{/snippet}
+
 {#snippet triggerMenu()}
   <Menu
     triggerClass={className}
@@ -140,8 +148,7 @@
     {color}
     {square}
     {wide}
-    icon={TriggerIcon}
-    label={triggerLabel}
+    label={triggerLabelSnippet}
     aria-label={iconOnly ? label : undefined}
     items={options.map((option) => ({
       label: labelSnippets[option.value],
