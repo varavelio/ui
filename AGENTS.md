@@ -105,7 +105,11 @@ Generates a Svelte Playground link with the provided code. After completing the 
 
 - **Component Exporting**: Export components via `index.ts` in their respective folders, and then again in the main `src/lib/components/index.ts`.
 - **Compound Components**: When a component family exposes namespaced parts (for example `Bento.Grid` and `Bento.Item`), keep the namespace export in the folder `index.ts` and make the parent layout own shared structure such as column count and gap while children own span and surface props.
+- **Block Families**: Treat `src/lib/blocks/` like compound component families. Export opinionated variants from each folder namespace (for example `Hero.Centered`, `Pricing.Table`, `Testimonials.Marquee`) instead of exposing one oversized configurable block.
+- **Block Variant Layout**: Organize blocks as `src/lib/blocks/Block/Variant/`, with each variant folder owning its `.svelte`, `index.ts`, `Demo.svelte`, and `meta.ts`. Avoid cross-block helpers or shared block utilities.
+- **Block Data Shape**: Blocks should be data-driven first. Prefer arrays and simple objects (`items`, `plans`, `posts`, `actions`) over freeform child markup so blocks remain CMS-friendly and visually consistent.
 - **Component Demos**: Keep showcase demos next to their components when possible, but wire explorer rendering through `meta.ts` via each entry's optional `demo` field.
+- **Block Metadata**: Each block variant folder should document itself in its own `meta.ts` using the full explorer entry name (for example `Features.Grid` or `Hero.Split`) while listing the variant's local props without prefixing them again.
 - **Library Exports**: Keep package export entry points aligned with `package.json` (`.`, `./brand`, `./blocks`, `./theme.css`) when adding new public modules.
 - **Props**: Use `$props()` for component properties. Prefer explicit types for props.
 - **Form Controls**: Wrapper inputs should preserve practical Svelte ergonomics such as `bind:value` where appropriate.
