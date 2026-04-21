@@ -1,3 +1,3 @@
-export * from "./Feature/index.js";
+export * from "./Features/index.ts";
 export * from "./Footer/index.js";
 export * from "./Hero/index.js";

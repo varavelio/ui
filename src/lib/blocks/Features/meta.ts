@@ -1,9 +1,9 @@
-import { components } from "../../catalog.js";
+import { components } from "../../catalog.ts";
 import Demo from "./Demo.svelte";
 
 export const componentMeta = components([
   {
-    name: "Feature",
+    name: "Features",
     category: "Blocks",
     demo: Demo,
     props: [

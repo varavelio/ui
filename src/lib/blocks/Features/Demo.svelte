@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Layout, Shield, Sparkles, Zap } from "@lucide/svelte";
   import Card from "../../components/Card/Card.svelte";
-  import Feature from "./Feature.svelte";
+  import Features from "./Features.svelte";
 </script>
 
-<Feature
+<Features
   title="Everything you need"
   description="Varavel UI provides a comprehensive set of components and blocks to build your next big idea."
 >
@@ -56,4 +56,4 @@
       Pre-composed sections that help you build entire pages in minutes.
     </p>
   </Card>
-</Feature>
+</Features>

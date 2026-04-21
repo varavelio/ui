@@ -1,4 +1,1 @@
-import Hero from "./Hero.svelte";
-
-export { Hero };
-export default Hero;
+export { default as Hero } from "./Hero.svelte";

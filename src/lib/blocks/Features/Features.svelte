@@ -2,7 +2,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import Container from "../../components/Container/Container.svelte";
-  import { cn } from "../../helpers/cn.js";
+  import { cn } from "../../helpers/cn.ts";
 
   interface Props extends Omit<HTMLAttributes<HTMLElement>, "title"> {
     /**
