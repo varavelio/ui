@@ -3,6 +3,7 @@
   import type { ClassValue } from "svelte/elements";
   import { theme } from "../../runtime/index.js";
   import { Menu } from "../Menu/index.js";
+  import { Tooltip } from "../Tooltip/index.js";
 
   const options = [
     { value: "system", label: "System", icon: LaptopMinimal },
@@ -83,7 +84,6 @@
   let effectiveShowLabel = $derived(showLabel && !square);
   let iconOnly = $derived(!effectiveShowLabel);
   let triggerLabel = $derived(effectiveShowLabel ? label : undefined);
-  let triggerHint = $derived(iconOnly ? label : undefined);
 
   let iconSnippets = $derived({
     light: sunIcon,
@@ -131,22 +131,31 @@
   {@render labelContent("System", selectedTheme === "system")}
 {/snippet}
 
-<Menu
-  triggerClass={className}
-  {size}
-  {radius}
-  {variant}
-  {color}
-  {square}
-  {wide}
-  icon={TriggerIcon}
-  label={triggerLabel}
-  aria-label={label}
-  title={triggerHint}
-  items={options.map((option) => ({
-    label: labelSnippets[option.value],
-    onSelect: () => theme.set(option.value),
-    icon: iconSnippets[option.value],
-    type: "item",
-  }))}
-/>
+{#snippet triggerMenu()}
+  <Menu
+    triggerClass={className}
+    {size}
+    {radius}
+    {variant}
+    {color}
+    {square}
+    {wide}
+    icon={TriggerIcon}
+    label={triggerLabel}
+    aria-label={iconOnly ? label : undefined}
+    items={options.map((option) => ({
+      label: labelSnippets[option.value],
+      onSelect: () => theme.set(option.value),
+      icon: iconSnippets[option.value],
+      type: "item",
+    }))}
+  />
+{/snippet}
+
+{#if iconOnly}
+  <Tooltip content={label} delay={0} triggerClass={wide ? "w-full" : ""}>
+    {@render triggerMenu()}
+  </Tooltip>
+{:else}
+  {@render triggerMenu()}
+{/if}
