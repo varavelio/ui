@@ -45,6 +45,13 @@
     icon: SvelteComponent;
   }
 
+  interface BlockNavGroup {
+    family: string;
+    count: number;
+    entries: typeof blockEntries;
+    icon: SvelteComponent;
+  }
+
   let { children } = $props();
 
   const componentCategoryIcons = {
@@ -176,11 +183,33 @@
   );
 
   let blockNavGroups = $derived.by(() =>
-    groupEntriesByCategory(
-      componentCategories,
-      filteredBlockEntries,
-      componentCategoryIcons,
-    ),
+    Array.from(
+      filteredBlockEntries.reduce((groups, entry) => {
+        const group = groups.get(entry.family);
+
+        if (group) {
+          group.entries.push(entry);
+          group.count += 1;
+          return groups;
+        }
+
+        groups.set(entry.family, {
+          family: entry.family,
+          count: 1,
+          entries: [entry],
+          icon: Layers,
+        });
+
+        return groups;
+      }, new Map<string, BlockNavGroup>()),
+    )
+      .map(([, group]) => ({
+        ...group,
+        entries: group.entries.sort((a, b) =>
+          a.variant.localeCompare(b.variant),
+        ),
+      }))
+      .sort((a, b) => a.family.localeCompare(b.family)),
   );
 
   let runtimeNavGroups = $derived.by(() =>
@@ -224,7 +253,7 @@
       case "runtime":
         return "Explore app-level APIs for interacting with Varavel UI.";
       case "blocks":
-        return "Production-ready sections are listed here.";
+        return "Block families and their opinionated variants are listed here.";
       case "layouts":
         return "Page scaffolds and structural templates are listed here.";
     }
@@ -240,7 +269,7 @@
     }
 
     if (currentType === "blocks") {
-      return "Search block or category";
+      return "Search block family or variant";
     }
 
     return "Search component or category";
@@ -344,12 +373,12 @@
           </Nav.Root>
         </div>
 
-        {#if currentType === "components" || currentType === "brand" || currentType === "blocks"}
-          {@const navGroups = currentType === "brand" ? brandNavGroups : (currentType === "blocks" ? blockNavGroups : componentNavGroups)}
+        {#if currentType === "components" || currentType === "brand"}
+          {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
 
           <div class="space-y-3">
             <Nav.Root
-              aria-label={currentType === "brand" ? "Brand catalog" : (currentType === "blocks" ? "Block catalog" : "Component catalog")}
+              aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
             >
               {#each navGroups as group (group.category)}
                 <Nav.Group
@@ -372,10 +401,39 @@
               <Alert
                 title={currentType === "brand"
                     ? "No brand components match this filter"
-                    : (currentType === "blocks" ? "No blocks match this filter" : "No components match this filter")}
+                    : "No components match this filter"}
                 description={currentType === "brand"
                     ? "Try broader terms like logo or loader."
-                    : (currentType === "blocks" ? "Try broader terms like hero or footer." : "Try broader terms like form, dialog, or feedback.")}
+                    : "Try broader terms like form, dialog, or feedback."}
+                color="warning"
+                closable={false}
+              />
+            {/if}
+          </div>
+        {:else if currentType === "blocks"}
+          <div class="space-y-3">
+            <Nav.Root aria-label="Block catalog">
+              {#each blockNavGroups as group (group.family)}
+                <Nav.Group
+                  label={`${group.family} (${group.count})`}
+                  icon={group.icon}
+                  open={true}
+                >
+                  {#each group.entries as entry (entry.id)}
+                    <Nav.Item
+                      href={`/${currentType}/${entry.slug}/`}
+                      label={entry.variant}
+                      active={activeSlug === entry.slug}
+                    />
+                  {/each}
+                </Nav.Group>
+              {/each}
+            </Nav.Root>
+
+            {#if !blockNavGroups.length}
+              <Alert
+                title="No blocks match this filter"
+                description="Try broader terms like hero, pricing, or footer."
                 color="warning"
                 closable={false}
               />

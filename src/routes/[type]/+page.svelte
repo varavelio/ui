@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import { Alert, Button, Card } from "$lib/components/index.js";
   import {
+    defaultBlockSlug,
     defaultBrandSlug,
     defaultComponentSlug,
     defaultRuntimeSlug,
@@ -22,6 +23,10 @@
       return "brand component";
     }
 
+    if (currentType === "blocks") {
+      return "block variant";
+    }
+
     return "component";
   });
 
@@ -32,6 +37,10 @@
 
     if (currentType === "brand" && defaultBrandSlug) {
       return `/brand/${defaultBrandSlug}`;
+    }
+
+    if (currentType === "blocks" && defaultBlockSlug) {
+      return `/blocks/${defaultBlockSlug}`;
     }
 
     if (currentType === "runtime" && defaultRuntimeSlug) {

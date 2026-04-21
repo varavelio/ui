@@ -52,13 +52,23 @@ export const brandEntries: BrandExplorerEntry[] = catalog.brand.map(
 export type BlockExplorerEntry = (typeof catalog.blocks)[number] & {
   id: string;
   importCode: string;
+  family: string;
+  variant: string;
 };
 
 export const blockEntries: BlockExplorerEntry[] = catalog.blocks.map(
   (entry) => ({
+    ...(() => {
+      const [family, variant = entry.name] = entry.name.split(".");
+
+      return {
+        family,
+        variant,
+      };
+    })(),
     ...entry,
     id: entry.name,
-    importCode: `import { ${entry.name} } from "@varavel/ui/blocks";`,
+    importCode: `import { ${entry.name.split(".")[0]} } from "@varavel/ui/blocks";`,
   }),
 );
 
