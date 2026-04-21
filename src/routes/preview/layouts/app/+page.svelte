@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { House, LayoutDashboard, Settings } from "@lucide/svelte";
+  import { House, LayoutDashboard, Search, Settings } from "@lucide/svelte";
   import Heading from "$lib/components/Heading/Heading.svelte";
   import {
     Breadcrumbs,
@@ -17,7 +17,7 @@
   {/snippet}
 
   {#snippet headerCenter()}
-    <Input placeholder="Search..." class="hidden desk:block" />
+    <Input icon={Search} placeholder="Search..." class="hidden desk:block" />
   {/snippet}
 
   {#snippet headerRight()}
