@@ -7,6 +7,7 @@ export { Breadcrumbs } from "./Breadcrumbs/index.js";
 export { Button } from "./Button/index.js";
 export { Card } from "./Card/index.js";
 export { Checkbox } from "./Checkbox/index.js";
+export { CodeBlock } from "./CodeBlock/index.js";
 export { Collapsible } from "./Collapsible/index.js";
 export { ColorPicker } from "./ColorPicker/index.js";
 export { Combobox } from "./Combobox/index.js";
