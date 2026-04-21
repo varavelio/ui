@@ -66,12 +66,10 @@
 </script>
 
 {#snippet labelContent(optionLabel: string, isSelected: boolean)}
-  <div class="flex flex-1 items-center justify-between gap-3">
-    <span>{optionLabel}</span>
-    {#if isSelected}
-      <Check class="size-4 text-content-muted" />
-    {/if}
-  </div>
+  <span>{optionLabel}</span>
+  {#if isSelected}
+    <Check class="size-4 text-content-muted" />
+  {/if}
 {/snippet}
 
 {#snippet sunIcon()}
