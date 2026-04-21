@@ -85,7 +85,6 @@
         "bg-base-100 text-content": bg === "100",
         "bg-base-200 text-content": bg === "200",
         "bg-base-300 text-content": bg === "300",
-        "border border-base-400": bordered,
         "border-transparent": !bordered,
       }
     )}
