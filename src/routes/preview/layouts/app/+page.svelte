@@ -41,7 +41,7 @@
   {/snippet}
 
   {#snippet sidebarBottom()}
-    <Button>Click me</Button>
+    <Button wide>Click me</Button>
   {/snippet}
 
   {#snippet main()}
