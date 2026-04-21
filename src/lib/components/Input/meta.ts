@@ -13,6 +13,11 @@ export const componentMeta = components([
         "Additional CSS classes to apply to the input element.",
       ),
       prop(
+        "wrapperClass",
+        "ClassValue",
+        "Additional CSS classes to apply to the root wrapper element.",
+      ),
+      prop(
         "icon",
         "Component",
         "Icon component rendered before the input value.",
