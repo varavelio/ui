@@ -1,1 +1,5 @@
-export { default as Footer } from "./Footer.svelte";
+import Columns from "./Columns/index.js";
+
+export const Footer = {
+  Columns: Columns,
+} as const;
