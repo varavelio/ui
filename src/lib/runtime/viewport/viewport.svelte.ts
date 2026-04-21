@@ -73,8 +73,12 @@ class Viewport {
     });
 
     // Listen for resize changes (required for exact width tracking)
+    let timeout: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", () => {
-      this.#width = window.innerWidth;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        this.#width = window.innerWidth;
+      }, 100);
     });
   }
 }
