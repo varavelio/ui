@@ -39,7 +39,7 @@
   {...restProps}
   class={cn(
     // Base layout & typography
-    "inline-flex items-center justify-center rounded-sm border border-base-400 bg-base-200 font-mono font-medium text-content-muted shadow-[0_1px_0_0_rgba(0,0,0,0.1)]",
+    "inline-flex items-center justify-center rounded-sm border border-b-2 border-base-400 bg-base-200 font-mono font-medium text-content-muted",
     // Presets
     kbdSizes[size],
     className,
