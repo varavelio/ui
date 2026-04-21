@@ -9,6 +9,7 @@
     ThemePicker,
   } from "$lib/components/index.js";
   import { AppLayout } from "$lib/layouts/index.js";
+  import { viewport } from "$lib/runtime/index.js";
 </script>
 
 <AppLayout primaryRegion="sidebar" maxWidth="lg">
@@ -17,11 +18,15 @@
   {/snippet}
 
   {#snippet headerCenter()}
-    <Input icon={Search} placeholder="Search..." class="hidden desk:block" />
+    {#if viewport.isDesktop}
+      <Input icon={Search} placeholder="Search..." />
+    {/if}
   {/snippet}
 
   {#snippet headerRight()}
-    <ThemePicker class="-mr-2 hidden desk:block" />
+    {#if viewport.isDesktop}
+      <ThemePicker class="-mr-2" />
+    {/if}
   {/snippet}
 
   {#snippet sidebarTop()}
