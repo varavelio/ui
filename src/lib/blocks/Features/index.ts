@@ -1,1 +1,5 @@
-export { default as Features } from "./Features.svelte";
+import Grid from "./Grid/index.js";
+
+export const Features = {
+  Grid: Grid,
+} as const;
