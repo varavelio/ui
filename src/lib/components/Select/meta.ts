@@ -12,6 +12,16 @@ export const componentMeta = components([
         "ClassValue",
         "Additional CSS classes to apply to the root wrapper.",
       ),
+      prop(
+        "icon",
+        "Component",
+        "Icon component rendered before the selected value.",
+      ),
+      prop(
+        "iconRight",
+        "Component",
+        "Icon component rendered instead of the default chevron.",
+      ),
       prop("label", "string", "Label text for the select field."),
       prop("description", "string", "Secondary helper text."),
       prop(

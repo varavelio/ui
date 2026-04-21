@@ -2,6 +2,7 @@
   import { Check, ChevronDown } from "@lucide/svelte";
   // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Select as BitsSelect } from "bits-ui";
+  import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
   import Label from "../Label/Label.svelte";
@@ -17,6 +18,16 @@
   };
 
   interface Props {
+    /**
+     * Icon component rendered before the selected value.
+     */
+    icon?: Component;
+
+    /**
+     * Icon component rendered instead of the default chevron.
+     */
+    iconRight?: Component;
+
     /**
      * Additional CSS classes to apply to the root wrapper.
      */
@@ -98,6 +109,8 @@
 
   let {
     class: className,
+    icon: Icon,
+    iconRight: IconRight,
     label,
     description,
     placeholder = "Select an option",
@@ -180,13 +193,36 @@
         }
       )}
     >
+      {#if Icon}
+        <Icon
+          class={cn("text-content-muted shrink-0", {
+            "size-3.5": size === "sm",
+            "size-4": size === "md",
+            "size-5": size === "lg",
+          })}
+        />
+      {/if}
       <span class="min-w-0 flex-1 truncate text-left">
         {selectedItem?.label ?? placeholder}
       </span>
-      <ChevronDown
-        aria-hidden="true"
-        class="text-content-muted size-4 shrink-0 transition-transform"
-      />
+      {#if IconRight}
+        <IconRight
+          class={cn("text-content-muted shrink-0 transition-transform", {
+            "size-3.5": size === "sm",
+            "size-4": size === "md",
+            "size-5": size === "lg",
+          })}
+        />
+      {:else}
+        <ChevronDown
+          aria-hidden="true"
+          class={cn("text-content-muted shrink-0 transition-transform", {
+            "size-3.5": size === "sm",
+            "size-4": size === "md",
+            "size-5": size === "lg",
+          })}
+        />
+      {/if}
     </BitsSelect.Trigger>
 
     <BitsSelect.Portal>
