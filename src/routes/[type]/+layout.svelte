@@ -504,9 +504,7 @@
   {/snippet}
 
   {#snippet main()}
-    <div
-      class="mx-auto flex min-h-full w-full max-w-7xl flex-col gap-6 p-4 desk:p-6"
-    >
+    <div class="mx-auto flex min-h-full w-full flex-col gap-4 p-4">
       {@render children()}
     </div>
   {/snippet}
