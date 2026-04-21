@@ -15,8 +15,12 @@
     bordered?: boolean;
     /** Width preset for the desktop sidebar. */
     width?: "sm" | "md" | "lg";
-    /** Sidebar navigation or content. */
-    children: Snippet;
+    /** Sidebar top navigation or content. */
+    sidebarTop?: Snippet;
+    /** Sidebar center navigation or content. */
+    sidebarCenter?: Snippet;
+    /** Sidebar bottom navigation or content. */
+    sidebarBottom?: Snippet;
   }
 
   let {
@@ -24,7 +28,9 @@
     bg,
     bordered = true,
     width = "md",
-    children,
+    sidebarTop,
+    sidebarCenter,
+    sidebarBottom,
   }: Props = $props();
 
   const state = getAppLayoutState();
@@ -40,7 +46,7 @@
 
 <aside
   class={cn(
-    "hidden shrink-0 min-h-0 overflow-x-hidden overflow-y-auto p-4 desk:block",
+    "hidden shrink-0 min-h-0 desk:block",
     {
       "w-56": width === "sm",
       "w-64": width === "md",
@@ -53,8 +59,18 @@
     className,
   )}
 >
-  <div class="flex min-h-full min-w-0 flex-col isolate">
-    {@render children()}
+  <div class="flex h-full min-w-0 flex-col isolate">
+    {#if sidebarTop}
+      <div class="p-4 shrink-0">{@render sidebarTop()}</div>
+    {/if}
+    {#if sidebarCenter}
+      <div class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto p-4">
+        {@render sidebarCenter()}
+      </div>
+    {/if}
+    {#if sidebarBottom}
+      <div class="p-4 shrink-0">{@render sidebarBottom()}</div>
+    {/if}
   </div>
 </aside>
 
@@ -73,6 +89,18 @@
       }
     )}
   >
-    {@render children()}
+    <div class="flex h-full min-w-0 flex-col isolate">
+      {#if sidebarTop}
+        <div class="p-4 shrink-0">{@render sidebarTop()}</div>
+      {/if}
+      {#if sidebarCenter}
+        <div class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto p-4">
+          {@render sidebarCenter()}
+        </div>
+      {/if}
+      {#if sidebarBottom}
+        <div class="p-4 shrink-0">{@render sidebarBottom()}</div>
+      {/if}
+    </div>
   </Sheet>
 </div>

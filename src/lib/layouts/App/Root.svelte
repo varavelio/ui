@@ -28,10 +28,18 @@
     sidebarBordered?: boolean;
     /** Main surface background preset. (default 100) */
     mainBg?: "100" | "200" | "300";
-    /** The header content to be rendered within the layout. */
-    header?: Snippet;
-    /** The sidebar content to be rendered within the layout. */
-    sidebar?: Snippet;
+    /** The header left content to be rendered within the layout. */
+    headerLeft?: Snippet;
+    /** The header center content to be rendered within the layout. */
+    headerCenter?: Snippet;
+    /** The header right content to be rendered within the layout. */
+    headerRight?: Snippet;
+    /** The sidebar top content to be rendered within the layout. */
+    sidebarTop?: Snippet;
+    /** The sidebar center content to be rendered within the layout. */
+    sidebarCenter?: Snippet;
+    /** The sidebar bottom content to be rendered within the layout. */
+    sidebarBottom?: Snippet;
     /** The main content to be rendered within the layout. */
     main?: Snippet;
     /** Width preset for the desktop sidebar. */
@@ -49,12 +57,20 @@
     sidebarBg = "100",
     sidebarBordered = true,
     mainBg = "100",
-    header,
-    sidebar,
+    headerLeft,
+    headerCenter,
+    headerRight,
+    sidebarTop,
+    sidebarCenter,
+    sidebarBottom,
     main,
     sidebarWidth = "md",
     closeSidebarOnRouteChange = true,
   }: Props = $props();
+
+  // Check presence of header or sidebar
+  let hasHeader = $derived(!!headerLeft || !!headerCenter || !!headerRight);
+  let hasSidebar = $derived(!!sidebarTop || !!sidebarCenter || !!sidebarBottom);
 
   // Initialize the reactive state for this specific AppLayout instance.
   const state = new AppLayoutState();
@@ -102,21 +118,26 @@
       className,
     )}
   >
-    {#if header}
-      <Header bg={headerBg} bordered={headerBordered} {maxWidth}>
-        {@render header()}
-      </Header>
+    {#if hasHeader}
+      <Header
+        bg={headerBg}
+        bordered={headerBordered}
+        {maxWidth}
+        {headerLeft}
+        {headerCenter}
+        {headerRight}
+      />
     {/if}
 
-    {#if sidebar}
+    {#if hasSidebar}
       <div
         class={cn(
           "pointer-events-none absolute bottom-0 hidden desk:block",
           {
             "left-0 right-1/2": !!main,
             "left-0 right-0": !main,
-            "top-14": !!header,
-            "top-0": !header,
+            "top-14": hasHeader,
+            "top-0": !hasHeader,
             "bg-base-100": sidebarBg === "100",
             "bg-base-200": sidebarBg === "200",
             "bg-base-300": sidebarBg === "300",
@@ -130,10 +151,10 @@
         class={cn(
           "pointer-events-none absolute bottom-0 hidden desk:block",
           {
-            "left-1/2 right-0": !!sidebar,
-            "left-0 right-0": !sidebar,
-            "top-14": !!header,
-            "top-0": !header,
+            "left-1/2 right-0": hasSidebar,
+            "left-0 right-0": !hasSidebar,
+            "top-14": hasHeader,
+            "top-0": !hasHeader,
             "bg-base-100": mainBg === "100",
             "bg-base-200": mainBg === "200",
             "bg-base-300": mainBg === "300",
@@ -146,15 +167,16 @@
       {maxWidth}
       class="relative z-10 flex flex-1 min-w-0 min-h-0 overflow-hidden"
     >
-      {#if sidebar}
+      {#if hasSidebar}
         <Sidebar
           bg={sidebarBg}
           bordered={sidebarBordered}
           width={sidebarWidth}
           class="desk:h-[calc(100dvh-3.5rem)]"
-        >
-          {@render sidebar()}
-        </Sidebar>
+          {sidebarTop}
+          {sidebarCenter}
+          {sidebarBottom}
+        />
       {/if}
 
       <Main bg={mainBg}>{@render main?.()}</Main>
@@ -169,13 +191,13 @@
       className,
     )}
   >
-    {#if header && sidebar}
+    {#if hasHeader && hasSidebar}
       <div
         class={cn(
           "pointer-events-none absolute top-0 right-0 hidden h-14 desk:block",
           {
-            "left-1/2": !!sidebar,
-            "left-0": !sidebar,
+            "left-1/2": hasSidebar,
+            "left-0": !hasSidebar,
             "bg-base-100": headerBg === "100",
             "bg-base-200": headerBg === "200",
             "bg-base-300": headerBg === "300",
@@ -185,7 +207,7 @@
       ></div>
     {/if}
 
-    {#if sidebar}
+    {#if hasSidebar}
       <div
         class={cn(
           "pointer-events-none absolute inset-y-0 left-0 hidden desk:block",
@@ -205,10 +227,10 @@
         class={cn(
           "pointer-events-none absolute right-0 bottom-0 hidden desk:block",
           {
-            "left-1/2": !!sidebar,
-            "left-0": !sidebar,
-            "top-14": !!header,
-            "top-0": !header,
+            "left-1/2": hasSidebar,
+            "left-0": !hasSidebar,
+            "top-14": hasHeader,
+            "top-0": !hasHeader,
             "bg-base-100": mainBg === "100",
             "bg-base-200": mainBg === "200",
             "bg-base-300": mainBg === "300",
@@ -221,22 +243,28 @@
       {maxWidth}
       class="relative z-10 flex size-full min-h-0 min-w-0 justify-start overflow-hidden"
     >
-      {#if sidebar}
+      {#if hasSidebar}
         <Sidebar
           bg={sidebarBg}
           bordered={sidebarBordered}
           width={sidebarWidth}
           class="desk:h-dvh"
-        >
-          {@render sidebar()}
-        </Sidebar>
+          {sidebarTop}
+          {sidebarCenter}
+          {sidebarBottom}
+        />
       {/if}
 
       <div class="flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden">
-        {#if header}
-          <Header bg={headerBg} bordered={headerBordered} {maxWidth}>
-            {@render header()}
-          </Header>
+        {#if hasHeader}
+          <Header
+            bg={headerBg}
+            bordered={headerBordered}
+            {maxWidth}
+            {headerLeft}
+            {headerCenter}
+            {headerRight}
+          />
         {/if}
 
         <Main bg={mainBg}>{@render main?.()}</Main>
