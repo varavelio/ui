@@ -1,10 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
+  import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { Container } from "$lib/components/index.js";
   import { cn } from "$lib/helpers/cn.js";
+  import { appLayoutApi } from "./api.ts";
   import Header from "./Header.svelte";
   import Main from "./Main.svelte";
+  import RouteChangeBridge from "./RouteChangeBridge.svelte";
   import Sidebar from "./Sidebar.svelte";
   import { AppLayoutState, setAppLayoutState } from "./state.svelte.ts";
 
@@ -34,6 +36,8 @@
     main?: Snippet;
     /** Width preset for the desktop sidebar. */
     sidebarWidth?: "sm" | "md" | "lg";
+    /** Whether mobile sidebars should automatically close when the current route changes. */
+    closeSidebarOnRouteChange?: boolean;
   }
 
   let {
@@ -49,10 +53,47 @@
     sidebar,
     main,
     sidebarWidth = "md",
+    closeSidebarOnRouteChange = true,
   }: Props = $props();
 
-  setAppLayoutState(new AppLayoutState());
+  // Initialize the reactive state for this specific AppLayout instance.
+  const state = new AppLayoutState();
+
+  // Bridge global API actions to local state mutations.
+  const handleSidebarAction = (
+    action: "open-sidebar" | "close-sidebar" | "toggle-sidebar",
+  ) => {
+    if (action === "open-sidebar") {
+      state.openSidebar();
+      return;
+    }
+
+    if (action === "close-sidebar") {
+      state.closeSidebar();
+      return;
+    }
+
+    state.toggleSidebarOpen();
+  };
+
+  // Provide the state to child components (Header, Sidebar, etc.) via Svelte context.
+  setAppLayoutState(state);
+
+  // Subscribe to the global appLayoutApi to react to programmatic commands
+  // (e.g., appLayoutApi.openSidebar()) from anywhere in the application.
+  const cleanupControls =
+    typeof window === "undefined"
+      ? () => {}
+      : appLayoutApi.subscribe(handleSidebarAction);
+
+  onDestroy(() => {
+    cleanupControls();
+  });
 </script>
+
+{#if closeSidebarOnRouteChange}
+  <RouteChangeBridge {state} />
+{/if}
 
 {#if primaryRegion==="header"}
   <div

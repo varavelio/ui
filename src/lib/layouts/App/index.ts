@@ -1,9 +1,6 @@
 import type { ComponentProps } from "svelte";
+import { appLayoutApi } from "./api.ts";
 import AppLayout from "./Root.svelte";
 
-/**
- * AppLayout compound component for building structured application shells.
- * Provides Root, Header, Sidebar, SidebarTrigger, and Main slots.
- */
-export { AppLayout };
+export { AppLayout, appLayoutApi };
 export type AppLayoutProps = ComponentProps<typeof AppLayout>;
