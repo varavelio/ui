@@ -12,6 +12,16 @@ export const componentMeta = components([
         "ClassValue",
         "Additional CSS classes to apply to the input element.",
       ),
+      prop(
+        "icon",
+        "Component",
+        "Icon component rendered before the input value.",
+      ),
+      prop(
+        "iconRight",
+        "Component",
+        "Icon component rendered after the input value.",
+      ),
       prop("value", "string | number", "Bindable current value."),
       prop(
         "variant",

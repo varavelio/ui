@@ -1,8 +1,34 @@
 <script lang="ts">
+  import { Lock, Mail, Search } from "@lucide/svelte";
   import { Card, Input, Label } from "$lib/components/index.js";
 </script>
 
 <div class="space-y-8">
+  <div class="space-y-3">
+    <Label>Icons</Label>
+    <Card class="p-6">
+      <div class="grid desk:grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <Label>Left Icon</Label>
+          <Input icon={Search} placeholder="Search..." />
+        </div>
+        <div class="space-y-2">
+          <Label>Right Icon</Label>
+          <Input iconRight={Mail} placeholder="Email address..." />
+        </div>
+        <div class="space-y-2 desk:col-span-2">
+          <Label>Both Icons</Label>
+          <Input
+            icon={Lock}
+            iconRight={Search}
+            type="password"
+            placeholder="Password..."
+          />
+        </div>
+      </div>
+    </Card>
+  </div>
+
   <div class="space-y-3">
     <Label>Variants & States</Label>
     <div class="grid grid-cols-1 desk:grid-cols-2 gap-4">
