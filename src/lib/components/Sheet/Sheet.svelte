@@ -83,8 +83,11 @@
 
     <BitsDialog.Content
       class={cn(
-				"fixed z-50 flex flex-col overflow-hidden border border-base-400 bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
+				"fixed z-50 flex flex-col overflow-hidden bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
         {
+          "border-r border-base-400": side === "left",
+          "border-l border-base-400": side === "right",
+          "border-t border-base-400": side === "bottom",
           "left-0 top-0 bottom-0 w-[min(100dvw,20rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "sm",
           "left-0 top-0 bottom-0 w-[min(100dvw,32rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "md",
           "left-0 top-0 bottom-0 w-[min(100dvw,40rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "lg",
