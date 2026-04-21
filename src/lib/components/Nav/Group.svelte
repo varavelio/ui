@@ -3,7 +3,9 @@
   import type { Component, Snippet } from "svelte";
   import type { ClassValue, HTMLButtonAttributes } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
+  import { checkTruncation } from "../../runtime/index.js";
   import { Button } from "../Button/index.js";
+  import { Tooltip } from "../Tooltip/index.js";
 
   export interface Props extends HTMLButtonAttributes {
     /**
@@ -50,31 +52,40 @@
     ...restProps
   }: Props = $props();
 
+  let isTruncated = $state(false);
+
   function toggle() {
     open = !open;
   }
 </script>
 
 <div class={cn("flex flex-col space-y-1", className)}>
-  <Button
-    variant="ghost"
-    color="neutral"
-    wide={true}
-    alignContent="left"
-    icon={IconComponent}
-    onclick={toggle}
-    class="font-medium text-content/70 px-2 hover:text-content"
-    aria-expanded={open}
-    {...restProps as any}
-  >
-    <span class="flex-1 truncate text-left">{label}</span>
+  <Tooltip content={label} disabled={!isTruncated} side="right">
+    <Button
+      variant="ghost"
+      color="neutral"
+      wide={true}
+      alignContent="left"
+      icon={IconComponent}
+      onclick={toggle}
+      class="font-medium text-content/70 px-2 hover:text-content"
+      aria-expanded={open}
+      {...restProps as any}
+    >
+      <span
+        class="flex-1 truncate text-left"
+        {@attach checkTruncation((val) => (isTruncated = val))}
+      >
+        {label}
+      </span>
 
-    <ChevronRight
-      class={cn("size-4 flex-none transition-transform duration-200", {
-        "rotate-90": open,
-      })}
-    />
-  </Button>
+      <ChevronRight
+        class={cn("size-4 flex-none transition-transform duration-200", {
+          "rotate-90": open,
+        })}
+      />
+    </Button>
+  </Tooltip>
 
   {#if open}
     <div

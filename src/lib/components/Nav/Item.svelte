@@ -6,7 +6,9 @@
     HTMLButtonAttributes,
   } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
+  import { checkTruncation } from "../../runtime/index.js";
   import { Button } from "../Button/index.js";
+  import { Tooltip } from "../Tooltip/index.js";
 
   export interface BaseProps {
     /**
@@ -49,25 +51,34 @@
     children,
     ...restProps
   }: Props = $props();
+
+  let isTruncated = $state(false);
 </script>
 
-<Button
-  variant="ghost"
-  color={active ? "info" : "neutral"}
-  {active}
-  wide={true}
-  alignContent="left"
-  icon={IconComponent}
-  class={cn(
-    "font-medium px-2",
-    {
-      "text-content/70 hover:text-content": !active,
-    },
-    className,
-  )}
-  aria-current={active ? "page" : undefined}
-  {...restProps as any}
->
-  <span class="flex-1 truncate text-left">{label}</span>
-  {@render children?.()}
-</Button>
+<Tooltip content={label} disabled={!isTruncated} side="right">
+  <Button
+    variant="ghost"
+    color={active ? "info" : "neutral"}
+    {active}
+    wide={true}
+    alignContent="left"
+    icon={IconComponent}
+    class={cn(
+      "font-medium px-2",
+      {
+        "text-content/70 hover:text-content": !active,
+      },
+      className,
+    )}
+    aria-current={active ? "page" : undefined}
+    {...restProps as any}
+  >
+    <span
+      class="flex-1 truncate text-left"
+      {@attach checkTruncation((val) => (isTruncated = val))}
+    >
+      {label}
+    </span>
+    {@render children?.()}
+  </Button>
+</Tooltip>
