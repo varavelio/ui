@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Check, LaptopMinimal, MoonStar, SunMedium } from "@lucide/svelte";
+  import type { ComponentProps } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { theme } from "../../runtime/index.js";
+  import type Button from "../Button/Button.svelte";
   import { Menu } from "../Menu/index.js";
   import { Tooltip } from "../Tooltip/index.js";
 
@@ -11,7 +13,12 @@
     { value: "dark", label: "Dark", icon: MoonStar },
   ] as const;
 
-  interface Props {
+  type TriggerButtonProps = Omit<
+    ComponentProps<typeof Button>,
+    "children" | "class" | "href" | "target" | "rel" | "icon" | "iconRight"
+  >;
+
+  interface Props extends TriggerButtonProps {
     /**
      * Additional CSS classes to apply to the trigger.
      */
@@ -26,42 +33,6 @@
      * @default true
      */
     showLabel?: boolean;
-
-    /**
-     * Button size preset.
-     * @default "md"
-     */
-    size?: "sm" | "md" | "lg";
-
-    /**
-     * Button border radius preset.
-     * @default "md"
-     */
-    radius?: "sm" | "md" | "lg" | "full";
-
-    /**
-     * Button appearance variant.
-     * @default "outline"
-     */
-    variant?: "solid" | "outline" | "ghost";
-
-    /**
-     * Semantic color representing the button's intent.
-     * @default "neutral"
-     */
-    color?: "neutral" | "info" | "success" | "warning" | "error";
-
-    /**
-     * Whether the button should have a square aspect ratio.
-     * @default false
-     */
-    square?: boolean;
-
-    /**
-     * Whether the button should span the full width of its container.
-     * @default false
-     */
-    wide?: boolean;
   }
 
   let {
@@ -74,6 +45,7 @@
     color = "neutral",
     square = false,
     wide = false,
+    ...restProps
   }: Props = $props();
 
   let selectedTheme = $derived(theme.current);
@@ -148,6 +120,7 @@
     {color}
     {square}
     {wide}
+    {...restProps}
     label={triggerLabelSnippet}
     aria-label={iconOnly ? label : undefined}
     items={options.map((option) => ({
