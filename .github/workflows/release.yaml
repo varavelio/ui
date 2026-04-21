@@ -34,6 +34,7 @@ jobs:
               set -euo pipefail
 
               npm ci
+              npm run ci
 
               echo "Publishing version: $VERSION"
 
