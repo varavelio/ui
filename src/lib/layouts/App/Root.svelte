@@ -32,6 +32,8 @@
     sidebar?: Snippet;
     /** The main content to be rendered within the layout. */
     main?: Snippet;
+    /** Width preset for the desktop sidebar. */
+    sidebarWidth?: "sm" | "md" | "lg";
   }
 
   let {
@@ -46,6 +48,7 @@
     header,
     sidebar,
     main,
+    sidebarWidth = "md",
   }: Props = $props();
 
   setAppLayoutState(new AppLayoutState());
@@ -106,6 +109,7 @@
         <Sidebar
           bg={sidebarBg}
           bordered={sidebarBordered}
+          width={sidebarWidth}
           class="desk:h-[calc(100dvh-3.5rem)]"
         >
           {@render sidebar()}
@@ -177,7 +181,12 @@
       class="relative z-10 flex size-full min-h-0 min-w-0 justify-start overflow-hidden"
     >
       {#if sidebar}
-        <Sidebar bg={sidebarBg} bordered={sidebarBordered} class="desk:h-dvh">
+        <Sidebar
+          bg={sidebarBg}
+          bordered={sidebarBordered}
+          width={sidebarWidth}
+          class="desk:h-dvh"
+        >
           {@render sidebar()}
         </Sidebar>
       {/if}
