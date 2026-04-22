@@ -30,16 +30,28 @@
     mainBg?: "100" | "200" | "300";
     /** The header left content to be rendered within the layout. */
     headerLeft?: Snippet;
+    /** Whether the header left region should render its content. */
+    showHeaderLeft?: boolean;
     /** The header center content to be rendered within the layout. */
     headerCenter?: Snippet;
+    /** Whether the header center region should render its content. */
+    showHeaderCenter?: boolean;
     /** The header right content to be rendered within the layout. */
     headerRight?: Snippet;
+    /** Whether the header right region should render its content. */
+    showHeaderRight?: boolean;
     /** The sidebar top content to be rendered within the layout. */
     sidebarTop?: Snippet;
+    /** Whether the sidebar top region should render its content. */
+    showSidebarTop?: boolean;
     /** The sidebar center content to be rendered within the layout. */
     sidebarCenter?: Snippet;
+    /** Whether the sidebar center region should render its content. */
+    showSidebarCenter?: boolean;
     /** The sidebar bottom content to be rendered within the layout. */
     sidebarBottom?: Snippet;
+    /** Whether the sidebar bottom region should render its content. */
+    showSidebarBottom?: boolean;
     /** The main content to be rendered within the layout. */
     main?: Snippet;
     /** Width preset for the desktop sidebar. */
@@ -58,11 +70,17 @@
     sidebarBordered = true,
     mainBg = "100",
     headerLeft,
+    showHeaderLeft = true,
     headerCenter,
+    showHeaderCenter = true,
     headerRight,
+    showHeaderRight = true,
     sidebarTop,
+    showSidebarTop = true,
     sidebarCenter,
+    showSidebarCenter = true,
     sidebarBottom,
+    showSidebarBottom = true,
     main,
     sidebarWidth = "md",
     closeSidebarOnRouteChange = true,
@@ -123,9 +141,9 @@
         bg={headerBg}
         bordered={headerBordered}
         {maxWidth}
-        {headerLeft}
-        {headerCenter}
-        {headerRight}
+        headerLeft={showHeaderLeft ? headerLeft : undefined}
+        headerCenter={showHeaderCenter ? headerCenter : undefined}
+        headerRight={showHeaderRight ? headerRight : undefined}
       />
     {/if}
 
@@ -173,9 +191,9 @@
           bordered={sidebarBordered}
           width={sidebarWidth}
           class="desk:h-[calc(100dvh-3.5rem)]"
-          {sidebarTop}
-          {sidebarCenter}
-          {sidebarBottom}
+          sidebarTop={showSidebarTop ? sidebarTop : undefined}
+          sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}
+          sidebarBottom={showSidebarBottom ? sidebarBottom : undefined}
         />
       {/if}
 
@@ -249,9 +267,9 @@
           bordered={sidebarBordered}
           width={sidebarWidth}
           class="desk:h-dvh"
-          {sidebarTop}
-          {sidebarCenter}
-          {sidebarBottom}
+          sidebarTop={showSidebarTop ? sidebarTop : undefined}
+          sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}
+          sidebarBottom={showSidebarBottom ? sidebarBottom : undefined}
         />
       {/if}
 
@@ -261,9 +279,9 @@
             bg={headerBg}
             bordered={headerBordered}
             {maxWidth}
-            {headerLeft}
-            {headerCenter}
-            {headerRight}
+            headerLeft={showHeaderLeft ? headerLeft : undefined}
+            headerCenter={showHeaderCenter ? headerCenter : undefined}
+            headerRight={showHeaderRight ? headerRight : undefined}
           />
         {/if}
 
