@@ -21,6 +21,7 @@ declare global {
   interface Window {
     __varavelUiAppLayoutRouteObserverInstalled?: boolean;
     __varavelUiAppLayoutRouteObserverLastUrl?: string;
+    __varavelUiAppLayoutRouteObserverIntervalId?: number;
   }
 }
 
@@ -169,23 +170,16 @@ class AppLayoutAPI {
       this.dispatchRouteChange(nextUrl);
     };
 
-    const originalPushState = window.history.pushState;
-    const originalReplaceState = window.history.replaceState;
-
-    window.history.pushState = function (...args) {
-      const result = originalPushState.apply(this, args);
+    const queueRouteChangeCheck = () => {
       queueMicrotask(notifyIfRouteChanged);
-      return result;
     };
 
-    window.history.replaceState = function (...args) {
-      const result = originalReplaceState.apply(this, args);
-      queueMicrotask(notifyIfRouteChanged);
-      return result;
-    };
-
-    window.addEventListener("popstate", notifyIfRouteChanged);
-    window.addEventListener("hashchange", notifyIfRouteChanged);
+    window.addEventListener("popstate", queueRouteChangeCheck);
+    window.addEventListener("hashchange", queueRouteChangeCheck);
+    window.__varavelUiAppLayoutRouteObserverIntervalId = window.setInterval(
+      notifyIfRouteChanged,
+      120,
+    );
   }
 
   private isAppLayoutEventDetail(
