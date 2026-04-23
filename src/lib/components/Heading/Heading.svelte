@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { ClassValue, HTMLAttributes } from "svelte/elements";
   import { cn } from "$lib/helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLHeadingElement> {
@@ -10,7 +10,7 @@
     /** Whether to apply a muted text color */
     muted?: boolean;
     /** Additional CSS classes */
-    class?: string;
+    class?: ClassValue;
     /** The content of the heading */
     children?: import("svelte").Snippet;
   }

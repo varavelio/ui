@@ -7,7 +7,7 @@ export const componentMeta = components([
     demo: Demo,
     category: "Core Building Blocks",
     props: [
-      prop("class", "string", "Additional CSS classes to apply."),
+      prop("class", "ClassValue", "Additional CSS classes to apply."),
       prop(
         "size",
         '"sm" | "md" | "lg"',

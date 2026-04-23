@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { ClassValue, HTMLAttributes } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLElement> {
@@ -9,7 +9,7 @@
     /** Removes typography max-width constraint when true. */
     fluid?: boolean;
     /** Additional CSS classes to apply to the prose wrapper. */
-    class?: string;
+    class?: ClassValue;
     /** Rich content rendered inside the prose wrapper. */
     children?: Snippet;
   }

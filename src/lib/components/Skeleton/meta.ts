@@ -6,6 +6,6 @@ export const componentMeta = components([
     name: "Skeleton",
     demo: Demo,
     category: "Status & Feedback",
-    props: [prop("class", "string", "Additional CSS classes to apply.")],
+    props: [prop("class", "ClassValue", "Additional CSS classes to apply.")],
   },
 ]);

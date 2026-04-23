@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { ClassValue, HTMLAttributes } from "svelte/elements";
   import { cn } from "$lib/helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -11,7 +11,7 @@
     /** The horizontal alignment of the container within its parent. */
     align?: "left" | "center" | "right";
     /** Additional CSS classes to apply to the container. */
-    class?: string;
+    class?: ClassValue;
     /** The content to be rendered inside the container. */
     children?: Snippet;
   }
