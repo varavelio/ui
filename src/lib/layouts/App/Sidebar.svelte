@@ -91,7 +91,7 @@
   >
     <div class="flex h-[100dvh] min-w-0 flex-col isolate">
       {#if sidebarTop}
-        <div class="p-4 pr-12 shrink-0">{@render sidebarTop()}</div>
+        <div class="p-4 shrink-0">{@render sidebarTop()}</div>
       {/if}
       {#if sidebarCenter}
         <div class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto p-4">
