@@ -2,8 +2,9 @@
   import { X } from "@lucide/svelte";
   // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Dialog as BitsDialog } from "bits-ui";
-  import type { Snippet } from "svelte";
+  import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
+  import { dialogLayerManager } from "$lib/runtime/dialog/layers.js";
   import { cn } from "../../helpers/cn.js";
 
   interface Props {
@@ -64,6 +65,36 @@
     footer,
     children,
   }: Props = $props();
+
+  const layerKey = Symbol("dialog-layer");
+
+  let layer = $derived.by(() => {
+    if (typeof window === "undefined") {
+      return 0;
+    }
+
+    if (!open) {
+      dialogLayerManager.unregister(layerKey);
+      return 0;
+    }
+
+    return dialogLayerManager.register(layerKey);
+  });
+
+  onDestroy(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    dialogLayerManager.unregister(layerKey);
+  });
+
+  let overlayStyle = $derived(
+    `z-index: ${dialogLayerManager.overlayZIndex(layer)};`,
+  );
+  let contentStyle = $derived(
+    `z-index: ${dialogLayerManager.contentZIndex(layer)};`,
+  );
 </script>
 
 <BitsDialog.Root bind:open>
@@ -73,11 +104,13 @@
 
   <BitsDialog.Portal>
     <BitsDialog.Overlay
-      class="fixed inset-0 z-40 bg-black/60 transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+      class="fixed inset-0 bg-black/60 transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+      style={overlayStyle}
     />
     <BitsDialog.Content
+      style={contentStyle}
       class={cn(
-        "fixed left-1/2 top-1/2 z-50 flex flex-col overflow-hidden isolate",
+        "fixed left-1/2 top-1/2 flex flex-col overflow-hidden isolate",
         "rounded-lg border bg-base-100 border-base-400 shadow-sm",
         "max-h-[calc(100dvh-4rem)] w-[calc(100dvw-2rem)] -translate-x-1/2 -translate-y-1/2",
         "transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",

@@ -2,8 +2,9 @@
   import { X } from "@lucide/svelte";
   // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Dialog as BitsDialog } from "bits-ui";
-  import type { Snippet } from "svelte";
+  import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
+  import { dialogLayerManager } from "$lib/runtime/dialog/layers.js";
   import { cn } from "../../helpers/cn.ts";
 
   interface Props {
@@ -71,6 +72,36 @@
     footer,
     children,
   }: Props = $props();
+
+  const layerKey = Symbol("sheet-layer");
+
+  let layer = $derived.by(() => {
+    if (typeof window === "undefined") {
+      return 0;
+    }
+
+    if (!open) {
+      dialogLayerManager.unregister(layerKey);
+      return 0;
+    }
+
+    return dialogLayerManager.register(layerKey);
+  });
+
+  onDestroy(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    dialogLayerManager.unregister(layerKey);
+  });
+
+  let overlayStyle = $derived(
+    `z-index: ${dialogLayerManager.overlayZIndex(layer)};`,
+  );
+  let contentStyle = $derived(
+    `z-index: ${dialogLayerManager.contentZIndex(layer)};`,
+  );
 </script>
 
 <BitsDialog.Root bind:open>
@@ -79,11 +110,15 @@
   {/if}
 
   <BitsDialog.Portal>
-    <BitsDialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
+    <BitsDialog.Overlay
+      class="fixed inset-0 bg-black/60"
+      style={overlayStyle}
+    />
 
     <BitsDialog.Content
+      style={contentStyle}
       class={cn(
-				"fixed z-50 flex flex-col overflow-hidden bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
+				"fixed flex flex-col overflow-hidden bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
         {
           "border-r border-base-400": side === "left",
           "border-l border-base-400": side === "right",

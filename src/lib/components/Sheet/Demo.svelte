@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { Button, Input, Label, Textarea } from "$lib/components/index.js";
+  import {
+    Button,
+    Dialog,
+    Input,
+    Label,
+    Textarea,
+  } from "$lib/components/index.js";
   import { Table } from "../Table/index.ts";
   import Sheet from "./Sheet.svelte";
 
@@ -166,6 +172,100 @@
         </div>
       {/snippet}
     </Sheet>
+  </div>
+
+  <div class="space-y-4">
+    <h2 class="text-lg font-semibold tracking-tight">Nested Layers</h2>
+    <p class="text-sm text-content-muted">
+      Sheets and dialogs can open each other without breaking focus management
+      or backdrop stacking.
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      <Sheet
+        description="Launch nested overlays from inside this sheet."
+        title="Parent sheet"
+      >
+        {#snippet trigger()}
+          <Button size="sm" variant="outline">Sheet parent</Button>
+        {/snippet}
+
+        <div class="space-y-3">
+          <Dialog
+            description="This dialog is opened from a sheet body."
+            size="sm"
+            title="Dialog from sheet"
+          >
+            {#snippet trigger()}
+              <Button size="sm" variant="outline">Open dialog</Button>
+            {/snippet}
+
+            <p class="text-sm text-content-muted">
+              Use this flow for confirmations or short approvals inside a
+              broader side workflow.
+            </p>
+          </Dialog>
+
+          <Sheet
+            description="Nested sheets keep the same API and close behavior."
+            side="right"
+            size="sm"
+            title="Sheet from sheet"
+          >
+            {#snippet trigger()}
+              <Button size="sm" variant="outline">Open nested sheet</Button>
+            {/snippet}
+
+            <p class="text-sm text-content-muted">
+              The child sheet renders above the parent layer and can close
+              independently.
+            </p>
+          </Sheet>
+        </div>
+      </Sheet>
+
+      <Dialog
+        description="Use nested actions without leaving the current dialog context."
+        title="Parent dialog"
+      >
+        {#snippet trigger()}
+          <Button size="sm" variant="outline">Dialog parent</Button>
+        {/snippet}
+
+        <div class="space-y-3">
+          <Dialog
+            description="A nested confirmation dialog opened from another dialog."
+            size="sm"
+            title="Dialog from dialog"
+          >
+            {#snippet trigger()}
+              <Button size="sm" variant="outline">Open nested dialog</Button>
+            {/snippet}
+
+            <p class="text-sm text-content-muted">
+              This pattern is useful when a secondary confirmation needs extra
+              context.
+            </p>
+          </Dialog>
+
+          <Sheet
+            description="A sheet can also be launched from dialog content."
+            side="right"
+            size="sm"
+            title="Sheet from dialog"
+          >
+            {#snippet trigger()}
+              <Button color="info" size="sm">Open sheet</Button>
+            {/snippet}
+
+            <p class="text-sm text-content-muted">
+              The sheet receives its own focus trap and closes without affecting
+              the parent dialog.
+            </p>
+          </Sheet>
+        </div>
+      </Dialog>
+    </div>
   </div>
 
   <div class="space-y-4">
