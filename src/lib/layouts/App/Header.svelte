@@ -69,7 +69,7 @@
             square
             variant="ghost"
             size="sm"
-            class={cn("desk:hidden flex-none", { "-ml-2 mr-2": !!headerLeft, "-ml-2": !headerLeft })}
+            class="desk:hidden flex-none mr-2"
             onclick={() => state.toggleSidebarOpen()}
             aria-label="Toggle Navigation"
           >
