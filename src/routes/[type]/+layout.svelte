@@ -18,6 +18,7 @@
     Badge,
     Button,
     GithubButton,
+    Heading,
     Input,
     Nav,
     ThemePicker,
@@ -111,12 +112,6 @@
       active: currentType === section.type,
       href: getSectionHref(section.type),
     })),
-  );
-
-  let currentSection = $derived.by(
-    () =>
-      sectionNavItems.find((item) => item.type === currentType) ??
-      sectionNavItems[0],
   );
 
   let normalizedQuery = $derived(query.trim().toLowerCase());
@@ -285,43 +280,35 @@
 
 <AppLayout primaryRegion="header" maxWidth="xl" sidebarWidth="lg">
   {#snippet headerLeft()}
-    <div class="flex min-w-0 flex-1 items-center gap-4">
-      <div class="min-w-0 shrink-0 flex items-center gap-2">
-        <Logo class="size-6 shrink-0" href="/" />
-        <h1 class="truncate text-base font-semibold desk:text-2xl">
-          Varavel UI
-        </h1>
-      </div>
-
-      <nav
-        aria-label="Explorer sections"
-        class="hidden min-w-0 flex-1 overflow-x-auto desk:block"
-      >
-        <div class="flex min-w-max items-center gap-1">
-          {#each sectionNavItems as item (item.type)}
-            <Button
-              href={item.href}
-              variant="ghost"
-              color={item.active ? "info" : "neutral"}
-              active={item.active}
-            >
-              <span>{item.label}</span>
-              {#if item.soon}
-                <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
-              {/if}
-            </Button>
-          {/each}
-        </div>
-      </nav>
+    <div class="min-w-0 shrink-0 flex items-center gap-2">
+      <Logo class="size-6 shrink-0" href="/" />
+      <Heading size="xl" level="1">Varavel UI</Heading>
     </div>
 
-    <div class="flex items-center gap-2 shrink-0">
-      <GithubButton
-        user="varavelio"
-        repo="ui"
-        class="hidden desk:inline-flex"
-      />
-      <ThemePicker class="hidden shrink-0 desk:inline-flex" />
+    <nav
+      aria-label="Explorer sections"
+      class="hidden min-w-max flex-1 overflow-x-auto desk:flex items-center gap-1"
+    >
+      {#each sectionNavItems as item (item.type)}
+        <Button
+          href={item.href}
+          variant="ghost"
+          color={item.active ? "info" : "neutral"}
+          active={item.active}
+        >
+          <span>{item.label}</span>
+          {#if item.soon}
+            <Badge size="sm" variant="solid" color="neutral">Soon</Badge>
+          {/if}
+        </Button>
+      {/each}
+    </nav>
+  {/snippet}
+
+  {#snippet headerRight()}
+    <div class="hidden desk:flex items-center gap-2">
+      <GithubButton user="varavelio" repo="ui" />
+      <ThemePicker />
     </div>
   {/snippet}
 
