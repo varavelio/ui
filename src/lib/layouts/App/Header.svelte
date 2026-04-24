@@ -37,9 +37,12 @@
   const state = getAppLayoutState();
 
   const hasLeft = $derived(state.hasSidebar || !!headerLeft);
-  const shouldRenderCenter = $derived(!!headerCenter);
-  const shouldRenderLeft = $derived(shouldRenderCenter || hasLeft);
-  const shouldRenderRight = $derived(shouldRenderCenter || !!headerRight);
+  const hasCenter = $derived(!!headerCenter);
+  const hasRight = $derived(!!headerRight);
+
+  const shouldRenderLeft = $derived(hasLeft || hasCenter);
+  const shouldRenderCenter = $derived(hasCenter);
+  const shouldRenderRight = $derived(hasRight || hasCenter);
 </script>
 
 <header
@@ -73,17 +76,19 @@
             <Menu class="size-5" />
           </Button>
         {/if}
-        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
-          <div class="w-max flex items-center gap-4 whitespace-nowrap mr-auto">
-            {@render headerLeft?.()}
+        {#if headerLeft}
+          <div class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden">
+            <div class="w-max flex items-center gap-4 whitespace-nowrap">
+              {@render headerLeft()}
+            </div>
           </div>
-        </div>
+        {/if}
       </div>
     {/if}
 
     {#if shouldRenderCenter}
       <div class="flex-auto min-w-0">
-        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
+        <div class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden">
           <div class="w-max flex items-center gap-4 whitespace-nowrap mx-auto">
             {@render headerCenter?.()}
           </div>
@@ -93,11 +98,15 @@
 
     {#if shouldRenderRight}
       <div class="flex-auto min-w-0">
-        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
-          <div class="w-max flex items-center gap-4 whitespace-nowrap ml-auto">
-            {@render headerRight?.()}
+        {#if headerRight}
+          <div class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden">
+            <div
+              class="w-max flex items-center gap-4 whitespace-nowrap ml-auto"
+            >
+              {@render headerRight()}
+            </div>
           </div>
-        </div>
+        {/if}
       </div>
     {/if}
   </Container>
