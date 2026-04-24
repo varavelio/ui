@@ -47,7 +47,7 @@
       >
         Usage
       </h3>
-      <div class="rounded-lg border border-base-300 p-4 space-y-4">
+      <div class="rounded-lg border border-base-400 p-4 space-y-4">
         <div class="flex items-center justify-between">
           <span class="text-sm font-medium">System Update</span>
           <span class="text-xs text-content-muted italic">Downloading...</span>

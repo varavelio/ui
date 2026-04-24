@@ -52,12 +52,12 @@
   <!-- Variants & Colors Grid -->
   <div class="space-y-2">
     <Label>Variants & Colors</Label>
-    <Card class="overflow-hidden border-base-300">
+    <Card class="overflow-hidden border-base-400">
       <div class="grid grid-cols-1 divide-y divide-base-300">
         {#each variants as variant}
           <div class="grid grid-cols-1 desk:grid-cols-[140px_1fr]">
             <div
-              class="flex items-center bg-base-200/30 px-6 py-4 desk:border-r desk:border-base-300"
+              class="flex items-center bg-base-200/30 px-6 py-4 desk:border-r desk:border-base-400"
             >
               <span
                 class="text-[10px] font-bold uppercase tracking-widest text-content-muted"
@@ -163,7 +163,7 @@
         </Button>
       </div>
       <div class="grid grid-cols-1 desk:grid-cols-2">
-        <div class="p-6 desk:border-r desk:border-base-300">
+        <div class="p-6 desk:border-r desk:border-base-400">
           <Button
             {active}
             {loading}

@@ -111,7 +111,7 @@
       </div>
     </div>
 
-    <div class="border-t border-base-300 pt-4">
+    <div class="border-t border-base-400 pt-4">
       <h5
         class="mb-3 text-[10px] font-bold uppercase tracking-wider text-content-muted"
       >

@@ -121,7 +121,7 @@
   class={cn(
     "vdl-code-block-wrapper flex flex-col overflow-hidden rounded-lg",
     {
-      "border-base-300 border": bordered,
+      "border-base-400 border": bordered,
     },
     wrapperClass,
   )}
@@ -131,7 +131,7 @@
     class={cn(
       "vdl-code-block-header-wrapper bg-base-200 flex items-center justify-between px-4 py-2 rounded-t-lg",
       {
-        "border-base-300 border-b": bordered,
+        "border-base-400 border-b": bordered,
       },
       headerWrapperClass,
     )}
