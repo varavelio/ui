@@ -294,7 +294,7 @@
 
     <nav
       aria-label="Explorer sections"
-      class="hidden min-w-max flex-1 overflow-x-auto desk:flex items-center gap-1"
+      class="hidden min-w-max flex-1 desk:flex items-center gap-1"
     >
       {#each sectionNavItems as item (item.type)}
         <Button
