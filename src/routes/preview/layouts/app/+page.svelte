@@ -9,6 +9,7 @@
     ThemePicker,
   } from "$lib/components/index.js";
   import { AppLayout } from "$lib/layouts/index.js";
+  import { viewport } from "$lib/runtime/index.js";
 </script>
 
 <AppLayout primaryRegion="sidebar" maxWidth="lg">
@@ -23,7 +24,12 @@
   {/snippet}
 
   {#snippet headerRight()}
-    <div class="hidden desk:block"><ThemePicker /></div>
+    <ThemePicker
+      class={{"[&_svg]:size-5": viewport.isMobile}}
+      variant={viewport.isMobile ? "ghost" : "outline"}
+      showLabel={viewport.isDesktop}
+      square={viewport.isMobile}
+    />
   {/snippet}
 
   {#snippet sidebarTop()}
