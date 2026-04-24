@@ -44,7 +44,7 @@
 
 <header
   class={cn(
-    "h-14 shrink-0 min-w-0 overflow-hidden",
+    "h-14 shrink-0 min-w-0",
     {
       "bg-base-100 text-content": bg === "100",
       "bg-base-200 text-content": bg === "200",
@@ -57,10 +57,10 @@
   <Container
     {maxWidth}
     padded
-    class="flex items-center justify-between size-full isolate"
+    class="flex items-center gap-4 size-full isolate"
   >
     {#if shouldRenderLeft}
-      <div class="flex items-center flex-1 min-w-0 justify-start">
+      <div class="flex-auto min-w-0 flex items-center">
         {#if state.hasSidebar}
           <Button
             square
@@ -73,19 +73,31 @@
             <Menu class="size-5" />
           </Button>
         {/if}
-        {@render headerLeft?.()}
+        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
+          <div class="w-max flex items-center gap-4 whitespace-nowrap mr-auto">
+            {@render headerLeft?.()}
+          </div>
+        </div>
       </div>
     {/if}
 
     {#if shouldRenderCenter}
-      <div class="flex items-center justify-center flex-none">
-        {@render headerCenter?.()}
+      <div class="flex-auto min-w-0">
+        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
+          <div class="w-max flex items-center gap-4 whitespace-nowrap mx-auto">
+            {@render headerCenter?.()}
+          </div>
+        </div>
       </div>
     {/if}
 
     {#if shouldRenderRight}
-      <div class="flex items-center flex-1 min-w-0 justify-end">
-        {@render headerRight?.()}
+      <div class="flex-auto min-w-0">
+        <div class="min-w-0 overflow-x-auto overflow-y-hidden">
+          <div class="w-max flex items-center gap-4 whitespace-nowrap ml-auto">
+            {@render headerRight?.()}
+          </div>
+        </div>
       </div>
     {/if}
   </Container>
