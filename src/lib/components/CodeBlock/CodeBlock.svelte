@@ -60,9 +60,19 @@
     showDownload?: boolean;
 
     /**
-     * Additional CSS classes to apply to the container.
+     * Additional CSS classes for the outer wrapper.
      */
-    class?: ClassValue;
+    wrapperClass?: ClassValue;
+
+    /**
+     * Additional CSS classes for the header wrapper.
+     */
+    headerWrapperClass?: ClassValue;
+
+    /**
+     * Additional CSS classes for the code wrapper.
+     */
+    codeWrapperClass?: ClassValue;
   }
 
   let {
@@ -75,7 +85,9 @@
     scrollY = true,
     showCopy = true,
     showDownload = true,
-    class: className,
+    wrapperClass,
+    headerWrapperClass,
+    codeWrapperClass,
     ...restProps
   }: Props = $props();
 
@@ -107,17 +119,21 @@
 
 <div
   class={cn(
-    "bg-base-200 flex flex-col overflow-hidden rounded-lg",
-    className,
+    "vdl-code-block-wrapper flex flex-col overflow-hidden rounded-lg",
+    {
+      "border-base-300 border": bordered,
+    },
+    wrapperClass,
   )}
   {...restProps}
 >
   <div
     class={cn(
-      "flex items-center justify-between px-4 py-2 rounded-t-lg",
+      "vdl-code-block-header-wrapper bg-base-200 flex items-center justify-between px-4 py-2 rounded-t-lg",
       {
-        "border-base-300 border": bordered,
+        "border-base-300 border-b": bordered,
       },
+      headerWrapperClass,
     )}
   >
     <div
@@ -153,15 +169,13 @@
 
   <div
     class={cn(
-      "code-container flex-1 p-4 text-sm rounded-b-lg",
+      "vdl-code-block-code-wrapper flex-1 text-sm rounded-b-lg font-mono",
       {
-        "bg-neutral-950 text-neutral-50": hasHighlightedHtml,
-        "bg-base-100 text-content": !hasHighlightedHtml,
+        "vdl-code-block-plain-code p-4 bg-base-100 text-content": !hasHighlightedHtml,
         "overflow-x-auto": scrollX,
         "overflow-y-auto": scrollY,
-        "plain-code": !hasHighlightedHtml,
-        "border-base-300 border-x border-b": bordered && !hasHighlightedHtml,
       },
+      codeWrapperClass,
     )}
   >
     {#if hasHighlightedHtml}
@@ -174,33 +188,30 @@
 </div>
 
 <style lang="postcss">
-  /* biome-ignore-all lint/complexity/noImportantStyles: need important for code-container */
+  /* biome-ignore-all lint/complexity/noImportantStyles: need important for vdl-code-block-code-wrapper */
 
   /* Base styles for the injected HTML */
-  .code-container :global(pre) {
+  .vdl-code-block-code-wrapper :global(pre) {
     margin: 0;
     background: transparent !important;
   }
 
-  .code-container :global(code) {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
+  .vdl-code-block-code-wrapper :global(code) {
     font-size: 0.875rem;
     line-height: 1.5;
   }
 
-  .code-container :global(pre:focus-visible) {
+  .vdl-code-block-code-wrapper :global(pre:focus-visible) {
     outline: 2px solid var(--color-primary, currentColor);
     outline-offset: -2px;
   }
 
-  .plain-code :global(code) {
+  .vdl-code-block-plain-code :global(code) {
     counter-reset: step;
     counter-increment: step 0;
   }
 
-  .plain-code :global(code .line::before) {
+  .vdl-code-block-plain-code :global(code .line::before) {
     content: counter(step);
     counter-increment: step;
     width: 1rem;
@@ -210,7 +221,7 @@
     color: var(--color-content-muted);
   }
 
-  .plain-code :global(code .line) {
+  .vdl-code-block-plain-code :global(code .line) {
     display: block;
     min-height: 1.5em;
   }

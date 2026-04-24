@@ -54,9 +54,19 @@ export const componentMeta = components([
         "true",
       ),
       prop(
-        "class",
+        "wrapperClass",
         "ClassValue",
-        "Additional CSS classes to apply to the container.",
+        "Additional CSS classes for the outer wrapper.",
+      ),
+      prop(
+        "headerWrapperClass",
+        "ClassValue",
+        "Additional CSS classes for the header wrapper.",
+      ),
+      prop(
+        "codeWrapperClass",
+        "ClassValue",
+        "Additional CSS classes for the code wrapper.",
       ),
     ],
   },

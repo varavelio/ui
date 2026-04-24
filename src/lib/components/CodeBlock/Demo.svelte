@@ -57,7 +57,7 @@
       {bordered}
       {showCopy}
       {showDownload}
-      class="max-w-2xl mx-auto"
+      wrapperClass="max-w-2xl mx-auto"
     />
   </div>
 </div>
