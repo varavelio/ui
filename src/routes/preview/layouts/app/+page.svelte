@@ -23,7 +23,7 @@
   {/snippet}
 
   {#snippet headerRight()}
-    <div class="hidden desk:block"><ThemePicker class="-mr-2" /></div>
+    <div class="hidden desk:block"><ThemePicker /></div>
   {/snippet}
 
   {#snippet sidebarTop()}
