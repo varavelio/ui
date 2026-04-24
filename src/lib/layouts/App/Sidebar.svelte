@@ -64,7 +64,15 @@
       <div class="p-4 shrink-0">{@render sidebarTop()}</div>
     {/if}
     {#if sidebarCenter}
-      <div class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto p-4">
+      <div
+        class={[
+          "flex-1 min-h-0 overflow-x-hidden overflow-y-auto px-4",
+          {
+            "pt-4": !sidebarTop,
+            "pb-4": !sidebarBottom,
+          }
+        ]}
+      >
         {@render sidebarCenter()}
       </div>
     {/if}
@@ -94,7 +102,15 @@
         <div class="p-4 shrink-0">{@render sidebarTop()}</div>
       {/if}
       {#if sidebarCenter}
-        <div class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto p-4">
+        <div
+          class={[
+            "flex-1 min-h-0 overflow-x-hidden overflow-y-auto px-4",
+            {
+              "pt-4": !sidebarTop,
+              "pb-4": !sidebarBottom,
+            }
+          ]}
+        >
           {@render sidebarCenter()}
         </div>
       {/if}
