@@ -121,7 +121,7 @@
     )}
   >
     <div
-      class="text-content-muted text-xs font-medium uppercase tracking-wider"
+      class="text-content-muted text-xs font-medium uppercase tracking-wider h-7 flex items-center"
     >
       {title}
     </div>
