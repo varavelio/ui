@@ -141,14 +141,15 @@
       {#if dismissible}
         <BitsDialog.Close
           class={[
+            "absolute right-4 top-4 z-10 rounded-md text-content-muted",
+            "flex items-center justify-center size-8",
+            "cursor-pointer transition-colors duration-75",
             "focus-visible:outline-2 focus-visible:outline-content",
-            "absolute right-4 top-4 z-10 rounded-md p-2 text-content-muted",
-            "transition-colors duration-75",
             "hover:bg-base-300 hover:text-content",
             "active:scale-[0.99] active:transition-none"
           ]}
         >
-          <X aria-hidden="true" class="size-4" />
+          <X aria-hidden="true" class="size-6" />
           <span class="sr-only">Close sheet</span>
         </BitsDialog.Close>
       {/if}
@@ -156,12 +157,12 @@
       {#if title || description}
         <div class="p-4 shrink-0">
           {#if title}
-            <BitsDialog.Title class="text-lg font-semibold text-content">
+            <BitsDialog.Title class="text-lg font-semibold text-content pr-8">
               {title}
             </BitsDialog.Title>
           {/if}
           {#if description}
-            <BitsDialog.Description class="text-sm text-content-muted">
+            <BitsDialog.Description class="text-sm text-content-muted pr-8">
               {description}
             </BitsDialog.Description>
           {/if}
