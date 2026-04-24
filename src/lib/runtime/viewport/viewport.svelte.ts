@@ -15,6 +15,12 @@ class Viewport {
   private readonly DESKTOP_QUERY = "(min-width: 1024px)";
 
   /**
+   * Tracks whether the viewport runtime has been initialized in the browser.
+   * Remains `false` during SSR and flips to `true` after client setup completes.
+   */
+  #initialized = $state(false);
+
+  /**
    * Reactive state for whether the current viewport is desktop-sized.
    * Defaults to `true` for SSR consistency and initial hydration.
    */
@@ -25,6 +31,13 @@ class Viewport {
    * Defaults to 1024 (desktop) for SSR consistency.
    */
   #width = $state(1024);
+
+  /**
+   * Returns `true` once client-side viewport state has been initialized.
+   */
+  get initialized() {
+    return this.#initialized;
+  }
 
   /**
    * Returns the current viewport width in pixels.
@@ -55,7 +68,7 @@ class Viewport {
   }
 
   constructor() {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !this.#initialized) {
       this.init();
     }
   }
@@ -80,6 +93,9 @@ class Viewport {
         this.#width = window.innerWidth;
       }, 100);
     });
+
+    // Mark as initialized
+    this.#initialized = true;
   }
 }
 
