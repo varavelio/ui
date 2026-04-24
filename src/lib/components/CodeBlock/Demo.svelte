@@ -5,7 +5,6 @@
   let bordered = $state(true);
   let showCopy = $state(true);
   let showDownload = $state(true);
-  let showLineNumbers = $state(true);
   let useHighlighting = $state(true);
 
   const rawCode = `function calculateTotal(items) {
@@ -37,7 +36,6 @@
       <Switch bind:checked={bordered} size="sm" label="Border" />
       <Switch bind:checked={showCopy} size="sm" label="Copy Button" />
       <Switch bind:checked={showDownload} size="sm" label="Download Button" />
-      <Switch bind:checked={showLineNumbers} size="sm" label="Line Numbers" />
       <Switch
         bind:checked={useHighlighting}
         size="sm"
@@ -59,7 +57,6 @@
       {bordered}
       {showCopy}
       {showDownload}
-      {showLineNumbers}
       class="max-w-2xl mx-auto"
     />
   </div>

@@ -54,12 +54,6 @@ export const componentMeta = components([
         "true",
       ),
       prop(
-        "showLineNumbers",
-        "boolean",
-        "Whether to style line numbers (assumes Shiki/Prism generates `.line` elements).",
-        "true",
-      ),
-      prop(
         "class",
         "ClassValue",
         "Additional CSS classes to apply to the container.",

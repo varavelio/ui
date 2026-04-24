@@ -60,12 +60,6 @@
     showDownload?: boolean;
 
     /**
-     * Whether to style line numbers (assumes Shiki/Prism generates `.line` elements).
-     * @default true
-     */
-    showLineNumbers?: boolean;
-
-    /**
      * Additional CSS classes to apply to the container.
      */
     class?: ClassValue;
@@ -81,10 +75,12 @@
     scrollY = true,
     showCopy = true,
     showDownload = true,
-    showLineNumbers = true,
     class: className,
     ...restProps
   }: Props = $props();
+
+  const hasHighlightedHtml = $derived(Boolean(highlightedHtml?.trim()));
+  const plainLines = $derived(rawCode.split(/\r?\n/g));
 
   function handleDownload() {
     try {
@@ -112,15 +108,16 @@
 <div
   class={cn(
     "bg-base-200 flex flex-col overflow-hidden rounded-lg",
-    bordered && "border-base-300 border",
     className,
   )}
   {...restProps}
 >
   <div
     class={cn(
-      "flex items-center justify-between px-4 py-2",
-      bordered && "border-base-300 border-b",
+      "flex items-center justify-between px-4 py-2 rounded-t-lg",
+      {
+        "border-base-300 border": bordered,
+      },
     )}
   >
     <div
@@ -134,23 +131,19 @@
         <Button
           variant="ghost"
           size="sm"
-          class="text-content-muted hover:text-content h-7 px-2"
+          class="size-7"
           onclick={handleDownload}
           title="Download code"
           aria-label="Download code"
-        >
-          <Download class="size-3.5" />
-          <span class="sr-only sm:not-sr-only sm:ml-1 sm:text-xs">
-            Download
-          </span>
-        </Button>
+          icon={Download}
+        />
       {/if}
 
       {#if showCopy}
         <Copy
           text={rawCode}
           size="sm"
-          class="text-content-muted hover:text-content h-7 w-7"
+          class="size-7"
           label="Copy code"
           copiedLabel="Copied code"
         />
@@ -160,16 +153,22 @@
 
   <div
     class={cn(
-      "code-container flex-1 bg-neutral-950 p-4 text-sm text-neutral-50 dark:bg-neutral-950",
-      scrollX && "overflow-x-auto",
-      scrollY && "overflow-y-auto",
-      showLineNumbers && "show-line-numbers",
+      "code-container flex-1 p-4 text-sm rounded-b-lg",
+      {
+        "bg-neutral-950 text-neutral-50": hasHighlightedHtml,
+        "bg-base-100 text-content": !hasHighlightedHtml,
+        "overflow-x-auto": scrollX,
+        "overflow-y-auto": scrollY,
+        "plain-code": !hasHighlightedHtml,
+        "border-base-300 border-x border-b": bordered && !hasHighlightedHtml,
+      },
     )}
   >
-    {#if highlightedHtml}
+    {#if hasHighlightedHtml}
       {@html highlightedHtml}
     {:else}
-      <pre><code>{rawCode}</code></pre>
+      <!-- biome-ignore format: pre tag should not be formatted -->
+      <pre><code>{#each plainLines as line, index (index)}<span class="line">{line || "\u00A0"}</span>{/each}</code></pre>
     {/if}
   </div>
 </div>
@@ -196,19 +195,23 @@
     outline-offset: -2px;
   }
 
-  /* Optional line number support for Shiki */
-  .show-line-numbers :global(code) {
+  .plain-code :global(code) {
     counter-reset: step;
     counter-increment: step 0;
   }
 
-  .show-line-numbers :global(code .line::before) {
+  .plain-code :global(code .line::before) {
     content: counter(step);
     counter-increment: step;
     width: 1rem;
     margin-right: 1.5rem;
     display: inline-block;
     text-align: right;
-    color: rgb(255 255 255 / 0.4);
+    color: var(--color-content-muted);
+  }
+
+  .plain-code :global(code .line) {
+    display: block;
+    min-height: 1.5em;
   }
 </style>
