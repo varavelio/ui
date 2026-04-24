@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
 
@@ -17,52 +16,40 @@
   }
 
   let { class: className, size = "md" }: Props = $props();
-
-  let state = $state<"v" | "a">("v");
-
-  onMount(() => {
-    const interval = window.setInterval(() => {
-      state = state === "v" ? "a" : "v";
-    }, 500);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  });
 </script>
 
-{#snippet brandMark(state: "v" | "a")}
+{#snippet brandMark()}
   <svg
     aria-hidden="true"
     viewBox="0 0 800 800"
-    class="size-full shrink-0 text-black transition-colors duration-150 dark:text-white"
+    class="vdl-brand-loader size-full shrink-0 transition-colors duration-150 text-black dark:text-white"
   >
     <rect
+      class="vdl-brand-loader-bar-outer"
       x="0"
-      y={state === "a" ? 200 : 0}
+      y="0"
       width="200"
       height="600"
       rx="16"
       fill="currentColor"
-      style="transition: y 180ms cubic-bezier(0.4, 0, 0.2, 1);"
     />
     <rect
+      class="vdl-brand-loader-bar-middle"
       x="300"
-      y={state === "a" ? 0 : 200}
+      y="0"
       width="200"
       height="600"
       rx="16"
       fill="currentColor"
-      style="transition: y 180ms cubic-bezier(0.4, 0, 0.2, 1);"
     />
     <rect
+      class="vdl-brand-loader-bar-outer"
       x="600"
-      y={state === "a" ? 200 : 0}
+      y="0"
       width="200"
       height="600"
       rx="16"
       fill="currentColor"
-      style="transition: y 180ms cubic-bezier(0.4, 0, 0.2, 1);"
     />
   </svg>
 {/snippet}
@@ -80,5 +67,25 @@
     className,
   )}
 >
-  {@render brandMark(state)}
+  {@render brandMark()}
 </span>
+
+<style>
+  :global(.vdl-brand-loader-bar-outer) {
+    animation: vdl-brand-loader-wave 450ms linear infinite alternate;
+  }
+
+  :global(.vdl-brand-loader-bar-middle) {
+    animation: vdl-brand-loader-wave 450ms linear infinite alternate-reverse;
+  }
+
+  @keyframes vdl-brand-loader-wave {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(200px);
+    }
+  }
+</style>
