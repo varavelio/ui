@@ -24,6 +24,7 @@
     ThemePicker,
   } from "$lib/components/index.js";
   import { AppLayout } from "$lib/layouts/index.js";
+  import { viewport } from "$lib/runtime/index.js";
   import {
     blockEntries,
     brandEntries,
@@ -278,7 +279,13 @@
   );
 </script>
 
-<AppLayout primaryRegion="header" maxWidth="xl" sidebarWidth="lg">
+<AppLayout
+  primaryRegion="header"
+  maxWidth="xl"
+  sidebarWidth="lg"
+  showHeaderRight={viewport.isDesktop}
+  showSidebarBottom={viewport.isMobile}
+>
   {#snippet headerLeft()}
     <div class="min-w-0 shrink-0 flex items-center gap-2">
       <Logo class="size-6 shrink-0" href="/" />
