@@ -60,6 +60,13 @@
     showDownload?: boolean;
 
     /**
+     * Whether to show the line count (LOC) in the header.
+     * Uses `rawCode.trim()` before counting lines.
+     * @default true
+     */
+    showLoc?: boolean;
+
+    /**
      * Additional CSS classes for the outer wrapper.
      */
     wrapperClass?: ClassValue;
@@ -85,6 +92,7 @@
     scrollY = true,
     showCopy = true,
     showDownload = true,
+    showLoc = true,
     wrapperClass,
     headerWrapperClass,
     codeWrapperClass,
@@ -92,7 +100,8 @@
   }: Props = $props();
 
   const hasHighlightedHtml = $derived(Boolean(highlightedHtml?.trim()));
-  const plainLines = $derived(rawCode.split(/\r?\n/g));
+  const trimmedRawCode = $derived(rawCode.trim());
+  const loc = $derived(trimmedRawCode.split(/\r?\n/g).length);
 
   function handleDownload() {
     try {
@@ -137,9 +146,14 @@
     )}
   >
     <div
-      class="text-content-muted text-xs font-medium uppercase tracking-wider h-7 flex items-center"
+      class="text-content-muted text-xs font-medium uppercase tracking-wider h-7 flex items-center gap-2"
     >
-      {title}
+      <span>
+        {title}
+        {#if showLoc}
+          - {loc} LOC
+        {/if}
+      </span>
     </div>
 
     <div class="flex items-center gap-1">
@@ -181,19 +195,15 @@
     {#if hasHighlightedHtml}
       {@html highlightedHtml}
     {:else}
-      <!-- biome-ignore format: pre tag should not be formatted -->
-      <pre><code>{#each plainLines as line, index (index)}<span class="line">{line || "\u00A0"}</span>{/each}</code></pre>
+      <pre><code>{rawCode}</code></pre>
     {/if}
   </div>
 </div>
 
 <style lang="postcss">
-  /* biome-ignore-all lint/complexity/noImportantStyles: need important for vdl-code-block-code-wrapper */
-
-  /* Base styles for the injected HTML */
   .vdl-code-block-code-wrapper :global(pre) {
     margin: 0;
-    background: transparent !important;
+    background: transparent;
   }
 
   .vdl-code-block-code-wrapper :global(code) {
@@ -204,25 +214,5 @@
   .vdl-code-block-code-wrapper :global(pre:focus-visible) {
     outline: 2px solid var(--color-primary, currentColor);
     outline-offset: -2px;
-  }
-
-  .vdl-code-block-plain-code :global(code) {
-    counter-reset: step;
-    counter-increment: step 0;
-  }
-
-  .vdl-code-block-plain-code :global(code .line::before) {
-    content: counter(step);
-    counter-increment: step;
-    width: 1rem;
-    margin-right: 1.5rem;
-    display: inline-block;
-    text-align: right;
-    color: var(--color-content-muted);
-  }
-
-  .vdl-code-block-plain-code :global(code .line) {
-    display: block;
-    min-height: 1.5em;
   }
 </style>

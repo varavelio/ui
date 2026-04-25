@@ -54,6 +54,12 @@ export const componentMeta = components([
         "true",
       ),
       prop(
+        "showLoc",
+        "boolean",
+        "Whether to show the line count (LOC) in the header based on `rawCode.trim()`.",
+        "true",
+      ),
+      prop(
         "wrapperClass",
         "ClassValue",
         "Additional CSS classes for the outer wrapper.",

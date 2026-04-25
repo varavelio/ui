@@ -5,6 +5,7 @@
   let bordered = $state(true);
   let showCopy = $state(true);
   let showDownload = $state(true);
+  let showLoc = $state(true);
   let useHighlighting = $state(true);
 
   const rawCode = `function calculateTotal(items) {
@@ -14,7 +15,8 @@
 }`;
 
   // This is a simulated output from Shiki or a similar highlighter
-  const highlightedHtml = `<pre class="shiki" tabindex="0"><code><span class="line"><span style="color: #F97583">function</span><span style="color: #B392F0"> calculateTotal</span><span style="color: #E1E4E8">(</span><span style="color: #FFAB70">items</span><span style="color: #E1E4E8">) {</span></span>
+  const highlightedHtml = `
+  <pre class="shiki" tabindex="0" style="background-color: #000000 !important; padding: 14px !important;"><code><span class="line"><span style="color: #F97583">function</span><span style="color: #B392F0"> calculateTotal</span><span style="color: #E1E4E8">(</span><span style="color: #FFAB70">items</span><span style="color: #E1E4E8">) {</span></span>
 <span class="line"><span style="color: #F97583">  return</span><span style="color: #E1E4E8"> items.</span><span style="color: #B392F0">reduce</span><span style="color: #E1E4E8">((</span><span style="color: #FFAB70">sum</span><span style="color: #E1E4E8">, </span><span style="color: #FFAB70">item</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">=&gt;</span><span style="color: #E1E4E8"> {</span></span>
 <span class="line"><span style="color: #F97583">    return</span><span style="color: #E1E4E8"> sum </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> (item.price </span><span style="color: #F97583">*</span><span style="color: #E1E4E8"> item.quantity);</span></span>
 <span class="line"><span style="color: #E1E4E8">  }, </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">);</span></span>
@@ -36,6 +38,7 @@
       <Switch bind:checked={bordered} size="sm" label="Border" />
       <Switch bind:checked={showCopy} size="sm" label="Copy Button" />
       <Switch bind:checked={showDownload} size="sm" label="Download Button" />
+      <Switch bind:checked={showLoc} size="sm" label="Show LOC" />
       <Switch
         bind:checked={useHighlighting}
         size="sm"
@@ -57,6 +60,7 @@
       {bordered}
       {showCopy}
       {showDownload}
+      {showLoc}
       wrapperClass="max-w-2xl mx-auto"
     />
   </div>
