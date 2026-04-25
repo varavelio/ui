@@ -329,17 +329,12 @@
       {#if supportsSearch}
         <label class="sr-only" for="explorer-search">Explorer search</label>
 
-        <div class="relative">
-          <Search
-            class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-content-muted"
-          />
-          <Input
-            id="explorer-search"
-            bind:value={query}
-            class="pl-9"
-            placeholder={searchPlaceholder}
-          />
-        </div>
+        <Input
+          id="explorer-search"
+          bind:value={query}
+          icon={Search}
+          placeholder={searchPlaceholder}
+        />
       {/if}
     </div>
   {/snippet}
