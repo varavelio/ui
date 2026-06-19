@@ -56,6 +56,18 @@
     main?: Snippet;
     /** Width preset for the desktop sidebar. */
     sidebarWidth?: "sm" | "md" | "lg";
+    /**
+     * Whether the sidebar can be resized by dragging its right edge.
+     * Only applies on desktop (`desk:`). The initial width is determined
+     * by `sidebarWidth` and persisted in memory during the session.
+     */
+    sidebarResizable?: boolean;
+    /**
+     * A unique identifier used to persist the sidebar width in
+     * `localStorage` across page reloads. When omitted the width
+     * resets to the preset on each navigation.
+     */
+    sidebarResizableId?: string;
     /** Whether mobile sidebars should automatically close when the current route changes. */
     closeSidebarOnRouteChange?: boolean;
   }
@@ -83,6 +95,8 @@
     showSidebarBottom = true,
     main,
     sidebarWidth = "md",
+    sidebarResizable = false,
+    sidebarResizableId = undefined,
     closeSidebarOnRouteChange = true,
   }: Props = $props();
 
@@ -122,6 +136,57 @@
 
   onDestroy(() => {
     cleanupControls();
+  });
+
+  // --- Sidebar resize persistence ---
+
+  const STORAGE_PREFIX = "varavel-ui-sidebar-width";
+
+  $effect(() => {
+    if (
+      typeof window === "undefined" ||
+      !sidebarResizable ||
+      !sidebarResizableId
+    ) {
+      return;
+    }
+
+    const key = `${STORAGE_PREFIX}-${sidebarResizableId}`;
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        state.setSidebarResizableWidth(parsed);
+      }
+    }
+  });
+
+  $effect(() => {
+    if (
+      typeof window === "undefined" ||
+      !sidebarResizable ||
+      !sidebarResizableId
+    ) {
+      return;
+    }
+
+    const key = `${STORAGE_PREFIX}-${sidebarResizableId}`;
+
+    if (state.sidebarResizableWidth != null) {
+      localStorage.setItem(key, String(state.sidebarResizableWidth));
+    }
+  });
+
+  $effect(() => {
+    if (
+      typeof window === "undefined" ||
+      !sidebarResizableId ||
+      state.sidebarResizableWidth !== null
+    ) {
+      return;
+    }
+
+    localStorage.removeItem(`${STORAGE_PREFIX}-${sidebarResizableId}`);
   });
 </script>
 
@@ -190,6 +255,7 @@
           bg={sidebarBg}
           bordered={sidebarBordered}
           width={sidebarWidth}
+          {sidebarResizable}
           class="desk:h-[calc(100dvh-3.5rem)]"
           sidebarTop={showSidebarTop ? sidebarTop : undefined}
           sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}
@@ -266,6 +332,7 @@
           bg={sidebarBg}
           bordered={sidebarBordered}
           width={sidebarWidth}
+          {sidebarResizable}
           class="desk:h-dvh"
           sidebarTop={showSidebarTop ? sidebarTop : undefined}
           sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}

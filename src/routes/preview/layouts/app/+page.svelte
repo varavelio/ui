@@ -12,7 +12,12 @@
   import { viewport } from "$lib/runtime/index.js";
 </script>
 
-<AppLayout primaryRegion="sidebar" maxWidth="lg">
+<AppLayout
+  primaryRegion="sidebar"
+  maxWidth="lg"
+  sidebarResizable
+  sidebarResizableId="foosidebar"
+>
   {#snippet headerLeft()}
     <Heading size="md" level="2">Header</Heading>
   {/snippet}

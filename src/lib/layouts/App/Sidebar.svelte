@@ -15,6 +15,8 @@
     bordered?: boolean;
     /** Width preset for the desktop sidebar. */
     width?: "sm" | "md" | "lg";
+    /** Whether the sidebar can be resized by dragging its right edge (desktop only). */
+    sidebarResizable?: boolean;
     /** Sidebar top navigation or content. */
     sidebarTop?: Snippet;
     /** Sidebar center navigation or content. */
@@ -28,6 +30,7 @@
     bg,
     bordered = true,
     width = "md",
+    sidebarResizable = false,
     sidebarTop,
     sidebarCenter,
     sidebarBottom,
@@ -42,15 +45,76 @@
       state.hasSidebar = false;
     };
   });
+
+  const isUsingDynamicWidth = $derived(
+    sidebarResizable && state.sidebarResizableWidth != null,
+  );
+  const sidebarStyle = $derived(
+    isUsingDynamicWidth
+      ? `width: ${state.sidebarResizableWidth}px; min-width: 180px; max-width: 40vw`
+      : undefined,
+  );
+  const presetWidthClass = $derived(
+    isUsingDynamicWidth
+      ? undefined
+      : width === "sm"
+        ? "w-56"
+        : width === "md"
+          ? "w-64"
+          : "w-80",
+  );
+
+  // --- Resize handle logic (desktop only) ---
+
+  const MIN_SIDEBAR_WIDTH = 180;
+  const MAX_SIDEBAR_WIDTH_FRACTION = 0.4;
+
+  let resizeStartX = 0;
+  let resizeStartWidth = 0;
+
+  function maxSidebarWidth(): number {
+    if (typeof window === "undefined") return 480;
+    return Math.floor(window.innerWidth * MAX_SIDEBAR_WIDTH_FRACTION);
+  }
+
+  function handleResizeStart(e: PointerEvent) {
+    if (!sidebarResizable) return;
+    e.preventDefault();
+    const handle = e.target as HTMLElement;
+    const aside = handle.parentElement;
+    if (!aside) return;
+    const asideRect = aside.getBoundingClientRect();
+    resizeStartWidth = e.clientX - asideRect.left;
+    resizeStartX = e.clientX;
+    state.isResizing = true;
+    handle.setPointerCapture(e.pointerId);
+  }
+
+  function handleResizeMove(e: PointerEvent) {
+    if (!state.isResizing) return;
+    const delta = e.clientX - resizeStartX;
+    const clamped = Math.max(
+      MIN_SIDEBAR_WIDTH,
+      Math.min(maxSidebarWidth(), resizeStartWidth + delta),
+    );
+    state.setSidebarResizableWidth(clamped);
+  }
+
+  function handleResizeEnd(_e: PointerEvent) {
+    state.isResizing = false;
+  }
+
+  function handleResizeDoubleClick() {
+    state.setSidebarResizableWidth(null);
+  }
 </script>
 
 <aside
+  style={sidebarStyle}
   class={cn(
-    "hidden shrink-0 min-h-0 desk:block",
+    "hidden shrink-0 min-h-0 desk:block relative",
+    presetWidthClass,
     {
-      "w-56": width === "sm",
-      "w-64": width === "md",
-      "w-80": width === "lg",
       "bg-base-100 text-content": bg === "100",
       "bg-base-200 text-content": bg === "200",
       "bg-base-300 text-content": bg === "300",
@@ -59,6 +123,25 @@
     className,
   )}
 >
+  {#if sidebarResizable}
+    <div
+      class={cn(
+        "hidden desk:block absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-10 bg-transparent hover:bg-info/20 transition-colors",
+        { "bg-info/30": state.isResizing },
+      )}
+      role="separator"
+      aria-label="Resize sidebar"
+      aria-valuenow={state.sidebarResizableWidth ?? MIN_SIDEBAR_WIDTH}
+      aria-valuemin={MIN_SIDEBAR_WIDTH}
+      aria-valuemax={maxSidebarWidth()}
+      tabindex="-1"
+      onpointerdown={handleResizeStart}
+      onpointermove={handleResizeMove}
+      onpointerup={handleResizeEnd}
+      ondblclick={handleResizeDoubleClick}
+    ></div>
+  {/if}
+
   <div class="flex h-full min-w-0 flex-col isolate">
     {#if sidebarTop}
       <div class="p-4 shrink-0">{@render sidebarTop()}</div>
