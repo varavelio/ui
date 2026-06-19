@@ -52,7 +52,7 @@ When updating this document, do so with the context of the entire document in mi
 - `biome.json` & `dprint.json`: Formatting and linting rules.
 - `DESIGN.md`: The visual and architectural "Source of Truth" for the design system.
 - `src/`: Main source code.
-- `static/`: Static assets (favicons, etc.).
+- `static/`: Static assets and tiny pre-paint bootstrappers such as `theme-init.js` and `layout-app-init.js`.
 - `.svelte-kit/`, `build/`, `dist/`: Generated and build output directories.
 
 ### `src/lib/` (Core Library)

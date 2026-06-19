@@ -67,6 +67,20 @@ You can also use the unminified version during development:
 <script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/theme-init.js"></script>
 ```
 
+If you use `AppLayout` with `sidebarResizableId`, you can also add the
+optional AppLayout bootstrapper before your app mounts. It reads saved sidebar
+widths from `localStorage` and applies them as CSS variables before the first
+paint, preventing the sidebar from briefly rendering at its preset width and
+then shifting after hydration:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/layout-app-init.js"></script>
+```
+
+This script is optional. If it is omitted, `AppLayout` still restores persisted
+sidebar widths after hydration; the only difference is that users may briefly
+see the preset `sidebarWidth` before the saved width is applied.
+
 ### 3) Mount `UiProvider` in your root layout
 
 `UiProvider` should wrap your app once at the root so shared runtime behavior (dialogs, toasts, tooltip timing, etc.) works globally.

@@ -3,6 +3,7 @@
   import type { ClassValue } from "svelte/elements";
   import Sheet from "$lib/components/Sheet/Sheet.svelte";
   import { cn } from "$lib/helpers/cn.js";
+  import { getSidebarWidthCssVariable } from "./persistence.ts";
   import { getAppLayoutState } from "./state.svelte.ts";
 
   /** Props for the Sidebar component. */
@@ -17,6 +18,8 @@
     width?: "sm" | "md" | "lg";
     /** Whether the sidebar can be resized by dragging its right edge (desktop only). */
     sidebarResizable?: boolean;
+    /** Id used to read an early width CSS variable from `layout-app-init.js`. */
+    sidebarResizableId?: string;
     /** Sidebar top navigation or content. */
     sidebarTop?: Snippet;
     /** Sidebar center navigation or content. */
@@ -31,6 +34,7 @@
     bordered = true,
     width = "md",
     sidebarResizable = false,
+    sidebarResizableId,
     sidebarTop,
     sidebarCenter,
     sidebarBottom,
@@ -46,13 +50,22 @@
     };
   });
 
+  const MIN_SIDEBAR_WIDTH = 180;
+  const MAX_SIDEBAR_WIDTH_FRACTION = 0.4;
+
+  const presetWidthValue = $derived(
+    width === "sm" ? "14rem" : width === "md" ? "16rem" : "20rem",
+  );
   const isUsingDynamicWidth = $derived(
-    sidebarResizable && state.sidebarResizableWidth != null,
+    sidebarResizable &&
+      (!!sidebarResizableId || state.sidebarResizableWidth != null),
   );
   const sidebarStyle = $derived(
-    isUsingDynamicWidth
-      ? `width: ${state.sidebarResizableWidth}px; min-width: 180px; max-width: 40vw`
-      : undefined,
+    sidebarResizable && sidebarResizableId
+      ? `width: var(${getSidebarWidthCssVariable(sidebarResizableId)}, ${presetWidthValue}); min-width: ${MIN_SIDEBAR_WIDTH}px; max-width: 40vw`
+      : sidebarResizable && state.sidebarResizableWidth != null
+        ? `width: ${state.sidebarResizableWidth}px; min-width: ${MIN_SIDEBAR_WIDTH}px; max-width: 40vw`
+        : undefined,
   );
   const presetWidthClass = $derived(
     isUsingDynamicWidth
@@ -65,9 +78,6 @@
   );
 
   // --- Resize handle logic (desktop only) ---
-
-  const MIN_SIDEBAR_WIDTH = 180;
-  const MAX_SIDEBAR_WIDTH_FRACTION = 0.4;
 
   let resizeStartX = 0;
   let resizeStartWidth = 0;

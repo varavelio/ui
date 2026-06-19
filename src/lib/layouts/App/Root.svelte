@@ -6,6 +6,11 @@
   import { appLayoutApi } from "./api.ts";
   import Header from "./Header.svelte";
   import Main from "./Main.svelte";
+  import {
+    getSidebarWidthCssVariable,
+    getSidebarWidthStorageKey,
+    parseStoredSidebarWidth,
+  } from "./persistence.ts";
   import RouteChangeBridge from "./RouteChangeBridge.svelte";
   import Sidebar from "./Sidebar.svelte";
   import { AppLayoutState, setAppLayoutState } from "./state.svelte.ts";
@@ -140,53 +145,71 @@
 
   // --- Sidebar resize persistence ---
 
-  const STORAGE_PREFIX = "varavel-ui-sidebar-width";
+  let hasReadPersistedSidebarWidth = false;
 
   $effect(() => {
+    hasReadPersistedSidebarWidth = false;
+
     if (
       typeof window === "undefined" ||
       !sidebarResizable ||
       !sidebarResizableId
     ) {
+      state.setSidebarResizableWidth(null);
+      hasReadPersistedSidebarWidth = true;
       return;
     }
 
-    const key = `${STORAGE_PREFIX}-${sidebarResizableId}`;
-    const stored = localStorage.getItem(key);
-    if (stored) {
-      const parsed = parseInt(stored, 10);
-      if (!Number.isNaN(parsed) && parsed > 0) {
-        state.setSidebarResizableWidth(parsed);
-      }
+    try {
+      state.setSidebarResizableWidth(
+        parseStoredSidebarWidth(
+          localStorage.getItem(getSidebarWidthStorageKey(sidebarResizableId)),
+        ),
+      );
+    } catch (_) {
+      state.setSidebarResizableWidth(null);
     }
+
+    hasReadPersistedSidebarWidth = true;
   });
 
   $effect(() => {
+    const width = state.sidebarResizableWidth;
+    const isResizing = state.isResizing;
+
     if (
       typeof window === "undefined" ||
       !sidebarResizable ||
-      !sidebarResizableId
-    ) {
-      return;
-    }
-
-    const key = `${STORAGE_PREFIX}-${sidebarResizableId}`;
-
-    if (state.sidebarResizableWidth != null) {
-      localStorage.setItem(key, String(state.sidebarResizableWidth));
-    }
-  });
-
-  $effect(() => {
-    if (
-      typeof window === "undefined" ||
       !sidebarResizableId ||
-      state.sidebarResizableWidth !== null
+      !hasReadPersistedSidebarWidth
     ) {
       return;
     }
 
-    localStorage.removeItem(`${STORAGE_PREFIX}-${sidebarResizableId}`);
+    const cssVariable = getSidebarWidthCssVariable(sidebarResizableId);
+    const storageKey = getSidebarWidthStorageKey(sidebarResizableId);
+
+    if (width === null) {
+      document.documentElement.style.removeProperty(cssVariable);
+      try {
+        localStorage.removeItem(storageKey);
+      } catch (_) {
+        // Ignore storage quotas or privacy blocks
+      }
+      return;
+    }
+
+    document.documentElement.style.setProperty(cssVariable, `${width}px`);
+
+    if (isResizing) {
+      return;
+    }
+
+    try {
+      localStorage.setItem(storageKey, String(width));
+    } catch (_) {
+      // Ignore storage quotas or privacy blocks
+    }
   });
 </script>
 
@@ -256,6 +279,7 @@
           bordered={sidebarBordered}
           width={sidebarWidth}
           {sidebarResizable}
+          {sidebarResizableId}
           class="desk:h-[calc(100dvh-3.5rem)]"
           sidebarTop={showSidebarTop ? sidebarTop : undefined}
           sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}
@@ -333,6 +357,7 @@
           bordered={sidebarBordered}
           width={sidebarWidth}
           {sidebarResizable}
+          {sidebarResizableId}
           class="desk:h-dvh"
           sidebarTop={showSidebarTop ? sidebarTop : undefined}
           sidebarCenter={showSidebarCenter ? sidebarCenter : undefined}
