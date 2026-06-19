@@ -135,10 +135,7 @@
 >
   {#if sidebarResizable}
     <div
-      class={cn(
-        "hidden desk:block absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-10 bg-transparent hover:bg-info/20 transition-colors",
-        { "bg-info/30": state.isResizing },
-      )}
+      class="hidden desk:block absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-10 bg-transparent hover:bg-info/80 transition-colors"
       role="separator"
       aria-label="Resize sidebar"
       aria-valuenow={state.sidebarResizableWidth ?? MIN_SIDEBAR_WIDTH}
