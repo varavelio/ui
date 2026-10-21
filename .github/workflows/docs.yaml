@@ -22,7 +22,7 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           push: never
-          runCmd: /bin/bash -c "npm install && npm run build"
+          runCmd: /bin/bash -c "npm install && npm run build && rm -rf node_modules"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
