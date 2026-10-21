@@ -117,7 +117,7 @@
       />
 
       <Button href={defaultHref} color="info" variant="outline">
-        Open first {defaultEntryLabel}
+        Open first{defaultEntryLabel}
       </Button>
     {:else}
       <Alert title="Coming soon" color="info" closable={false} />

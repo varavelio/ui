@@ -101,7 +101,10 @@
           </div>
         {/if}
 
-        {#if support?.title || support?.description || support?.note || support?.action}
+        {#if support?.title ||
+          support?.description ||
+          support?.note ||
+          support?.action}
           <div
             class="space-y-4 rounded-lg border border-base-400 bg-base-200 p-6"
           >

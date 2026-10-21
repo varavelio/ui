@@ -65,7 +65,9 @@
 
 <BitsTooltip.Root delayDuration={delay} {disabled}>
   <BitsTooltip.Trigger>
-    {#snippet child({ props })}
+    {#snippet child({
+      props,
+    })}
       <svelte:element
         this={as}
         {...props}

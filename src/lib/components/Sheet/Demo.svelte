@@ -152,9 +152,12 @@
       {/snippet}
 
       <div class="space-y-5">
-        {#each Array.from({ length: 8 }, (_, index) => index + 1) as step (step)}
+        {#each Array.from(
+          { length: 8 },
+          (_, index) => index + 1,
+        ) as step (step)}
           <div class="space-y-2">
-            <Label for={`field-${step}`}>Field {step}</Label>
+            <Label for={`field-${step}`}>Field{step}</Label>
             <Input id={`field-${step}`} placeholder={`Enter value ${step}`} />
           </div>
         {/each}
@@ -271,7 +274,7 @@
   <div class="space-y-4">
     <h2 class="text-lg font-semibold tracking-tight">Close Behavior</h2>
     <p class="text-sm text-content-muted">
-      Set <code class="font-mono text-xs text-content">
+      Set<code class="font-mono text-xs text-content">
         dismissible=&#123;false&#125;
       </code>
       to require explicit actions before closing.
@@ -280,7 +283,7 @@
     <div class="flex items-center gap-3">
       <Button onclick={() => (restrictedOpen = true)}>Review invoice</Button>
       <span class="font-mono text-sm text-content-muted">
-        selected = {selectedInvoice}
+        selected ={selectedInvoice}
       </span>
     </div>
 
@@ -292,7 +295,7 @@
     >
       <div class="space-y-3 text-sm text-content-muted">
         <p>
-          Invoice <span class="font-mono text-content">{selectedInvoice}</span>
+          Invoice<span class="font-mono text-content">{selectedInvoice}</span>
           is waiting for a final approval note.
         </p>
         <p>

@@ -106,6 +106,7 @@
 
   {#snippet footer()}
     <div class="flex w-full justify-center sm:justify-end">
+      <!-- biome-ignore lint/a11y/noAutofocus: intentional initial focus inside modal -->
       <Button autofocus {color} onclick={onClose} class="min-w-24">
         {closeText}
       </Button>

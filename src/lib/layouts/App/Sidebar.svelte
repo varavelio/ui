@@ -134,6 +134,7 @@
   )}
 >
   {#if sidebarResizable}
+    <!-- biome-ignore lint/a11y/useSemanticElements: custom splitter needs div with pointer handlers -->
     <div
       class="hidden desk:block absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-10 bg-transparent hover:bg-info/80 transition-colors"
       role="separator"
@@ -160,7 +161,7 @@
           {
             "pt-4": !sidebarTop,
             "pb-4": !sidebarBottom,
-          }
+          },
         ]}
       >
         {@render sidebarCenter()}
@@ -177,15 +178,12 @@
     bind:open={state.isSidebarOpen}
     size="sm"
     padded={false}
-    class={cn(
-      "isolate",
-      {
-        "bg-base-100 text-content": bg === "100",
-        "bg-base-200 text-content": bg === "200",
-        "bg-base-300 text-content": bg === "300",
-        "border-transparent": !bordered,
-      }
-    )}
+    class={cn("isolate", {
+      "bg-base-100 text-content": bg === "100",
+      "bg-base-200 text-content": bg === "200",
+      "bg-base-300 text-content": bg === "300",
+      "border-transparent": !bordered,
+    })}
   >
     <div class="flex h-[100dvh] min-w-0 flex-col isolate">
       {#if sidebarTop}
@@ -198,7 +196,7 @@
             {
               "pt-4": !sidebarTop,
               "pb-4": !sidebarBottom,
-            }
+            },
           ]}
         >
           {@render sidebarCenter()}

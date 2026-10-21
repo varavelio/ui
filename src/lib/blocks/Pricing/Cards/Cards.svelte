@@ -90,12 +90,10 @@
             {@render plan(entry)}
           {:else}
             <Card
-              class={cn(
-                "flex h-full flex-col gap-6 p-6",
-                {
-                  "border-content bg-base-100 shadow-md desk:-translate-y-2": entry.featured,
-                },
-              )}
+              class={cn("flex h-full flex-col gap-6 p-6", {
+                "border-content bg-base-100 shadow-md desk:-translate-y-2":
+                  entry.featured,
+              })}
             >
               <div class="space-y-4">
                 <div class="flex items-start justify-between gap-4">
@@ -151,7 +149,8 @@
                 rel={entry.cta.rel}
                 size={entry.cta.size ?? "lg"}
                 target={entry.cta.target}
-                variant={entry.cta.variant ?? (entry.featured ? "solid" : "outline")}
+                variant={entry.cta.variant ??
+                  (entry.featured ? "solid" : "outline")}
                 wide
               >
                 {entry.cta.label}

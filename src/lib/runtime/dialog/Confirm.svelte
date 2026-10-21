@@ -118,6 +118,7 @@
 
   {#snippet footer()}
     <div class="flex w-full justify-center gap-4 sm:justify-end">
+      <!-- biome-ignore lint/a11y/noAutofocus: intentional initial focus inside modal -->
       <Button autofocus variant="outline" onclick={onCancel} class="min-w-24">
         {cancelText}
       </Button>

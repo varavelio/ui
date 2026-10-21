@@ -39,13 +39,13 @@
           Live theme controls
         </h4>
         <p class="text-sm text-content-muted">
-          Trigger <code>theme.set(...)</code> and inspect the reactive
-          properties or the subscription stream.
+          Trigger<code>theme.set(...)</code> and inspect the reactive properties
+          or the subscription stream.
         </p>
       </div>
       <div class="flex gap-2">
-        <Badge color="info" variant="outline">Preference: {activeTheme}</Badge>
-        <Badge color="success" variant="solid">Resolved: {resolvedTheme}</Badge>
+        <Badge color="info" variant="outline">Preference:{activeTheme}</Badge>
+        <Badge color="success" variant="solid">Resolved:{resolvedTheme}</Badge>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
           variant={activeTheme === nextTheme ? "outline" : "ghost"}
           onclick={() => applyTheme(nextTheme)}
         >
-          Set {nextTheme}
+          Set{nextTheme}
         </Button>
       {/each}
     </div>
@@ -72,7 +72,7 @@
         API Documentation
       </h4>
       <p class="text-xs text-content-muted">
-        The <code>theme</code> runtime is a reactive singleton providing deep
+        The<code>theme</code> runtime is a reactive singleton providing deep
         integration with the browser's theme preferences.
       </p>
     </div>

@@ -44,10 +44,10 @@
       {#each sizes as size (size)}
         <Popover {size} title="Size: {size}">
           {#snippet trigger()}
-            <Button variant="outline">Size: {size}</Button>
+            <Button variant="outline">Size:{size}</Button>
           {/snippet}
           <div class="text-sm text-content">
-            This is a <span class="font-bold">{size}</span> popover. It adjusts
+            This is a<span class="font-bold">{size}</span> popover. It adjusts
             its maximum width accordingly.
           </div>
         </Popover>
@@ -64,7 +64,7 @@
       {#each sides as side (side)}
         <Popover {side} title="Side: {side}">
           {#snippet trigger()}
-            <Button variant="outline">Side: {side}</Button>
+            <Button variant="outline">Side:{side}</Button>
           {/snippet}
           <div class="text-sm text-content text-center">
             Floating on the

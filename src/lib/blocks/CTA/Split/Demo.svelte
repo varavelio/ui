@@ -16,7 +16,8 @@
   image={{
     src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
     alt: "Developer workstation with code on screen",
-    caption: "Swap the default media card for a custom snippet only when the visual needs more structure.",
+    caption:
+      "Swap the default media card for a custom snippet only when the visual needs more structure.",
   }}
   title="Use the split CTA when the visual needs to sell the story too"
 />

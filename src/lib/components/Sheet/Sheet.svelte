@@ -118,23 +118,32 @@
     <BitsDialog.Content
       style={contentStyle}
       class={cn(
-				"fixed flex flex-col overflow-hidden bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
+        "fixed flex flex-col overflow-hidden bg-base-100 shadow-md outline-none transition-transform duration-200 ease-out motion-reduce:transition-none",
         {
           "border-r border-base-400": side === "left",
           "border-l border-base-400": side === "right",
           "border-t border-base-400": side === "bottom",
-          "left-0 top-0 bottom-0 w-[min(100dvw,20rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "sm",
-          "left-0 top-0 bottom-0 w-[min(100dvw,32rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "md",
-          "left-0 top-0 bottom-0 w-[min(100dvw,40rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full": side === "left" && size === "lg",
-          "right-0 top-0 bottom-0 w-[min(100dvw,20rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full": side === "right" && size === "sm",
-          "right-0 top-0 bottom-0 w-[min(100dvw,32rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full": side === "right" && size === "md",
-          "right-0 top-0 bottom-0 w-[min(100dvw,40rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full": side === "right" && size === "lg",
-          "bottom-0 left-0 right-0 h-[min(100dvh,16rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full": side === "bottom" && size === "sm",
-          "bottom-0 left-0 right-0 h-[min(100dvh,24rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full": side === "bottom" && size === "md",
-          "bottom-0 left-0 right-0 h-[min(100dvh,32rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full": side === "bottom" && size === "lg",
+          "left-0 top-0 bottom-0 w-[min(100dvw,20rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full":
+            side === "left" && size === "sm",
+          "left-0 top-0 bottom-0 w-[min(100dvw,32rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full":
+            side === "left" && size === "md",
+          "left-0 top-0 bottom-0 w-[min(100dvw,40rem)] max-w-[80dvw] data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full":
+            side === "left" && size === "lg",
+          "right-0 top-0 bottom-0 w-[min(100dvw,20rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full":
+            side === "right" && size === "sm",
+          "right-0 top-0 bottom-0 w-[min(100dvw,32rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full":
+            side === "right" && size === "md",
+          "right-0 top-0 bottom-0 w-[min(100dvw,40rem)] max-w-[80dvw] data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full":
+            side === "right" && size === "lg",
+          "bottom-0 left-0 right-0 h-[min(100dvh,16rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full":
+            side === "bottom" && size === "sm",
+          "bottom-0 left-0 right-0 h-[min(100dvh,24rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full":
+            side === "bottom" && size === "md",
+          "bottom-0 left-0 right-0 h-[min(100dvh,32rem)] max-h-[80dvh] w-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full":
+            side === "bottom" && size === "lg",
         },
-				className,
-			)}
+        className,
+      )}
       escapeKeydownBehavior={dismissible ? "close" : "ignore"}
       interactOutsideBehavior={dismissible ? "close" : "ignore"}
     >
@@ -146,7 +155,7 @@
             "cursor-pointer transition-colors duration-75",
             "focus-visible:outline-2 focus-visible:outline-content",
             "hover:bg-base-300 hover:text-content",
-            "active:scale-[0.99] active:transition-none"
+            "active:scale-[0.99] active:transition-none",
           ]}
         >
           <X aria-hidden="true" class="size-6" />
@@ -172,7 +181,7 @@
       {#if children}
         <div class="min-h-0 h-0 flex-1 overflow-auto">
           <div
-            class={{ 
+            class={{
               "p-4": padded,
               "pt-0": title || description,
               "pb-0": footer,

@@ -97,7 +97,9 @@
         "bg-warning": color === "warning",
         "bg-error": color === "error",
       })}
-      style={clampedValue === null ? undefined : `transform: translateX(-${100 - percentage}%); width: 100%;`}
+      style={clampedValue === null
+        ? undefined
+        : `transform: translateX(-${100 - percentage}%); width: 100%;`}
     ></div>
   </BitsProgress.Root>
 </div>

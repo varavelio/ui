@@ -37,7 +37,8 @@
     title: "Drop in a screenshot and keep moving",
     description:
       "The visual pane is intentionally framed like a product surface so screenshots, UI previews, and editorial images all sit naturally.",
-    caption: "Use the optional custom visual snippet only when the default frame is not enough.",
+    caption:
+      "Use the optional custom visual snippet only when the default frame is not enough.",
     stats: [
       { value: "4.9/5", label: "design confidence" },
       { value: "72rem", label: "layout width" },

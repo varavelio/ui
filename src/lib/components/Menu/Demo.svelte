@@ -192,5 +192,5 @@
     </div>
   </div>
 
-  <p class="text-sm text-content-muted italic">Last action: {lastAction}</p>
+  <p class="text-sm text-content-muted italic">Last action:{lastAction}</p>
 </Card>

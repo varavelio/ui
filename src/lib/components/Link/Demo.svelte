@@ -43,7 +43,12 @@
     <div class="space-y-3 text-sm text-content-muted">
       <p>
         Force external behavior on a relative path:
-        <Link href="/security/audit" external class="ml-1 text-content">
+        <Link
+          href="/security/audit"
+          external
+          rel="external"
+          class="ml-1 text-content"
+        >
           Open audit report in new tab
         </Link>
       </p>
@@ -62,7 +67,7 @@
 
     <div class="space-y-3 text-sm text-content-muted">
       <p>
-        When <code class="rounded-sm bg-base-200 px-1.5 py-0.5 text-xs">
+        When<code class="rounded-sm bg-base-200 px-1.5 py-0.5 text-xs">
           target="_blank"
         </code>
         is used, secure rel tokens are automatically enforced:
@@ -107,7 +112,7 @@
     <div class="grid grid-cols-1 gap-4 desk:grid-cols-2">
       <div class="space-y-2 rounded-md border border-base-400 bg-base-200 p-4">
         <p class="text-sm text-content-muted">
-          Link inherits <code
+          Link inherits<code
             class="rounded-sm bg-base-100 px-1.5 py-0.5 text-xs"
           >
             text-current
@@ -133,7 +138,11 @@
         </p>
 
         <div class="flex flex-wrap items-center gap-4 text-sm text-content">
-          <Link href="/assets/ui-spec.pdf" download="ui-spec-v1.pdf">
+          <Link
+            href="/assets/ui-spec.pdf"
+            rel="external"
+            download="ui-spec-v1.pdf"
+          >
             <span class="inline-flex items-center gap-1">
               <Download class="size-3.5" />
               Download spec

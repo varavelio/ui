@@ -18,24 +18,10 @@
   },
   "license": "MIT",
   "author": "Varavel",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "README.md",
-    "LICENSE",
-    "static",
-    "dist",
-    "!dist/**/Demo.svelte",
-    "!dist/**/*.test.*",
-    "!dist/**/*.spec.*"
-  ],
   "sideEffects": [
     "**/*.css"
   ],
   "type": "module",
-  "types": "./dist/components/index.d.ts",
-  "svelte": "./dist/components/index.js",
   "exports": {
     ".": {
       "types": "./dist/components/index.d.ts",
@@ -64,6 +50,17 @@
     },
     "./theme.css": "./dist/theme.css"
   },
+  "svelte": "./dist/components/index.js",
+  "types": "./dist/components/index.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "static",
+    "dist",
+    "!dist/**/Demo.svelte",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
   "scripts": {
     "dev": "vite dev",
     "build": "npm run build:vite && npm run build:svelte",
@@ -79,32 +76,35 @@
     "test": "echo ''",
     "ci": "npm run build && npm run lint && npm run test"
   },
-  "peerDependencies": {
-    "svelte": "^5.0.0",
-    "tailwindcss": "^4.0.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.4.10",
-    "@sveltejs/adapter-static": "3.0.10",
-    "@sveltejs/kit": "2.56.1",
-    "@sveltejs/package": "2.5.7",
-    "@sveltejs/vite-plugin-svelte": "6.2.4",
-    "@tailwindcss/vite": "4.2.2",
-    "dprint": "0.53.2",
-    "svelte": "5.55.1",
-    "svelte-check": "4.4.6",
-    "tailwindcss": "4.2.2",
-    "typescript": "5.9.3",
-    "vite": "7.3.1"
-  },
   "dependencies": {
     "@icons-pack/svelte-simple-icons": "7.2.0",
-    "@internationalized/date": "3.12.0",
-    "@lucide/svelte": "1.7.0",
-    "@tailwindcss/typography": "0.5.19",
-    "bits-ui": "2.17.2",
+    "@internationalized/date": "3.12.4",
+    "@lucide/svelte": "1.60.0",
+    "@tailwindcss/typography": "0.5.20",
+    "bits-ui": "2.20.0",
     "clsx": "2.1.1",
-    "svelte-sonner": "1.1.0",
-    "tailwind-merge": "3.5.0"
+    "svelte-sonner": "1.2.1",
+    "tailwind-merge": "3.7.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@sveltejs/adapter-static": "3.0.10",
+    "@sveltejs/kit": "2.56.1",
+    "@sveltejs/package": "3.0.1",
+    "@sveltejs/vite-plugin-svelte": "6.2.4",
+    "@tailwindcss/vite": "4.3.3",
+    "dprint": "0.64.1",
+    "svelte": "5.57.2",
+    "svelte-check": "4.7.7",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vite": "7.3.1"
+  },
+  "peerDependencies": {
+    "svelte": "5.57.2",
+    "tailwindcss": "4.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

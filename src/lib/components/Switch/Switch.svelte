@@ -109,11 +109,16 @@
         "h-7 w-12 p-0.5": size === "lg",
 
         // Color presets
-        "data-[state=checked]:bg-content data-[state=checked]:border-content data-[state=unchecked]:bg-base-300 focus-visible:outline-content": color === "neutral",
-        "data-[state=checked]:bg-info data-[state=checked]:border-info data-[state=unchecked]:bg-base-300 focus-visible:outline-info": color === "info",
-        "data-[state=checked]:bg-success data-[state=checked]:border-success data-[state=unchecked]:bg-base-300 focus-visible:outline-success": color === "success",
-        "data-[state=checked]:bg-warning data-[state=checked]:border-warning data-[state=unchecked]:bg-base-300 focus-visible:outline-warning": color === "warning",
-        "data-[state=checked]:bg-error data-[state=checked]:border-error data-[state=unchecked]:bg-base-300 focus-visible:outline-error": color === "error",
+        "data-[state=checked]:bg-content data-[state=checked]:border-content data-[state=unchecked]:bg-base-300 focus-visible:outline-content":
+          color === "neutral",
+        "data-[state=checked]:bg-info data-[state=checked]:border-info data-[state=unchecked]:bg-base-300 focus-visible:outline-info":
+          color === "info",
+        "data-[state=checked]:bg-success data-[state=checked]:border-success data-[state=unchecked]:bg-base-300 focus-visible:outline-success":
+          color === "success",
+        "data-[state=checked]:bg-warning data-[state=checked]:border-warning data-[state=unchecked]:bg-base-300 focus-visible:outline-warning":
+          color === "warning",
+        "data-[state=checked]:bg-error data-[state=checked]:border-error data-[state=unchecked]:bg-base-300 focus-visible:outline-error":
+          color === "error",
       },
     )}
   >

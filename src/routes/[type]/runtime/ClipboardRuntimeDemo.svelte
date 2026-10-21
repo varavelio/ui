@@ -48,7 +48,7 @@
         <h4 class="text-lg font-semibold tracking-tight">Clipboard runtime</h4>
         <p class="text-sm text-content-muted">
           Standardize copy behavior once, then reuse it from direct runtime
-          calls or through the <code>Copy</code> component.
+          calls or through the<code>Copy</code> component.
         </p>
       </div>
 

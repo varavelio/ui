@@ -97,7 +97,7 @@
                   "text-content-muted hover:text-content": !isActive,
                 },
               )}
-              {...{ href: item.href }}
+              href={item.href}
             >
               {#if Icon}
                 <Icon aria-hidden="true" class="size-4 shrink-0" />
@@ -127,13 +127,16 @@
             <span
               aria-current={isActive ? "page" : undefined}
               aria-disabled={item.disabled ? "true" : undefined}
-              class={cn("inline-flex items-center gap-1.5 text-sm font-medium", {
-                "text-content": isActive,
-                "text-content-muted": !isActive,
-                "opacity-50": item.disabled,
-                "cursor-not-allowed": item.disabled,
-                "cursor-default": !item.disabled,
-              })}
+              class={cn(
+                "inline-flex items-center gap-1.5 text-sm font-medium",
+                {
+                  "text-content": isActive,
+                  "text-content-muted": !isActive,
+                  "opacity-50": item.disabled,
+                  "cursor-not-allowed": item.disabled,
+                  "cursor-default": !item.disabled,
+                },
+              )}
             >
               {#if Icon}
                 <Icon aria-hidden="true" class="size-4 shrink-0" />

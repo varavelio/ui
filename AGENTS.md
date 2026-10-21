@@ -78,6 +78,7 @@ When updating this document, do so with the context of the entire document in mi
   - `[type]/+layout.svelte`: Shared explorer shell built with `AppLayout`; keep the section switcher in the header and render sidebar navigation with the `Nav` component so mobile and desktop stay aligned.
   - `[type]/+page.ts` and `[type]/[slug]/+page.ts`: Keep static `entries()` lists in sync with the explorer registry so adapter-static prerenders every explorer section and detail route.
   - `[type]/[slug]/+page.svelte`: Detail renderer for explorer entries. It handles component docs from `src/lib/catalog.ts` and runtime API docs from `[type]/explorer.ts`.
+  - `svelte.config.js`: Prerender keeps `handleHttpError` and `handleMissingId` on `"warn"` because demos use placeholder hrefs and fragment links. Demo links to non-existent routes must carry `rel="external"` so the SvelteKit crawler skips them.
 
 ## Svelte
 

@@ -132,7 +132,7 @@
             "cursor-pointer transition-colors duration-75",
             "focus-visible:outline-2 focus-visible:outline-content",
             "hover:bg-base-300 hover:text-content",
-            "active:scale-[0.99] active:transition-none"
+            "active:scale-[0.99] active:transition-none",
           ]}
         >
           <X aria-hidden="true" class="size-6" />
@@ -158,7 +158,7 @@
       {#if children}
         <div class="min-h-0 h-0 flex-1 overflow-auto">
           <div
-            class={{ 
+            class={{
               "p-4": padded,
               "pt-0": title || description,
               "pb-0": footer,

@@ -16,7 +16,9 @@
   ];
 </script>
 
-{#snippet proseContent(label: string)}
+{#snippet proseContent(
+  label: string,
+)}
   <h1>{label}</h1>
   <p>
     This reusable snippet demonstrates prose defaults with semantic HTML, stable
@@ -39,8 +41,8 @@
   <h4>Ordered list</h4>
   <ol>
     <li>Write semantic HTML.</li>
-    <li>Wrap it with <code>&lt;Prose&gt;</code>.</li>
-    <li>Tune density with <code>size</code> and <code>fluid</code>.</li>
+    <li>Wrap it with<code>&lt;Prose&gt;</code>.</li>
+    <li>Tune density with<code>size</code> and<code>fluid</code>.</li>
   </ol>
 
   <h5>Quote and link</h5>
@@ -61,19 +63,17 @@
 
   <h6>Inline and block code</h6>
   <p>
-    Inline references like <code>npm run ci</code> stay readable next to normal
+    Inline references like<code>npm run ci</code> stay readable next to normal
     body text.
   </p>
-  <pre>
-    <code>
+  <pre><code>
       import Prose from "$lib/components/Prose/Prose.svelte";
 
       &lt;Prose size="md" fluid&gt;
         &lt;h1&gt;Documentation&lt;/h1&gt;
         &lt;p&gt;This content keeps a consistent system style.&lt;/p&gt;
       &lt;/Prose&gt;
-    </code>
-  </pre>
+    </code></pre>
 
   <table>
     <thead>
@@ -99,7 +99,7 @@
 
   <div class="not-prose rounded-md border border-base-400 bg-base-200 p-4">
     <p class="m-0 text-sm text-content">
-      This <code class="text-content">not-prose</code> area is intentionally
+      This<code class="text-content">not-prose</code> area is intentionally
       untouched by typography defaults.
     </p>
   </div>

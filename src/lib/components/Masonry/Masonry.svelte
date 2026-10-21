@@ -64,53 +64,53 @@
 
 <div
   class={cn(
-		"w-full",
+    "w-full",
 
-		// Mobile columns
-		cols === "1" && "columns-1",
-		cols === "2" && "columns-2",
-		cols === "3" && "columns-3",
-		cols === "4" && "columns-4",
-		cols === "5" && "columns-5",
-		cols === "6" && "columns-6",
-		cols === "7" && "columns-7",
-		cols === "8" && "columns-8",
-		cols === "9" && "columns-9",
-		cols === "10" && "columns-10",
-		cols === "11" && "columns-11",
-		cols === "12" && "columns-12",
+    // Mobile columns
+    cols === "1" && "columns-1",
+    cols === "2" && "columns-2",
+    cols === "3" && "columns-3",
+    cols === "4" && "columns-4",
+    cols === "5" && "columns-5",
+    cols === "6" && "columns-6",
+    cols === "7" && "columns-7",
+    cols === "8" && "columns-8",
+    cols === "9" && "columns-9",
+    cols === "10" && "columns-10",
+    cols === "11" && "columns-11",
+    cols === "12" && "columns-12",
 
-		// Desktop columns
-		deskCols === "1" && "desk:columns-1",
-		deskCols === "2" && "desk:columns-2",
-		deskCols === "3" && "desk:columns-3",
-		deskCols === "4" && "desk:columns-4",
-		deskCols === "5" && "desk:columns-5",
-		deskCols === "6" && "desk:columns-6",
-		deskCols === "7" && "desk:columns-7",
-		deskCols === "8" && "desk:columns-8",
-		deskCols === "9" && "desk:columns-9",
-		deskCols === "10" && "desk:columns-10",
-		deskCols === "11" && "desk:columns-11",
-		deskCols === "12" && "desk:columns-12",
+    // Desktop columns
+    deskCols === "1" && "desk:columns-1",
+    deskCols === "2" && "desk:columns-2",
+    deskCols === "3" && "desk:columns-3",
+    deskCols === "4" && "desk:columns-4",
+    deskCols === "5" && "desk:columns-5",
+    deskCols === "6" && "desk:columns-6",
+    deskCols === "7" && "desk:columns-7",
+    deskCols === "8" && "desk:columns-8",
+    deskCols === "9" && "desk:columns-9",
+    deskCols === "10" && "desk:columns-10",
+    deskCols === "11" && "desk:columns-11",
+    deskCols === "12" && "desk:columns-12",
 
-		// Horizontal Gaps (CSS columns gap)
-		gap === "0" && "gap-0",
-		gap === "2" && "gap-2",
-		gap === "4" && "gap-4",
-		gap === "6" && "gap-6",
-		gap === "8" && "gap-8",
+    // Horizontal Gaps (CSS columns gap)
+    gap === "0" && "gap-0",
+    gap === "2" && "gap-2",
+    gap === "4" && "gap-4",
+    gap === "6" && "gap-6",
+    gap === "8" && "gap-8",
 
-		// Vertical Gaps (Targeting children)
-		"*:break-inside-avoid",
-		gap === "0" && "*:mb-0",
-		gap === "2" && "*:mb-2",
-		gap === "4" && "*:mb-4",
-		gap === "6" && "*:mb-6",
-		gap === "8" && "*:mb-8",
+    // Vertical Gaps (Targeting children)
+    "*:break-inside-avoid",
+    gap === "0" && "*:mb-0",
+    gap === "2" && "*:mb-2",
+    gap === "4" && "*:mb-4",
+    gap === "6" && "*:mb-6",
+    gap === "8" && "*:mb-8",
 
-		className,
-	)}
+    className,
+  )}
   {...restProps}
 >
   {@render children?.()}

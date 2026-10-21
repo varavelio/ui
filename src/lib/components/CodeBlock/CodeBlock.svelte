@@ -151,7 +151,7 @@
       <span>
         {title}
         {#if showLoc}
-          - {loc} LOC
+          -{loc} LOC
         {/if}
       </span>
     </div>
@@ -185,7 +185,8 @@
     class={cn(
       "vdl-code-block-code-wrapper flex-1 text-sm rounded-b-lg font-mono",
       {
-        "vdl-code-block-plain-code p-4 bg-base-100 text-content": !hasHighlightedHtml,
+        "vdl-code-block-plain-code p-4 bg-base-100 text-content":
+          !hasHighlightedHtml,
         "overflow-x-auto": scrollX,
         "overflow-y-auto": scrollY,
       },

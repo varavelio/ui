@@ -167,7 +167,7 @@
         "focus-visible:ring-1 focus-visible:ring-content data-[state=open]:ring-1 data-[state=open]:ring-content",
         // Disabled state
         "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-base-400",
-        
+
         // Dynamic classes
         {
           // Size presets
@@ -190,7 +190,7 @@
           "hover:border-error text-error": error,
           "focus-visible:border-error focus-visible:ring-error": error,
           "data-[state=open]:border-error data-[state=open]:ring-error": error,
-        }
+        },
       )}
     >
       {#if Icon}
@@ -237,7 +237,9 @@
             value={item.value}
             class="data-highlighted:bg-base-200 data-[selected=true]:bg-base-200 flex w-full cursor-pointer select-none items-center gap-3 rounded-md px-3 py-2 text-sm text-content outline-none transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-50"
           >
-            {#snippet children({ selected })}
+            {#snippet children({
+              selected,
+            })}
               <div class="min-w-0 flex-1">
                 <div class="truncate font-medium">{item.label}</div>
                 {#if item.description}

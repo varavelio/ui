@@ -34,14 +34,14 @@
       "mr-auto": align === "left",
       "mx-auto": align === "center",
       "ml-auto": align === "right",
-      "max-w-md": maxWidth === "xs", /* 28rem = 448px */
-      "max-w-3xl": maxWidth === "sm",/* 48rem = 768px */
-      "max-w-6xl": maxWidth === "md", /* 72rem = 1152px */
-      "max-w-360": maxWidth === "lg", /* 90rem = 1440px */
-      "max-w-480": maxWidth === "xl", /* 120rem = 1920px */
-      "max-w-full": maxWidth === "full", /* 100% of the parent container */
+      "max-w-md": maxWidth === "xs" /* 28rem = 448px */,
+      "max-w-3xl": maxWidth === "sm" /* 48rem = 768px */,
+      "max-w-6xl": maxWidth === "md" /* 72rem = 1152px */,
+      "max-w-360": maxWidth === "lg" /* 90rem = 1440px */,
+      "max-w-480": maxWidth === "xl" /* 120rem = 1920px */,
+      "max-w-full": maxWidth === "full" /* 100% of the parent container */,
     },
-    className
+    className,
   )}
   {...rest}
 >

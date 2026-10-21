@@ -71,7 +71,7 @@
         {
           "pl-3": size === "sm" || size === "md",
           "pl-4": size === "lg",
-        }
+        },
       )}
     >
       <Icon
@@ -102,14 +102,14 @@
       "focus-visible:ring-1 focus-visible:ring-content",
       // Disabled state
       "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-base-400",
-      
+
       // Dynamic classes
       {
         // Size presets
         "h-8 px-3 text-xs": size === "sm",
         "h-10 px-3 text-sm": size === "md",
         "h-12 px-4 text-base": size === "lg",
-        // Radius presets      
+        // Radius presets
         "rounded-none": radius === "none",
         "rounded-sm": radius === "sm",
         "rounded-md": radius === "md",
@@ -122,12 +122,12 @@
         "border-error placeholder:text-error/50": error,
         "hover:border-error": error,
         "focus-visible:border-error focus-visible:ring-error": error,
-        
+
         // Icon padding overrides
         "pl-8": Icon && size === "sm",
         "pl-10": Icon && size === "md",
         "pl-11": Icon && size === "lg",
-        
+
         "pr-8": IconRight && size === "sm",
         "pr-10": IconRight && size === "md",
         "pr-11": IconRight && size === "lg",
@@ -145,7 +145,7 @@
         {
           "pr-3": size === "sm" || size === "md",
           "pr-4": size === "lg",
-        }
+        },
       )}
     >
       <IconRight

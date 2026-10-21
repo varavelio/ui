@@ -195,7 +195,8 @@
       // Variant: Solid
       ...(variant === "solid" && {
         "focus-visible:outline-offset-2": true,
-        "border-content bg-content text-base-100 outline-content": color === "neutral",
+        "border-content bg-content text-base-100 outline-content":
+          color === "neutral",
         "bg-content/80 border-content/80": color === "neutral" && active,
         "hover:bg-content/80": color === "neutral" && !disabledOrLoading,
 
@@ -203,11 +204,13 @@
         "bg-info/80 border-info/80": color === "info" && active,
         "hover:bg-info/80": color === "info" && !disabledOrLoading,
 
-        "border-success bg-success text-white outline-success": color === "success",
+        "border-success bg-success text-white outline-success":
+          color === "success",
         "bg-success/80 border-success/80": color === "success" && active,
         "hover:bg-success/80": color === "success" && !disabledOrLoading,
 
-        "border-warning bg-warning text-white outline-warning": color === "warning",
+        "border-warning bg-warning text-white outline-warning":
+          color === "warning",
         "bg-warning/80 border-warning/80": color === "warning" && active,
         "hover:bg-warning/80": color === "warning" && !disabledOrLoading,
 
@@ -218,52 +221,63 @@
 
       // Variant: Outline
       ...(variant === "outline" && {
-        "border-base-400 bg-transparent text-content outline-content": color === "neutral",
+        "border-base-400 bg-transparent text-content outline-content":
+          color === "neutral",
         "bg-base-300": color === "neutral" && active,
         "hover:bg-base-300": color === "neutral" && !disabledOrLoading,
 
-        "border-info/30 bg-transparent text-info outline-info": color === "info",
+        "border-info/30 bg-transparent text-info outline-info":
+          color === "info",
         "bg-info/10": color === "info" && active,
         "hover:bg-info/10": color === "info" && !disabledOrLoading,
 
-        "border-success/30 bg-transparent text-success outline-success": color === "success",
+        "border-success/30 bg-transparent text-success outline-success":
+          color === "success",
         "bg-success/10": color === "success" && active,
         "hover:bg-success/10": color === "success" && !disabledOrLoading,
 
-        "border-warning/30 bg-transparent text-warning outline-warning": color === "warning",
+        "border-warning/30 bg-transparent text-warning outline-warning":
+          color === "warning",
         "bg-warning/10": color === "warning" && active,
         "hover:bg-warning/10": color === "warning" && !disabledOrLoading,
 
-        "border-error/30 bg-transparent text-error outline-error": color === "error",
+        "border-error/30 bg-transparent text-error outline-error":
+          color === "error",
         "bg-error/10": color === "error" && active,
         "hover:bg-error/10": color === "error" && !disabledOrLoading,
       }),
 
       // Variant: Ghost
       ...(variant === "ghost" && {
-        "border-transparent bg-transparent text-content outline-content": color === "neutral",
+        "border-transparent bg-transparent text-content outline-content":
+          color === "neutral",
         "bg-base-300": color === "neutral" && active,
         "hover:bg-base-300": color === "neutral" && !disabledOrLoading,
 
-        "border-transparent bg-transparent text-info outline-info": color === "info",
+        "border-transparent bg-transparent text-info outline-info":
+          color === "info",
         "bg-info/10": color === "info" && active,
         "hover:bg-info/10": color === "info" && !disabledOrLoading,
 
-        "border-transparent bg-transparent text-success outline-success": color === "success",
+        "border-transparent bg-transparent text-success outline-success":
+          color === "success",
         "bg-success/10": color === "success" && active,
         "hover:bg-success/10": color === "success" && !disabledOrLoading,
 
-        "border-transparent bg-transparent text-warning outline-warning": color === "warning",
+        "border-transparent bg-transparent text-warning outline-warning":
+          color === "warning",
         "bg-warning/10": color === "warning" && active,
         "hover:bg-warning/10": color === "warning" && !disabledOrLoading,
 
-        "border-transparent bg-transparent text-error outline-error": color === "error",
+        "border-transparent bg-transparent text-error outline-error":
+          color === "error",
         "bg-error/10": color === "error" && active,
         "hover:bg-error/10": color === "error" && !disabledOrLoading,
       }),
     },
 
-    skeleton && "border-transparent bg-transparent text-transparent outline-transparent",
+    skeleton &&
+      "border-transparent bg-transparent text-transparent outline-transparent",
 
     className,
   )}
@@ -278,16 +292,13 @@
   {/if}
 
   <span
-    class={cn(
-      "inline-flex items-center gap-2 leading-none w-full",
-      {
-        "invisible": loading || skeleton,
-        "justify-center": alignContent === "center",
-        "justify-start": alignContent === "left",
-        "justify-end": alignContent === "right",
-        "justify-between": alignContent === "between",
-      }
-    )}
+    class={cn("inline-flex items-center gap-2 leading-none w-full", {
+      invisible: loading || skeleton,
+      "justify-center": alignContent === "center",
+      "justify-start": alignContent === "left",
+      "justify-end": alignContent === "right",
+      "justify-between": alignContent === "between",
+    })}
   >
     {#if Icon}
       {#key Icon}

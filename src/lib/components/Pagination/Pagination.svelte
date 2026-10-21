@@ -106,7 +106,10 @@
       perPage={safePerPage}
       {siblingCount}
     >
-      {#snippet children({ pages, range })}
+      {#snippet children({
+        pages,
+        range,
+      })}
         <div class="flex flex-col gap-3">
           <div class="flex flex-wrap items-center justify-center gap-1">
             <BitsPagination.PrevButton
@@ -146,8 +149,8 @@
 
           {#if showSummary}
             <p class="text-center text-sm text-content-muted">
-              Showing {range.start}
-              -{range.end} of {safeCount}
+              Showing{range.start}
+              -{range.end} of{safeCount}
             </p>
           {/if}
         </div>

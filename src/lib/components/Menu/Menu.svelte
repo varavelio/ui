@@ -124,7 +124,9 @@
   <BitsContextMenu.Root bind:open>
     {#if hasButtonTrigger}
       <BitsContextMenu.Trigger disabled={triggerDisabled}>
-        {#snippet child({ props })}
+        {#snippet child({
+          props,
+        })}
           <Button {..._mergeTriggerProps(props)} {icon} {iconRight}>
             {#if typeof label === "string"}
               {label}
@@ -192,7 +194,9 @@
   <BitsDropdownMenu.Root bind:open>
     {#if hasButtonTrigger}
       <BitsDropdownMenu.Trigger disabled={triggerDisabled}>
-        {#snippet child({ props })}
+        {#snippet child({
+          props,
+        })}
           <Button {..._mergeTriggerProps(props)} {icon} {iconRight}>
             {#if typeof label === "string"}
               {label}

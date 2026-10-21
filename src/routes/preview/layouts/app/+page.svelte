@@ -30,7 +30,7 @@
 
   {#snippet headerRight()}
     <ThemePicker
-      class={{"[&_svg]:size-5": viewport.isMobile}}
+      class={{ "[&_svg]:size-5": viewport.isMobile }}
       variant={viewport.isMobile ? "ghost" : "outline"}
       showLabel={viewport.isDesktop}
       square={viewport.isMobile}

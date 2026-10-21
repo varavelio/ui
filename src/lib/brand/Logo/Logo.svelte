@@ -96,7 +96,9 @@
   }
 </script>
 
-{#snippet icon(Icon: Component)}
+{#snippet icon(
+  Icon: Component,
+)}
   <Icon class="size-4" />
 {/snippet}
 
@@ -108,7 +110,9 @@
   {@render icon(ExternalLink)}
 {/snippet}
 
-{#snippet brandMark(state: "v" | "a")}
+{#snippet brandMark(
+  state: "v" | "a",
+)}
   <svg
     aria-hidden="true"
     viewBox="0 0 800 800"
@@ -164,7 +168,10 @@
     <span
       aria-label={ariaLabel}
       role="img"
-      class={cn("inline-flex size-10 items-center justify-center align-middle", className)}
+      class={cn(
+        "inline-flex size-10 items-center justify-center align-middle",
+        className,
+      )}
       onmouseenter={() => (hovered = true)}
       onmouseleave={() => (hovered = false)}
     >

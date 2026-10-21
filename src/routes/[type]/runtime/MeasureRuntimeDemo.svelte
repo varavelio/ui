@@ -71,9 +71,8 @@
       <div>
         <h4 class="text-lg font-semibold tracking-tight">Measure runtime</h4>
         <p class="text-sm text-content-muted">
-          Attach <code>measure(...)</code> directly to a node to stream live
-          box, scroll, offset, and style data. The more expensive reads stay
-          opt-in.
+          Attach<code>measure(...)</code> directly to a node to stream live box,
+          scroll, offset, and style data. The more expensive reads stay opt-in.
         </p>
       </div>
 
@@ -192,11 +191,11 @@
               Size
             </p>
             <p class="mt-2 font-mono text-xs text-content">
-              client: {formatNumber(latestMeasure?.size.clientWidth)} ×
+              client:{formatNumber(latestMeasure?.size.clientWidth)} ×
               {formatNumber(latestMeasure?.size.clientHeight)}
             </p>
             <p class="mt-1 font-mono text-xs text-content-muted">
-              offset: {formatNumber(latestMeasure?.size.offsetWidth)} ×
+              offset:{formatNumber(latestMeasure?.size.offsetWidth)} ×
               {formatNumber(latestMeasure?.size.offsetHeight)}
             </p>
           </div>
@@ -208,11 +207,13 @@
               Scroll
             </p>
             <p class="mt-2 font-mono text-xs text-content">
-              x: {formatNumber(latestMeasure?.scroll.left)} / y:
+              x:{formatNumber(latestMeasure?.scroll.left)} / y:
               {formatNumber(latestMeasure?.scroll.top)}
             </p>
             <p class="mt-1 text-xs text-content-muted">
-              {trackScroll ? "Live scroll tracking enabled." : "Scroll tracking disabled."}
+              {trackScroll
+                ? "Live scroll tracking enabled."
+                : "Scroll tracking disabled."}
             </p>
           </div>
 
@@ -223,11 +224,11 @@
               Parent offset
             </p>
             <p class="mt-2 font-mono text-xs text-content">
-              t {formatNumber(latestMeasure?.parentOffset?.top)} · l
+              t{formatNumber(latestMeasure?.parentOffset?.top)} · l
               {formatNumber(latestMeasure?.parentOffset?.left)}
             </p>
             <p class="mt-1 font-mono text-xs text-content-muted">
-              b {formatNumber(latestMeasure?.parentOffset?.bottom)} · r
+              b{formatNumber(latestMeasure?.parentOffset?.bottom)} · r
               {formatNumber(latestMeasure?.parentOffset?.right)}
             </p>
           </div>
@@ -239,11 +240,11 @@
               Viewport offset
             </p>
             <p class="mt-2 font-mono text-xs text-content">
-              t {formatNumber(latestMeasure?.viewportOffset?.top)} · l
+              t{formatNumber(latestMeasure?.viewportOffset?.top)} · l
               {formatNumber(latestMeasure?.viewportOffset?.left)}
             </p>
             <p class="mt-1 font-mono text-xs text-content-muted">
-              b {formatNumber(latestMeasure?.viewportOffset?.bottom)} · r
+              b{formatNumber(latestMeasure?.viewportOffset?.bottom)} · r
               {formatNumber(latestMeasure?.viewportOffset?.right)}
             </p>
           </div>
@@ -264,11 +265,11 @@
           <div
             class="mt-2 grid gap-1 font-mono text-xs text-content-muted sm:grid-cols-2"
           >
-            <p>width {formatNumber(latestMeasure?.style?.width)}</p>
-            <p>height {formatNumber(latestMeasure?.style?.height)}</p>
-            <p>margin {formatNumber(latestMeasure?.style?.marginTop)}</p>
-            <p>padding {formatNumber(latestMeasure?.style?.paddingTop)}</p>
-            <p>border {formatNumber(latestMeasure?.style?.borderTop)}</p>
+            <p>width{formatNumber(latestMeasure?.style?.width)}</p>
+            <p>height{formatNumber(latestMeasure?.style?.height)}</p>
+            <p>margin{formatNumber(latestMeasure?.style?.marginTop)}</p>
+            <p>padding{formatNumber(latestMeasure?.style?.paddingTop)}</p>
+            <p>border{formatNumber(latestMeasure?.style?.borderTop)}</p>
           </div>
         </div>
       </div>

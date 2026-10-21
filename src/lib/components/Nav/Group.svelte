@@ -96,13 +96,17 @@
         // Position it right at the middle of the first line element (top-[18px] approx)
         "[&>*::before]:-left-3.5 [&>*::before]:top-[18px] [&>*::before]:w-2.5",
         {
-          "after:absolute after:top-0 after:left-0 after:h-[calc(100%-19px)]": line !== "none",
-          "after:border-l after:border-dashed after:border-base-400 [&>*::before]:border-dashed [&>*::before]:border-base-400": line === "dashed",
-          "after:border-l after:border-solid after:border-base-400 [&>*::before]:border-solid [&>*::before]:border-base-400": line === "solid",
-          "after:border-transparent [&>*::before]:border-transparent": line === "none",
+          "after:absolute after:top-0 after:left-0 after:h-[calc(100%-19px)]":
+            line !== "none",
+          "after:border-l after:border-dashed after:border-base-400 [&>*::before]:border-dashed [&>*::before]:border-base-400":
+            line === "dashed",
+          "after:border-l after:border-solid after:border-base-400 [&>*::before]:border-solid [&>*::before]:border-base-400":
+            line === "solid",
+          "after:border-transparent [&>*::before]:border-transparent":
+            line === "none",
           "after:border-l [&>*::before]:border-t": borderWidth === "1",
           "after:border-l-2 [&>*::before]:border-t-2": borderWidth === "2",
-        }
+        },
       )}
     >
       {@render children()}

@@ -81,7 +81,7 @@
       <p class="text-sm text-content-muted">
         <span class="font-medium text-content">Use:</span>
         Dense infra views like database tables, logs, and full-screen code
-        editors. <br>
+        editors.<br>
         <span class="font-medium text-content">Why:</span>
         Leverages large engineer screens but caps width before UI elements feel
         disconnected.

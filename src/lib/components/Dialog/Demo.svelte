@@ -192,7 +192,7 @@
         Open Programmatically
       </Button>
       <span class="text-sm text-content-muted font-mono">
-        open = {controlledOpen ? "true" : "false"}
+        open ={controlledOpen ? "true" : "false"}
       </span>
     </div>
 

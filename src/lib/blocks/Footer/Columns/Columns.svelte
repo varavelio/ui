@@ -86,15 +86,12 @@
         </div>
 
         <div
-          class={cn(
-            "grid grid-cols-1 gap-8 sm:grid-cols-2",
-            {
-              "desk:grid-cols-1": columns.length === 1,
-              "desk:grid-cols-2": columns.length === 2,
-              "desk:grid-cols-3": columns.length === 3,
-              "desk:grid-cols-4": columns.length >= 4,
-            },
-          )}
+          class={cn("grid grid-cols-1 gap-8 sm:grid-cols-2", {
+            "desk:grid-cols-1": columns.length === 1,
+            "desk:grid-cols-2": columns.length === 2,
+            "desk:grid-cols-3": columns.length === 3,
+            "desk:grid-cols-4": columns.length >= 4,
+          })}
         >
           {#each columns as column (column.title)}
             <div class="space-y-4">

@@ -217,7 +217,7 @@
   <RouteChangeBridge {state} />
 {/if}
 
-{#if primaryRegion==="header"}
+{#if primaryRegion === "header"}
   <div
     class={cn(
       "relative flex h-dvh w-dvw flex-1 min-w-0 min-h-0 flex-col overflow-hidden",
@@ -237,35 +237,29 @@
 
     {#if hasSidebar}
       <div
-        class={cn(
-          "pointer-events-none absolute bottom-0 hidden desk:block",
-          {
-            "left-0 right-1/2": !!main,
-            "left-0 right-0": !main,
-            "top-14": hasHeader,
-            "top-0": !hasHeader,
-            "bg-base-100": sidebarBg === "100",
-            "bg-base-200": sidebarBg === "200",
-            "bg-base-300": sidebarBg === "300",
-          },
-        )}
+        class={cn("pointer-events-none absolute bottom-0 hidden desk:block", {
+          "left-0 right-1/2": !!main,
+          "left-0 right-0": !main,
+          "top-14": hasHeader,
+          "top-0": !hasHeader,
+          "bg-base-100": sidebarBg === "100",
+          "bg-base-200": sidebarBg === "200",
+          "bg-base-300": sidebarBg === "300",
+        })}
       ></div>
     {/if}
 
     {#if main}
       <div
-        class={cn(
-          "pointer-events-none absolute bottom-0 hidden desk:block",
-          {
-            "left-1/2 right-0": hasSidebar,
-            "left-0 right-0": !hasSidebar,
-            "top-14": hasHeader,
-            "top-0": !hasHeader,
-            "bg-base-100": mainBg === "100",
-            "bg-base-200": mainBg === "200",
-            "bg-base-300": mainBg === "300",
-          },
-        )}
+        class={cn("pointer-events-none absolute bottom-0 hidden desk:block", {
+          "left-1/2 right-0": hasSidebar,
+          "left-0 right-0": !hasSidebar,
+          "top-14": hasHeader,
+          "top-0": !hasHeader,
+          "bg-base-100": mainBg === "100",
+          "bg-base-200": mainBg === "200",
+          "bg-base-300": mainBg === "300",
+        })}
       ></div>
     {/if}
 
@@ -292,7 +286,7 @@
   </div>
 {/if}
 
-{#if primaryRegion==="sidebar"}
+{#if primaryRegion === "sidebar"}
   <div
     class={cn(
       "relative flex h-dvh w-dvw flex-1 min-w-0 min-h-0 overflow-hidden",

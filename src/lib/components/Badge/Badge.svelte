@@ -52,13 +52,19 @@
       "h-7 px-3 text-sm": size === "lg",
 
       // Variant: Solid
-      "border-content bg-content text-base-100": variant === "solid" && color === "neutral",
+      "border-content bg-content text-base-100":
+        variant === "solid" && color === "neutral",
       "border-info bg-info text-white": variant === "solid" && color === "info",
-      "border-success bg-success text-white": variant === "solid" && color === "success",
-      "border-warning bg-warning text-white": variant === "solid" && color === "warning",
-      "border-error bg-error text-white": variant === "solid" && color === "error",
-      "border-error/15 bg-error/10 text-error": variant === "soft" && color === "error",
-      "border-error/30 bg-transparent text-error": variant === "outline" && color === "error",
+      "border-success bg-success text-white":
+        variant === "solid" && color === "success",
+      "border-warning bg-warning text-white":
+        variant === "solid" && color === "warning",
+      "border-error bg-error text-white":
+        variant === "solid" && color === "error",
+      "border-error/15 bg-error/10 text-error":
+        variant === "soft" && color === "error",
+      "border-error/30 bg-transparent text-error":
+        variant === "outline" && color === "error",
     },
     className,
   )}

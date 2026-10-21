@@ -8,7 +8,7 @@
   <div class="space-y-3">
     <Label>Sizes</Label>
     <p>
-      Use the predefined size variants or tailwind css {'`size-{n}`'} classes
+      Use the predefined size variants or tailwind css{"`size-{n}`"} classes
     </p>
     <Card class="flex flex-wrap items-center justify-center gap-8 p-8">
       {#each sizes as size (size)}

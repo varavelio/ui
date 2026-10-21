@@ -68,14 +68,11 @@
       {/if}
 
       <div
-        class={cn(
-          "grid grid-cols-1 gap-5 desk:gap-6",
-          {
-            "desk:grid-cols-2": columns === 2,
-            "desk:grid-cols-3": columns === 3,
-            "desk:grid-cols-4": columns === 4,
-          },
-        )}
+        class={cn("grid grid-cols-1 gap-5 desk:gap-6", {
+          "desk:grid-cols-2": columns === 2,
+          "desk:grid-cols-3": columns === 3,
+          "desk:grid-cols-4": columns === 4,
+        })}
       >
         {#each items as feature (feature.title)}
           {#if item}

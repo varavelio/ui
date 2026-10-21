@@ -86,10 +86,7 @@
           deskRows={card.deskRows}
         >
           <Card
-            class={[
-              "flex h-full flex-col justify-between gap-6",
-              card.tone
-            ]}
+            class={["flex h-full flex-col justify-between gap-6", card.tone]}
           >
             <div class="flex flex-col gap-3">
               <div class="flex items-center justify-between gap-3">

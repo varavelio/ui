@@ -71,13 +71,10 @@
       {/if}
 
       <div
-        class={cn(
-          "grid grid-cols-1 gap-5 desk:gap-6",
-          {
-            "desk:grid-cols-2": columns === 2,
-            "desk:grid-cols-3": columns === 3,
-          },
-        )}
+        class={cn("grid grid-cols-1 gap-5 desk:gap-6", {
+          "desk:grid-cols-2": columns === 2,
+          "desk:grid-cols-3": columns === 3,
+        })}
       >
         {#each items as entry (`${entry.name}-${entry.quote}`)}
           {#if testimonial}

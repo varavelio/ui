@@ -168,7 +168,8 @@
               iconRight={plan.cta.iconRight}
               rel={plan.cta.rel}
               target={plan.cta.target}
-              variant={plan.cta.variant ?? (plan.featured ? "solid" : "outline")}
+              variant={plan.cta.variant ??
+                (plan.featured ? "solid" : "outline")}
               wide
             >
               {plan.cta.label}
@@ -266,7 +267,8 @@
                       rel={plan.cta.rel}
                       size="sm"
                       target={plan.cta.target}
-                      variant={plan.cta.variant ?? (plan.featured ? "solid" : "outline")}
+                      variant={plan.cta.variant ??
+                        (plan.featured ? "solid" : "outline")}
                       wide
                     >
                       {plan.cta.label}

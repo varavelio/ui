@@ -226,13 +226,16 @@
           "rounded-full": radius === "full",
           "bg-base-100 border-base-400": variant === "default",
           "bg-transparent border-transparent": variant === "ghost",
-          "border-error focus-within:border-error focus-within:ring-error": error,
+          "border-error focus-within:border-error focus-within:ring-error":
+            error,
         },
       )}
       {id}
       {name}
     >
-      {#snippet children({ segments })}
+      {#snippet children({
+        segments,
+      })}
         <div class="flex min-w-0 flex-1 flex-wrap items-center gap-0.5">
           {#each segments as { part, value }, index (part + index)}
             {#if part === "literal"}

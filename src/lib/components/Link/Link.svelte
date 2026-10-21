@@ -101,7 +101,8 @@
     "inline-flex items-center gap-1 rounded-sm font-medium text-current underline underline-offset-4 decoration-base-400 transition-colors duration-150",
     "hover:decoration-content focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-content",
     {
-      "pointer-events-none cursor-not-allowed opacity-50 no-underline": disabledLink,
+      "pointer-events-none cursor-not-allowed opacity-50 no-underline":
+        disabledLink,
     },
     className,
   )}

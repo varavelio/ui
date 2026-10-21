@@ -187,27 +187,23 @@
       {step}
       thumbPositioning="exact"
       {type}
-      class={cn(
-        "relative flex touch-none select-none items-center",
-        {
-          "w-full": orientation === "horizontal",
-          "h-full flex-col": orientation === "vertical",
-        },
-      )}
+      class={cn("relative flex touch-none select-none items-center", {
+        "w-full": orientation === "horizontal",
+        "h-full flex-col": orientation === "vertical",
+      })}
     >
-      {#snippet children({ thumbItems })}
+      {#snippet children({
+        thumbItems,
+      })}
         <span
-          class={cn(
-            "bg-base-300 relative grow overflow-hidden rounded-full",
-            {
-              "h-1.5 w-full": orientation === "horizontal" && size === "sm",
-              "h-2 w-full": orientation === "horizontal" && size === "md",
-              "h-2.5 w-full": orientation === "horizontal" && size === "lg",
-              "h-full w-1.5": orientation === "vertical" && size === "sm",
-              "h-full w-2": orientation === "vertical" && size === "md",
-              "h-full w-2.5": orientation === "vertical" && size === "lg",
-            },
-          )}
+          class={cn("bg-base-300 relative grow overflow-hidden rounded-full", {
+            "h-1.5 w-full": orientation === "horizontal" && size === "sm",
+            "h-2 w-full": orientation === "horizontal" && size === "md",
+            "h-2.5 w-full": orientation === "horizontal" && size === "lg",
+            "h-full w-1.5": orientation === "vertical" && size === "sm",
+            "h-full w-2": orientation === "vertical" && size === "md",
+            "h-full w-2.5": orientation === "vertical" && size === "lg",
+          })}
         >
           <BitsSlider.Range
             class={cn("bg-content absolute", {

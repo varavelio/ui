@@ -193,7 +193,7 @@
     <div class="rounded-md border border-base-400 bg-base-100 p-3 text-sm">
       <p class="font-medium text-content">{latestAction}</p>
       <p class="mt-1 font-mono text-xs text-content-muted">
-        Last toast id: {lastToastId ?? "—"}
+        Last toast id:{lastToastId ?? "—"}
       </p>
     </div>
 

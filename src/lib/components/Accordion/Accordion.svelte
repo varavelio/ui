@@ -93,7 +93,7 @@
               "py-5 text-base": size === "lg",
             },
             item.disabled && "opacity-50 cursor-not-allowed",
-            iconPosition === "left" ? "flex-row-reverse" : "flex-row"
+            iconPosition === "left" ? "flex-row-reverse" : "flex-row",
           )}
         >
           <span class="flex-1">{item.label}</span>

@@ -77,18 +77,15 @@
   class={cn("w-full", className)}
 >
   <BitsTabs.List
-    class={cn(
-      "border-base-400 inline-flex gap-1 rounded-lg border",
-      {
-        "bg-base-100": bg === "100",
-        "bg-base-200": bg === "200",
-        "bg-base-300": bg === "300",
-        "p-1": size === "sm" || size === "md",
-        "p-1.5": size === "lg",
-        "w-full flex-col": orientation === "vertical",
-        "w-full flex-wrap": orientation === "horizontal",
-      },
-    )}
+    class={cn("border-base-400 inline-flex gap-1 rounded-lg border", {
+      "bg-base-100": bg === "100",
+      "bg-base-200": bg === "200",
+      "bg-base-300": bg === "300",
+      "p-1": size === "sm" || size === "md",
+      "p-1.5": size === "lg",
+      "w-full flex-col": orientation === "vertical",
+      "w-full flex-wrap": orientation === "horizontal",
+    })}
   >
     {#each items as item (item.value)}
       <BitsTabs.Trigger
@@ -100,11 +97,16 @@
             "h-7 px-2.5 text-xs": size === "sm",
             "h-9 px-4 text-sm": size === "md",
             "h-11 px-6 text-base": size === "lg",
-            "data-[state=active]:bg-content data-[state=active]:text-base-100": color === "neutral",
-            "data-[state=active]:bg-info data-[state=active]:text-white": color === "info",
-            "data-[state=active]:bg-success data-[state=active]:text-white": color === "success",
-            "data-[state=active]:bg-warning data-[state=active]:text-white": color === "warning",
-            "data-[state=active]:bg-error data-[state=active]:text-white": color === "error",
+            "data-[state=active]:bg-content data-[state=active]:text-base-100":
+              color === "neutral",
+            "data-[state=active]:bg-info data-[state=active]:text-white":
+              color === "info",
+            "data-[state=active]:bg-success data-[state=active]:text-white":
+              color === "success",
+            "data-[state=active]:bg-warning data-[state=active]:text-white":
+              color === "warning",
+            "data-[state=active]:bg-error data-[state=active]:text-white":
+              color === "error",
           },
         )}
       >

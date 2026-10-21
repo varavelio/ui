@@ -151,15 +151,22 @@
               "size-6": size === "lg",
 
               // Color presets
-              "data-[state=checked]:border-content text-content focus-visible:outline-content": color === "neutral",
-              "data-[state=checked]:border-info text-info focus-visible:outline-info": color === "info",
-              "data-[state=checked]:border-success text-success focus-visible:outline-success": color === "success",
-              "data-[state=checked]:border-warning text-warning focus-visible:outline-warning": color === "warning",
-              "data-[state=checked]:border-error text-error focus-visible:outline-error": color === "error",
+              "data-[state=checked]:border-content text-content focus-visible:outline-content":
+                color === "neutral",
+              "data-[state=checked]:border-info text-info focus-visible:outline-info":
+                color === "info",
+              "data-[state=checked]:border-success text-success focus-visible:outline-success":
+                color === "success",
+              "data-[state=checked]:border-warning text-warning focus-visible:outline-warning":
+                color === "warning",
+              "data-[state=checked]:border-error text-error focus-visible:outline-error":
+                color === "error",
             },
           )}
         >
-          {#snippet children({ checked })}
+          {#snippet children({
+            checked,
+          })}
             <span
               class={cn(
                 "rounded-full bg-current transition-transform duration-200",

@@ -65,7 +65,10 @@
   });
 </script>
 
-{#snippet labelContent(optionLabel: string, isSelected: boolean)}
+{#snippet labelContent(
+  optionLabel: string,
+  isSelected: boolean,
+)}
   <span>{optionLabel}</span>
   {#if isSelected}
     <Check class="size-4 text-content-muted" />

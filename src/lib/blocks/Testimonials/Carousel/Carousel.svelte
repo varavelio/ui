@@ -89,7 +89,7 @@
         <Card class="space-y-8 p-6 desk:p-10">
           <div class="flex items-center justify-between gap-4">
             <div class="text-sm text-content-muted">
-              {activeIndex + 1} / {items.length}
+              {activeIndex + 1} /{items.length}
             </div>
 
             <div class="flex gap-2">
@@ -157,7 +157,8 @@
                     "flex items-center gap-3 rounded-md border px-3 py-2 text-left transition-colors duration-150",
                     {
                       "border-content bg-base-100": index === activeIndex,
-                      "border-base-400 bg-base-200 hover:bg-base-100": index !== activeIndex,
+                      "border-base-400 bg-base-200 hover:bg-base-100":
+                        index !== activeIndex,
                     },
                   )}
                   onclick={() => {

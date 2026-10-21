@@ -64,7 +64,7 @@
     "focus-visible:ring-1 focus-visible:ring-content",
     // Disabled state
     "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-base-400",
-    
+
     // Dynamic classes
     {
       // Radius presets
@@ -79,7 +79,7 @@
       // Resize behavior
       "resize-none": resize === "none",
       "resize-y": resize === "vertical",
-      "resize": resize === "auto",
+      resize: resize === "auto",
       // Error state
       "border-error placeholder:text-error/50": error,
       "hover:border-error": error,

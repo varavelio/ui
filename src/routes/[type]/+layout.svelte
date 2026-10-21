@@ -360,11 +360,14 @@
       </div>
 
       {#if currentType === "components" || currentType === "brand"}
-        {@const navGroups = currentType === "brand" ? brandNavGroups : componentNavGroups}
+        {@const navGroups =
+          currentType === "brand" ? brandNavGroups : componentNavGroups}
 
         <div class="space-y-3">
           <Nav.Root
-            aria-label={currentType === "brand" ? "Brand catalog" : "Component catalog"}
+            aria-label={currentType === "brand"
+              ? "Brand catalog"
+              : "Component catalog"}
           >
             {#each navGroups as group (group.category)}
               <Nav.Group
@@ -386,11 +389,11 @@
           {#if !navGroups.length}
             <Alert
               title={currentType === "brand"
-                  ? "No brand components match this filter"
-                  : "No components match this filter"}
+                ? "No brand components match this filter"
+                : "No components match this filter"}
               description={currentType === "brand"
-                  ? "Try broader terms like logo or loader."
-                  : "Try broader terms like form, dialog, or feedback."}
+                ? "Try broader terms like logo or loader."
+                : "Try broader terms like form, dialog, or feedback."}
               color="warning"
               closable={false}
             />
