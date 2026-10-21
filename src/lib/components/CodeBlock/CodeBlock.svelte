@@ -5,6 +5,7 @@
   import { toast } from "../../runtime/toast/index.js";
   import { Button } from "../Button/index.js";
   import { Copy } from "../Copy/index.js";
+  import { Tooltip } from "../Tooltip/index.js";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {
     /**
@@ -158,15 +159,16 @@
 
     <div class="flex items-center gap-1">
       {#if showDownload}
-        <Button
-          variant="ghost"
-          size="sm"
-          class="size-7"
-          onclick={handleDownload}
-          title="Download code"
-          aria-label="Download code"
-          icon={Download}
-        />
+        <Tooltip content="Download code" delay={0} side="top">
+          <Button
+            variant="ghost"
+            size="sm"
+            class="size-7"
+            onclick={handleDownload}
+            aria-label="Download code"
+            icon={Download}
+          />
+        </Tooltip>
       {/if}
 
       {#if showCopy}
