@@ -1,5 +1,9 @@
-/* Geist fonts via Bunny CDN. */
-@import url("https://fonts.bunny.net/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap");
+/*
+  Import Geist fonts in your HTML (required by this config)
+
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap" />
+*/
 
 /* Tailwind Typography plugin used by rich text surfaces (`prose`). */
 @plugin "@tailwindcss/typography";
@@ -7,28 +11,15 @@
 /* Enable dark mode with either .dark or [data-theme="dark"]. */
 @custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
+/* Geist families ("Geist", "Geist Mono") load via Bunny <link> tags in app.html (see README install). */
 @theme {
   /* Single-breakpoint responsive model */
   --breakpoint-*: initial;
   --breakpoint-desk: 64rem;
 
   /* Typography families. */
-  --font-sans:
-    "Geist",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-  --font-mono:
-    "Geist Mono",
-    ui-monospace,
-    "SFMono-Regular",
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    monospace;
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
   /* Restrict font utilities to approved weights only. */
   --font-weight-*: initial;

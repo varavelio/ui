@@ -16,7 +16,7 @@ Our primary goal is to deliver an exceptional User Experience (UX) through minim
 
 We have standardized our typography using the **Geist** font family, which is specifically optimized for modern development tools and interfaces.
 
-_Note: The Geist font family loads via Bunny CDN inside the `@varavel/ui` core theme (`theme.css`). Internet access is required; no local font installs needed._
+_Note: The Geist font family loads via Bunny CDN `<link>` tags in `app.html` (see install guide). Internet access is required; no local font installs needed._
 
 ### 1. Interface and Text (Sans-Serif)
 

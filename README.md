@@ -68,6 +68,16 @@ In your main stylesheet (for example `src/app.css`):
 @source "../node_modules/@varavel/ui";
 ```
 
+Load the Geist font families via Bunny CDN by adding the following links to your `app.html` (or main HTML file) inside the `<head>` tag:
+
+```html
+<link rel="preconnect" href="https://fonts.bunny.net" />
+<link
+  rel="stylesheet"
+  href="https://fonts.bunny.net/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
+/>
+```
+
 ### 2) Prevent FOUC with Theme Initialization
 
 To ensure the theme is initialized correctly and prevent a Flash of Unstyled Content (FOUC), add the following script (use the CDN or download it) to your `app.html` (or main HTML file) inside the `<head>` tag, ideally before any other scripts:
