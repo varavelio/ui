@@ -55,6 +55,7 @@ Required peer dependencies:
 
 - `svelte` v5+
 - `tailwindcss` v4+
+- `@internationalized/date` v3+
 
 ## Quick Start
 
