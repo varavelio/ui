@@ -1,6 +1,5 @@
 <script lang="ts">
   import { ChevronDown } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Accordion as BitsAccordion } from "bits-ui";
   import type { Component } from "svelte";
   import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";

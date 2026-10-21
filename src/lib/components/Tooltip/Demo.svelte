@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Input, Tooltip } from "$lib/components/index.js";
+  import { Button, Tooltip } from "$lib/components/index.js";
   import Avatar from "../Avatar/Avatar.svelte";
 </script>
 

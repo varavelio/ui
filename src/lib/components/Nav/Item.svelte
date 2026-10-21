@@ -71,7 +71,7 @@
       className,
     )}
     aria-current={active ? "page" : undefined}
-    {...restProps as any}
+    {...restProps as unknown as Record<string, never>}
   >
     <span
       class="flex-1 truncate text-left"

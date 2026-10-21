@@ -3,7 +3,6 @@
   import { GitFork, Star, Tag } from "@lucide/svelte";
   import { onMount } from "svelte";
   import type { ClassValue, HTMLAnchorAttributes } from "svelte/elements";
-  import { cn } from "../../helpers/cn.js";
   import Badge from "../Badge/Badge.svelte";
   import Button from "../Button/Button.svelte";
   import {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Loader, Logo } from "$lib/brand/index.js";
+  import { Loader } from "$lib/brand/index.js";
   import { Card, Label } from "$lib/components/index.js";
 
   const sizes = ["sm", "md", "lg"] as const;

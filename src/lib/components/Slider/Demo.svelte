@@ -1,13 +1,5 @@
 <script lang="ts">
-  import {
-    CirclePercent,
-    DollarSign,
-    Gauge,
-    Layers,
-    MoveHorizontal,
-    MoveVertical,
-    Zap,
-  } from "@lucide/svelte";
+  import { Gauge, Layers, MoveVertical, Zap } from "@lucide/svelte";
   import { Card, Label, Slider, Switch } from "$lib/components/index.js";
 
   let volume = $state(72);

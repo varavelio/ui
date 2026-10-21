@@ -1,5 +1,4 @@
 <script lang="ts">
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Popover as BitsPopover } from "bits-ui";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";

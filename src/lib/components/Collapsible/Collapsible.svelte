@@ -1,6 +1,5 @@
 <script lang="ts">
   import { ChevronDown } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Collapsible as BitsCollapsible } from "bits-ui";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";

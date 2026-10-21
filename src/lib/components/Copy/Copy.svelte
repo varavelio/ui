@@ -1,5 +1,4 @@
 <script lang="ts">
-  // biome-ignore lint/correctness/noUnusedImports: Used but not detected by biome.
   import { Check, Copy as CopyIcon } from "@lucide/svelte";
   import { onDestroy } from "svelte";
   import type { ClassValue, HTMLButtonAttributes } from "svelte/elements";

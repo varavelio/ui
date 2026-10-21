@@ -2,7 +2,6 @@
   import type { CalendarDate } from "@internationalized/date";
   import { getLocalTimeZone, today } from "@internationalized/date";
   import { CalendarDays, ChevronLeft, ChevronRight } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { DatePicker as BitsDatePicker } from "bits-ui";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";

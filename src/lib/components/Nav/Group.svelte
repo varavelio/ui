@@ -70,7 +70,7 @@
       onclick={toggle}
       class="font-medium text-content/70 px-2 hover:text-content"
       aria-expanded={open}
-      {...restProps as any}
+      {...restProps as unknown as Record<string, never>}
     >
       <span
         class="flex-1 truncate text-left"

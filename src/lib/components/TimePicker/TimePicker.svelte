@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Time } from "@internationalized/date";
   import { Clock3 } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { TimeField as BitsTimeField } from "bits-ui";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";

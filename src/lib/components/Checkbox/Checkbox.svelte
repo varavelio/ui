@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Check, Minus } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Checkbox as BitsCheckbox } from "bits-ui";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { X } from "@lucide/svelte";
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Dialog as BitsDialog } from "bits-ui";
   import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";

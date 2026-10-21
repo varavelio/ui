@@ -1,5 +1,4 @@
 <script lang="ts">
-  // biome-ignore lint/correctness/noUnusedImports: Used as a compound component namespace in Svelte markup.
   import { Avatar as BitsAvatar } from "bits-ui";
   import type { ClassValue } from "svelte/elements";
   import { cn } from "../../helpers/cn.js";
