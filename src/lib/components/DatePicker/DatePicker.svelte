@@ -115,6 +115,18 @@
     closeOnDateSelect?: boolean;
 
     /**
+     * Whether to show the today button in the calendar footer.
+     * @default true
+     */
+    showToday?: boolean;
+
+    /**
+     * Whether to show the clear button in the calendar footer.
+     * @default true
+     */
+    showClear?: boolean;
+
+    /**
      * Prevents clearing the current date without choosing another one.
      * @default false
      */
@@ -227,6 +239,8 @@
     variant = "default",
     locale = "en-GB",
     closeOnDateSelect = true,
+    showToday = true,
+    showClear = true,
     preventDeselect = false,
     readonlySegments,
     weekStartsOn,
@@ -481,21 +495,23 @@
             {/snippet}
           </BitsDatePicker.Calendar>
 
-          {#if !disabled && !readonly}
+          {#if !disabled && !readonly && (showToday || (value && showClear))}
             <div
               class="mt-3 flex items-center justify-between gap-3 border-t border-base-400 pt-3"
             >
-              <Button
-                color="neutral"
-                disabled={!isSelectableDate(currentDate)}
-                onclick={handleToday}
-                size="sm"
-                variant="ghost"
-              >
-                Today
-              </Button>
+              {#if showToday}
+                <Button
+                  color="neutral"
+                  disabled={!isSelectableDate(currentDate)}
+                  onclick={handleToday}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Today
+                </Button>
+              {/if}
 
-              {#if value}
+              {#if value && showClear}
                 <Button
                   color="neutral"
                   onclick={handleClear}

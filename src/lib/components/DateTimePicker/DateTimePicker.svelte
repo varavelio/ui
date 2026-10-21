@@ -147,6 +147,18 @@
     closeOnDateSelect?: boolean;
 
     /**
+     * Whether to show the now button in the calendar footer.
+     * @default true
+     */
+    showNow?: boolean;
+
+    /**
+     * Whether to show the clear button in the calendar footer.
+     * @default true
+     */
+    showClear?: boolean;
+
+    /**
      * Prevents clearing the current value without choosing another one.
      * @default false
      */
@@ -272,6 +284,8 @@
     hourCycle,
     hideTimeZone = false,
     closeOnDateSelect = false,
+    showNow = true,
+    showClear = true,
     preventDeselect = false,
     readonlySegments,
     weekStartsOn,
@@ -613,21 +627,23 @@
             </BitsTimeField.Root>
           </div>
 
-          {#if !disabled && !readonly}
+          {#if !disabled && !readonly && (showNow || (value && showClear))}
             <div
               class="mt-3 flex items-center justify-between gap-3 border-t border-base-400 pt-3"
             >
-              <Button
-                color="neutral"
-                disabled={!isSelectableValue(getNowValue())}
-                onclick={handleNow}
-                size="sm"
-                variant="ghost"
-              >
-                Now
-              </Button>
+              {#if showNow}
+                <Button
+                  color="neutral"
+                  disabled={!isSelectableValue(getNowValue())}
+                  onclick={handleNow}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Now
+                </Button>
+              {/if}
 
-              {#if value}
+              {#if value && showClear}
                 <Button
                   color="neutral"
                   onclick={handleClear}

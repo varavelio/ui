@@ -4,10 +4,18 @@
     now,
     parseDateTime,
   } from "@internationalized/date";
-  import { Card, DateTimePicker, Label } from "$lib/components/index.js";
+  import {
+    Card,
+    DateTimePicker,
+    Label,
+    Switch,
+  } from "$lib/components/index.js";
 
   let value = $state(parseDateTime("2026-04-18T14:30:00"));
   let zonedValue = $state(now(getLocalTimeZone()));
+  let showNow = $state(true);
+  let showClear = $state(true);
+  let footerValue = $state(parseDateTime("2026-04-18T14:30:00"));
 </script>
 
 <div class="space-y-8">
@@ -88,5 +96,20 @@
         </div>
       </Card>
     </div>
+  </div>
+  <div class="space-y-3">
+    <Label>Footer Options</Label>
+    <Card class="space-y-4 p-6">
+      <div class="flex flex-wrap gap-4">
+        <Switch bind:checked={showNow} size="sm" label="Now button" />
+        <Switch bind:checked={showClear} size="sm" label="Clear button" />
+      </div>
+      <DateTimePicker
+        bind:value={footerValue}
+        label="Footer controls"
+        {showClear}
+        {showNow}
+      />
+    </Card>
   </div>
 </div>

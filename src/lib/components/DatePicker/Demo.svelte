@@ -4,10 +4,13 @@
     getLocalTimeZone,
     today,
   } from "@internationalized/date";
-  import { Card, DatePicker, Label } from "$lib/components/index.js";
+  import { Card, DatePicker, Label, Switch } from "$lib/components/index.js";
 
   let value = $state(new CalendarDate(2026, 4, 18));
   const todayValue = today(getLocalTimeZone());
+  let showToday = $state(true);
+  let showClear = $state(true);
+  let footerValue = $state(new CalendarDate(2026, 4, 18));
 </script>
 
 <div class="space-y-8">
@@ -75,5 +78,21 @@
         />
       </Card>
     </div>
+  </div>
+
+  <div class="space-y-3">
+    <Label>Footer Options</Label>
+    <Card class="space-y-4 p-6">
+      <div class="flex flex-wrap gap-4">
+        <Switch bind:checked={showToday} size="sm" label="Today button" />
+        <Switch bind:checked={showClear} size="sm" label="Clear button" />
+      </div>
+      <DatePicker
+        bind:value={footerValue}
+        label="Footer controls"
+        {showClear}
+        {showToday}
+      />
+    </Card>
   </div>
 </div>

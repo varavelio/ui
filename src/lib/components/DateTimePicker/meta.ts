@@ -114,6 +114,18 @@ export const componentMeta = components([
         "false",
       ),
       prop(
+        "showNow",
+        "boolean",
+        "Whether to show the now button in the calendar footer.",
+        "true",
+      ),
+      prop(
+        "showClear",
+        "boolean",
+        "Whether to show the clear button in the calendar footer.",
+        "true",
+      ),
+      prop(
         "numberOfMonths",
         "number",
         "Number of months displayed in the calendar popover.",

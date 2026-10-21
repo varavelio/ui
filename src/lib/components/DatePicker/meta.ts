@@ -95,6 +95,18 @@ export const componentMeta = components([
         "true",
       ),
       prop(
+        "showToday",
+        "boolean",
+        "Whether to show the today button in the calendar footer.",
+        "true",
+      ),
+      prop(
+        "showClear",
+        "boolean",
+        "Whether to show the clear button in the calendar footer.",
+        "true",
+      ),
+      prop(
         "preventDeselect",
         "boolean",
         "Prevents clearing the current date without choosing another one.",
