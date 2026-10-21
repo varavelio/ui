@@ -84,13 +84,10 @@ Load the Geist font families via Bunny CDN by adding the following links to your
 To ensure the theme is initialized correctly and prevent a Flash of Unstyled Content (FOUC), add the following script (use the CDN or download it) to your `app.html` (or main HTML file) inside the `<head>` tag, ideally before any other scripts:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/theme-init.min.js"></script>
-```
-
-You can also use the unminified version during development:
-
-```html
+<!-- Unminified -->
 <script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/theme-init.js"></script>
+<!-- Minified -->
+<script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/theme-init.min.js"></script>
 ```
 
 If you use `AppLayout` with `sidebarResizableId`, you can also add the
@@ -100,7 +97,10 @@ paint, preventing the sidebar from briefly rendering at its preset width and
 then shifting after hydration:
 
 ```html
+<!-- Unminified -->
 <script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/layout-app-init.js"></script>
+<!-- Minified -->
+<script src="https://cdn.jsdelivr.net/npm/@varavel/ui@0/static/layout-app-init.min.js"></script>
 ```
 
 This script is optional. If it is omitted, `AppLayout` still restores persisted
