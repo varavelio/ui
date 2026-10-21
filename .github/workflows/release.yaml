@@ -18,10 +18,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create mount directories
-        run: |
-          mkdir -p ~/.claude ~/.config/opencode ~/.local/share/opencode
-
       - name: Publish to npm
         uses: devcontainers/ci@v0.3
         env:
