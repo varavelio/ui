@@ -185,27 +185,31 @@
 
   <div
     class={cn(
-      "vdl-code-block-code-wrapper flex-1 text-sm rounded-b-lg font-mono",
-      {
-        "vdl-code-block-plain-code p-4 bg-base-100 text-content":
-          !hasHighlightedHtml,
-        "overflow-x-auto": scrollX,
-        "overflow-y-auto": scrollY,
-      },
+      "vdl-code-block-code-wrapper flex min-h-0 flex-1 flex-col rounded-b-lg font-mono text-sm",
       codeWrapperClass,
     )}
   >
-    {#if hasHighlightedHtml}
-      {@html highlightedHtml}
-    {:else}
-      <pre><code>{rawCode}</code></pre>
-    {/if}
+    <div
+      class={cn("min-h-0 flex-1 rounded-b-lg [&>*]:p-4", {
+        "overflow-x-auto": scrollX,
+        "overflow-y-auto": scrollY,
+      })}
+    >
+      {#if hasHighlightedHtml}
+        {@html highlightedHtml}
+      {:else}
+        <pre class="bg-base-100 text-content"><code>{rawCode}</code></pre>
+      {/if}
+    </div>
   </div>
 </div>
 
 <style lang="postcss">
   .vdl-code-block-code-wrapper :global(pre) {
     margin: 0;
+    width: max-content;
+    min-width: 100%;
+    box-sizing: border-box;
     background: transparent;
   }
 
