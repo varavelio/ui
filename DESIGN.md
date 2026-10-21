@@ -16,11 +16,11 @@ Our primary goal is to deliver an exceptional User Experience (UX) through minim
 
 We have standardized our typography using the **Geist** font family, which is specifically optimized for modern development tools and interfaces.
 
-_Note: The Geist font family is fully integrated and pre-configured within the `@varavel/ui` core theme (`theme.css`). It is an "all-included" setup, meaning no external font imports or installations are required on your end._
+_Note: The Geist font family loads via Bunny CDN inside the `@varavel/ui` core theme (`theme.css`). Internet access is required; no local font installs needed._
 
 ### 1. Interface and Text (Sans-Serif)
 
-- **Family:** `Geist Sans`
+- **Family:** `Geist`
 - **Usage:** Headings, paragraphs, buttons, form labels, and general navigation.
 - **Permitted Weights:**
   - `Regular (400)`: For standard body text.

@@ -1,25 +1,11 @@
+/* Geist fonts via Bunny CDN. */
+@import url("https://fonts.bunny.net/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap");
+
 /* Tailwind Typography plugin used by rich text surfaces (`prose`). */
 @plugin "@tailwindcss/typography";
 
 /* Enable dark mode with either .dark or [data-theme="dark"]. */
 @custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
-
-/* Bundled Geist fonts (self-hosted inside this package). */
-@font-face {
-  font-family: "Geist Sans";
-  src: url("./fonts/geist/Geist-Variable.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist Mono";
-  src: url("./fonts/geist/GeistMono-Variable.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
 
 @theme {
   /* Single-breakpoint responsive model */
@@ -28,7 +14,7 @@
 
   /* Typography families. */
   --font-sans:
-    "Geist Sans",
+    "Geist",
     ui-sans-serif,
     system-ui,
     -apple-system,

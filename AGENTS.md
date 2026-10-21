@@ -65,7 +65,6 @@ When updating this document, do so with the context of the entire document in mi
   - `helpers/`: Shared cross-library utilities such as `cn()` that are not specific to any one component family.
   - `blocks/`: Larger, pre-composed UI sections or patterns.
   - `layouts/`: Ready to use layout components to use in various scenarios. Layout-specific browser control APIs should live beside their layout family here (for example `appLayout` next to `AppLayout`) and be exported through `@varavel/ui/layouts`, not the generic `runtime/` entrypoint.
-  - `fonts/`: Self-hosted Geist font family.
 - `runtime/`: App-level browser helpers such as `theme`, `dialog`, `toast`, and `clipboard`, plus Svelte-specific attachment factories like `measure` for DOM instrumentation. Prefer these shared runtime utilities over ad-hoc browser API access inside components.
   - `theme.css`: The central Tailwind 4 theme definition, including colors, typography, and base styles.
 
