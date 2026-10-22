@@ -58,6 +58,7 @@
     "static",
     "dist",
     "!dist/**/Demo.svelte",
+    "!dist/**/Demo.svelte.d.ts",
     "!dist/**/*.test.*",
     "!dist/**/*.spec.*"
   ],
