@@ -152,7 +152,8 @@
       <span>
         {title}
         {#if showLoc}
-          -{loc} LOC
+          •
+          {loc} LOC
         {/if}
       </span>
     </div>
