@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button, Tooltip } from "$lib/components/index.js";
   import Avatar from "../Avatar/Avatar.svelte";
+  import { Button, Tooltip } from "../index.js";
 </script>
 
 <div class="flex flex-col gap-12">

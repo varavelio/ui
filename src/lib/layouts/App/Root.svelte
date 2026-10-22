@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { Container } from "$lib/components/index.js";
-  import { cn } from "$lib/helpers/cn.js";
+  import { Container } from "../../components/index.js";
+  import { cn } from "../../helpers/cn.js";
   import { appLayoutApi } from "./api.ts";
   import Header from "./Header.svelte";
   import Main from "./Main.svelte";

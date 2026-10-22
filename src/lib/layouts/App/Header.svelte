@@ -2,8 +2,8 @@
   import { Menu } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { Button, Container } from "$lib/components/index.js";
-  import { cn } from "$lib/helpers/cn.js";
+  import { Button, Container } from "../../components/index.js";
+  import { cn } from "../../helpers/cn.js";
   import { getAppLayoutState } from "./state.svelte.ts";
 
   /** Props for the Header component. */

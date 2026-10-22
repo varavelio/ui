@@ -1,11 +1,5 @@
 <script lang="ts">
-  import {
-    Button,
-    Dialog,
-    Input,
-    Label,
-    Textarea,
-  } from "$lib/components/index.js";
+  import { Button, Dialog, Input, Label, Textarea } from "../index.js";
   import { Table } from "../Table/index.ts";
   import Sheet from "./Sheet.svelte";
 

@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { HTMLAttributes } from "svelte/elements";
-  import Container from "$lib/components/Container/Container.svelte";
-  import Link from "$lib/components/Link/Link.svelte";
-  import Separator from "$lib/components/Separator/Separator.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Container from "../../../components/Container/Container.svelte";
+  import Link from "../../../components/Link/Link.svelte";
+  import Separator from "../../../components/Separator/Separator.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface FooterLink {
     label: string;

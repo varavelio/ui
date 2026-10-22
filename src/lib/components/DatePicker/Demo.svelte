@@ -4,7 +4,7 @@
     getLocalTimeZone,
     today,
   } from "@internationalized/date";
-  import { Card, DatePicker, Label, Switch } from "$lib/components/index.js";
+  import { Card, DatePicker, Label, Switch } from "../index.js";
 
   let value = $state(new CalendarDate(2026, 4, 18));
   const todayValue = today(getLocalTimeZone());

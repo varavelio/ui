@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { ClassValue, HTMLAttributes } from "svelte/elements";
-  import { cn } from "$lib/helpers/cn.js";
+  import { cn } from "../../helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
     /** The maximum width of the container. */

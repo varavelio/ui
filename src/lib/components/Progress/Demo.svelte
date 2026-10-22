@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Progress } from "$lib/components/index.js";
+  import { Progress } from "../index.js";
 </script>
 
 <div class="grid gap-8">

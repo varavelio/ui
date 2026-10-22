@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Alert } from "$lib/components/index.js";
+  import { Alert } from "../index.js";
 
   function handleClose() {
     alert("This alert has been closed via the onClose callback!");

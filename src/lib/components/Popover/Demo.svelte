@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Input, Popover } from "$lib/components/index.js";
   import Avatar from "../Avatar/Avatar.svelte";
   import Button from "../Button/Button.svelte";
+  import { Input, Popover } from "../index.js";
 
   const sizes = ["sm", "md", "lg"] as const;
   const sides = ["top", "bottom", "left", "right"] as const;

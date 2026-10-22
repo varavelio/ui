@@ -54,10 +54,10 @@
 
 <script lang="ts">
   import { CircleAlert, CircleCheck, CircleX, Info } from "@lucide/svelte";
-  import Button from "$lib/components/Button/Button.svelte";
-  import Dialog from "$lib/components/Dialog/Dialog.svelte";
-  import Heading from "$lib/components/Heading/Heading.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Button from "../../components/Button/Button.svelte";
+  import Dialog from "../../components/Dialog/Dialog.svelte";
+  import Heading from "../../components/Heading/Heading.svelte";
+  import { cn } from "../../helpers/cn.js";
 
   let {
     title,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Collapsible } from "$lib/components/index.js";
+  import { Collapsible } from "../index.js";
 </script>
 
 <div class="space-y-8">

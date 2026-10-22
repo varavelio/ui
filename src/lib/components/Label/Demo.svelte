@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Input, Label } from "$lib/components/index.js";
+  import { Card, Input, Label } from "../index.js";
 </script>
 
 <div class="space-y-8">

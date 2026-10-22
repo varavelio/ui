@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, ColorPicker, Label } from "$lib/components/index.js";
+  import { Card, ColorPicker, Label } from "../index.js";
 
   let brand = $state("#111111");
   let accent = $state("#2563EB");

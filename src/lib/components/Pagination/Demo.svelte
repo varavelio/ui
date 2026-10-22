@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Label, Pagination, Table } from "$lib/components/index.js";
+  import { Card, Label, Pagination, Table } from "../index.js";
 
   let page = $state(3);
   const perPage = 10;

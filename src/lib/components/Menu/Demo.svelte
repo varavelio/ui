@@ -9,8 +9,8 @@
     Trash,
     User,
   } from "@lucide/svelte";
-  import { Card, Menu } from "$lib/components/index.js";
   import Avatar from "../Avatar/Avatar.svelte";
+  import { Card, Menu } from "../index.js";
 
   let lastAction = $state("No action yet");
 

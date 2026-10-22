@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Accordion, Label } from "$lib/components/index.js";
+  import { Accordion, Label } from "../index.js";
 
   const baseItems = [
     { value: "foundations", label: "Foundations", content: foundations },

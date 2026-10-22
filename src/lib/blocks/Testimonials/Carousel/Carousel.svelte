@@ -1,11 +1,11 @@
 <script lang="ts">
   import { ChevronLeft, ChevronRight, Star } from "@lucide/svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import Avatar from "$lib/components/Avatar/Avatar.svelte";
-  import Button from "$lib/components/Button/Button.svelte";
-  import Card from "$lib/components/Card/Card.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Avatar from "../../../components/Avatar/Avatar.svelte";
+  import Button from "../../../components/Button/Button.svelte";
+  import Card from "../../../components/Card/Card.svelte";
+  import Container from "../../../components/Container/Container.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface TestimonialsCarouselItem {
     quote: string;

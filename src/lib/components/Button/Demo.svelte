@@ -10,7 +10,7 @@
     Settings,
     Trash2,
   } from "@lucide/svelte";
-  import { Button, Card, Kbd, Label, Switch } from "$lib/components/index.js";
+  import { Button, Card, Kbd, Label, Switch } from "../index.js";
 
   let active = $state(false);
   let loading = $state(false);

@@ -3,8 +3,8 @@
   import { Dialog as BitsDialog } from "bits-ui";
   import { onDestroy, type Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import { dialogLayerManager } from "$lib/runtime/dialog/layers.js";
   import { cn } from "../../helpers/cn.ts";
+  import { dialogLayerManager } from "../../runtime/dialog/layers.js";
 
   interface Props {
     /**

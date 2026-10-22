@@ -1,6 +1,6 @@
 <script lang="ts">
   import { parseTime, Time } from "@internationalized/date";
-  import { Card, Label, TimePicker } from "$lib/components/index.js";
+  import { Card, Label, TimePicker } from "../index.js";
 
   let value = $state(parseTime("14:30:00"));
   const officeOpen = new Time(9, 0);

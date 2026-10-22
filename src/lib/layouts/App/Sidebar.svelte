@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { ClassValue } from "svelte/elements";
-  import Sheet from "$lib/components/Sheet/Sheet.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Sheet from "../../components/Sheet/Sheet.svelte";
+  import { cn } from "../../helpers/cn.js";
   import { getSidebarWidthCssVariable } from "./persistence.ts";
   import { getAppLayoutState } from "./state.svelte.ts";
 

@@ -2,11 +2,11 @@
   import { Star } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import Avatar from "$lib/components/Avatar/Avatar.svelte";
-  import Card from "$lib/components/Card/Card.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
-  import Link from "$lib/components/Link/Link.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Avatar from "../../../components/Avatar/Avatar.svelte";
+  import Card from "../../../components/Card/Card.svelte";
+  import Container from "../../../components/Container/Container.svelte";
+  import Link from "../../../components/Link/Link.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface TestimonialsGridItem {
     quote: string;

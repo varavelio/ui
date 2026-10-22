@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
-  import Button from "$lib/components/Button/Button.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Button from "../../../components/Button/Button.svelte";
+  import Container from "../../../components/Container/Container.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface StatsWithContextAction {
     label: string;

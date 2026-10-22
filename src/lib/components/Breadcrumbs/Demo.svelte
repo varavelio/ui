@@ -9,7 +9,7 @@
     UserRound,
   } from "@lucide/svelte";
   import type { Component } from "svelte";
-  import { Breadcrumbs, Card, Label } from "$lib/components/index.js";
+  import { Breadcrumbs, Card, Label } from "../index.js";
 
   type BreadcrumbDemoItem = {
     label: string;

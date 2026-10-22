@@ -4,12 +4,7 @@
     now,
     parseDateTime,
   } from "@internationalized/date";
-  import {
-    Card,
-    DateTimePicker,
-    Label,
-    Switch,
-  } from "$lib/components/index.js";
+  import { Card, DateTimePicker, Label, Switch } from "../index.js";
 
   let value = $state(parseDateTime("2026-04-18T14:30:00"));
   let zonedValue = $state(now(getLocalTimeZone()));

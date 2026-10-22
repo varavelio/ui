@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Copy, Input } from "$lib/components/index.js";
+  import { Copy, Input } from "../index.js";
 
   const apiKey = "vrvl_live_8N9S2Q1Z7X4K5M3P";
   const transactionId = "txn_01JSQ3M6WQ5A2Z0T9H8Y7F6E5D";

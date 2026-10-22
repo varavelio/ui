@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Loader } from "$lib/brand/index.js";
-  import { Card, Label } from "$lib/components/index.js";
+  import { Card, Label } from "../../components/index.js";
+  import { Loader } from "../index.js";
 
   const sizes = ["sm", "md", "lg"] as const;
 </script>

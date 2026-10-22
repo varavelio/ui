@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Label, RadioGroup } from "$lib/components/index.js";
+  import { Card, Label, RadioGroup } from "../index.js";
 
   let selectedEnvironment = $state("staging");
   let selectedDensity = $state("comfortable");

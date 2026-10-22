@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Label, Switch } from "$lib/components/index.js";
+  import { Card, Label, Switch } from "../index.js";
 
   let checked1 = $state(false);
   let checked2 = $state(true);

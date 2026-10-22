@@ -6,7 +6,7 @@
     LockKeyhole,
     ShieldCheck,
   } from "@lucide/svelte";
-  import { Card, Label, Link } from "$lib/components/index.js";
+  import { Card, Label, Link } from "../index.js";
 
   const docsUrl = "https://svelte.dev/docs/svelte/overview";
   const releaseUrl = "https://example.com/changelog/latest";

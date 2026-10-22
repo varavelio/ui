@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Tooltip } from "bits-ui";
   import type { Snippet } from "svelte";
-  import DialogProvider from "$lib/runtime/dialog/DialogProvider.svelte";
-  import ToastProvider from "$lib/runtime/toast/ToastProvider.svelte";
+  import DialogProvider from "../../runtime/dialog/DialogProvider.svelte";
+  import ToastProvider from "../../runtime/toast/ToastProvider.svelte";
 
   interface Props {
     /**

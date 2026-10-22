@@ -2,8 +2,8 @@
   import { ChevronDown } from "@lucide/svelte";
   import { Accordion as BitsAccordion } from "bits-ui";
   import type { HTMLAttributes } from "svelte/elements";
-  import Container from "$lib/components/Container/Container.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Container from "../../../components/Container/Container.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface FaqAccordionItem {
     question: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge, Card, Tabs } from "$lib/components/index.js";
+  import { Badge, Card, Tabs } from "../index.js";
 
   const items = [
     { value: "overview", label: "Overview", content: overview },

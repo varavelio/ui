@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Gauge, Layers, MoveVertical, Zap } from "@lucide/svelte";
-  import { Card, Label, Slider, Switch } from "$lib/components/index.js";
+  import { Card, Label, Slider, Switch } from "../index.js";
 
   let volume = $state(72);
   let priceRange = $state([25, 75]);

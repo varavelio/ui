@@ -10,8 +10,8 @@
     Shield,
     Users,
   } from "@lucide/svelte";
-  import Card from "$lib/components/Card/Card.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
+  import Card from "../Card/Card.svelte";
+  import Container from "../Container/Container.svelte";
   import { Nav } from "./index.js";
 </script>
 

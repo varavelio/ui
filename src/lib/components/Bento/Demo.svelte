@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Heading } from "$lib/components/index.js";
   import Card from "../Card/Card.svelte";
+  import { Heading } from "../index.js";
   import { Bento } from "./index.js";
 
   const overviewCards = [

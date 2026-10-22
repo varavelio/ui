@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { HTMLAttributes } from "svelte/elements";
-  import Button from "$lib/components/Button/Button.svelte";
-  import Card from "$lib/components/Card/Card.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
-  import Input from "$lib/components/Input/Input.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Button from "../../../components/Button/Button.svelte";
+  import Card from "../../../components/Card/Card.svelte";
+  import Container from "../../../components/Container/Container.svelte";
+  import Input from "../../../components/Input/Input.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface NewsletterCenteredProps
     extends Omit<HTMLAttributes<HTMLElement>, "title"> {

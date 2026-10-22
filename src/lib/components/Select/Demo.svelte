@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Globe, MapPin, Navigation } from "@lucide/svelte";
-  import { Card, Label, Select } from "$lib/components/index.js";
+  import { Card, Label, Select } from "../index.js";
 
   const items = [
     { value: "us-east", label: "US East" },

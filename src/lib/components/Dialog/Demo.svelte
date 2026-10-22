@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Dialog, Input, Label } from "$lib/components/index.js";
+  import { Button, Dialog, Input, Label } from "../index.js";
 
   let nonDismissable = $state(false);
   let controlledOpen = $state(false);

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge, Button, Card } from "$lib/components/index.js";
+  import { Badge, Button, Card } from "../index.js";
   import { Table } from "./index.js";
 
   const invoices = [

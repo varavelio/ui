@@ -55,7 +55,7 @@
 <style lang="postcss">
   /* biome-ignore-all lint/complexity/noImportantStyles: svelte-sonner has its own styling and we need to override it */
 
-  @reference "$lib/../app.css";
+  @reference "../../../app.css";
 
   :global {
     .sonner-toast {

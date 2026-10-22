@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Label, Textarea } from "$lib/components/index.js";
+  import { Card, Label, Textarea } from "../index.js";
 </script>
 
 <div class="space-y-8">

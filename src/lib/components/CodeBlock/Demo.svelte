@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Label, Switch } from "$lib/components/index.js";
+  import { Card, Label, Switch } from "../index.js";
   import { CodeBlock } from "./index.js";
 
   let bordered = $state(true);

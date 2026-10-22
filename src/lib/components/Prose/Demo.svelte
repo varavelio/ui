@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Label } from "$lib/components/index.js";
+  import { Label } from "../index.js";
   import Prose from "./Prose.svelte";
 
   const combinations: {
@@ -67,7 +67,7 @@
     body text.
   </p>
   <pre><code>
-      import Prose from "$lib/components/Prose/Prose.svelte";
+      import Prose from "Prose.svelte";
 
       &lt;Prose size="md" fluid&gt;
         &lt;h1&gt;Documentation&lt;/h1&gt;

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Logo } from "$lib/brand/index.js";
-  import { Card, Label } from "$lib/components/index.js";
+  import { Card, Label } from "../../components/index.js";
+  import { Logo } from "../index.js";
 
   const sizes = [
     { label: "sm", class: "size-8" },

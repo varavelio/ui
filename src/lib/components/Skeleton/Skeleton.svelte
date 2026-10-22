@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ClassValue, HTMLAttributes } from "svelte/elements";
-  import { cn } from "$lib/helpers/cn.js";
+  import { cn } from "../../helpers/cn.js";
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
     class?: ClassValue;

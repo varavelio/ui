@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { HTMLAttributes } from "svelte/elements";
-  import Card from "$lib/components/Card/Card.svelte";
-  import Container from "$lib/components/Container/Container.svelte";
-  import Link from "$lib/components/Link/Link.svelte";
-  import { cn } from "$lib/helpers/cn.js";
+  import Card from "../../../components/Card/Card.svelte";
+  import Container from "../../../components/Container/Container.svelte";
+  import Link from "../../../components/Link/Link.svelte";
+  import { cn } from "../../../helpers/cn.js";
 
   export interface BlogListMagazinePost {
     title: string;
